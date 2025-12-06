@@ -1,0 +1,12 @@
+flutter_native_splash:
+
+  android: true
+  web: true
+
+  color: "#0e0504"
+  image: "asstes/images/app_images/splash_screen-images/food_logo_large.png"
+
+  android_12:
+
+    color: "#0e0504"
+    image: "asstes/images/app_images/splash_screen-images/food_logo_large.png"
