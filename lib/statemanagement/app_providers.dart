@@ -11,12 +11,10 @@ import 'package:foodapp/statemanagement/searching_filter/price_filter_provider.d
 import 'package:foodapp/statemanagement/searching_filter/ratting_provider.dart';
 import 'package:foodapp/statemanagement/searching_system/searchin_drink_provider.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
-import 'package:foodapp/statemanagement/stock_limit/quantity.dart';
 import 'package:foodapp/statemanagement/theming/theme_provider.dart';
 import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
 import 'package:foodapp/statemanagement/user_table/get_user_table.dart';
 import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/favotie_items/is_loadding.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 
 import 'package:provider/provider.dart';

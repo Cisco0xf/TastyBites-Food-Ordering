@@ -18,3 +18,9 @@ enum Push {
   clear,
   none,
 }
+
+enum RateFilter {
+  any,
+  medium,
+  high,
+}

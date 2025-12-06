@@ -22,4 +22,14 @@ class Assets {
       "asstes/images/vegetarian_images/dishes_images/";
   static const String vegIngBase =
       "asstes/images/vegetarian_images/ingerdients_images/";
+
+
+  //
+
+  static const String _filterPirce = "asstes/images/app_images/price_filter/";
+
+  static const String meduim = "${_filterPirce}medium.svg";
+  static const String all = "${_filterPirce}all.svg";
+  static const String cheap = "${_filterPirce}cheap.svg";
+  static const String expencive = "${_filterPirce}expencive.svg";
 }
