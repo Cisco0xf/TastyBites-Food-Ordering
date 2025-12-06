@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodapp/common/commons.dart';
-import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/payment_screen/payment_card.dart';
-import 'package:toastification/toastification.dart';
 
 class TableProvider extends ChangeNotifier {
   String selectedTable = "table";

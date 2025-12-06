@@ -2,49 +2,38 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 
 class RattingProvider with ChangeNotifier {
-  RattingFilterEnum selectedRate = RattingFilterEnum.any;
+  RateFilter selectedRate = RateFilter.any;
+
   void getUserRate({
-    required RattingFilterEnum choosedRate,
+    required RateFilter choosedRate,
   }) {
     selectedRate = choosedRate;
     log("User select : $choosedRate");
     notifyListeners();
   }
 
-  bool get isAny {
-    bool isAny = selectedRate == RattingFilterEnum.any;
-    return isAny;
-  }
+  bool get isAny => selectedRate == RateFilter.any;
 
-  bool get isGood {
-    bool isGood = selectedRate == RattingFilterEnum.medium;
-    return isGood;
-  }
+  bool get isGood => selectedRate == RateFilter.medium;
 
-  bool get isExcellent {
-    bool isEx = selectedRate == RattingFilterEnum.medium;
-    return isEx;
-  }
+  bool get isExcellent => selectedRate == RateFilter.medium;
 
-  String rattingFilter({required BuildContext context}) {
-    String rattingFilter = "";
+  String rattingFilter() {
+    final BuildContext context = navigationKey.currentContext as BuildContext;
+
     if (isAny) {
-      rattingFilter = "any_rate".localeValue(context: context);
-    } else if (isGood) {
-      rattingFilter = "good_rate".localeValue(context: context);
-    } else {
-      rattingFilter = "excellent".localeValue(context: context);
+      return "any_rate".localeValue(context: context);
     }
 
-    return rattingFilter;
-  }
-}
+    if (isGood) {
+      return "good_rate".localeValue(context: context);
+    }
 
-enum RattingFilterEnum {
-  any,
-  medium,
-  high,
+    return "excellent".localeValue(context: context);
+  }
 }
