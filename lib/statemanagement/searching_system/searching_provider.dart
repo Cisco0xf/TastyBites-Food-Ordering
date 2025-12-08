@@ -1,10 +1,145 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/common/my_logger.dart';
+import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/drinks_cold_demo_data.dart';
+import 'package:foodapp/data_layer/data_models/drinks_hot_demo_data.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:foodapp/statemanagement/searching_filter/price_filter_provider.dart';
 import 'package:foodapp/statemanagement/searching_filter/ratting_provider.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/categories_items.dart';
+import 'package:foodapp/statemanagement/searching_system/controllers_manager.dart';
 import 'package:provider/provider.dart';
+
+class SearchingProvider extends ChangeNotifier {
+  List<FoodModel> filterdFood = [];
+
+  final BuildContext context = navigationKey.currentContext as BuildContext;
+
+  String get _query => searchController!.text.trim().toLowerCase();
+
+  int get currentCategory => context.read<CurrentIndexProvider>().currentIndex;
+
+  bool get filterDrinks => currentCategory == 1;
+
+  TextEditingController? get searchController => filterDrinks
+      ? ControllersManager.drinkSearchController
+      : ControllersManager.searchingController;
+
+  bool _matchPrice(FoodModel item) {
+    final PriceFilterProvider price = Provider.of<PriceFilterProvider>(
+      context,
+      listen: false,
+    );
+
+    final bool priceMatch = (price.isAll) ||
+        (price.isCheap && item.foodPrice >= 5.0 && item.foodPrice <= 20.0) ||
+        (price.isMedium && item.foodPrice >= 21 && item.foodPrice <= 50) ||
+        (price.isHigh && item.foodPrice >= 51.0 && item.foodPrice <= 120.0);
+
+    return priceMatch;
+  }
+
+  bool _matchRate(FoodModel item) {
+    final RattingProvider rate = Provider.of<RattingProvider>(
+      context,
+      listen: false,
+    );
+
+    final bool rateMatch = rate.isAny ||
+        (rate.isGood && item.foodRate >= 2.0 && item.foodRate <= 3.3) ||
+        (rate.isExcellent && item.foodRate >= 3.4 && item.foodRate <= 5.0);
+
+    return rateMatch;
+  }
+
+  void _searchInCategory() {
+    final List<FoodModel> targetFilter =
+        categoriesItems[currentCategory].filteredList;
+
+    filterdFood = targetFilter.where(
+      (FoodModel food) {
+        final bool matchName = food.foodName.toLowerCase().contains(_query);
+
+        final bool goodToGo =
+            matchName && _matchRate(food) && _matchPrice(food);
+
+        Log.log("Item Name => ${food.foodName} | Price => ${food.foodPrice}");
+
+        return goodToGo;
+      },
+    ).toList();
+
+    notifyListeners();
+  }
+
+  // =============== Drinks Searching System =================
+
+  List<FoodModel> state = [];
+
+  List<FoodModel> get _searchBase {
+    final int drinkType = context.read<CurrentIndexProvider>().drinkIndex;
+
+    final List<FoodModel> searchBase =
+        drinkType == 0 ? coldDrinksDemoData : dirnksDemoData;
+
+    return searchBase;
+  }
+
+  // Searching Algorithm
+
+  void _searchDrinkCategory() {
+    for (int i = 0; i < _searchBase.length; i++) {
+      final FoodModel item = _searchBase[i];
+
+      final bool nameMatch = item.foodName.toLowerCase().contains(_query);
+
+      final bool targetMatch =
+          nameMatch && _matchPrice(item) && _matchRate(item);
+
+      if (targetMatch) {
+        Log.log("Item {${i + 1}} with Name => ${item.foodName} has Matchs");
+        state = [...state, item];
+      }
+    }
+
+    notifyListeners();
+  }
+
+  // Seatrching Status
+
+  bool get isSearching {
+    return _query.isNotEmpty;
+  }
+
+  bool get searchingWithData {
+    final bool data = filterDrinks ? state.isNotEmpty : filterdFood.isNotEmpty;
+
+    final bool hasData = data && isSearching;
+
+    return hasData;
+  }
+
+  bool get searchingWithoutData {
+    final bool data = filterDrinks ? state.isEmpty : filterdFood.isEmpty;
+
+    final bool hasNoData = data && isSearching;
+
+    return hasNoData;
+  }
+
+  void filtesearchWithFilterCategoriesItems() {
+    if (!filterDrinks) {
+      _searchInCategory();
+
+      return;
+    }
+
+    _searchDrinkCategory();
+  }
+
+  List<FoodModel> get filtred => filterDrinks ? state : filterdFood;
+}
 
 class SearchingSystemProvider with ChangeNotifier {
   // Filtered List
@@ -22,7 +157,7 @@ class SearchingSystemProvider with ChangeNotifier {
       listen: false,
     );
 
-    SearchingFilterProvider filterPrice = Provider.of<SearchingFilterProvider>(
+    PriceFilterProvider filterPrice = Provider.of<PriceFilterProvider>(
       context,
       listen: false,
     );

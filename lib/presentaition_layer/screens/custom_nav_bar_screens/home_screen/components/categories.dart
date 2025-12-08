@@ -34,104 +34,111 @@ class _CategoriesSectorWidgetState extends State<CategoriesSectorWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CurrentIndexProvider>(builder: (context, currentIndex, _) {
-      return PopScope(
-        onPopInvokedWithResult: (didPop, results) {
-          bool isFirstCategory = currentIndex.currentIndex == 0;
-          if (!isFirstCategory) {
-            currentIndex.getNewIndex(newIndex: 0);
-            scrollToCategoryController.scrollTo(
-              index: 0,
-              duration: const Duration(milliseconds: 230),
-            );
-            return;
-          }
-        },
-        child: SizedBox(
-          width: double.infinity,
-          height: context.screenHeight * .07,
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: ScrollablePositionedList.builder(
-              key: const PageStorageKey("categories_key"),
-              itemScrollController: scrollToCategoryController,
-              scrollDirection: Axis.horizontal,
-              itemCount: categoriesItems.length,
-              minCacheExtent: context.screenWidth * .45,
-              itemBuilder: (context, index) {
-                return Consumer<CurrentIndexProvider>(
-                  builder: (context, currentIndex, child) {
-                    return Consumer<SearchingSystemProvider>(
-                      builder: (context, searching, child) {
-                        return GestureDetector(
-                          onTap: () {
-                            currentIndex.getNewIndex(newIndex: index);
-                            searching.searchInCategory(context: context);
-                            _scrollToCategory(index: index);
-                          },
-                          child: AnimatedContainer(
-                            width: context.screenWidth * .45,
-                            duration: const Duration(
-                              milliseconds: 300,
-                            ),
-                            padding: const EdgeInsets.all(5),
-                            margin: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              borderRadius: borderRaduis(20),
-                              border: index == currentIndex.currentIndex
-                                  ? Border.all(
-                                      color: const Color(0xFFff3d00),
-                                      width: 2,
-                                    )
-                                  : Border.all(
-                                      color: Colors.transparent,
-                                      width: 0,
-                                    ),
-                              color: const Color(0xFFFF7800).withOpacity(
-                                index == currentIndex.currentIndex ? 1.0 : 0.5,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Container(
-                                  width: context.screenWidth * .1,
-                                  height: context.screenHeight * .04,
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                  ),
-                                  child: SvgPicture.asset(
-                                    categoriesItems[index].itemImage,
-                                  ),
-                                ),
-                                AnimatedOpacity(
-                                  duration: const Duration(milliseconds: 300),
-                                  opacity: index == currentIndex.currentIndex
-                                      ? 1.0
-                                      : 0.5,
-                                  child: Text(
-                                    categoriesItems[index]
-                                        .itemTitle
-                                        .localeValue(context: context),
-                                    style: AppTextStyles.categoriesTextStyle(
-                                      context: context,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-            ),
+    final int currentIndex = context.watch<CurrentIndexProvider>().currentIndex;
+    return PopScope(
+      onPopInvokedWithResult: (didPop, results) {
+        bool isFirstCategory = currentIndex == 0;
+
+        if (!isFirstCategory) {
+          context.read<CurrentIndexProvider>().getNewIndex(newIndex: 0);
+
+          scrollToCategoryController.scrollTo(
+            index: 0,
+            duration: const Duration(milliseconds: 230),
+          );
+
+          return;
+        }
+      },
+      child: SizedBox(
+        width: double.infinity,
+        height: context.screenHeight * .07,
+        child: Directionality(
+          textDirection: TextDirection.ltr,
+          child: ScrollablePositionedList.builder(
+            key: const PageStorageKey("categories_key"),
+            itemScrollController: scrollToCategoryController,
+            scrollDirection: Axis.horizontal,
+            itemCount: categoriesItems.length,
+            minCacheExtent: context.screenWidth * .45,
+            itemBuilder: (context, index) {
+              return CategoryItem(
+                isSelected: index == currentIndex,
+                category: categoriesItems[index],
+                onSelect: () {
+                  context
+                      .read<CurrentIndexProvider>()
+                      .getNewIndex(newIndex: index);
+
+                  context
+                      .read<SearchingProvider>()
+                      .filtesearchWithFilterCategoriesItems();
+
+                  _scrollToCategory(index: index);
+                },
+              );
+            },
           ),
         ),
-      );
-    });
+      ),
+    );
+  }
+}
+
+class CategoryItem extends StatelessWidget {
+  const CategoryItem({
+    super.key,
+    required this.category,
+    required this.isSelected,
+    required this.onSelect,
+  });
+
+  final CategoriesItemsModel category;
+  final bool isSelected;
+
+  final void Function() onSelect;
+
+  Border? get _border =>
+      isSelected ? Border.all(color: const Color(0xFFff3d00), width: 2) : null;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      width: context.screenWidth * .45,
+      duration: const Duration(milliseconds: 300),
+      margin: padding(5.0),
+      decoration: BoxDecoration(
+        borderRadius: borderRaduis(20),
+        border: _border,
+        color: const Color(0xFFFF7800).withOpacity(isSelected ? 1.0 : 0.5),
+      ),
+      child: Clicker(
+        onClick: onSelect,
+        innerPadding: 5.0,
+        raduis: 20.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Container(
+              width: context.screenWidth * .1,
+              height: context.screenHeight * .04,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child: SvgPicture.asset(category.itemImage),
+            ),
+            AnimatedOpacity(
+              duration: const Duration(milliseconds: 300),
+              opacity: isSelected ? 1.0 : 0.5,
+              child: Text(
+                category.itemTitle.localeValue(context: context),
+                style: AppTextStyles.categoriesTextStyle(context: context),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

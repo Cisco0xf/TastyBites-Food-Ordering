@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/assets.dart';
@@ -34,25 +35,18 @@ void showFilterSheet() {
   );
 }
 
-class FilterSheet extends StatefulWidget {
+class FilterSheet extends StatelessWidget {
   const FilterSheet({super.key});
 
   @override
-  State<FilterSheet> createState() => _FilterSheetState();
-}
-
-class _FilterSheetState extends State<FilterSheet> {
-  @override
   Widget build(BuildContext context) {
-    return Consumer<SearchingFilterProvider>(
+    return Consumer<PriceFilterProvider>(
       builder: (context, filterPrice, child) {
         return Column(
           children: <Widget>[
-            SizedBox(
-              height: context.screenHeight * .02,
-            ),
+            const Gap(hRatio: 0.02),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: padding(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -66,92 +60,36 @@ class _FilterSheetState extends State<FilterSheet> {
                 ],
               ),
             ),
-            Consumer<CurrentIndexProvider>(
-              builder: (context, currentIndex, child) {
-                return Consumer<SearchingDrinksProvider>(
-                  builder: (context, searchingDrink, child) {
-                    return Consumer<SearchingSystemProvider>(
-                      builder: (context, searching, child) {
-                        return Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                SelectPriceFilter(
-                                  imagePath: Assets.all,
-                                  onSelect: () {
-                                    filterPrice.allPricesFilter;
-                                    currentIndex.currentIndex == 1
-                                        ? searchingDrink.filterDrinke(
-                                            context: context)
-                                        : searching.searchInCategory(
-                                            context: context);
-                                    log("Selected : All");
-                                  },
-                                  priceRange:
-                                      "all_price".localeValue(context: context),
-                                  isSelected: filterPrice.isAll,
-                                ),
-                                SelectPriceFilter(
-                                  onSelect: () {
-                                    filterPrice.cheapPricesFilter;
-                                    currentIndex.currentIndex == 1
-                                        ? searchingDrink.filterDrinke(
-                                            context: context)
-                                        : searching.searchInCategory(
-                                            context: context);
-                                    log("Selected : Cheap");
-                                  },
-                                  imagePath: Assets.cheap,
-                                  priceRange: "cheap_price"
-                                      .localeValue(context: context),
-                                  isSelected: filterPrice.isCheap,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                SelectPriceFilter(
-                                  onSelect: () {
-                                    filterPrice.mediumPricesFilter;
-                                    currentIndex.currentIndex == 1
-                                        ? searchingDrink.filterDrinke(
-                                            context: context)
-                                        : searching.searchInCategory(
-                                            context: context);
-                                    log("Selected : Medium");
-                                  },
-                                  imagePath: Assets.meduim,
-                                  priceRange: "medium_price"
-                                      .localeValue(context: context),
-                                  isSelected: filterPrice.isMedium,
-                                ),
-                                SelectPriceFilter(
-                                  onSelect: () {
-                                    filterPrice.highPricesFilter;
-                                    currentIndex.currentIndex == 1
-                                        ? searchingDrink.filterDrinke(
-                                            context: context)
-                                        : searching.searchInCategory(
-                                            context: context);
-                                    log("Selected : High");
-                                  },
-                                  imagePath: Assets.expencive,
-                                  priceRange: "high_price".localeValue(
-                                    context: context,
-                                  ),
-                                  isSelected: filterPrice.isHigh,
-                                ),
-                              ],
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                );
-              },
+            Wrap(
+              alignment: WrapAlignment.spaceAround,
+              children: <Widget>[
+                for (int f = 0; f < priceFilters.length; f++) ...{
+                  SelectPriceFilter(
+                    onSelect: () {
+                      filterPrice.selectFilter(f);
+                      /* final int currentCaegory =
+                          context.read<CurrentIndexProvider>().currentIndex;
+
+                      final bool isDrink = currentCaegory == 1;
+
+                      if (isDrink) {
+                        searchingDrink.filterDrinke(context: context);
+
+                        return;
+                      }
+
+                      searching.searchInCategory(context: context); */
+
+                      context
+                          .read<SearchingProvider>()
+                          .filtesearchWithFilterCategoriesItems();
+                    },
+                    priceRange: priceFilters[f].type,
+                    imagePath: priceFilters[f].imagePath,
+                    isSelected: filterPrice.currentFilter == f,
+                  ),
+                },
+              ],
             ),
             const Divider(),
             Row(

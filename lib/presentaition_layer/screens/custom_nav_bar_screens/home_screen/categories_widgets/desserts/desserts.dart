@@ -42,36 +42,11 @@ class DessertsWidget extends StatelessWidget {
                                   builder: (context) {
                                     return searching.isSearchingBarEmpty
                                         ? DessertsDetailsWidget(
-                                            /*  imagePath: dessertDemoData[index]
-                                                .imagePath,
-                                            dessertName:
-                                                dessertDemoData[index].foodName,
-                                            numberOfReviewers:
-                                                dessertDemoData[index]
-                                                    .numberOfReviewers,
-                                            description: dessertDemoData[index]
-                                                .description,
-                                            price: dessertDemoData[index]
-                                                .foodPrice,
-                                            rate:
-                                                dessertDemoData[index].foodRate, */
+                                            
                                             item: dessertDemoData[index],
                                           )
                                         : DessertsDetailsWidget(
-                                            /* imagePath: searching
-                                                .filteredList[index].imagePath,
-                                            dessertName: searching
-                                                .filteredList[index].foodName,
-                                            numberOfReviewers: searching
-                                                .filteredList[index]
-                                                .numberOfReviewers,
-                                            description: searching
-                                                .filteredList[index]
-                                                .description,
-                                            price: searching
-                                                .filteredList[index].foodPrice,
-                                            rate: searching
-                                                .filteredList[index].foodRate, */
+                                            
                                             item: searching.filteredList[index],
                                           );
                                   },

@@ -45,37 +45,11 @@ class SpecialDishesWidget extends StatelessWidget {
                               builder: (context) {
                                 return searching.isSearchingBarEmpty
                                     ? FastFoodDetailsScreen(
-                                        /*  specialDishNeme:
-                                            italianFoodDemoData[index].foodName,
-                                        description: italianFoodDemoData[index]
-                                            .description,
-                                        imagePath: italianFoodDemoData[index]
-                                            .imagePath,
-                                        price: italianFoodDemoData[index]
-                                            .foodPrice,
-                                        rate:
-                                            italianFoodDemoData[index].foodRate,
-                                        numberOfReviewers:
-                                            italianFoodDemoData[index]
-                                                .numberOfReviewers,
-                                        heroTag: index, */
+                                       
                                         item: italianFoodDemoData[index],
                                       )
                                     : FastFoodDetailsScreen(
-                                        /*  specialDishNeme: searching
-                                            .filteredList[index].foodName,
-                                        description: searching
-                                            .filteredList[index].description,
-                                        imagePath: searching
-                                            .filteredList[index].imagePath,
-                                        price: searching
-                                            .filteredList[index].foodPrice,
-                                        rate: searching
-                                            .filteredList[index].foodRate,
-                                        numberOfReviewers: searching
-                                            .filteredList[index]
-                                            .numberOfReviewers,
-                                        heroTag: index, */
+                                      
                                         item: searching.filteredList[index],
                                       );
                               },
