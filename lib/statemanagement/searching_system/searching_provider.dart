@@ -64,7 +64,10 @@ class SearchingProvider extends ChangeNotifier {
         final bool goodToGo =
             matchName && _matchRate(food) && _matchPrice(food);
 
-        Log.log("Item Name => ${food.foodName} | Price => ${food.foodPrice}");
+        Log.log(
+          "Item Name => ${food.foodName} | Price => ${food.foodPrice} | Match Price => ${_matchPrice(food)}",
+          color: _matchPrice(food) ? LColor.green : LColor.red, 
+        );
 
         return goodToGo;
       },

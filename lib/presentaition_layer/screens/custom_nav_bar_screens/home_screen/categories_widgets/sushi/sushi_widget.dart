@@ -19,10 +19,6 @@ class SushiWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<FoodModel> currentList =
-        categoriesItems[context.read<CurrentIndexProvider>().currentIndex]
-            .filteredList;
-
     return Consumer<SearchingProvider>(
       builder: (context, searching, child) {
         return searching.searchingWithoutData
@@ -30,89 +26,19 @@ class SushiWidget extends StatelessWidget {
             : Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.only(bottom: context.screenHeight * .1),
-                  itemCount: searching.searchingWithData
-                      ? searching.filtred.length
-                      : currentList.length,
+                  itemCount: searching.filtred.length,
                   itemBuilder: (context, index) {
                     return SushiItemWidget(
-                      target: searching.searchingWithData
-                          ? searching.filtred[index]
-                          : currentList[index],
+                      target: searching.filtred[index],
                       onTap: () {
-                        final FoodModel target = searching.searchingWithData
-                            ? searching.filtred[index]
-                            : currentList[index];
+                        final FoodModel target = searching.filtred[index];
+
                         pushTo(FastFoodDetailsScreen(item: target));
                       },
                     );
                   },
                 ),
               );
-
-        /* searching.isItemNotExist
-            ? const NotFounCategoryWidget(
-                category: "sushi",
-              )
-            : Expanded(
-                child: ListView.builder(
-                  padding: EdgeInsets.only(bottom: context.screenHeight * .1),
-                  itemCount: searching.isSearchingBarEmpty
-                      ? sushiDemoData.length
-                      : searching.filteredList.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return searching.isSearchingBarEmpty
-                                  ? FastFoodDetailsScreen(
-                                      /*  sushiName: sushiDemoData[index].foodName,
-                                      sushiPrice:
-                                          sushiDemoData[index].foodPrice,
-                                      sushiRate: sushiDemoData[index].foodRate,
-                                      description:
-                                          sushiDemoData[index].description,
-                                      imagePath: sushiDemoData[index].imagePath,
-                                      numberOfReviewers: sushiDemoData[index]
-                                          .numberOfReviewers,
-                                      heroTag: index,
-                                      stock: sushiDemoData[index].stock, */
-                                      item: sushiDemoData[index],
-                                    )
-                                  : FastFoodDetailsScreen(
-                                      /*  sushiName: searching
-                                          .filteredList[index].foodName,
-                                      sushiPrice: searching
-                                          .filteredList[index].foodPrice,
-                                      sushiRate: searching
-                                          .filteredList[index].foodRate,
-                                      description: searching
-                                          .filteredList[index].description,
-                                      imagePath: searching
-                                          .filteredList[index].imagePath,
-                                      numberOfReviewers: searching
-                                          .filteredList[index]
-                                          .numberOfReviewers,
-                                      heroTag: index,
-                                      stock:
-                                          searching.filteredList[index].stock, */
-                                      item: searching.filteredList[index],
-                                    );
-                            },
-                          ),
-                        );
-                      },
-                      child: SushiItemWidget(
-                        index: index,
-                        foodList: searching.isSearchingBarEmpty
-                            ? sushiDemoData
-                            : searching.filteredList,
-                      ),
-                    );
-                  },
-                ),
-              ); */
       },
     );
   }
@@ -126,6 +52,7 @@ class SushiItemWidget extends StatelessWidget {
   });
 
   final FoodModel target;
+
   final void Function() onTap;
 
   @override
@@ -138,19 +65,17 @@ class SushiItemWidget extends StatelessWidget {
       ],
       child: Container(
         height: context.screenHeight * .3,
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
+        margin: padding(10),
         decoration: BoxDecoration(
           borderRadius: borderRaduis(20),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage(
-              target.imagePath,
-            ),
+            image: AssetImage(target.imagePath),
           ),
         ),
         child: Clicker(
           onClick: onTap,
+          innerPadding: 10.0,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -158,7 +83,7 @@ class SushiItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Container(
-                    padding: const EdgeInsets.all(7),
+                    padding: padding(7),
                     decoration: BoxDecoration(
                       color: Colors.white54,
                       borderRadius: borderRaduis(10),
