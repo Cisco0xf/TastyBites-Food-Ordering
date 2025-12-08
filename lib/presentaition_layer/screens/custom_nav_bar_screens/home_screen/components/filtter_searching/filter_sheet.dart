@@ -67,18 +67,6 @@ class FilterSheet extends StatelessWidget {
                   SelectPriceFilter(
                     onSelect: () {
                       filterPrice.selectFilter(f);
-                      /* final int currentCaegory =
-                          context.read<CurrentIndexProvider>().currentIndex;
-
-                      final bool isDrink = currentCaegory == 1;
-
-                      if (isDrink) {
-                        searchingDrink.filterDrinke(context: context);
-
-                        return;
-                      }
-
-                      searching.searchInCategory(context: context); */
 
                       context
                           .read<SearchingProvider>()
