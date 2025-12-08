@@ -25,10 +25,10 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => AddressProvider()),
     ChangeNotifierProvider(create: (context) => ReceiptHistoryProvider()),
     ChangeNotifierProvider(create: (context) => OrderSingleItemProvider()),
-    ChangeNotifierProvider(create: (context) => SearchingSystemProvider()),
-    ChangeNotifierProvider(create: (context) => SearchingFilterProvider()),
+    ChangeNotifierProvider(create: (context) => SearchingSystemProvider()),//
+   // ChangeNotifierProvider(create: (context) => SearchingFilterProvider()),
+    ChangeNotifierProvider(create: (context) => SearchingDrinksProvider()),//
     ChangeNotifierProvider(create: (context) => RattingProvider()),
-    ChangeNotifierProvider(create: (context) => SearchingDrinksProvider()),
     ChangeNotifierProvider(create: (context) => ThemeProvider()),
     ChangeNotifierProvider(create: (context) => LocalizationProvider()),
     ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
@@ -42,6 +42,8 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => TableProvider()),
     ChangeNotifierProvider(create: (context) => WishListProvider()),
     ChangeNotifierProvider(create: (context) => CartManager(context)),
+    ChangeNotifierProvider(create: (context) => PriceFilterProvider()),
+    ChangeNotifierProvider(create: (context) => SearchingProvider())
   ];
 
   return providers;

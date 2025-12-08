@@ -18,4 +18,13 @@ class CurrentIndexProvider with ChangeNotifier {
     currentContent = target - 1;
     notifyListeners();
   }
+
+  // Drinks INdex
+
+  int drinkIndex = 0;
+
+  void selectDrinsType(int type) {
+    drinkIndex = type;
+    notifyListeners();
+  }
 }

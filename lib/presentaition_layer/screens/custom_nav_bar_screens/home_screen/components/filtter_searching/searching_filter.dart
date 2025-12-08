@@ -7,6 +7,7 @@ import 'package:foodapp/constants/app_colors.dart';
 
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/style.dart';
+import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 
 class SearchingFilterWidget extends StatefulWidget {
   const SearchingFilterWidget({super.key});
@@ -70,7 +71,7 @@ class SelectPriceFilter extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       width: context.screenWidth * .42,
       decoration: BoxDecoration(
-        borderRadius: borderRaduis(20),
+        borderRadius: borderRaduis(isSelected ? 30 : 20),
         color: _selectedColor,
         border: _selectedBorder,
       ),
@@ -83,7 +84,7 @@ class SelectPriceFilter extends StatelessWidget {
               child: SvgPicture.asset(imagePath),
             ),
             Text(
-              priceRange,
+              priceRange.localeValue(context: context),
               style: AppTextStyles.filterItemTextStyle(context: context),
             ),
           ],

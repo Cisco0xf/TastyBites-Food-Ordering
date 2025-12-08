@@ -45,42 +45,11 @@ class FastFoodCategoryWidget extends StatelessWidget {
                                   builder: (context) {
                                     return searching.isSearchingBarEmpty
                                         ? FastFoodDetailsScreen(
-                                            /*  imagePath: fastFoodDemoData[index]
-                                                .imagePath,
-                                            foodName: fastFoodDemoData[index]
-                                                .foodName,
-                                            description: fastFoodDemoData[index]
-                                                .description,
-                                            foodPrice: fastFoodDemoData[index]
-                                                .foodPrice,
-                                            rate: fastFoodDemoData[index]
-                                                .foodRate,
-                                            numberOfReviewers:
-                                                fastFoodDemoData[index]
-                                                    .numberOfReviewers,
-                                            calories: fastFoodDemoData[index]
-                                                .calories,
-                                            heroTage: index.toString(), */
+                                           
                                             item: fastFoodDemoData[index],
                                           )
                                         : FastFoodDetailsScreen(
-                                            /* imagePath: searching
-                                                .filteredList[index].imagePath,
-                                            foodName: searching
-                                                .filteredList[index].foodName,
-                                            description: searching
-                                                .filteredList[index]
-                                                .description,
-                                            foodPrice: searching
-                                                .filteredList[index].foodPrice,
-                                            rate: searching
-                                                .filteredList[index].foodRate,
-                                            numberOfReviewers: searching
-                                                .filteredList[index]
-                                                .numberOfReviewers,
-                                            calories: searching
-                                                .filteredList[index].calories,
-                                            heroTage: index.toString(), */
+                                           
                                             item: searching.filteredList[index],
                                           );
                                   },
