@@ -9,9 +9,7 @@ import 'package:foodapp/statemanagement/localization/localization_delegate.dart'
 class RattingProvider with ChangeNotifier {
   RateFilter selectedRate = RateFilter.any;
 
-  void getUserRate({
-    required RateFilter choosedRate,
-  }) {
+  void getUserRate({required RateFilter choosedRate}) {
     selectedRate = choosedRate;
     log("User select : $choosedRate");
     notifyListeners();
@@ -35,5 +33,10 @@ class RattingProvider with ChangeNotifier {
     }
 
     return "excellent".localeValue(context: context);
+  }
+
+  void resetRate() {
+    selectedRate = RateFilter.any;
+    notifyListeners();
   }
 }

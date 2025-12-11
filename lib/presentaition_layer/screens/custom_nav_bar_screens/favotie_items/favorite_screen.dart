@@ -57,7 +57,7 @@ class FavoriteItemsScreen extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) {
                                 if (item.foodType == "FastFood") {
-                                  return FastFoodDetailsScreen(
+                                  return FoodDetials(
                                     /* imagePath: item.imagePath,
                                     foodName: item.foodName,
                                     foodPrice: item.foodPrice,
@@ -69,7 +69,7 @@ class FavoriteItemsScreen extends StatelessWidget {
                                     item: item,
                                   );
                                 } else if (item.foodType == "Dessert") {
-                                  return DessertsDetailsWidget(
+                                  return DessertsDetails(
                                     /*  imagePath: item.imagePath,
                                     description: item.description,
                                     price: item.foodPrice,
@@ -80,7 +80,7 @@ class FavoriteItemsScreen extends StatelessWidget {
                                   );
                                 } else if (item.foodType == "ColdDrink" ||
                                     item.foodType == "HotDrink") {
-                                  return FastFoodDetailsScreen(
+                                  return FoodDetials(
                                     /*  imagePath: item.imagePath,
                                     drinkDescription: item.description,
                                     drinkName: item.foodName,
@@ -91,7 +91,7 @@ class FavoriteItemsScreen extends StatelessWidget {
                                     item: item,
                                   );
                                 } else if (item.foodType == "SpecialFood") {
-                                  return FastFoodDetailsScreen(
+                                  return FoodDetials(
                                     /*    imagePath: item.imagePath,
                                     price: item.foodPrice,
                                     specialDishNeme: item.foodName,
@@ -129,7 +129,7 @@ class FavoriteItemsScreen extends StatelessWidget {
                                     item: item,
                                   );
                                 } else {
-                                  return FastFoodDetailsScreen(
+                                  return FoodDetials(
                                     /*  imagePath: item.imagePath,
                                     sushiName: item.foodName,
                                     sushiPrice: item.foodPrice,

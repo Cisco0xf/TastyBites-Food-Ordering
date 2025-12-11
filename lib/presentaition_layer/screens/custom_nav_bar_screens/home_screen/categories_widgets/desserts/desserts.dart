@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_models/desserts_demo_data.dart';
@@ -18,54 +19,60 @@ class DessertsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Stack(
-        children: [
-          Consumer<SearchingSystemProvider>(
-            builder: (context, searching, child) {
-              return searching.isItemNotExist
-                  ? const NotFounCategoryWidget(
-                      category: "desserts",
-                    )
-                  : ListView.builder(
-                      padding:
-                          EdgeInsets.only(bottom: context.screenHeight * .1),
-                      itemCount: searching.isSearchingBarEmpty
-                          ? dessertDemoData.length
-                          : searching.filteredList.length,
-                      itemBuilder: (context, index) {
-                        return SizedBox(
-                          width: double.infinity,
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return searching.isSearchingBarEmpty
-                                        ? DessertsDetailsWidget(
-                                            
-                                            item: dessertDemoData[index],
-                                          )
-                                        : DessertsDetailsWidget(
-                                            
-                                            item: searching.filteredList[index],
-                                          );
-                                  },
-                                ),
-                              );
-                            },
-                            child: DessertsItemWidget(
-                              index: index,
-                              foodList: searching.isSearchingBarEmpty
-                                  ? dessertDemoData
-                                  : searching.filteredList,
+      child: Consumer<SearchingProvider>(
+        builder: (context, searching, child) {
+          return searching.searchingWithoutData
+              ? const NotFounCategoryWidget(category: "desserts")
+              : ListView.builder(
+                  itemCount: searching.filtred.length,
+                  itemBuilder: (context, index) {
+                    final FoodModel target = searching.filtred[index];
+
+                    return DessertsItemWidget(
+                        item: target,
+                        onTap: () {
+                          pushTo(DessertsDetails(item: target));
+                        });
+                  },
+                );
+
+          /* searching.isItemNotExist
+              ? const NotFounCategoryWidget(category: "desserts")
+              : ListView.builder(
+                  padding: EdgeInsets.only(bottom: context.screenHeight * .1),
+                  itemCount: searching.isSearchingBarEmpty
+                      ? dessertDemoData.length
+                      : searching.filteredList.length,
+                  itemBuilder: (context, index) {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return searching.isSearchingBarEmpty
+                                    ? DessertsDetails(
+                                        item: dessertDemoData[index],
+                                      )
+                                    : DessertsDetails(
+                                        item: searching.filteredList[index],
+                                      );
+                              },
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                        child: DessertsItemWidget(
+                          index: index,
+                          foodList: searching.isSearchingBarEmpty
+                              ? dessertDemoData
+                              : searching.filteredList,
+                        ),
+                      ),
                     );
-            },
-          ),
-        ],
+                  },
+                ); */
+        },
       ),
     );
   }
@@ -74,18 +81,23 @@ class DessertsWidget extends StatelessWidget {
 class DessertsItemWidget extends StatelessWidget {
   const DessertsItemWidget({
     super.key,
-    required this.index,
-    required this.foodList,
+    /* required this.index,
+    required this.foodList, */
+    required this.item,
+    required this.onTap,
   });
-  final int index;
-  final List<FoodModel> foodList;
+  /* final int index;
+  final List<FoodModel> foodList; */
+
+  final FoodModel item;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         Container(
-          margin: const EdgeInsets.all(10),
+          margin: padding(10.0),
           width: double.infinity,
           height: context.screenHeight * .3,
           decoration: BoxDecoration(
@@ -93,17 +105,15 @@ class DessertsItemWidget extends StatelessWidget {
             color: Colors.black26,
             image: DecorationImage(
               fit: BoxFit.cover,
-              image: AssetImage(
-                foodList[index].imagePath,
-              ),
+              image: AssetImage(item.imagePath),
             ),
           ),
         ),
         Directionality(
           textDirection: TextDirection.ltr,
           child: Container(
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+            padding: padding(10),
+            margin: padding(10, from: From.horizontal),
             decoration: BoxDecoration(
               borderRadius: borderRaduis(20),
               gradient: LinearGradient(
@@ -116,24 +126,23 @@ class DessertsItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  foodList[index].foodName,
+                  item.foodName,
                   style: const TextStyle(
-                      fontSize: 19, fontWeight: FontWeight.bold),
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
-                  "${foodList[index].foodPrice.toString()}  \$",
+                  "${item.foodPrice.toString()}  \$",
                   style: typePriceTextStyle,
                 ),
                 Row(
                   children: <Widget>[
                     Row(
                       children: [
-                        const Icon(
-                          Icons.star,
-                          color: Colors.yellow,
-                        ),
+                        const Icon(Icons.star, color: Colors.yellow),
                         Text(
-                          foodList[index].foodRate.toString(),
+                          item.foodRate.toString(),
                           style: const TextStyle(
                             color: Colors.yellow,
                             fontFamily: FontFamily.mainFont,
@@ -142,7 +151,7 @@ class DessertsItemWidget extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "   (${foodList[index].numberOfReviewers} reviewer)",
+                      "   (${item.numberOfReviewers} reviewer)",
                       style: const TextStyle(
                         fontSize: 13,
                         fontFamily: FontFamily.subFont,
@@ -154,14 +163,11 @@ class DessertsItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     OrderButtonWidget(
-                      item: foodList[index],
+                      item: item,
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(
-                        Icons.add_circle,
-                        size: 35,
-                      ),
+                      icon: const Icon(Icons.add_circle, size: 35),
                     ),
                   ],
                 )

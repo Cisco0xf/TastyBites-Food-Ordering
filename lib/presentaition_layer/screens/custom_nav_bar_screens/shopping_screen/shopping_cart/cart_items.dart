@@ -25,15 +25,15 @@ class CartItemsWidget extends StatefulWidget {
 class _CartItemsWidgetState extends State<CartItemsWidget> {
   Map<String, Widget> _pushTarget(FoodModel item) {
     return {
-      "FastFood": FastFoodDetailsScreen(item: item),
-      "Dessert": DessertsDetailsWidget(item: item),
-      "ColdDrink": FastFoodDetailsScreen(item: item),
-      "HotDrink": FastFoodDetailsScreen(item: item),
-      "SpecialFood": FastFoodDetailsScreen(item: item),
+      "FastFood": FoodDetials(item: item),
+      "Dessert": DessertsDetails(item: item),
+      "ColdDrink": FoodDetials(item: item),
+      "HotDrink": FoodDetials(item: item),
+      "SpecialFood": FoodDetials(item: item),
       "GlobalDishe": GlobalDishesDetailsWidget(item: item),
       "Salad": ShowDishesDetailsWidget(item: item),
       "Vegetarian": ShowDishesDetailsWidget(item: item),
-      "Sushi": FastFoodDetailsScreen(item: item),
+      "Sushi": FoodDetials(item: item),
     };
   }
 

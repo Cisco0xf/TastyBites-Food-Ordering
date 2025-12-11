@@ -11,8 +11,8 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/presentaition_layer/widgets/pop_button_widget.dart';
 import 'package:provider/provider.dart';
 
-class FastFoodDetailsScreen extends StatefulWidget {
-  const FastFoodDetailsScreen({
+class FoodDetials extends StatefulWidget {
+  const FoodDetials({
     super.key,
     /* required this.imagePath,
     required this.foodName,
@@ -39,10 +39,10 @@ class FastFoodDetailsScreen extends StatefulWidget {
   final FoodModel item;
 
   @override
-  State<FastFoodDetailsScreen> createState() => _FastFoodDetailsScreenState();
+  State<FoodDetials> createState() => _FoodDetialsState();
 }
 
-class _FastFoodDetailsScreenState extends State<FastFoodDetailsScreen> {
+class _FoodDetialsState extends State<FoodDetials> {
   late double reviewers;
   @override
   void initState() {

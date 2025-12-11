@@ -6,6 +6,7 @@ class ControllersManager {
 
   static void initSearhcingControllers() {
     searchingController = TextEditingController();
+    drinkSearchController = TextEditingController();
   }
 
   static void disposeControllers() {

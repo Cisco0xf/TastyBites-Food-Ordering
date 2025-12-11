@@ -10,8 +10,8 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/presentaition_layer/widgets/favorite_button.dart';
 import 'package:foodapp/presentaition_layer/widgets/pop_button_widget.dart';
 
-class DessertsDetailsWidget extends StatelessWidget {
-  const DessertsDetailsWidget({
+class DessertsDetails extends StatelessWidget {
+  const DessertsDetails({
     super.key,
     /* required this.imagePath,
     required this.dessertName,
