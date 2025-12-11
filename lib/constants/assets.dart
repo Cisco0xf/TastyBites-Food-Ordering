@@ -23,7 +23,6 @@ class Assets {
   static const String vegIngBase =
       "asstes/images/vegetarian_images/ingerdients_images/";
 
-
   //
 
   static const String _filterPirce = "asstes/images/app_images/price_filter/";
@@ -32,4 +31,15 @@ class Assets {
   static const String all = "${_filterPirce}all.svg";
   static const String cheap = "${_filterPirce}cheap.svg";
   static const String expencive = "${_filterPirce}expencive.svg";
+
+  //
+  static const String _imagesAppBase = "asstes/images/app_images/";
+  static const String emptyCart =
+      "${_imagesAppBase}screens_images/empty_cart.svg";
+
+  static const String oldDrinks =
+      "${_imagesAppBase}categories_images/cold_drinks.svg";
+
+  static const String hotDrinks =
+      "${_imagesAppBase}categories_images/hot_drinks.svg";
 }

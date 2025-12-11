@@ -26,6 +26,11 @@ class PriceFilterProvider extends ChangeNotifier {
     };
     return label[currentFilter]!;
   }
+
+  void resetFilter() {
+    currentFilter = 0;
+    notifyListeners();
+  }
 }
 
 /* 

@@ -10,7 +10,6 @@ import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/constants/style.dart';
 
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/speial_dishes/special_dishes_details.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/x_not_found/not_found_category.dart';
 import 'package:foodapp/presentaition_layer/widgets/order_button.dart';
 import 'package:provider/provider.dart';
@@ -44,12 +43,10 @@ class SpecialDishesWidget extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) {
                                 return searching.isSearchingBarEmpty
-                                    ? FastFoodDetailsScreen(
-                                       
+                                    ? FoodDetials(
                                         item: italianFoodDemoData[index],
                                       )
-                                    : FastFoodDetailsScreen(
-                                      
+                                    : FoodDetials(
                                         item: searching.filteredList[index],
                                       );
                               },

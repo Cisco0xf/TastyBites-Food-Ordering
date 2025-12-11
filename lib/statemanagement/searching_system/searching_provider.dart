@@ -16,8 +16,6 @@ class SearchingProvider extends ChangeNotifier {
 
   final BuildContext context = navigationKey.currentContext as BuildContext;
 
-  String get _query => searchController!.text.trim().toLowerCase();
-
   int get currentCategory => context.read<CurrentIndexProvider>().currentIndex;
 
   bool get filterDrinks => currentCategory == 1;
@@ -25,6 +23,10 @@ class SearchingProvider extends ChangeNotifier {
   TextEditingController? get searchController => filterDrinks
       ? ControllersManager.drinkSearchController
       : ControllersManager.searchingController;
+
+  String? get _query => searchController?.text.trim().toLowerCase();
+
+  bool get _isNotInit => _query == null;
 
   bool _matchPrice(FoodModel item) {
     final PriceFilterProvider price = Provider.of<PriceFilterProvider>(
@@ -53,25 +55,35 @@ class SearchingProvider extends ChangeNotifier {
     return rateMatch;
   }
 
-  void _searchInCategory() {
+  void _searchInCategory({bool updateUi = true}) {
     final List<FoodModel> targetFilter =
         categoriesItems[currentCategory].filteredList;
 
+    filterdFood = List.from(targetFilter);
+
     filterdFood = targetFilter.where(
       (FoodModel food) {
-        final bool matchName = food.foodName.toLowerCase().contains(_query);
+        if (_isNotInit) {
+          return true;
+        }
+
+        final bool matchName = food.foodName.toLowerCase().contains(_query!);
 
         final bool goodToGo =
             matchName && _matchRate(food) && _matchPrice(food);
 
         Log.log(
           "Item Name => ${food.foodName} | Price => ${food.foodPrice} | Match Price => ${_matchPrice(food)}",
-          color: _matchPrice(food) ? LColor.green : LColor.red, 
+          color: _matchPrice(food) ? LColor.green : LColor.red,
         );
 
         return goodToGo;
       },
     ).toList();
+
+    if (!updateUi) {
+      return;
+    }
 
     notifyListeners();
   }
@@ -95,13 +107,19 @@ class SearchingProvider extends ChangeNotifier {
     for (int i = 0; i < _searchBase.length; i++) {
       final FoodModel item = _searchBase[i];
 
-      final bool nameMatch = item.foodName.toLowerCase().contains(_query);
+      if (_isNotInit) {
+        return;
+      }
+
+      final bool nameMatch = item.foodName.toLowerCase().contains(_query!);
 
       final bool targetMatch =
           nameMatch && _matchPrice(item) && _matchRate(item);
 
       if (targetMatch) {
-        Log.log("Item {${i + 1}} with Name => ${item.foodName} has Matchs");
+        Log.log(
+            "Item {${i + 1}} with Name => ${item.foodName} | Price => ${item.foodPrice}");
+
         state = [...state, item];
       }
     }
@@ -112,7 +130,11 @@ class SearchingProvider extends ChangeNotifier {
   // Seatrching Status
 
   bool get isSearching {
-    return _query.isNotEmpty;
+    if (_isNotInit) {
+      return false;
+    }
+
+    return _query!.isNotEmpty;
   }
 
   bool get searchingWithData {
@@ -131,9 +153,9 @@ class SearchingProvider extends ChangeNotifier {
     return hasNoData;
   }
 
-  void filtesearchWithFilterCategoriesItems() {
+  void filtesearchWithFilterCategoriesItems({bool updateUI = true}) {
     if (!filterDrinks) {
-      _searchInCategory();
+      _searchInCategory(updateUi: updateUI);
 
       return;
     }
@@ -142,6 +164,16 @@ class SearchingProvider extends ChangeNotifier {
   }
 
   List<FoodModel> get filtred => filterDrinks ? state : filterdFood;
+
+  void clearFilterAndSearch() {
+    context.read<RattingProvider>().resetRate();
+    context.read<PriceFilterProvider>().resetFilter();
+    searchController!.clear();
+
+    filtesearchWithFilterCategoriesItems();
+
+    notifyListeners();
+  }
 }
 
 class SearchingSystemProvider with ChangeNotifier {

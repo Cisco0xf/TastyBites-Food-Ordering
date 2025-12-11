@@ -33,6 +33,8 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   void initState() {
     search = Provider.of<SearchingProvider>(context, listen: false);
+    search.filtesearchWithFilterCategoriesItems(updateUI: false);
+
     ControllersManager.initSearhcingControllers();
     super.initState();
   }
@@ -45,40 +47,38 @@ class _HomeWidgetState extends State<HomeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<SearchingProvider>();
+    final int currentScreen =
+        context.watch<CurrentIndexProvider>().currentIndex;
 
-    return Consumer<SearchingProvider>(builder: (context, ref, __) {
-      return Expanded(
-        child: Container(
-          padding: padding(10, from: From.vertical),
-          decoration: BoxDecoration(
-            color: SwitchColors.backgroundMianColor,
-            borderRadius: borderRaduis(15.0, side: Side.top),
-          ),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: padding(10, from: From.horizontal),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SearchField(),
-                    SearchingFilterWidget(),
-                  ],
+    return Consumer<SearchingProvider>(
+      builder: (context, ref, __) {
+        return Expanded(
+          child: Container(
+            padding: padding(10, from: From.vertical),
+            decoration: BoxDecoration(
+              color: SwitchColors.backgroundMianColor,
+              borderRadius: borderRaduis(15.0, side: Side.top),
+            ),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: padding(10, from: From.horizontal),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      SearchField(),
+                      SearchingFilterWidget(),
+                    ],
+                  ),
                 ),
-              ),
-              const Gap(hRatio: 0.01),
-              const CategoriesSectorWidget(),
-              Consumer<CurrentIndexProvider>(
-                builder: (context, currentIndex, child) {
-                  return categoriesItems[currentIndex.currentIndex]
-                      .targetWidget;
-                },
-              ),
-            ],
+                const Gap(hRatio: 0.01),
+                const CategoriesSectorWidget(),
+                categoriesItems[currentScreen].targetWidget,
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

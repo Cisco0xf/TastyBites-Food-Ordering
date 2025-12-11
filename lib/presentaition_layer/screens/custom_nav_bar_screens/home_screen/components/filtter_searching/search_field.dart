@@ -21,11 +21,17 @@ class SearchField extends StatelessWidget {
         height: context.screenHeight * .06,
         child: Consumer<CurrentIndexProvider>(
           builder: (context, currentIndex, child) {
-            String hintText =
-                "${"search".localeValue(context: context)} \"${categoriesItems[currentIndex.currentIndex].itemTitle.localeValue(
-                      context: context,
-                    )}\" ${context.isArabicEg ? "؟" : ""}";
-                    
+            final String search = "search".localeValue(context: context);
+            
+            final String currentCategory =
+                categoriesItems[currentIndex.currentIndex]
+                    .itemTitle
+                    .localeValue(context: context);
+
+            final String qMark = context.isArabicEg ? "؟" : "";
+
+            final String hintText = "$search \"$currentCategory\" $qMark";
+
             return TextField(
               controller: context.read<SearchingProvider>().searchController,
               onChanged: (_) {
