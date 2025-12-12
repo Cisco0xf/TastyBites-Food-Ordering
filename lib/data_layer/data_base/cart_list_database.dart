@@ -58,6 +58,7 @@ class CartDatabase implements Database {
   final String dbKey;
 
   CartDatabase(this.dbKey);
+
   @override
   Future<Box> get openBox async {
     final Box box = await Hive.openBox<FoodModel>(dbKey);
@@ -110,7 +111,7 @@ class ManageCartDB {
     final Box box = await _cartDB.openBox;
 
     try {
-      await _cartDB.removeItemFromDB(box: box, food: food);
+      await _cartDB.removeItemFromDB(box: box, food: food.copyWith());
     } catch (error) {
       Log.error("Error Db remove => $error");
     }
@@ -132,9 +133,12 @@ class ManageCartDB {
     final Box box = await _cartDB.openBox;
     final List<FoodModel> db = _cartDB.getFoodDtaFromDatabase(box: box);
 
-    if (type == InitType.cart) {
+    final bool initCart = type == InitType.cart;
+
+    if (initCart) {
       Provider.of<CartManager>(navigationKey.currentContext!, listen: false)
           .initializeCartFromDatabase(db);
+
       return;
     }
 
@@ -147,11 +151,13 @@ class InitDB {
   static Future<void> initDB() async {
     final ManageCartDB cartDb = ManageCartDB(HiveKeys.CART_KEY);
     await cartDb.initializeDataFromDB();
+    
+    Log.log("Cart DB has been init successfully...");
 
     final ManageCartDB wishList = ManageCartDB(HiveKeys.WISH_LIST_KEY);
     await wishList.initializeDataFromDB(type: InitType.wish);
 
-    Log.log("Database has been init successfully...");
+    Log.log("WishList DB has been init successfully...");
   }
 }
 
