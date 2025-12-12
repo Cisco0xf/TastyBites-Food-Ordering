@@ -26,10 +26,10 @@ class FoodModelAdapter extends TypeAdapter<FoodModel> {
       foodType: fields[0] as String,
       stock: fields[12] as int,
       calories: fields[7] as int,
-      dishCountry: fields[8] as String,
-      dishCountryFlag: fields[9] as String,
-      ingredientsNames: (fields[11] as List).cast<String>(),
-      ingredientsImages: (fields[10] as List).cast<String>(),
+      dishCountry: fields[8] as String?,
+      dishCountryFlag: fields[9] as String?,
+      ingredientsNames: (fields[11] as List?)?.cast<String>(),
+      ingredientsImages: (fields[10] as List?)?.cast<String>(),
     );
   }
 
