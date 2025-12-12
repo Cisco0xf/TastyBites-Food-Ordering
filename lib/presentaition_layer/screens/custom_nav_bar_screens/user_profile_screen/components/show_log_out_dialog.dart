@@ -101,7 +101,7 @@ Future<void> get showLogoutDialog async {
                                 )
                                     .whenComplete(
                                   () {
-                                    currentContent.switchContent(1);
+                                    currentContent.switchContent(0);
                                   },
                                 );
                                 Navigator.of(context).pushAndRemoveUntil(

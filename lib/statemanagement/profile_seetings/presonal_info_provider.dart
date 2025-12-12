@@ -209,7 +209,7 @@ class PersonalInfoProvider with ChangeNotifier {
             context,
             listen: false,
           );
-          currentIndex.switchContent(1);
+          currentIndex.switchContent(0);
         },
       );
     } on SocketException catch (_) {

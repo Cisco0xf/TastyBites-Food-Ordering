@@ -30,27 +30,31 @@ class CustomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 250),
-      width: context.screenWidth * .17,
-      padding: padding(3),
-      margin: padding(5),
-      decoration: BoxDecoration(
-        borderRadius: borderRaduis(20),
-        color: _color,
-      ),
-      child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        transitionBuilder: (child, animation) {
-          return FadeTransition(
-            opacity: animation,
-            child: ScaleTransition(
-              scale: animation,
-              child: child,
-            ),
-          );
-        },
-        child: _icon,
+    return Clicker(
+      onClick: onSelect,
+      innerPadding: 5.0,
+      raduis: 20.0,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 250),
+        width: context.screenWidth * .17,
+        padding: padding(3.0),
+        decoration: BoxDecoration(
+          borderRadius: borderRaduis(20.0),
+          color: _color,
+        ),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 300),
+          transitionBuilder: (child, animation) {
+            return FadeTransition(
+              opacity: animation,
+              child: ScaleTransition(
+                scale: animation,
+                child: child,
+              ),
+            );
+          },
+          child: _icon,
+        ),
       ),
     );
   }

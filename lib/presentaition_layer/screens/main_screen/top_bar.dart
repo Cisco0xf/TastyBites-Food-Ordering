@@ -41,7 +41,7 @@ class MainScreenAppBar extends StatelessWidget {
                 visible: !(hitProfile.currentContent == 4),
                 child: GestureDetector(
                   onTap: () {
-                    hitProfile.switchContent(5);
+                    hitProfile.switchContent(4);
                   },
                   child: const CircleAvatar(
                     radius: 25,

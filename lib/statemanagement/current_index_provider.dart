@@ -20,7 +20,7 @@ class CurrentIndexProvider with ChangeNotifier {
   int currentContent = 0;
 
   void switchContent(int target) {
-    currentContent = target - 1;
+    currentContent = target;
     notifyListeners();
   }
 

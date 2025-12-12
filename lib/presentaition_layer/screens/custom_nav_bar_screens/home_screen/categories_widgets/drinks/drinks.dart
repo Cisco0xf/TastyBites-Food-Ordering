@@ -20,11 +20,10 @@ class DrinksWidget extends StatelessWidget {
       length: 2,
       child: Column(
         children: [
-          Consumer<SearchingProvider>(
-              builder: (context, searchingDrink, child) {
+          Consumer<SearchingProvider>(builder: (context, search, _) {
             return TabBar(
               onTap: (int type) {
-                searchingDrink.filtesearchWithFilterCategoriesItems();
+                search.filtesearchWithFilterCategoriesItems();
 
                 context.read<CurrentIndexProvider>().selectDrinsType(type);
               },
@@ -52,9 +51,7 @@ class DrinksWidget extends StatelessWidget {
                     children: <Widget>[
                       SizedBox.square(
                         dimension: context.screenHeight * .04,
-                        child: SvgPicture.asset(
-                          "asstes/images/app_images/categories_images/hot_drinks.svg",
-                        ),
+                        child: SvgPicture.asset(Assets.hotDrinks),
                       ),
                       const Padding(
                         padding: EdgeInsets.only(left: 7),
@@ -69,15 +66,11 @@ class DrinksWidget extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: context.screenHeight * .6,
-            child: TabBarView(
-              physics: const NeverScrollableScrollPhysics(),
+            child: const TabBarView(
+              physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
-                TypeDrinksWidget(
-                    /*  typeDrinks: coldDrinksDemoData, */
-                    ),
-                TypeDrinksWidget(
-                    /*  typeDrinks: dirnksDemoData, */
-                    ),
+                TypeDrinksWidget(),
+                TypeDrinksWidget(),
               ],
             ),
           ),

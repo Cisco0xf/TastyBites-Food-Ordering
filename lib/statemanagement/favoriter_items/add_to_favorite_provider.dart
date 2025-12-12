@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
+import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
+import 'package:toastification/toastification.dart';
 
 class WishListProvider with ChangeNotifier {
   List<FoodModel> favoriteItems = [];
@@ -19,6 +21,10 @@ class WishListProvider with ChangeNotifier {
     }
 
     favoriteItems = [...favoriteItems, item];
+    ReusableMethods.showtoastification(
+      message: "Item added to favorite",
+      type: ToastificationType.success,
+    );
 
     notifyListeners();
 
@@ -31,6 +37,9 @@ class WishListProvider with ChangeNotifier {
         if (favoriteItems[i].id != item.id) favoriteItems[i]
       }
     ];
+    ReusableMethods.showtoastification(
+      message: "Item removed from favorite",
+    );
 
     notifyListeners();
 

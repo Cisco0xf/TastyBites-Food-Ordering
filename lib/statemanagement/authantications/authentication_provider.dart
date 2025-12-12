@@ -359,7 +359,7 @@ class AuthenticationProvider with ChangeNotifier {
           context,
           listen: false,
         );
-        currentContent.switchContent(1);
+        currentContent.switchContent(0);
       } else if (account) {
         // Sign out from google account
         GoogleSignIn signOutFromGoogle = GoogleSignIn();
@@ -368,7 +368,7 @@ class AuthenticationProvider with ChangeNotifier {
           context,
           listen: false,
         );
-        currentContent.switchContent(1);
+        currentContent.switchContent(0);
       } else {
         log("Can not Log out");
       }

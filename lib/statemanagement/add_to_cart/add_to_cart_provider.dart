@@ -9,6 +9,7 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopp
 
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:toastification/toastification.dart';
 
 class CartManager extends ChangeNotifier {
   List<FoodModel> state = [];
@@ -33,6 +34,7 @@ class CartManager extends ChangeNotifier {
 
     ReusableMethods.showtoastification(
       message: "Item has been added to cart",
+      type: ToastificationType.success, 
     );
 
     await cartDb.addDBItem(food);
@@ -56,7 +58,7 @@ class CartManager extends ChangeNotifier {
 
   Future<void> clearCart() async {
     state = [];
-    
+
     notifyListeners();
 
     context.read<TableProvider>().clearTable();

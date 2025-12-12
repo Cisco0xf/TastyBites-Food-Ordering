@@ -69,7 +69,7 @@ class EmptyCartScreen extends StatelessWidget {
               height: context.screenHeight * .06,
               child: MaterialButton(
                 onPressed: () {
-                  goToHome.switchContent(1);
+                  goToHome.switchContent(0);
                 },
                 color: Colors.orange,
                 shape: RoundedRectangleBorder(

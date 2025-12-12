@@ -38,125 +38,116 @@ class _ChickOutWidgetState extends State<ChickOutWidget> {
   Widget get _gap =>
       widget.isSingleItem ? const Gap(hRatio: 0.01) : const Gap(hRatio: 0.05);
 
-      late final AddressProvider address;
+  late final AddressProvider address;
 
   @override
   void initState() {
-    address = Provider.of<AddressProvider>(context);
-
-    address.initAddressController();
+    address = Provider.of(context, listen: false)..initAddressController();
 
     super.initState();
   }
 
   @override
   void dispose() {
-    address.disposeController();
+    address
+      ..disposeController()
+      ..clearError();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      onPopInvokedWithResult: (didPop, result) {
-        AddressProvider address = Provider.of<AddressProvider>(
-          context,
-          listen: false,
-        );
-        address.clearError;
-      },
-      child: Scaffold(
-        backgroundColor: SwitchColors.chickoutAppBarColor,
-        resizeToAvoidBottomInset: false,
-        body: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).requestFocus(
-              FocusNode(),
-            );
-          },
-          child: Consumer<PlaceProvider>(
-            builder: (context, orderPlace, child) {
-              return Container(
-                width: context.screenWidth,
-                height: context.screenHeight,
-                padding: EdgeInsets.only(
-                  top: context.screenHeight * .04,
-                ),
-                child: Stack(
-                  children: <Widget>[
-                    Positioned.fill(
-                      bottom: null,
-                      child: Container(
-                        height: context.screenHeight * .11,
-                        decoration: BoxDecoration(
-                          color: SwitchColors.chickoutAppBarColor,
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Row(
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: const Icon(Icons.arrow_back_ios, size: 35),
+    return Scaffold(
+      backgroundColor: SwitchColors.chickoutAppBarColor,
+      resizeToAvoidBottomInset: false,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(
+            FocusNode(),
+          );
+        },
+        child: Consumer<PlaceProvider>(
+          builder: (context, orderPlace, child) {
+            return Container(
+              width: context.screenWidth,
+              height: context.screenHeight,
+              padding: EdgeInsets.only(
+                top: context.screenHeight * .04,
+              ),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    bottom: null,
+                    child: Container(
+                      height: context.screenHeight * .11,
+                      decoration: BoxDecoration(
+                        color: SwitchColors.chickoutAppBarColor,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Row(
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: const Icon(Icons.arrow_back_ios, size: 35),
+                          ),
+                          const Gap(wRatio: .2),
+                          const Text(
+                            "CHICKOUT",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 2,
                             ),
-                            const Gap(wRatio: .2),
-                            const Text(
-                              "CHICKOUT",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 2,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                    Positioned.fill(
-                      top: context.screenHeight * .1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: borderRaduis(15.0, side: Side.top),
-                          color: SwitchColors.chickoutOrderPlaceColor,
-                        ),
-                        child: Column(
-                          children: <Widget>[
-                            const OrderPlaceWidget(),
-                            orderPlace.isTakeaway
-                                ? const AddLocaltionWidget()
-                                : const ChoosTableWidget(),
-                            Expanded(
-                              child: SingleChildScrollView(
-                                child: Container(
-                                  margin: const EdgeInsets.only(top: 10),
-                                  decoration: BoxDecoration(
-                                    color: SwitchColors.chickoutDetailsColor,
-                                    borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(15),
-                                    ),
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      widget.isSingleItem
-                                          ? const OrderSingleItemWidget()
-                                          : const OrderAllCartWidget(),
-                                      _gap,
-                                      const PaymentsMethods(),
-                                      _gap,
-                                      PayManager(isSingleItem: widget.isSingleItem)
-                                    ],
-                                  ),
+                  ),
+                  Positioned.fill(
+                    top: context.screenHeight * .1,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: borderRaduis(15.0, side: Side.top),
+                        color: SwitchColors.chickoutOrderPlaceColor,
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          const OrderPlaceWidget(),
+                          orderPlace.isTakeaway
+                              ? const AddLocaltionWidget()
+                              : const ChoosTableWidget(),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                  color: SwitchColors.chickoutDetailsColor,
+                                  borderRadius:
+                                      borderRaduis(15.0, side: Side.top),
+                                ),
+                                child: Column(
+                                  children: <Widget>[
+                                    widget.isSingleItem
+                                        ? const OrderSingleItemWidget()
+                                        : const OrderAllCartWidget(),
+                                    _gap,
+                                    const PaymentsMethods(),
+                                    _gap,
+                                    PayManager(
+                                        isSingleItem: widget.isSingleItem)
+                                  ],
                                 ),
                               ),
-                            )
-                          ],
-                        ),
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              );
-            },
-          ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
