@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
-import 'package:foodapp/data_layer/data_models/fast_food_demo_data.dart';
 import 'package:foodapp/common/app_dimention.dart';
-import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/drinks/tab_bar_widgets/type_drinks.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
-import 'package:foodapp/constants/app_colors.dart';
 
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/fast_food/details.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/x_not_found/not_found_category.dart';
-import 'package:foodapp/presentaition_layer/widgets/order_button.dart';
 import 'package:provider/provider.dart';
 
 class FastFoodCategoryWidget extends StatelessWidget {

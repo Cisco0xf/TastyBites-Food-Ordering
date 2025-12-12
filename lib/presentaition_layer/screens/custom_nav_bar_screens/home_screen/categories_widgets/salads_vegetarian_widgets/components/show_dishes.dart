@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/speial_dishes/special_dishes.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
@@ -13,19 +15,47 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/presentaition_layer/widgets/order_button.dart';
 import 'package:provider/provider.dart';
 
-class ShowDishWidget extends StatelessWidget {
-  const ShowDishWidget({
+class GreenDish extends StatelessWidget {
+  const GreenDish({
     super.key,
-    required this.typeList,
+    /*   required this.typeList, */
   });
 
-  final List<FoodModel> typeList;
+  /* final List<FoodModel> typeList; */
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SearchingSystemProvider>(
+    return Consumer<SearchingProvider>(
       builder: (context, searching, child) {
-        return searching.isItemNotExist
+        if (searching.searchingWithoutData) {
+          return NotFounCategoryWidget(
+            category: context.read<CurrentIndexProvider>().currentIndex == 3
+                ? "salads"
+                : "vegetarian",
+          );
+        }
+
+        return Directionality(
+          textDirection: TextDirection.ltr,
+          child: Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.only(bottom: context.screenHeight * .12),
+              itemCount: searching.filtred.length,
+              itemBuilder: (context, index) {
+                final FoodModel item = searching.filtred[index];
+
+                return ListFoodItem(
+                  isGreen: true,
+                  item: item,
+                  onTap: () {
+                    pushTo(ShowDishesDetailsWidget(item: item));
+                  },
+                );
+              },
+            ),
+          ),
+        );
+        /*  return searching.isItemNotExist
             ? NotFounCategoryWidget(
                 category: context.read<CurrentIndexProvider>().currentIndex == 3
                     ? "salads"
@@ -60,12 +90,12 @@ class ShowDishWidget extends StatelessWidget {
                     },
                   ),
                 ),
-              );
+              ); */
       },
     );
   }
 }
-
+/* 
 class GreenItemWidget extends StatelessWidget {
   const GreenItemWidget({
     super.key,
@@ -171,3 +201,6 @@ class GreenItemWidget extends StatelessWidget {
     );
   }
 }
+ */
+
+/// TODO:Clear this file after test

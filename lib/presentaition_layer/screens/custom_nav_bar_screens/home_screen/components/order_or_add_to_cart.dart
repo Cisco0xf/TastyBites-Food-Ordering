@@ -34,7 +34,7 @@ class OrderOrAddtoCartWidget extends StatelessWidget {
                   addToCart.state.any((element) => element.id == item.id);
               return GestureDetector(
                 onTap: () async {
-                  addToCart.addFoodItemToCart(item);
+                  await addToCart.addFoodItemToCart(item);
                 },
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 10),
