@@ -170,7 +170,7 @@ class _AddedToCartSuccessfullyWidgetState
                   onPressed: () {
                     Navigator.pop(context); // Close bottomSheet
                     Navigator.pop(context); // Close details screen
-                    moveToCart.switchContent(3);
+                    moveToCart.switchContent(2);
                   },
                   color: Colors.orange,
                   height: context.screenHeight * .06,

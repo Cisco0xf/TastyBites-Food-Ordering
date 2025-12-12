@@ -188,6 +188,7 @@ class SearchingProvider extends ChangeNotifier {
   void clearFilterAndSearch() {
     context.read<RattingProvider>().resetRate();
     context.read<PriceFilterProvider>().resetFilter();
+    
     searchController!.clear();
 
     filtesearchWithFilterCategoriesItems();

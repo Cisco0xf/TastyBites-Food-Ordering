@@ -28,7 +28,7 @@ class FastFoodCategoryWidget extends StatelessWidget {
                     ),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisExtent: context.screenHeight * .467,
+                      mainAxisExtent: context.screenHeight * .42,
                     ),
                     itemCount: searching.filtred.length,
                     itemBuilder: (context, index) {

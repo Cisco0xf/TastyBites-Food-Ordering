@@ -14,8 +14,9 @@ import '../../../../../../statemanagement/localization/localization_provider.dar
 
 void showTablesSheet() {
   final BuildContext context = navigationKey.currentContext as BuildContext;
+
   showModalBottomSheet(
-    isDismissible: false,
+    isDismissible: true,
     constraints: BoxConstraints(
       maxHeight: context.screenHeight * .6,
     ),
@@ -41,8 +42,8 @@ class _TablesSheetState extends State<TablesSheet> {
         return Column(
           children: <Widget>[
             Container(
-              padding: const EdgeInsets.all(5),
-              margin: const EdgeInsets.all(10),
+              padding: padding(5),
+              margin: padding(10),
               width: context.screenWidth * .6,
               height: context.screenHeight * .05,
               decoration: BoxDecoration(
@@ -55,17 +56,18 @@ class _TablesSheetState extends State<TablesSheet> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: tables.length,
+                itemCount: 150,
                 itemBuilder: (context, index) {
+                  final int table = index + 1;
                   return RadioListTile(
-                    value: tables[index],
+                    value: table.toString(),
                     groupValue: userTable.selectedTable,
                     onChanged: (table) {
-                      setState(
-                        () => userTable.selectTable(table as String),
-                      );
+                      userTable.selectTable(table as String);
+
+                      Navigator.pop(context);
                     },
-                    title: Text("Table : ${tables[index]}"),
+                    title: Text("Table : $table"),
                   );
                 },
               ),

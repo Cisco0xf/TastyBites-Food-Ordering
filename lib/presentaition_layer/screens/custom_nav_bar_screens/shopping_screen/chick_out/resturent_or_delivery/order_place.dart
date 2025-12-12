@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
@@ -12,70 +14,35 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopp
 
 import 'package:provider/provider.dart';
 
-class OrderPlaceWidget extends StatefulWidget {
+class OrderPlaceWidget extends StatelessWidget {
   const OrderPlaceWidget({super.key});
 
-  @override
-  State<OrderPlaceWidget> createState() => _OrderPlaceWidgetState();
-}
-
-class _OrderPlaceWidgetState extends State<OrderPlaceWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<PlaceProvider>(
       builder: (context, chooseOrderPlace, child) {
         return Container(
-          margin: const EdgeInsets.only(
-            top: 10,
-            left: 10,
-            right: 10,
-          ),
-          padding: const EdgeInsets.all(5),
+          margin: padding(10.0),
+          padding: padding(5.0),
           decoration: BoxDecoration(
-            borderRadius: borderRaduis(15),
+            borderRadius: borderRaduis(30.0),
             color: SwitchColors.orderPlaceBGColor,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Consumer<AddressProvider>(builder: (context, clearError, child) {
-                return GestureDetector(
-                  /* onClick: () {
-                    if (chooseOrderPlace.isTakeaway) {
-                      //chooseOrderPlace.atResturent();
-                      chooseOrderPlace.placeSwitcher(Place.restuarant);
-                      clearError.clearError;
-                    }
-                  }, */
-                  child: OrderChoiceWidget(
-                    onSelect: () {
-                      chooseOrderPlace.placeSwitcher(Place.restuarant);
-                      clearError.clearError;
-                    },
-                    orderPlace: "restaurant".localeValue(context: context),
-                    imagePath:
-                        "asstes/images/app_images/chickout_place/restaurant.svg",
-                    isSelected: !chooseOrderPlace.isTakeaway,
-                  ),
-                );
-              }),
-              GestureDetector(
-                /*  onTap: () {
-                  if (chooseOrderPlace.isRasturent) {
-                    chooseOrderPlace.takeAway();
-                  }
-                }, */
-                child: OrderChoiceWidget(
+            children: List<Widget>.generate(
+              places.length,
+              (index) {
+                final PlaceModel place = places[index];
+                return OrderChoice(
+                  isSelected: place.type == chooseOrderPlace.orderPlace,
+                  place: place,
                   onSelect: () {
-                    chooseOrderPlace.placeSwitcher(Place.takeaway);
+                    chooseOrderPlace.placeSwitcher(place.type);
                   },
-                  orderPlace: "delivary_service".localeValue(context: context),
-                  imagePath:
-                      "asstes/images/app_images/chickout_place/delivery.svg",
-                  isSelected: chooseOrderPlace.isTakeaway,
-                ),
-              )
-            ],
+                );
+              },
+            ),
           ),
         );
       },
@@ -83,46 +50,40 @@ class _OrderPlaceWidgetState extends State<OrderPlaceWidget> {
   }
 }
 
-class OrderChoiceWidget extends StatelessWidget {
-  const OrderChoiceWidget({
+class OrderChoice extends StatelessWidget {
+  const OrderChoice({
     super.key,
-    required this.orderPlace,
     required this.isSelected,
-    required this.imagePath,
     required this.onSelect,
+    required this.place,
   });
 
-  final String orderPlace;
-  final String imagePath;
+  final PlaceModel place;
   final bool isSelected;
   final void Function() onSelect;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(
-        milliseconds: 250,
-      ),
+      duration: const Duration(milliseconds: 250),
       width: context.screenWidth * .4,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: borderRaduis(20),
+        borderRadius: borderRaduis(25.0),
         color: isSelected ? SwitchColors.selectedPlaceColor : null,
       ),
       child: Clicker(
         onClick: onSelect,
+        raduis: 20.0,
         child: Row(
           children: [
-            SizedBox(
-              width: context.screenWidth * .1,
-              height: context.screenHeight * .04,
-              child: SvgPicture.asset(imagePath),
+            SizedBox.square(
+              dimension: context.screenHeight * .04,
+              child: SvgPicture.asset(place.image),
             ),
-            const SizedBox(
-              width: 10,
-            ),
+            const Gap(width: 10.0),
             Text(
-              orderPlace,
+              place.label.localeValue(context: context),
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -135,3 +96,28 @@ class OrderChoiceWidget extends StatelessWidget {
     );
   }
 }
+
+class PlaceModel {
+  final String image;
+  final String label;
+  final Place type;
+
+  const PlaceModel({
+    required this.image,
+    required this.label,
+    required this.type,
+  });
+}
+
+const List<PlaceModel> places = [
+  PlaceModel(
+    image: Assets.rest,
+    label: "restaurant",
+    type: Place.restuarant,
+  ),
+  PlaceModel(
+    image: Assets.delivary,
+    label: "delivary_service",
+    type: Place.takeaway,
+  ),
+];

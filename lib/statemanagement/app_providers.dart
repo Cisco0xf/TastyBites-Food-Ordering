@@ -27,7 +27,7 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => OrderSingleItemProvider()),
     //ChangeNotifierProvider(create: (context) => SearchingSystemProvider()),//
    // ChangeNotifierProvider(create: (context) => SearchingFilterProvider()),
-    ChangeNotifierProvider(create: (context) => SearchingDrinksProvider()),//
+   // ChangeNotifierProvider(create: (context) => SearchingDrinksProvider()),//
     ChangeNotifierProvider(create: (context) => RattingProvider()),
     ChangeNotifierProvider(create: (context) => ThemeProvider()),
     ChangeNotifierProvider(create: (context) => LocalizationProvider()),

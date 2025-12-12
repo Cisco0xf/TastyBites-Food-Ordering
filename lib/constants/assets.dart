@@ -42,4 +42,19 @@ class Assets {
 
   static const String hotDrinks =
       "${_imagesAppBase}categories_images/hot_drinks.svg";
+
+  static const String rest = "${_imagesAppBase}chickout_place/delivery.svg";
+  static const String delivary =
+      "${_imagesAppBase}chickout_place/restaurant.svg";
+
+  static const String _paymentBase = "${_imagesAppBase}payment_images/";
+
+  static const String mastercard = "${_paymentBase}mastercard.png";
+  static const String meeza = "${_paymentBase}meeza.png";
+  static const String visa = "${_paymentBase}visa.png";
+  static const String express = "${_paymentBase}american_express.png";
+  static const String cvv = "${_paymentBase}card_cvv.png";
+  static const String dinner = "${_paymentBase}dinners_club.png";
+  static const String jcb = "${_paymentBase}jcb.png";
+  static const String verve = "${_paymentBase}verve.png";
 }

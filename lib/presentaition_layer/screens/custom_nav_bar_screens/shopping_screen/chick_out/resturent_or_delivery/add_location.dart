@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/input_decoration.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
@@ -16,7 +17,7 @@ class AddLocaltionWidget extends StatelessWidget {
         return Column(
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.all(10),
+              margin: padding(10),
               width: context.screenWidth * .97,
               height: context.screenHeight * .07,
               child: TextField(

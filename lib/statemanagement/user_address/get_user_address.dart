@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -16,7 +15,7 @@ class AddressProvider with ChangeNotifier {
   }
 
   void disposeController() {
-    addressController?.dispose();
+    addressController!.dispose();
   }
 
   // GET user address
@@ -50,10 +49,7 @@ class AddressProvider with ChangeNotifier {
 
   // Clear custom error
 
-  void get clearError {
-    error = "";
-    notifyListeners();
-  }
+  void clearError() => error = "";
 
   void clearAddress() {
     userAddress = "User Address";

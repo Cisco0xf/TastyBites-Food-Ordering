@@ -24,10 +24,10 @@ class TypeDrinksWidget extends StatelessWidget {
             : Directionality(
                 textDirection: TextDirection.ltr,
                 child: GridView.builder(
-                  padding: EdgeInsets.only(bottom: context.screenHeight * .07),
+                  padding: EdgeInsets.only(bottom: context.screenHeight * .1),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisExtent: context.screenHeight * .45,
+                    mainAxisExtent: context.screenHeight * .42,
                   ),
                   itemCount: searching.filtred.length,
                   itemBuilder: (context, index) {
@@ -117,16 +117,14 @@ class GridFoodItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 5,
-                        vertical: 5,
-                      ),
+                      padding: padding(5.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Text(
                               item.foodName,
+                              overflow: TextOverflow.ellipsis,
                               style: typeNameTextStyle,
                             ),
                           ),

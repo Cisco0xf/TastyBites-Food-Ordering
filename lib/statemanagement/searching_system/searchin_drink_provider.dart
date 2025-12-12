@@ -1,4 +1,4 @@
-import 'dart:developer';
+/* import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/common/navigator_key.dart';
@@ -278,3 +278,4 @@ class SearchDrinkWithFilter extends ChangeNotifier {
     return noData;
   }
 }
+ */

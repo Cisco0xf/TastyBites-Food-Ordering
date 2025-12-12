@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -34,9 +35,7 @@ Future<void> get showExitDialog async {
                         fontFamily: FontFamily.mainArabic,
                       ),
               ),
-              SizedBox(
-                height: context.screenHeight * .02,
-              ),
+              const Gap(hRatio: 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -44,9 +43,7 @@ Future<void> get showExitDialog async {
                     width: context.screenWidth * .35,
                     height: context.screenHeight * .06,
                     child: OutlinedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                      onPressed: () => Navigator.pop(context),
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                           borderRadius: borderRaduis(15.0),
