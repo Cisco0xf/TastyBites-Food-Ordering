@@ -37,172 +37,223 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final int cartCounter = context.watch<CartManager>().state.length;
 
-    return Consumer<CurrentIndexProvider>(
-      builder: (context, currentIndex, child) {
-        return PopScope(
-          canPop: false,
-          onPopInvokedWithResult: (didPop, result) async {
-            bool isHome = currentIndex.currentContent == 0;
+    final int currentIndex = context.watch<CurrentIndexProvider>().currentIndex;
+    final int currentContent =
+        context.watch<CurrentIndexProvider>().currentContent;
 
-            bool isFirstCategory = currentIndex.currentIndex == 0;
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) async {
+        bool isHome = currentContent == 0;
 
-            if (!isHome) {
-              currentIndex.switchContent(1);
-              return;
-            }
+        bool isFirstCategory = currentIndex == 0;
 
-            if (!isFirstCategory) {
-              return;
-            }
+        if (!isHome) {
+          context.read<CurrentIndexProvider>().switchContent(1);
+          return;
+        }
 
-            if (!didPop) {
-              await showExitDialog;
-              return;
-            }
+        if (!isFirstCategory) {
+          return;
+        }
 
-            if (context.mounted) {
-              Navigator.pop(context);
-            }
-          },
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            extendBody: true,
-            body: Column(
+        if (!didPop) {
+          await showExitDialog;
+          return;
+        }
+
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBody: true,
+        body: Column(
+          children: <Widget>[
+            const MainScreenAppBar(),
+            contentWidgets[currentContent].targetWidget,
+          ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Container(
+          decoration: BoxDecoration(
+            color: Colors.orange[600],
+            shape: BoxShape.circle,
+          ),
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: IconButton(
+                  onPressed: () {
+                    context.read<CurrentIndexProvider>().switchContent(3);
+                  },
+                  icon: Icon(
+                    Icons.shopping_cart,
+                    color: context.isLight
+                        ? Colors.black87
+                        : const Color(0xFF6B728E),
+                    size: 35,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: -10,
+                left: -5,
+                child: Container(
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 1.5,
+                    ),
+                    shape: BoxShape.circle,
+                    color: context.isLight
+                        ? Colors.blueGrey[200]
+                        : const Color(0xFF263238),
+                  ),
+                  child: Text(
+                    cartCounter.toString(),
+                    style: const TextStyle(fontSize: 10),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          padding: const EdgeInsets.only(bottom: 10),
+          surfaceTintColor: Colors.white,
+          height: context.screenHeight * .08,
+          notchMargin: 5.0,
+          shape: const CircularNotchedRectangle(),
+          child: IconTheme(
+            data: const IconThemeData(
+              color: Color(0xFFFF7800),
+              size: 30,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
-                const MainScreenAppBar(),
-                contentWidgets[currentIndex.currentContent].targetWidget,
+                for (int i = 0; i < navIcons.length; i++) ...{
+                  CustomNavigationBarItem(
+                    icon: navIcons[i],
+                    isSelected: currentContent == i,
+                    onSelect: () {
+                      context.read<CurrentIndexProvider>().switchContent(i + 1);
+                    },
+                  ),
+                },
+                /*  CustomNavigationBarItem(
+                  selectedColor:
+                      context.read<CurrentIndexProvider>().currentContent == 0
+                          ? SwitchColors.selectedNavColor
+                          : null,
+                  icon: context.read<CurrentIndexProvider>().currentContent == 0
+                      ? const Icon(
+                          Icons.home,
+                        )
+                      : const Icon(
+                          Icons.home_outlined,
+                        ),
+                  onPressed: () {
+                    context.read<CurrentIndexProvider>().switchContent(1);
+                  },
+                ),
+                CustomNavigationBarItem(
+                  selectedColor:
+                      context.read<CurrentIndexProvider>().currentContent == 1
+                          ? SwitchColors.selectedNavColor
+                          : null,
+                  icon: context.read<CurrentIndexProvider>().currentContent == 1
+                      ? const Icon(Icons.favorite)
+                      : const Icon(
+                          Icons.favorite_outline,
+                        ),
+                  onPressed: () {
+                    context.read<CurrentIndexProvider>().switchContent(2);
+                  },
+                ),
+                SizedBox(
+                  width: context.screenWidth * .12,
+                ),
+                CustomNavigationBarItem(
+                  selectedColor: currentContent == 3
+                      ? SwitchColors.selectedNavColor
+                      : null,
+                  icon: currentContent == 3
+                      ? const Icon(
+                          Icons.notifications,
+                        )
+                      : const Icon(
+                          Icons.notifications_none_outlined,
+                        ),
+                  onPressed: () {
+                    context.read<CurrentIndexProvider>().switchContent(4);
+                  },
+                ),
+                CustomNavigationBarItem(
+                  selectedColor: currentContent == 4
+                      ? SwitchColors.selectedNavColor
+                      : null,
+                  icon: currentContent == 4
+                      ? const Icon(Icons.person_2)
+                      : const Icon(
+                          Icons.person_2_outlined,
+                        ),
+                  onPressed: () {
+                    context.read<CurrentIndexProvider>().switchContent(5);
+                  },
+                ), */
               ],
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: Container(
-              decoration: BoxDecoration(
-                color: Colors.orange[600],
-                shape: BoxShape.circle,
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: IconButton(
-                      onPressed: () {
-                        currentIndex.switchContent(3);
-                      },
-                      icon: Icon(
-                        Icons.shopping_cart,
-                        color: context.isLight
-                            ? Colors.black87
-                            : const Color(0xFF6B728E),
-                        size: 35,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: -10,
-                    left: -5,
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 1.5,
-                        ),
-                        shape: BoxShape.circle,
-                        color: context.isLight
-                            ? Colors.blueGrey[200]
-                            : const Color(0xFF263238),
-                      ),
-                      child: Text(
-                        cartCounter.toString(),
-                        style: const TextStyle(fontSize: 10),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            bottomNavigationBar: BottomAppBar(
-              padding: const EdgeInsets.only(bottom: 10),
-              surfaceTintColor: Colors.white,
-              height: context.screenHeight * .08,
-              notchMargin: 5.0,
-              shape: const CircularNotchedRectangle(),
-              child: IconTheme(
-                data: const IconThemeData(
-                  color: Color(0xFFFF7800),
-                  size: 30,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    CustomNavigationBarItem(
-                      selectedColor: currentIndex.currentContent == 0
-                          ? SwitchColors.selectedNavColor
-                          : null,
-                      icon: currentIndex.currentContent == 0
-                          ? const Icon(
-                              Icons.home,
-                            )
-                          : const Icon(
-                              Icons.home_outlined,
-                            ),
-                      onPressed: () {
-                        currentIndex.switchContent(1);
-                      },
-                    ),
-                    CustomNavigationBarItem(
-                      selectedColor: currentIndex.currentContent == 1
-                          ? SwitchColors.selectedNavColor
-                          : null,
-                      icon: currentIndex.currentContent == 1
-                          ? const Icon(Icons.favorite)
-                          : const Icon(
-                              Icons.favorite_outline,
-                            ),
-                      onPressed: () {
-                        currentIndex.switchContent(2);
-                      },
-                    ),
-                    SizedBox(
-                      width: context.screenWidth * .12,
-                    ),
-                    CustomNavigationBarItem(
-                      selectedColor: currentIndex.currentContent == 3
-                          ? SwitchColors.selectedNavColor
-                          : null,
-                      icon: currentIndex.currentContent == 3
-                          ? const Icon(
-                              Icons.notifications,
-                            )
-                          : const Icon(
-                              Icons.notifications_none_outlined,
-                            ),
-                      onPressed: () {
-                        currentIndex.switchContent(4);
-                      },
-                    ),
-                    CustomNavigationBarItem(
-                      selectedColor: currentIndex.currentContent == 4
-                          ? SwitchColors.selectedNavColor
-                          : null,
-                      icon: currentIndex.currentContent == 4
-                          ? const Icon(Icons.person_2)
-                          : const Icon(
-                              Icons.person_2_outlined,
-                            ),
-                      onPressed: () {
-                        currentIndex.switchContent(5);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
+
+class NavBarIconModel {
+  final IconData icon;
+  final IconData selectedIcon;
+  final String selectedKey;
+  final String key;
+
+  const NavBarIconModel({
+    required this.icon,
+    required this.selectedIcon,
+    required this.key,
+    required this.selectedKey,
+  });
+}
+
+const List<NavBarIconModel> navIcons = [
+  NavBarIconModel(
+    icon: Icons.home_outlined,
+    selectedIcon: Icons.home,
+    key: "MNIbfo-dmgmn",
+    selectedKey: "MCIRUBgo-dm",
+  ),
+  NavBarIconModel(
+    icon: Icons.favorite_outline,
+    selectedIcon: Icons.favorite,
+    key: "dgpmhom-dmgmn",
+    selectedKey: "domgBgo-dm",
+  ),
+  NavBarIconModel(
+    icon: Icons.notifications_none_outlined,
+    selectedIcon: Icons.notifications,
+    key: "dlomhe-dmgmn",
+    selectedKey: "pggmep-dm",
+  ),
+  NavBarIconModel(
+    icon: Icons.person_2_outlined,
+    selectedIcon: Icons.person_2,
+    key: "MNIbfo-gfrhrs",
+    selectedKey: "MCIRUBgo-dfhgs",
+  ),
+];

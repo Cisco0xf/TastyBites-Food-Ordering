@@ -20,9 +20,11 @@ class SearchingProvider extends ChangeNotifier {
 
   bool get filterDrinks => currentCategory == 1;
 
-  TextEditingController? get searchController => filterDrinks
+  TextEditingController? get searchController =>
+      ControllersManager.searchingController;
+  /* TextEditingController? get searchController => filterDrinks
       ? ControllersManager.drinkSearchController
-      : ControllersManager.searchingController;
+      : ControllersManager.searchingController; */
 
   String? get _query => searchController?.text.trim().toLowerCase();
 
@@ -104,6 +106,16 @@ class SearchingProvider extends ChangeNotifier {
   // Searching Algorithm
 
   void _searchDrinkCategory() {
+    /* state = _searchBase.where((item) {
+      final bool matchName = item.foodName.toLowerCase().contains(_query!);
+
+      final hasMatch = matchName && _matchPrice(item) && _matchRate(item);
+
+      return hasMatch;
+    }).toList(); */
+
+    state = [];
+
     for (int i = 0; i < _searchBase.length; i++) {
       final FoodModel item = _searchBase[i];
 
@@ -120,7 +132,7 @@ class SearchingProvider extends ChangeNotifier {
         Log.log(
             "Item {${i + 1}} with Name => ${item.foodName} | Price => ${item.foodPrice}");
 
-        state = [...state, item];
+        state.add(item);
       }
     }
 
@@ -184,6 +196,7 @@ class SearchingProvider extends ChangeNotifier {
   }
 }
 
+/* 
 class SearchingSystemProvider with ChangeNotifier {
   // Filtered List
   List<FoodModel> filteredList = [];
@@ -391,3 +404,4 @@ class SearchingSystemProvider with ChangeNotifier {
     return isItemExist;
   }
 }
+ */
