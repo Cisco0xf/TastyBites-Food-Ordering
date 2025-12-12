@@ -7,6 +7,7 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/style.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/x_not_found/not_found_category.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/add_icon_btn.dart';
 import 'package:foodapp/presentaition_layer/widgets/order_button.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:provider/provider.dart';
@@ -183,11 +184,12 @@ class GridFoodItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OrderButtonWidget(item: item),
-                        const Icon(
+                        /* const Icon(
                           Icons.add_circle,
                           color: Color(0xFF1F8A70),
                           size: 35,
-                        ),
+                        ), */
+                        CartIconButton(target: item),
                       ],
                     )
                   ],

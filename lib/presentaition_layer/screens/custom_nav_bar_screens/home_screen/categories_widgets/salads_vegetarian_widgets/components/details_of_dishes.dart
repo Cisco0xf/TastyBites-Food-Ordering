@@ -73,9 +73,7 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: context.screenHeight * .01,
-                          ),
+                         const Gap(hRatio: .01),
                           const Divider(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,

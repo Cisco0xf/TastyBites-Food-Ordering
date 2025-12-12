@@ -102,7 +102,7 @@ class FavoriteItemsScreen extends StatelessWidget {
                                     item: item,
                                   );
                                 } else if (item.foodType == "GlobalDishe") {
-                                  return GlobalDishesDetailsWidget(
+                                  return GlobalDishesDetails(
                                     /*   imagePath: item.imagePath,
                                     description: item.description,
                                     rate: item.foodRate,

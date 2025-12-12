@@ -3,7 +3,7 @@ import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
-import 'package:foodapp/data_layer/data_models/desserts_demo_data.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/add_icon_btn.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/common/app_dimention.dart';
@@ -24,6 +24,7 @@ class DessertsWidget extends StatelessWidget {
           return searching.searchingWithoutData
               ? const NotFounCategoryWidget(category: "desserts")
               : ListView.builder(
+                  padding: EdgeInsets.only(bottom: context.screenHeight * .14),
                   itemCount: searching.filtred.length,
                   itemBuilder: (context, index) {
                     final FoodModel target = searching.filtred[index];
@@ -96,23 +97,26 @@ class DessertsItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Container(
-          margin: padding(10.0),
-          width: double.infinity,
-          height: context.screenHeight * .3,
-          decoration: BoxDecoration(
-            borderRadius: borderRaduis(15),
-            color: Colors.black26,
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(item.imagePath),
+        Clicker(
+          onClick: onTap,
+          innerPadding: 0.0,
+          child: Container(
+            margin: padding(10.0),
+            width: double.infinity,
+            height: context.screenHeight * .3,
+            decoration: BoxDecoration(
+              borderRadius: borderRaduis(15),
+              color: Colors.black26,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(item.imagePath),
+              ),
             ),
           ),
         ),
         Directionality(
           textDirection: TextDirection.ltr,
           child: Container(
-            padding: padding(10),
             margin: padding(10, from: From.horizontal),
             decoration: BoxDecoration(
               borderRadius: borderRaduis(20),
@@ -122,56 +126,59 @@ class DessertsItemWidget extends StatelessWidget {
                 end: Alignment.bottomRight,
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  item.foodName,
-                  style: const TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
+            child: Clicker(
+              onClick: onTap,
+              innerPadding: 10.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    item.foodName,
+                    style: const TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  "${item.foodPrice.toString()}  \$",
-                  style: typePriceTextStyle,
-                ),
-                Row(
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        const Icon(Icons.star, color: Colors.yellow),
-                        Text(
-                          item.foodRate.toString(),
-                          style: const TextStyle(
-                            color: Colors.yellow,
-                            fontFamily: FontFamily.mainFont,
+                  Text(
+                    "${item.foodPrice.toString()}  \$",
+                    style: typePriceTextStyle,
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Row(
+                        children: [
+                          const Icon(Icons.star, color: Colors.yellow),
+                          Text(
+                            item.foodRate.toString(),
+                            style: const TextStyle(
+                              color: Colors.yellow,
+                              fontFamily: FontFamily.mainFont,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      "   (${item.numberOfReviewers} reviewer)",
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontFamily: FontFamily.subFont,
+                        ],
                       ),
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    OrderButtonWidget(
-                      item: item,
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.add_circle, size: 35),
-                    ),
-                  ],
-                )
-              ],
+                      Text(
+                        "   (${item.numberOfReviewers} reviewer)",
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontFamily: FontFamily.subFont,
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      OrderButtonWidget(item: item),
+                      /* IconButton(
+                        onPressed: () {},
+                        icon: const Icon(Icons.add_circle, size: 35),
+                      ), */
+                      CartIconButton(target: item),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

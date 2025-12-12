@@ -30,7 +30,7 @@ class _CartItemsWidgetState extends State<CartItemsWidget> {
       "ColdDrink": FoodDetials(item: item),
       "HotDrink": FoodDetials(item: item),
       "SpecialFood": FoodDetials(item: item),
-      "GlobalDishe": GlobalDishesDetailsWidget(item: item),
+      "GlobalDishe": GlobalDishesDetails(item: item),
       "Salad": ShowDishesDetailsWidget(item: item),
       "Vegetarian": ShowDishesDetailsWidget(item: item),
       "Sushi": FoodDetials(item: item),

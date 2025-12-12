@@ -148,7 +148,15 @@ class SearchingProvider extends ChangeNotifier {
   bool get searchingWithoutData {
     final bool data = filterDrinks ? state.isEmpty : filterdFood.isEmpty;
 
-    final bool hasNoData = data && isSearching;
+    final bool hasRateFilter = !(context.read<RattingProvider>().isAny);
+    final bool hasPriceFilter = !(context.read<PriceFilterProvider>().isAll);
+
+    final bool hasNoData =
+        data && (isSearching || hasPriceFilter || hasRateFilter);
+
+    /* final bool hasNoData = (data && isSearching) ||
+        (data && hasRateFilter) ||
+        (data && hasPriceFilter); */
 
     return hasNoData;
   }

@@ -12,6 +12,7 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/drinks/drinks.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/fast_food/fast_food.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_dishes_widget.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/salads_vegetarian_widgets/components/show_dishes.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/salads_vegetarian_widgets/salads/salads.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/salads_vegetarian_widgets/vegetarian/vegetarian.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/speial_dishes/special_dishes.dart';
@@ -53,13 +54,13 @@ List<CategoriesItemsModel> categoriesItems = <CategoriesItemsModel>[
   CategoriesItemsModel(
     itemTitle: "salads",
     itemImage: "asstes/images/app_images/categories_images/salads.svg",
-    targetWidget: const SaladsTypeWidget(),
+    targetWidget: const GreenDish() /* const SaladsTypeWidget() */,
     filteredList: saladDamoData,
   ),
   CategoriesItemsModel(
     itemTitle: "vegetarian",
     itemImage: "asstes/images/app_images/categories_images/vegetarians.svg",
-    targetWidget: const VegetarainTypeWidget(),
+    targetWidget: const GreenDish(),
     filteredList: vegetarianDishesDemoData,
   ),
   CategoriesItemsModel(

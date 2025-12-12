@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodapp/common/app_dimention.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
@@ -46,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen>
       SystemUiMode.manual,
       overlays: SystemUiOverlay.values,
     );
-    
+
     InitDB.initDB();
 
     super.dispose();
@@ -70,9 +71,7 @@ class _SplashScreenState extends State<SplashScreen>
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
-              height: context.screenHeight * .1,
-            ),
+            const Gap(hRatio: 0.1),
             SizedBox(
               width: context.screenWidth * .65,
               height: context.screenHeight * .35,
@@ -82,9 +81,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
             const CircularProgressIndicator(),
-            SizedBox(
-              height: context.screenHeight * .27,
-            ),
+            const Gap(hRatio: 0.27),
             const Text(
               "TastyBites",
               style: TextStyle(

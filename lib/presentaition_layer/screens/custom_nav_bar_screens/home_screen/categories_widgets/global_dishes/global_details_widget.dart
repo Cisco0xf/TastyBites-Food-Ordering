@@ -14,8 +14,8 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/presentaition_layer/widgets/pop_button_widget.dart';
 import 'package:provider/provider.dart';
 
-class GlobalDishesDetailsWidget extends StatelessWidget {
-  const GlobalDishesDetailsWidget({
+class GlobalDishesDetails extends StatelessWidget {
+  const GlobalDishesDetails({
     super.key,
     /* required this.dishName,
     required this.description,
@@ -49,11 +49,7 @@ class GlobalDishesDetailsWidget extends StatelessWidget {
         textDirection: TextDirection.ltr,
         child: Stack(
           children: <Widget>[
-            Positioned(
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 0,
+            Positioned.fill(
               child: Stack(
                 children: <Widget>[
                   Container(
