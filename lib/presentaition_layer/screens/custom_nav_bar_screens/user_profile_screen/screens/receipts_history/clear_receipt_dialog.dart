@@ -4,7 +4,7 @@ import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> clearReceiptDialog(BuildContext context) async {

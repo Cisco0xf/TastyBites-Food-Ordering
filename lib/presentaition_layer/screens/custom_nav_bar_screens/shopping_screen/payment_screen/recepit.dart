@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
 
 import 'package:foodapp/common/app_dimention.dart';

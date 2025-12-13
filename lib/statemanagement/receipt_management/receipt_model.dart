@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+/* import 'package:hive/hive.dart';
 
 
 @HiveType(typeId: 1)
@@ -12,3 +12,4 @@ class ReceiptHistoryModel {
     required this.dateTime,
   });
 }
+ */

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:provider/provider.dart';
