@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
-import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
+import 'package:foodapp/common/reusable_methods.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
