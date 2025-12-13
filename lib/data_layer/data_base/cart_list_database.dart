@@ -49,12 +49,13 @@ import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/data_layer/data_base/locale_repository.dart';
+import 'package:foodapp/data_layer/data_base/receipt_db/receipt_db.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/favoriter_items/add_to_favorite_provider.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
-class CartDatabase implements Database {
+class CartDatabase implements Database<FoodModel> {
   final String dbKey;
 
   CartDatabase(this.dbKey);
@@ -95,7 +96,7 @@ class ManageCartDB {
 
   ManageCartDB(this.dbKey);
 
-  Database get _cartDB => CartDatabase(dbKey);
+  Database<FoodModel> get _cartDB => CartDatabase(dbKey);
 
   Future<void> addDBItem(FoodModel food) async {
     final Box box = await _cartDB.openBox;
@@ -151,13 +152,17 @@ class InitDB {
   static Future<void> initDB() async {
     final ManageCartDB cartDb = ManageCartDB(HiveKeys.CART_KEY);
     await cartDb.initializeDataFromDB();
-    
+
     Log.log("Cart DB has been init successfully...");
 
     final ManageCartDB wishList = ManageCartDB(HiveKeys.WISH_LIST_KEY);
     await wishList.initializeDataFromDB(type: InitType.wish);
 
     Log.log("WishList DB has been init successfully...");
+
+    await ManageReceiptDB.initializeReceiptHistoryFromDatabase();
+
+    Log.log("Receipt DB has been init Successfully...");
   }
 }
 

@@ -1,34 +1,36 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'data_model.dart';
+part of 'receipt_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ReceiptHistoryModelAdapter extends TypeAdapter<ReceiptHistoryModel> {
+class ReceiptModelAdapter extends TypeAdapter<ReceiptModel> {
   @override
   final int typeId = 1;
 
   @override
-  ReceiptHistoryModel read(BinaryReader reader) {
+  ReceiptModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ReceiptHistoryModel(
-      newReceipt: fields[0] as String,
-      dateTime: fields[1] as String,
+    return ReceiptModel(
+      newReceipt: fields[1] as String,
+      dateTime: fields[2] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, ReceiptHistoryModel obj) {
+  void write(BinaryWriter writer, ReceiptModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.newReceipt)
+      ..write(obj.id)
       ..writeByte(1)
+      ..write(obj.newReceipt)
+      ..writeByte(2)
       ..write(obj.dateTime);
   }
 
@@ -38,7 +40,7 @@ class ReceiptHistoryModelAdapter extends TypeAdapter<ReceiptHistoryModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ReceiptHistoryModelAdapter &&
+      other is ReceiptModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

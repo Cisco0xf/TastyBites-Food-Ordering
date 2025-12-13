@@ -1,4 +1,6 @@
-import 'package:foodapp/statemanagement/withdraw_history/data_model.dart';
+/* import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_base/locale_repository.dart';
+import 'package:foodapp/statemanagement/withdraw_history/receipt_model.dart';
 import 'package:hive/hive.dart';
 
 abstract class ReceiptHistoryRepository {
@@ -57,3 +59,4 @@ class ReceiptDatabse extends ReceiptHistoryRepository {
     await box.clear();
   }
 }
+ */

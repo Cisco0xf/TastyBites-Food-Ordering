@@ -23,11 +23,11 @@ import 'package:provider/single_child_widget.dart';
 List<SingleChildWidget> get appProviders {
   List<SingleChildWidget> providers = [
     ChangeNotifierProvider(create: (context) => AddressProvider()),
-    ChangeNotifierProvider(create: (context) => ReceiptHistoryProvider()),
+    //ChangeNotifierProvider(create: (context) => ReceiptHistoryProvider()),
     ChangeNotifierProvider(create: (context) => OrderSingleItemProvider()),
     //ChangeNotifierProvider(create: (context) => SearchingSystemProvider()),//
-   // ChangeNotifierProvider(create: (context) => SearchingFilterProvider()),
-   // ChangeNotifierProvider(create: (context) => SearchingDrinksProvider()),//
+    // ChangeNotifierProvider(create: (context) => SearchingFilterProvider()),
+    // ChangeNotifierProvider(create: (context) => SearchingDrinksProvider()),//
     ChangeNotifierProvider(create: (context) => RattingProvider()),
     ChangeNotifierProvider(create: (context) => ThemeProvider()),
     ChangeNotifierProvider(create: (context) => LocalizationProvider()),
@@ -43,7 +43,8 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => WishListProvider()),
     ChangeNotifierProvider(create: (context) => CartManager(context)),
     ChangeNotifierProvider(create: (context) => PriceFilterProvider()),
-    ChangeNotifierProvider(create: (context) => SearchingProvider())
+    ChangeNotifierProvider(create: (context) => SearchingProvider()),
+    ChangeNotifierProvider(create: (context) => ManageReceiptHistory())
   ];
 
   return providers;

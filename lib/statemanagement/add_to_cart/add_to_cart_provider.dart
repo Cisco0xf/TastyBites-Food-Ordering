@@ -161,45 +161,6 @@ class CartManager extends ChangeNotifier {
   }
   // Get the receipt && its components
 
-  String get _getRecepitDateTime {
-    String recepitDateTime = DateFormat("MMM d, hh:mm aaa").format(
-      DateTime.now(),
-    );
-    return recepitDateTime;
-  }
-
-  String get dateTime => _getRecepitDateTime;
-
-  String getRecepit({required BuildContext context, bool isHistory = false}) {
-    final StringBuffer recepit = StringBuffer();
-
-    isHistory ? null : recepit.writeln("Ordered in : $_getRecepitDateTime");
-    recepit.writeln("Thanks for your order.");
-    recepit.writeln("Here's your recepit");
-    recepit.writeln("---------------------------------------");
-    for (int j = 0; j < state.length; j++) {
-      recepit.writeln(
-        "${state[j].stock} x ${state[j].foodName} ( \$ ${state[j].foodPrice})",
-      );
-    }
-
-    recepit.writeln("---------------------------------------");
-    recepit.writeln("Total items : ${state.length}");
-    recepit.writeln("Discount : \$ ${disCount.toString()}");
-    recepit.writeln(serviceOrDelivery());
-    recepit.writeln("---------------------------------------");
-    recepit.writeln(
-      "Total price : \$ ${getOrderTotalArterDiscountAndService()}",
-    );
-    recepit.writeln("---------------------------------------");
-
-    if (isHistory) {
-      recepit.writeln(orderPlace());
-    }
-
-    return recepit.toString();
-  }
-
   // Chick the user choice
 
   String orderPlace() {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/home_widget.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/foos_vedios_scree/notifications_screen.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/food_notification/notifications_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/shopping_widget.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/profile_widget.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/favotie_items/favorite_screen.dart';

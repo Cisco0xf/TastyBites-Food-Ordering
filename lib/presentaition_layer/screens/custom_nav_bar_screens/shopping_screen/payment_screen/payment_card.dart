@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/input_decoration.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
 import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
-import 'package:foodapp/statemanagement/withdraw_history/data_model.dart';
+import 'package:foodapp/statemanagement/withdraw_history/receipt_model.dart';
 import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
 
@@ -92,6 +93,7 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
             SizedBox(
               height: context.screenHeight * .01,
             ),
+            const Gap(hRatio: 0.01),
             CreditCardWidget(
               cardNumber: cardNumber,
               expiryDate: expiryDate,
@@ -197,16 +199,13 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text("Card Number : $cardNumber"),
-                                  cardHolderName.isEmpty
-                                      ? const SizedBox()
-                                      : Text("Card Holder : $cardHolderName"),
+                                  if (cardHolderName.isNotEmpty)
+                                    Text("Card Holder : $cardHolderName"),
                                   Text("Card expiry date : $expiryDate"),
                                   Text("Card CVV code : $cvvCode"),
                                   Container(
-                                    margin: const EdgeInsets.only(
-                                      top: 10,
-                                    ),
-                                    padding: const EdgeInsets.all(5),
+                                    margin: const EdgeInsets.only(top: 10),
+                                    padding: padding(5),
                                     decoration: BoxDecoration(
                                       borderRadius: borderRaduis(7),
                                       color: Colors.white54,
@@ -239,80 +238,34 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                                   ),
                                 ),
                               ),
-                              Consumer<ReceiptHistoryProvider>(
-                                builder: (
-                                  context,
-                                  saveReceipt,
-                                  child,
-                                ) {
-                                  return Consumer<CartManager>(
-                                    builder: (
-                                      context,
-                                      cartReceipt,
-                                      child,
-                                    ) {
-                                      return Consumer<OrderSingleItemProvider>(
-                                        builder: (
-                                          context,
-                                          singleItemReceipt,
-                                          child,
-                                        ) {
-                                          return MaterialButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                MaterialPageRoute(
-                                                  builder: (context) {
-                                                    return SuccessfulPaymentWidget(
-                                                      isSingleItem:
-                                                          widget.isSingleItem,
-                                                    );
-                                                  },
-                                                ),
-                                              );
-                                              saveReceipt.addNewReceipt(
-                                                context: context,
-                                                receipt: !widget.isSingleItem
-                                                    ? ReceiptHistoryModel(
-                                                        newReceipt: cartReceipt
-                                                            .getRecepit(
-                                                          context: context,
-                                                          isHistory: true,
-                                                        ),
-                                                        dateTime: cartReceipt
-                                                            .dateTime,
-                                                      )
-                                                    : ReceiptHistoryModel(
-                                                        newReceipt:
-                                                            singleItemReceipt
-                                                                .singleOrderReceipt(
-                                                          context: context,
-                                                        ),
-                                                        dateTime:
-                                                            singleItemReceipt
-                                                                .getDateTime,
-                                                      ),
-                                              );
-                                            },
-                                            color: Colors.orange,
-                                            child: Text(
-                                              "confim".localeValue(
-                                                  context: context),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontFamily: context.isEnglish
-                                                    ? null
-                                                    : FontFamily.mainArabic,
-                                                fontSize: context.isEnglish
-                                                    ? null
-                                                    : 16,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      );
+                              Consumer<ManageReceiptHistory>(
+                                builder: (context, saveReceipt, _) {
+                                  return MaterialButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return SuccessfulPaymentWidget(
+                                              isSingleItem: widget.isSingleItem,
+                                            );
+                                          },
+                                        ),
+                                      ).whenComplete(() async {
+                                        await saveReceipt.addNewReceipt();
+                                      });
                                     },
+                                    color: Colors.orange,
+                                    child: Text(
+                                      "confim".localeValue(context: context),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: context.isEnglish
+                                            ? null
+                                            : FontFamily.mainArabic,
+                                        fontSize: context.isEnglish ? null : 16,
+                                      ),
+                                    ),
                                   );
                                 },
                               ),

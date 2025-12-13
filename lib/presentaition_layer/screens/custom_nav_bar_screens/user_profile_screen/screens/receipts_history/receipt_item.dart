@@ -24,24 +24,24 @@ class ReceiptHistoryWidget extends StatelessWidget {
         ),
         backgroundColor: Colors.orange,
       ),
-      body: Consumer<ReceiptHistoryProvider>(
+      body: Consumer<ManageReceiptHistory>(
         builder: (context, receiptHistory, child) {
-          return receiptHistory.receiptHistoryList.isEmpty
+          return receiptHistory.state.isEmpty
               ? const Center(
                   child: Text(
                     "Empty List",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize:/*  */ 20,
                       color: Colors.red,
                     ),
                   ),
                 )
               : ListView.builder(
-                  itemCount: receiptHistory.receiptHistoryList.length,
+                  itemCount: receiptHistory.state.length,
                   itemBuilder: (context, index) {
                     return Container(
-                      padding: const EdgeInsets.all(10),
-                      margin: const EdgeInsets.all(10),
+                      padding: padding(10),
+                      margin: padding(10),
                       decoration: BoxDecoration(
                         color: const Color(0xFFEBE3D5),
                         borderRadius: borderRaduis(15),
@@ -50,7 +50,7 @@ class ReceiptHistoryWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            receiptHistory.receiptHistoryList[index].newReceipt,
+                            receiptHistory.state[index].newReceipt,
                             overflow: TextOverflow.fade,
                             maxLines: 6,
                           ),
