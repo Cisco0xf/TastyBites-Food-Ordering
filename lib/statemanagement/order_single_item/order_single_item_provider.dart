@@ -3,14 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
-import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
-import 'package:foodapp/statemanagement/user_table/get_user_table.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-
-class OrderSingleItemProvider with ChangeNotifier {
+class SingleItemProvider with ChangeNotifier {
   // Cach the ordered item
   late FoodModel orderedItem;
   void item({required FoodModel item}) {
@@ -88,58 +82,5 @@ class OrderSingleItemProvider with ChangeNotifier {
 
     return finalPrice;
   }
-  // Get single item price receipt
 
-  String get getDateTime {
-    String dateTime = DateFormat("MMM d, hh:mm aaa").format(DateTime.now());
-    return dateTime;
-  }
-/* 
-  bool isDelivary({required BuildContext context}) {
-    PlaceProvider orderPlace =
-        Provider.of<PlaceProvider>(context, listen: false);
-    return orderPlace.isTakeAway;
-  } */
-
-  String orderPlace({required BuildContext context}) {
-    String userDicision = "";
-
-    AddressProvider address =
-        Provider.of<AddressProvider>(context, listen: false);
-    /* GetUserTableProvider table =
-        Provider.of<GetUserTableProvider>(context, listen: false); */
-
-    final bool isDelivary = context.read<PlaceProvider>().isTakeaway;
-
-    if (isDelivary) {
-      userDicision = "Deliveted to : ${address.userAddress}";
-    } else {
-      final String selectedTable = context.read<TableProvider>().selectedTable;
-      userDicision = "Ordered at restuarant, table : $selectedTable";
-    }
-
-    return userDicision;
-  }
-
-  String singleOrderReceipt({required BuildContext context}) {
-    StringBuffer receipt = StringBuffer();
-    receipt.writeln("Thanks for your oreder");
-    receipt.writeln("Here's your single order receipt");
-    receipt.writeln("-" * 30);
-    receipt.writeln(
-        "${orderedItem.stock} x ${orderedItem.foodName} (\$ ${orderedItem.foodPrice})");
-    receipt.writeln("-" * 30);
-    receipt.writeln("Quantity : ${orderedItem.stock}");
-    receipt.writeln("Offer Discount : $offerDiscout");
-    context.read<PlaceProvider>().isTakeaway
-        ? receipt.writeln("Delivery : \$ 11")
-        : receipt.writeln("Service : \$ 5");
-    receipt.writeln("-" * 30);
-    receipt.writeln("Item price : ${getTotalPriceAfterDiscountAndService()}");
-    receipt.writeln("-" * 30);
-    receipt.writeln(orderPlace(context: context));
-
-    String orderReceipt = receipt.toString();
-    return orderReceipt;
-  }
 }

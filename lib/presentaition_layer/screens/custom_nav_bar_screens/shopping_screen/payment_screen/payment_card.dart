@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/input_decoration.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
@@ -210,7 +211,7 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                                       borderRadius: borderRaduis(7),
                                       color: Colors.white54,
                                     ),
-                                    child: Consumer<OrderSingleItemProvider>(
+                                    child: Consumer<SingleItemProvider>(
                                       builder: (context, singleItem, child) {
                                         return Text(
                                           widget.isSingleItem
@@ -241,9 +242,9 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                               Consumer<ManageReceiptHistory>(
                                 builder: (context, saveReceipt, _) {
                                   return MaterialButton(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       Navigator.pop(context);
-                                      Navigator.of(context).pushReplacement(
+                                      /*  Navigator.of(context).pushReplacement(
                                         MaterialPageRoute(
                                           builder: (context) {
                                             return SuccessfulPaymentWidget(
@@ -252,8 +253,33 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                                           },
                                         ),
                                       ).whenComplete(() async {
-                                        await saveReceipt.addNewReceipt();
-                                      });
+                                        
+                                      }); */
+                                      /* saveReceipt.addNewReceipt(
+                                        context: context,
+                                        receipt: !widget.isSingleItem
+                                            ? ReceiptHistoryModel(
+                                                newReceipt:
+                                                    cartReceipt.getRecepit(
+                                                        context: context,
+                                                        isHistory: true),
+                                                dateTime: cartReceipt.dateTime,
+                                              )
+                                            : ReceiptHistoryModel(
+                                                newReceipt: singleItemReceipt
+                                                    .singleOrderReceipt(
+                                                        context: context),
+                                                dateTime: singleItemReceipt
+                                                    .getDateTime),
+                                      ); */
+                                      pushTo(
+                                        SuccessfulPaymentWidget(
+                                          isSingleItem: widget.isSingleItem,
+                                        ),
+                                        type: Push.replace,
+                                      );
+                                      await saveReceipt.addNewReceipt(
+                                          isSingle: widget.isSingleItem);
                                     },
                                     color: Colors.orange,
                                     child: Text(

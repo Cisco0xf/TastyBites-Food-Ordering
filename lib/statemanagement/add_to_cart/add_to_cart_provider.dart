@@ -34,7 +34,7 @@ class CartManager extends ChangeNotifier {
 
     ReusableMethods.showtoastification(
       message: "Item has been added to cart",
-      type: ToastificationType.success, 
+      type: ToastificationType.success,
     );
 
     await cartDb.addDBItem(food);
@@ -382,8 +382,8 @@ class AddToCartProvider with ChangeNotifier {
   // Get total price of Single item
 
   double getTotalPriceOfSingleItem({required BuildContext context}) {
-    OrderSingleItemProvider singleOrder =
-        Provider.of<OrderSingleItemProvider>(context, listen: false);
+    SingleItemProvider singleOrder =
+        Provider.of<SingleItemProvider>(context, listen: false);
 
     double singleOrderPrice =
         singleOrder.getTotalPriceAfterDiscountAndService();

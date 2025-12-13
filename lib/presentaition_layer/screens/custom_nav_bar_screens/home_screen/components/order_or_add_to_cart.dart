@@ -79,7 +79,7 @@ class OrderOrAddtoCartWidget extends StatelessWidget {
             width: context.screenWidth * .45,
             child: ClipRRect(
               borderRadius: borderRaduis(20),
-              child: Consumer<OrderSingleItemProvider>(
+              child: Consumer<SingleItemProvider>(
                 builder: (context, orderNow, child) {
                   return OrderButtonWidget(
                     item: item,

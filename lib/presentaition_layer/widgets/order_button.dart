@@ -28,7 +28,7 @@ class OrderButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     CurrentIndexProvider currentIndex =
         Provider.of<CurrentIndexProvider>(context, listen: false);
-    return Consumer<OrderSingleItemProvider>(
+    return Consumer<SingleItemProvider>(
       builder: (context, orderNow, child) {
         return MaterialButton(
           onPressed: () {

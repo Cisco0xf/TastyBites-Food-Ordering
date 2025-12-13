@@ -24,7 +24,7 @@ List<SingleChildWidget> get appProviders {
   List<SingleChildWidget> providers = [
     ChangeNotifierProvider(create: (context) => AddressProvider()),
     //ChangeNotifierProvider(create: (context) => ReceiptHistoryProvider()),
-    ChangeNotifierProvider(create: (context) => OrderSingleItemProvider()),
+    ChangeNotifierProvider(create: (context) => SingleItemProvider()),
     //ChangeNotifierProvider(create: (context) => SearchingSystemProvider()),//
     // ChangeNotifierProvider(create: (context) => SearchingFilterProvider()),
     // ChangeNotifierProvider(create: (context) => SearchingDrinksProvider()),//
