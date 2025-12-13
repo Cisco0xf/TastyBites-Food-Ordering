@@ -3,7 +3,7 @@ import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/data_layer/data_base/locale_repository.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 

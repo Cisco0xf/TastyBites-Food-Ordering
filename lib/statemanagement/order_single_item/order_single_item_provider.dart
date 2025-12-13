@@ -82,5 +82,4 @@ class SingleItemProvider with ChangeNotifier {
 
     return finalPrice;
   }
-
 }

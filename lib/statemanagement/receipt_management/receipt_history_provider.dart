@@ -9,9 +9,6 @@ import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_model.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_db.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

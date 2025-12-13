@@ -3,7 +3,7 @@ import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/screens/receipts_history/clear_receipt_dialog.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:provider/provider.dart';
 

@@ -8,8 +8,8 @@ import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
 import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_model.dart';
-import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_model.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
 
 import 'package:foodapp/common/app_dimention.dart';
