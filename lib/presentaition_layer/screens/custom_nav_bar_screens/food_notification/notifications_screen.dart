@@ -4,7 +4,7 @@ import 'package:foodapp/statemanagement/save_received_notifications/save_notific
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/foos_vedios_scree/empty_notifications.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/food_notification/empty_notifications.dart';
 import 'package:provider/provider.dart';
 
 class NotificationsWidget extends StatelessWidget {

@@ -34,35 +34,32 @@ class FavoriteItemsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    final List<FoodModel> favItem =
+        context.watch<WishListProvider>().favoriteItems;
+
+    final bool empty = favItem.isEmpty;
     return Expanded(
-      child: Consumer<WishListProvider>(
-        builder: (context, addToFavorite, child) {
-          return addToFavorite.favoriteItems.isEmpty
-              ? const EmptyFavoriteWidget()
-              : Container(
-                  decoration: BoxDecoration(
-                    borderRadius: borderRaduis(15, side: Side.top),
-                    color: SwitchColors.backgroundMianColor,
-                  ),
-                  child: ListView.builder(
-                    padding: EdgeInsets.only(
-                      bottom: context.screenHeight * .1,
-                    ),
-                    itemCount: addToFavorite.favoriteItems.length,
-                    itemBuilder: (context, index) {
-                      final FoodModel item = addToFavorite.favoriteItems[index];
-                      return FavoriteItemWidget(
-                        item: item,
-                        discover: () {
-                          pushTo(_targetWidget(item.foodType, item));
-                        },
-                      );
+      child: empty
+          ? const EmptyFavoriteWidget()
+          : Container(
+              decoration: BoxDecoration(
+                borderRadius: borderRaduis(15, side: Side.top),
+                color: SwitchColors.backgroundMianColor,
+              ),
+              child: ListView.builder(
+                padding: EdgeInsets.only(bottom: context.screenHeight * .13),
+                itemCount: favItem.length,
+                itemBuilder: (context, index) {
+                  final FoodModel item = favItem[index];
+                  return FavoriteItemWidget(
+                    item: item,
+                    discover: () {
+                      pushTo(_targetWidget(item.foodType, item));
                     },
-                  ),
-                );
-        },
-      ),
+                  );
+                },
+              ),
+            ),
     );
   }
 }

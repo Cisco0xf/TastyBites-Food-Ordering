@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/withdraw_history/receipt_history_provider.dart';
@@ -31,134 +32,109 @@ class ReceiptHistoryWidget extends StatelessWidget {
         ),
         backgroundColor: Colors.orange,
       ),
-      body: Consumer<ReceiptHistoryProvider>(
-        builder: (context, receiptHistory, child) {
-          return FutureBuilder(
-            future: receiptHistory.waitToLoadding,
-            builder: (context, snapshot) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  if (receiptHistory.receiptHistoryList.isEmpty) {
-                    return receiptHistory.isLoadding
-                        ? const Center(
-                            child: CircularProgressIndicator(),
-                          )
-                        : const EmptyReceiptWidget();
-                  } else {
-                    return Column(
-                      children: <Widget>[
-                        const ReceiptInfoWidget(),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: receiptHistory.receiptHistoryList.length,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                padding: const EdgeInsets.all(10),
-                                margin: const EdgeInsets.all(10),
+      body: context.read<ManageReceiptHistory>().hasData
+          ? const ReceiptList()
+          : const EmptyReceiptWidget(),
+    );
+  }
+}
+
+class ReceiptList extends StatelessWidget {
+  const ReceiptList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final List<ReceiptModel> history =
+        context.watch<ManageReceiptHistory>().state;
+    return Column(
+      children: <Widget>[
+        const ReceiptInfoWidget(),
+        Expanded(
+          child: ListView.builder(
+            itemCount: history.length,
+            itemBuilder: (context, index) {
+              return Container(
+                padding: padding(10),
+                margin: padding(10),
+                decoration: BoxDecoration(
+                  color: SwitchColors.receiptColor,
+                  borderRadius: borderRaduis(15),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Localizations(
+                      locale: const Locale("en"),
+                      delegates: const <LocalizationsDelegate<dynamic>>[
+                        DefaultMaterialLocalizations.delegate,
+                        DefaultWidgetsLocalizations.delegate,
+                      ],
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              const Text("Ordered in :"),
+                              Container(
+                                padding: padding(7),
+                                margin: padding(5),
                                 decoration: BoxDecoration(
-                                  color: SwitchColors.receiptColor,
-                                  borderRadius: borderRaduis(15),
+                                  borderRadius: borderRaduis(10),
+                                  color: SwitchColors.dateBoxColor,
+                                  border: Border.all(
+                                    color: Colors.black,
+                                    width: 1,
+                                  ),
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Localizations(
-                                      locale: const Locale("en"),
-                                      delegates: const <LocalizationsDelegate<
-                                          dynamic>>[
-                                        DefaultMaterialLocalizations.delegate,
-                                        DefaultWidgetsLocalizations.delegate,
-                                      ],
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: <Widget>[
-                                              const Text("Ordered in :"),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.all(7),
-                                                margin: const EdgeInsets.all(5),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      borderRaduis(10),
-                                                  color:
-                                                      SwitchColors.dateBoxColor,
-                                                  border: Border.all(
-                                                    color: Colors.black,
-                                                    width: 1,
-                                                  ),
-                                                ),
-                                                child: Text(receiptHistory
-                                                    .receiptHistoryList[index]
-                                                    .dateTime),
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            receiptHistory
-                                                .receiptHistoryList[index]
-                                                .newReceipt,
-                                            overflow: TextOverflow.fade,
-                                            maxLines: 6,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) {
-                                                  return NewReceiptWidget(
-                                                    newReceipt: receiptHistory
-                                                        .receiptHistoryList[
-                                                            index]
-                                                        .newReceipt,
-                                                    dateTime: receiptHistory
-                                                        .receiptHistoryList[
-                                                            index]
-                                                        .dateTime,
-                                                  );
-                                                },
-                                              ),
-                                            );
-                                          },
-                                          child: Text(
-                                            "receipt_button"
-                                                .localeValue(context: context),
-                                            style: TextStyle(
-                                              fontFamily: context.isEnglish
-                                                  ? FontFamily.mainFont
-                                                  : FontFamily.mainArabic,
-                                              color: Colors.blue,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
+                                child: Text(history[index].dateTime),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            history[index].newReceipt,
+                            overflow: TextOverflow.fade,
+                            maxLines: 6,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return NewReceiptWidget(
+                                    newReceipt: history[index].newReceipt,
+                                    dateTime: history[index].dateTime,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "receipt_button".localeValue(context: context),
+                            style: TextStyle(
+                              fontFamily: context.isEnglish
+                                  ? FontFamily.mainFont
+                                  : FontFamily.mainArabic,
+                              color: Colors.blue,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ],
-                    );
-                  }
-                },
+                    ),
+                  ],
+                ),
               );
             },
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 }

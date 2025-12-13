@@ -101,8 +101,8 @@ class RecepitWidget extends StatelessWidget {
                           textDirection: TextDirection.ltr,
                           child: Container(
                             width: double.infinity,
-                            padding: const EdgeInsets.all(10),
-                            margin: const EdgeInsets.all(10),
+                            padding: padding(10),
+                            margin: padding(10),
                             decoration: BoxDecoration(
                               borderRadius: borderRaduis(7),
                               border: Border.all(
@@ -111,7 +111,7 @@ class RecepitWidget extends StatelessWidget {
                               ),
                               color: SwitchColors.receiptColor,
                             ),
-                            child: Consumer<ReceiptHistoryProvider>(
+                            child: Consumer<ManageReceiptHistory>(
                               builder: (context, lastSavedReceipt, child) {
                                 return Column(
                                   children: [
@@ -128,26 +128,23 @@ class RecepitWidget extends StatelessWidget {
                                           ),
                                         ),
                                         Container(
-                                          padding: const EdgeInsets.all(7),
-                                          margin: const EdgeInsets.all(5),
+                                          padding: padding(7),
+                                          margin: padding(5),
                                           decoration: BoxDecoration(
                                             borderRadius: borderRaduis(10),
                                             color: SwitchColors.dateBoxColor,
-                                            border: Border.all(
-                                              color: Colors.black,
-                                              width: 1,
-                                            ),
+                                            border:
+                                                Border.all(color: Colors.black),
                                           ),
                                           child: Text(
-                                            lastSavedReceipt.receiptHistoryList
-                                                .last.dateTime,
+                                            lastSavedReceipt
+                                                .state.last.dateTime,
                                           ),
                                         ),
                                       ],
                                     ),
                                     Text(
-                                      lastSavedReceipt
-                                          .receiptHistoryList.last.newReceipt,
+                                      lastSavedReceipt.state.last.newReceipt,
                                       style: const TextStyle(
                                         fontFamily: FontFamily.mainFont,
                                         fontSize: 18,

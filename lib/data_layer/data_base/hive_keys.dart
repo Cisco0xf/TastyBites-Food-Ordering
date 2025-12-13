@@ -3,4 +3,5 @@
 class HiveKeys {
   static const String CART_KEY = "NMDUIBD_-mfeingInf";
   static const String WISH_LIST_KEY = "WISH_DFNGOR084_-";
+  static const String RECEIPT_HISTORY_KEY = "MJDBUb-ksfn_mfing";
 }

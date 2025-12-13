@@ -2,10 +2,110 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:foodapp/statemanagement/withdraw_history/data_model.dart';
-import 'package:foodapp/statemanagement/withdraw_history/databse.dart';
+import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_base/receipt_db/receipt_db.dart';
+import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
+import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:foodapp/statemanagement/withdraw_history/receipt_model.dart';
+import 'package:foodapp/statemanagement/withdraw_history/receipt_db.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+class ManageReceiptHistory extends ChangeNotifier {
+  List<ReceiptModel> state = [];
+
+  Future<void> addNewReceipt() async {
+    final ReceiptModel receipt = ReceiptModel(
+      newReceipt: getRecepit(),
+      dateTime: dateTime,
+    );
+
+    final bool isExist = state.any((item) => item.id == receipt.id);
+
+    if (isExist) {
+      await _removeReceipt(receipt);
+      return;
+    }
+
+    state = [...state, receipt];
+
+    notifyListeners();
+
+    await ManageReceiptDB.addNewReceipt(receipt: receipt);
+  }
+
+  Future<void> _removeReceipt(ReceiptModel receipt) async {
+    state = [
+      for (int i = 0; i < state.length; i++) ...{
+        if (receipt.id != state[i].id) state[i]
+      }
+    ];
+
+    notifyListeners();
+
+    await ManageReceiptDB.removeReceipt(receipt: receipt);
+  }
+
+  Future<void> clearHistory() async {
+    state = [];
+
+    await ManageReceiptDB.clearDB();
+  }
+
+  void initializeReceiptHistoryFromDatabase(List<ReceiptModel> db) {
+    state = db;
+  }
+
+  bool get hasData => state.isNotEmpty;
+
+  String get _getRecepitDateTime {
+    String recepitDateTime = DateFormat("MMM d, hh:mm aaa").format(
+      DateTime.now(),
+    );
+    return recepitDateTime;
+  }
+
+  String get dateTime => _getRecepitDateTime;
+
+  String getRecepit({bool isHistory = false}) {
+    final StringBuffer recepit = StringBuffer();
+
+    final BuildContext context = navigationKey.currentContext as BuildContext;
+
+    final CartManager cart = Provider.of<CartManager>(context, listen: false);
+
+    final List<FoodModel> cartItems = cart.state;
+
+    isHistory ? null : recepit.writeln("Ordered in : $_getRecepitDateTime");
+    recepit.writeln("Thanks for your order.");
+    recepit.writeln("Here's your recepit");
+    recepit.writeln("---------------------------------------");
+    for (int j = 0; j < cartItems.length; j++) {
+      recepit.writeln(
+        "${cartItems[j].stock} x ${cartItems[j].foodName} ( \$ ${cartItems[j].foodPrice})",
+      );
+    }
+
+    recepit.writeln("---------------------------------------");
+    recepit.writeln("Total items : ${cartItems.length}");
+    recepit.writeln("Discount : \$ ${cart.disCount.toString()}");
+    recepit.writeln(cart.serviceOrDelivery());
+    recepit.writeln("---------------------------------------");
+    recepit.writeln(
+      "Total price : \$ ${cart.getOrderTotalArterDiscountAndService()}",
+    );
+    recepit.writeln("---------------------------------------");
+
+    if (isHistory) {
+      recepit.writeln(cart.orderPlace());
+    }
+
+    return recepit.toString();
+  }
+}
+/* 
 class ReceiptHistoryProvider with ChangeNotifier {
   // Get instance from database class
   final ReceiptDatabse _receiptDatabse = ReceiptDatabse();
@@ -72,3 +172,4 @@ class ReceiptHistoryProvider with ChangeNotifier {
     );
   }
 }
+ */
