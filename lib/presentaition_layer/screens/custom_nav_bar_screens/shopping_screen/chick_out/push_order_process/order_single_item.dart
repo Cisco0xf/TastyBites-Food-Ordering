@@ -17,7 +17,7 @@ class OrderSingleItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<OrderSingleItemProvider>(
+    return Consumer<SingleItemProvider>(
       builder: (context, singleOrder, child) {
         return SizedBox(
           width: double.infinity,

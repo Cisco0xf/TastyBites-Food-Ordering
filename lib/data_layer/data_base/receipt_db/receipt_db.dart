@@ -10,7 +10,10 @@ import 'package:provider/provider.dart';
 class ReceiptDB extends Database<ReceiptModel> {
   @override
   Future<Box> get openBox async {
-    final Box box = await Hive.openBox(HiveKeys.RECEIPT_HISTORY_KEY);
+    final Box box = await Hive.openBox<ReceiptModel>(
+      HiveKeys.RECEIPT_HISTORY_KEY,
+    );
+
     return box;
   }
 
@@ -78,7 +81,9 @@ class ManageReceiptDB {
 
     final List<ReceiptModel> db = _receiptDB.getFoodDtaFromDatabase(box: box);
 
-    Provider.of<ManageReceiptHistory>(navigationKey.currentContext!)
-        .initializeReceiptHistoryFromDatabase(db);
+    Provider.of<ManageReceiptHistory>(
+      navigationKey.currentContext!,
+      listen: false,
+    ).initializeReceiptHistoryFromDatabase(db);
   }
 }

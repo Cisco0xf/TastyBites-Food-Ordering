@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -19,21 +20,18 @@ import 'package:foodapp/statemanagement/withdraw_history/receipt_model.dart';
 import 'package:toastification/toastification.dart';
 
 Future<void> main() async {
-  await Hive.initFlutter();
-  Hive
-    ..registerAdapter(
-      FoodModelAdapter()
-    )
-    /* ..registerAdapter(
-      ReceiptHistoryModelAdapter()
-    ) */;
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  
+  Hive
+    ..registerAdapter(FoodModelAdapter())
+    ..registerAdapter(ReceiptModelAdapter());
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    const MainWidget(),
-  );
+  runApp(const MainWidget());
 
   SystemChrome.setPreferredOrientations(
     <DeviceOrientation>[
@@ -66,21 +64,22 @@ class MainWidget extends StatelessWidget {
                     Locale("ar"),
                     Locale("ur"),
                   ],
-                  localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+                  localizationsDelegates: const <LocalizationsDelegate<
+                      dynamic>>[
                     CustomLocalizationDelegate.delegate,
                     GlobalWidgetsLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalCupertinoLocalizations.delegate,
                   ],
-                  localeResolutionCallback:
-                      (Locale? deviceLocale, Iterable<Locale> supportedLocales) {
+                  localeResolutionCallback: (Locale? deviceLocale,
+                      Iterable<Locale> supportedLocales) {
                     for (Locale locale in supportedLocales) {
                       if (deviceLocale != null &&
                           deviceLocale.languageCode == locale.languageCode) {
                         return deviceLocale;
                       }
                     }
-                
+
                     return supportedLocales.first;
                   },
                   // App Thame
