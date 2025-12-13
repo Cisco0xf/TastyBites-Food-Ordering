@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
-import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
+import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_auth_button.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
 import 'package:foodapp/common/app_dimention.dart';

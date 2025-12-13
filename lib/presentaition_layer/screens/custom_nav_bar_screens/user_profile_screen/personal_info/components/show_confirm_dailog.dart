@@ -5,7 +5,7 @@ import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
-import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
+import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:provider/provider.dart';

@@ -7,7 +7,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
-import 'package:foodapp/statemanagement/reuable_methods/reusable_methods.dart';
+import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
 import 'package:google_sign_in/google_sign_in.dart';
