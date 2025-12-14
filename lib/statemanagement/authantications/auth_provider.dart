@@ -104,8 +104,10 @@ class FireAuthProvider extends ChangeNotifier {
 
         return;
       }
-      
+
       await user.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      Log.error("FirebaseAuthException => ${e.code}");
     } on SocketException {
       showToastification(message: "Check Internet connection");
     } catch (error) {
@@ -137,6 +139,7 @@ class FireAuthProvider extends ChangeNotifier {
       await _updateCurrnetUsername();
 
       // Send a vrification link
+
       await _sendVerificationEmail().whenComplete(() {
         showToastification(
           message: "We have send you a verification message, check you email",
