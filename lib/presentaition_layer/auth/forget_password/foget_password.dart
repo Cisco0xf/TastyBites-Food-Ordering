@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
 import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_auth_button.dart';
@@ -19,115 +20,123 @@ class ForgetPassWordScreen extends StatefulWidget {
 }
 
 class _ForgetPassWordScreenState extends State<ForgetPassWordScreen> {
-  late TextEditingController emailController;
+  /*  late TextEditingController emailController;
   @override
   void initState() {
     emailController = TextEditingController();
     super.initState();
+  } */
+
+  //<FormState> forgetPasswordKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    AuthControllers.initResetPwsEmailController();
+    super.initState();
   }
 
-  GlobalKey<FormState> forgetPasswordKey = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    AuthControllers.diposeResetPwsEmailController();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<AuthenticationProvider>(
-        builder: (context, forgetPassword, child) {
-          return Stack(
-            children: <Widget>[
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  height: context.screenHeight * .33,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF082032),
+      body: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            bottom: null,
+            child: Container(
+              height: context.screenHeight * .33,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color(0xFF082032),
+              ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: context.screenHeight * .04,
                   ),
-                  child: Column(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      SizedBox(
-                        height: context.screenHeight * .04,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios_new,
-                              size: 35,
-                              color: Colors.orange,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Text(
-                        "Forgot Password",
-                        style: TextStyle(
-                          fontSize: 26,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: FontFamily.mainFont,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Text(
-                          "Please Enter your existing account to get the code",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: FontFamily.mainFont,
-                            color: Colors.grey,
-                          ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new,
+                          size: 35,
+                          color: Colors.orange,
                         ),
                       ),
                     ],
                   ),
-                ),
+                  const Text(
+                    "Forgot Password",
+                    style: TextStyle(
+                      fontSize: 26,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: FontFamily.mainFont,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Text(
+                      "Please Enter your existing account to get the code",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: FontFamily.mainFont,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Positioned.fill(
-                top: context.screenHeight * .31,
-                /*  bottom: 0,
+            ),
+          ),
+          Positioned.fill(
+            top: context.screenHeight * .31,
+            /*  bottom: 0,
                 right: 0,
                 left: 0, */
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.only(top: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: borderRaduis(20.0, side: Side.top),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(top: 5),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: borderRaduis(20.0, side: Side.top),
+              ),
+              child: Column(
+                children: <Widget>[
+                  const Gap(hRatio: 0.03),
+                  AuthField(
+                    controller: AuthControllers.resetPassworsEmail!,
+                    textFeildTitle: "Email",
+                    textInputType: TextInputType.emailAddress,
+                    hintText: "example@gmail.com",
+                    /* validator: (validate) {
+                          if ((validate as String).isEmpty) {
+                            return "This field can not be empty";
+                          }
+                          return null;
+                        }, */
                   ),
-                  child: Column(
-                    children: <Widget>[
-                      const Gap(hRatio: 0.03),
-                      Form(
-                        key: forgetPasswordKey,
-                        child: AuthField(
-                          controller: forgetPassword.resetPasswordController,
-                          textFeildTitle: "Email",
-                          textInputType: TextInputType.emailAddress,
-                          hintText: "example@gmail.com",
-                          /* validator: (validate) {
-                            if ((validate as String).isEmpty) {
-                              return "This field can not be empty";
-                            }
-                            return null;
-                          }, */
-                        ),
-                      ),
-                      const Gap(hRatio: 0.1),
-                      AuthButton(
-                        buttonTitle: "Send link",
-                        authantication: () {
-                          if (forgetPasswordKey.currentState!.validate()) {
+                  const Gap(hRatio: 0.1),
+                  AuthButton(
+                    buttonTitle: "Send link",
+                    authantication: () async {
+                      await context
+                          .read<FireAuthProvider>()
+                          .sendResetPasswordEmail();
+                      /* if (forgetPasswordKey.currentState!.validate()) {
                             forgetPassword.sentResetPasswordLink();
                             ReusableMethods.showAwesomDialog(
                               context: context,
@@ -136,16 +145,14 @@ class _ForgetPassWordScreenState extends State<ForgetPassWordScreen> {
                               title: "Chick your eamil",
                               dialogType: DialogType.info,
                             );
-                          }
-                        },
-                      ),
-                    ],
+                          } */
+                    },
                   ),
-                ),
+                ],
               ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }
