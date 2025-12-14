@@ -157,7 +157,7 @@ class VerificationScreen extends StatelessWidget {
                   SizedBox(
                     height: context.screenHeight * .1,
                   ),
-                  CustomAuthButtonWidget(
+                  AuthButton(
                     buttonTitle: "Verify",
                     authantication: () {
                       Navigator.of(context).pushAndRemoveUntil(

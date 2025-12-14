@@ -75,32 +75,32 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                         key: resetPasswordKey,
                         child: Column(
                           children: <Widget>[
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller: resetPassword.enterNewPassword,
                               textFeildTitle: "Enter new password",
                               textInputType: TextInputType.emailAddress,
                               hintText: "New password",
-                              validator: (value) {
+                             /*  validator: (value) {
                                 if (value!.isEmpty) {
                                   return "This feild can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                             SizedBox(
                               height: context.screenHeight * .04,
                             ),
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller: resetPassword.enterConfirmPassword,
                               textFeildTitle: "Confirm password",
                               textInputType: TextInputType.emailAddress,
                               hintText: "confrim new password",
-                              validator: (value) {
+                              /* validator: (value) {
                                 if (value!.isEmpty) {
                                   return "This feild can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                           ],
                         ),

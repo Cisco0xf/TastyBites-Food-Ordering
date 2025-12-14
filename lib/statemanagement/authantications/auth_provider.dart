@@ -9,6 +9,7 @@ import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/presentaition_layer/auth/components/send_vrification_dialog.dart';
 import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:toastification/toastification.dart';
 
 class AuthControllers {
@@ -60,8 +61,17 @@ class AuthControllers {
   }
 }
 
-class AuthProvider {
+class FireAuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Handel loading
+
+  bool isLoading = false;
+
+  void _switchLoading() {
+    isLoading = !isLoading;
+    notifyListeners();
+  }
 
   // Create new account
 
@@ -85,10 +95,26 @@ class AuthProvider {
   Future<void> _updateCurrnetUsername() async =>
       await _auth.currentUser!.updateDisplayName(_createuserName);
 
-  Future<void> _sendVerificationEmail() async =>
-      _auth.currentUser!.sendEmailVerification();
+  Future<void> _sendVerificationEmail() async {
+    try {
+      final User? user = _auth.currentUser;
+
+      if (user == null) {
+        Log.error("User is Null");
+
+        return;
+      }
+      
+      await user.sendEmailVerification();
+    } on SocketException {
+      showToastification(message: "Check Internet connection");
+    } catch (error) {
+      Log.error("Error send Vrification => $error");
+    }
+  }
 
   Future<void> createNewAccountWithEmailAndPassword() async {
+    _switchLoading();
     try {
       // Check that user entires
 
@@ -136,6 +162,8 @@ class AuthProvider {
     } catch (error) {
       showToastification(message: "Something went wrong, try again later");
       Log.error("Auth Error => $error");
+    } finally {
+      _switchLoading();
     }
   }
 
@@ -153,6 +181,7 @@ class AuthProvider {
   }
 
   Future<void> signInWithEmailAndPassword() async {
+    _switchLoading();
     try {
       if (!logHasFullData()) {
         showToastification(message: "Please enter the email and Password");
@@ -190,17 +219,78 @@ class AuthProvider {
 
         return;
       }
-      
+
       showToastification(message: "Something went wrong, try again later");
     } catch (error) {
       showToastification(message: "Something went wrong, try again later");
       Log.error("Log In Error => $error");
+    } finally {
+      _switchLoading();
     }
   }
 
-  // Reset the account password
+  // Send Reset Password Email
+
+  String get _resetPws => AuthControllers.resetPassworsEmail!.text.trim();
+
+  bool hasResetEmail() => _resetPws.isNotEmpty;
+
+  Future<void> sendResetPasswordEmail() async {
+    _switchLoading();
+    try {
+      if (!hasResetEmail()) {
+        showToastification(message: "Please insert the email");
+        return;
+      }
+
+      await _auth.sendPasswordResetEmail(email: _resetPws).whenComplete(() {
+        showToastification(message: "Email has been sent, check you inbox");
+      });
+    } on SocketException {
+      showToastification(message: "Please check internet connection");
+    } catch (error) {
+      Log.error("Send Reset Error => $error");
+    } finally {
+      _switchLoading();
+    }
+  }
 
   // Sign in with Google
+
+  Future<void> signInWithGoogleAccount() async {
+    _switchLoading();
+    try {
+      final GoogleSignIn google = GoogleSignIn();
+
+      final GoogleSignInAccount? account = await google.signIn();
+
+      final bool hasUser = account != null;
+
+      if (!hasUser) {
+        showToastification(message: "Something went wrong, try again later");
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await account.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _auth.signInWithCredential(credential).whenComplete(() {
+        pushTo(const MainScreenShimmer(), type: Push.clear);
+        Log.log("Signned in with google successfully");
+      });
+    } on SocketException {
+      showToastification(message: "Please check ibternet connection");
+    } catch (error) {
+      Log.error("Google Sign In Error => $error");
+    } finally {
+      _switchLoading();
+    }
+  }
 
   // Delete account
 

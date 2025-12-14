@@ -1,5 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_auth_button.dart';
@@ -90,46 +93,38 @@ class _ForgetPassWordScreenState extends State<ForgetPassWordScreen> {
                   ),
                 ),
               ),
-              Positioned(
+              Positioned.fill(
                 top: context.screenHeight * .31,
-                bottom: 0,
+                /*  bottom: 0,
                 right: 0,
-                left: 0,
+                left: 0, */
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(
-                    top: 5,
-                  ),
-                  decoration: const BoxDecoration(
+                  padding: const EdgeInsets.only(top: 5),
+                  decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
+                    borderRadius: borderRaduis(20.0, side: Side.top),
                   ),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
-                        height: context.screenHeight * .03,
-                      ),
+                      const Gap(hRatio: 0.03),
                       Form(
                         key: forgetPasswordKey,
-                        child: CustomTextFeildWidget(
+                        child: AuthField(
                           controller: forgetPassword.resetPasswordController,
                           textFeildTitle: "Email",
                           textInputType: TextInputType.emailAddress,
                           hintText: "example@gmail.com",
-                          validator: (validate) {
+                          /* validator: (validate) {
                             if ((validate as String).isEmpty) {
                               return "This field can not be empty";
                             }
                             return null;
-                          },
+                          }, */
                         ),
                       ),
-                      SizedBox(
-                        height: context.screenHeight * .1,
-                      ),
-                      CustomAuthButtonWidget(
+                      const Gap(hRatio: 0.1),
+                      AuthButton(
                         buttonTitle: "Send link",
                         authantication: () {
                           if (forgetPasswordKey.currentState!.validate()) {

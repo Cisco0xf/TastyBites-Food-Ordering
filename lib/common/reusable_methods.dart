@@ -27,7 +27,7 @@ void showToastification({
       color: progressBarColor,
     ),
     type: type,
-    title: Text(
+    description: Text(
       message,
       textAlign: context.isEnglish ? TextAlign.left : TextAlign.right,
       style: TextStyle(

@@ -74,33 +74,33 @@ class _UpdateUserPasswordScreenState extends State<UpdateUserPasswordScreen> {
                         key: resePasswordKey,
                         child: Column(
                           children: <Widget>[
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller: updatePassword.resetEmailController,
                               textFeildTitle: "Email",
                               textInputType: TextInputType.emailAddress,
                               hintText: "Enter your email",
-                              validator: (val) {
+                            /*   validator: (val) {
                                 if (val!.isEmpty) {
                                   return "This feild can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                             SizedBox(
                               height: context.screenHeight * .04,
                             ),
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller:
                                   updatePassword.resetPasswordController,
                               textFeildTitle: "Password",
                               textInputType: TextInputType.emailAddress,
                               hintText: "Enter password",
-                              validator: (val) {
+                             /*  validator: (val) {
                                 if (val!.isEmpty) {
                                   return "This feild can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                           ],
                         ),

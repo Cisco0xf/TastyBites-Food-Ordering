@@ -1,45 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/fonts.dart';
 
 typedef SignUpValidator = String? Function(String?)?;
 
-class CustomTextFeildWidget extends StatefulWidget {
-  const CustomTextFeildWidget({
+class AuthField extends StatefulWidget {
+  const AuthField({
     super.key,
     required this.controller,
     required this.textFeildTitle,
     required this.textInputType,
     required this.hintText,
-    required this.validator,
-    this.suffixIcon = const SizedBox(),
-    this.isObscure = false,
+    //required this.validator,
+    /* this.suffixIcon = const SizedBox(), */
+    this.hasObscure = false,
   });
 
   final TextEditingController controller;
   final TextInputType textInputType;
-  final SignUpValidator validator;
+  //final SignUpValidator validator;
   final String textFeildTitle;
-  final Widget suffixIcon;
+  /* final Widget suffixIcon; */
   final String hintText;
-  final bool isObscure;
+  final bool hasObscure;
 
   @override
-  State<CustomTextFeildWidget> createState() => _CustomTextFeildWidgetState();
+  State<AuthField> createState() => _AuthFieldState();
 }
 
-class _CustomTextFeildWidgetState extends State<CustomTextFeildWidget> {
+class _AuthFieldState extends State<AuthField> {
+  bool isObscure = true;
+
+  void _switchObscureState() {
+    setState(() {
+      isObscure = !isObscure;
+    });
+  }
+
+  Widget? suffixIcon() {
+    if (!widget.hasObscure) {
+      return null;
+    }
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: ScaleTransition(
+            scale: animation,
+            child: child,
+          ),
+        );
+      },
+      child: Clicker(
+        onClick: () {
+          _switchObscureState();
+        },
+        child: isObscure
+            ? const Icon(
+                Icons.visibility,
+                key: ValueKey("MIbfj-efien"),
+              )
+            : const Icon(
+                Icons.visibility_off,
+                key: ValueKey("Mrgeibgfw"),
+              ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(
-              width: context.screenWidth * .03,
-            ),
+            const Gap(wRatio: 0.03),
             Text(
               widget.textFeildTitle,
               style: const TextStyle(
@@ -49,21 +89,17 @@ class _CustomTextFeildWidgetState extends State<CustomTextFeildWidget> {
             ),
           ],
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        const Gap(height: 10.0),
         SizedBox(
           width: context.screenWidth * .95,
           child: TextFormField(
             controller: widget.controller,
             keyboardType: widget.textInputType,
             textInputAction: TextInputAction.next,
-            obscureText: widget.isObscure,
-            validator: widget.validator,
+            obscureText: isObscure && widget.hasObscure,
+            // validator: widget.validator,
             onTapOutside: (event) {
-              FocusScope.of(context).requestFocus(
-                FocusNode(),
-              );
+              FocusScope.of(context).requestFocus(FocusNode());
             },
             decoration: InputDecoration(
               filled: true,
@@ -94,7 +130,7 @@ class _CustomTextFeildWidgetState extends State<CustomTextFeildWidget> {
                 fontFamily: FontFamily.mainFont,
                 fontWeight: FontWeight.w300,
               ),
-              suffixIcon: widget.suffixIcon,
+              suffixIcon: suffixIcon(),
             ),
           ),
         ),

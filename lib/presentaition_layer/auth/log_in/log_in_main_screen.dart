@@ -119,27 +119,27 @@ class _LogInScreenState extends State<LogInScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller: userLogin.loginEmailController,
                               textInputType: TextInputType.emailAddress,
                               textFeildTitle: "Email",
                               hintText: "example@gmail.com",
-                              validator: (validate) {
+                              /*  validator: (validate) {
                                 if ((validate as String).isEmpty) {
                                   return "This field can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                             const SizedBox(
                               height: 30,
                             ),
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller: userLogin.loginPasswordController,
                               textInputType: TextInputType.text,
                               textFeildTitle: "Password",
                               hintText: "Please enter password",
-                              isObscure: userLogin.isObscure,
+                              /* isObscure: userLogin.isObscure,
                               suffixIcon: IconButton(
                                 onPressed: () {
                                   userLogin.showLoginPassword;
@@ -151,7 +151,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                   return "This field can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                             const SizedBox(
                               height: 10,
@@ -191,9 +191,8 @@ class _LogInScreenState extends State<LogInScreen> {
                             SizedBox(
                               height: context.screenHeight * .03,
                             ),
-                            CustomAuthButtonWidget(
+                            AuthButton(
                               buttonTitle: "LOG IN",
-                              isSignIn: true,
                               authantication: () {
                                 if (loginKey.currentState!.validate()) {
                                   userLogin.signInWithEmailAndPassword(

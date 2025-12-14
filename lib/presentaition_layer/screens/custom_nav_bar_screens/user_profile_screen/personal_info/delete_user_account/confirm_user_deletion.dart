@@ -91,30 +91,30 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
                         key: deleteAccountKey,
                         child: Column(
                           children: [
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller: deleteAccount.deleteEmailController,
                               hintText: "Email",
                               textFeildTitle: "Enter your email",
-                              isObscure: false,
+                             // isObscure: false,
                               textInputType: TextInputType.emailAddress,
-                              validator: (value) {
+                             /*  validator: (value) {
                                 if (value!.isEmpty) {
                                   return "This feild can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                             SizedBox(
                               height: context.screenHeight * .03,
                             ),
-                            CustomTextFeildWidget(
+                            AuthField(
                               controller:
                                   deleteAccount.deletePasswordController,
                               hintText: "Password",
                               textFeildTitle: "Enter password",
-                              isObscure: deleteAccount.isObscure,
+                              //isObscure: deleteAccount.isObscure,
                               textInputType: TextInputType.text,
-                              suffixIcon: IconButton(
+                              /* suffixIcon: IconButton(
                                 onPressed: () {
                                   deleteAccount.unbObscure();
                                 },
@@ -125,7 +125,7 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
                                   return "This feild can not be empty";
                                 }
                                 return null;
-                              },
+                              }, */
                             ),
                           ],
                         ),

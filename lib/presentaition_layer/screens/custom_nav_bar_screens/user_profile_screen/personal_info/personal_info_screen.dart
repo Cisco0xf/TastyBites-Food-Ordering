@@ -277,7 +277,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                               SizedBox(
                                 height: context.screenHeight * .03,
                               ),
-                              CustomAuthButtonWidget(
+                              AuthButton(
                                 buttonTitle: "save_changes"
                                     .localeValue(context: context),
                                 authantication: () {
