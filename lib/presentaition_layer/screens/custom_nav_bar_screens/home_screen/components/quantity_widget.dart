@@ -64,7 +64,7 @@ class _QuantityWidgetState extends State<QuantityWidget> {
                               () {
                                 if (widget.item.foodType == "Sushi") {
                                   if (widget.item.stock == 5) {
-                                    ReusableMethods.showtoastification(
+                                    showToastification(
                                       message: "stock_sushi".localeValue(
                                         context: context,
                                       ),
@@ -74,7 +74,7 @@ class _QuantityWidgetState extends State<QuantityWidget> {
                                   }
                                 } else {
                                   if (widget.item.stock == 1) {
-                                    ReusableMethods.showtoastification(
+                                    showToastification(
                                       message: "stock_item".localeValue(
                                         context: context,
                                       ),

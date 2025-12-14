@@ -39,12 +39,12 @@ class PersonalInfoProvider with ChangeNotifier {
   }) {
     isUpdateUserNameFocused = !isUpdateUserNameFocused;
     if (isUpdateUserNameFocused) {
-      ReusableMethods.showtoastification(
+      showToastification(
         message: "You can update your username",
         type: ToastificationType.info,
       );
     } else {
-      ReusableMethods.showtoastification(
+      showToastification(
         message: "Feild has been disabled",
         type: ToastificationType.info,
       );
@@ -94,12 +94,12 @@ class PersonalInfoProvider with ChangeNotifier {
   }) {
     isbioFocused = !isbioFocused;
     if (isbioFocused) {
-      ReusableMethods.showtoastification(
+      showToastification(
         message: "You can update your BIO",
         type: ToastificationType.info,
       );
     } else {
-      ReusableMethods.showtoastification(
+      showToastification(
         message: "Feild has been disabled",
         type: ToastificationType.info,
       );
@@ -321,13 +321,13 @@ class PersonalInfoProvider with ChangeNotifier {
         );
         clearResetingPswControllers;
       } else {
-        ReusableMethods.showtoastification(
+        showToastification(
           message: "Passwrd not matches",
           type: ToastificationType.error,
         );
       }
     } on SocketException catch (_) {
-      ReusableMethods.showtoastification(
+      showToastification(
         message: "Please chick your internet connection",
       );
     }

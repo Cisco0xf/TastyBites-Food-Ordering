@@ -65,31 +65,33 @@ void pushTo(Widget target, {Push type = Push.push}) {
           builder: (context) {
             return target;
           },
-        ), (root) => true);
+        ), (root) => false);
 
         return;
       }
     case Push.push:
       {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return target;
-          },
-        ));
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => target,
+          ),
+        );
         return;
       }
     case Push.replace:
       {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) {
-            return target;
-          },
+          builder: (context) => target,
         ));
         return;
       }
-    default:
-      {}
   }
+}
+
+void popScreen() {
+  final BuildContext context = navigationKey.currentContext as BuildContext;
+
+  Navigator.of(context).pop();
 }
 
 class CheckDivider extends StatelessWidget {

@@ -16,7 +16,6 @@ enum Push {
   push,
   replace,
   clear,
-  none,
 }
 
 enum RateFilter {

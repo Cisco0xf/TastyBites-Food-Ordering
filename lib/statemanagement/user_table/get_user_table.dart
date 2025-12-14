@@ -13,7 +13,6 @@ class TableProvider extends ChangeNotifier {
   void clearTable() {
     selectedTable = "table";
   }
-
 }
 
 /* final List<String> tables = <String>[
@@ -43,7 +42,7 @@ class GetUserTableProvider with ChangeNotifier {
     final bool noTable = selectedTable == "table";
 
     if (noTable) {
-      ReusableMethods.showtoastification(
+      showToastification(
         message: "enter_your_table_toast".localeValue(context: context),
         type: ToastificationType.error,
       );

@@ -71,7 +71,7 @@ class ReceiptPdf {
     final bool hasPermission = await _checkStoragePermission();
 
     if (!hasPermission) {
-      ReusableMethods.showtoastification(
+      showToastification(
         message: "You need Storage permission to download the pdf receipt",
       );
       return;
@@ -82,7 +82,7 @@ class ReceiptPdf {
     pdf.addPage(
       MultiPage(
         build: (context) {
-          return [
+          return <Widget>[
             Text(
               "TastyBites",
               style: TextStyle(

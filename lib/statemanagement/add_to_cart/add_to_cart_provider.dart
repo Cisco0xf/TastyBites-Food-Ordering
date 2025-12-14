@@ -32,7 +32,7 @@ class CartManager extends ChangeNotifier {
     state = [...state, food];
     notifyListeners();
 
-    ReusableMethods.showtoastification(
+    showToastification(
       message: "Item has been added to cart",
       type: ToastificationType.success,
     );
@@ -49,7 +49,7 @@ class CartManager extends ChangeNotifier {
 
     notifyListeners();
 
-    ReusableMethods.showtoastification(
+    showToastification(
       message: "Item has been removed from cart",
     );
 
@@ -95,7 +95,7 @@ class CartManager extends ChangeNotifier {
         if (sushiStok) {
           state[i].copyWith(stock: state[i].stock - 1);
         } else {
-          ReusableMethods.showtoastification(
+          showToastification(
             message: "Sush Quantity must be >= 5",
           );
         }
@@ -194,7 +194,7 @@ class AddToCartProvider with ChangeNotifier {
   }) async {
     if (cartItems.contains(addedItem)) {
       removeItemFromCart(removedItem: addedItem);
-      ReusableMethods.showtoastification(
+      showToastification(
         context: context,
         message: "Item removed from cart",
       );
@@ -404,7 +404,7 @@ class AddToCartProvider with ChangeNotifier {
   }) {
     if (cartItems[index].foodType == "Sushi") {
       if (cartItems[index].stock == 5) {
-        ReusableMethods.showtoastification(
+        showToastification(
           context: context,
           message: "stock_sushi".localeValue(
             context: context,
@@ -415,7 +415,7 @@ class AddToCartProvider with ChangeNotifier {
       }
     } else {
       if (cartItems[index].stock == 1) {
-        ReusableMethods.showtoastification(
+        showToastification(
           context: context,
           message: "stock_item".localeValue(
             context: context,

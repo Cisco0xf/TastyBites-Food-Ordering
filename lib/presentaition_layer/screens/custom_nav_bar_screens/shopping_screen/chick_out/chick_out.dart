@@ -185,7 +185,7 @@ class PayManager extends StatelessWidget {
 
                       return;
                     }
-                    ReusableMethods.showtoastification(
+                    showToastification(
                       message: "enter_your_table_toast"
                           .localeValue(context: context),
                       type: ToastificationType.error,

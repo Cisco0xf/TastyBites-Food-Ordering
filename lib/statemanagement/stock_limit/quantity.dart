@@ -16,7 +16,7 @@ class QuantityProvider with ChangeNotifier {
     required BuildContext context,
   }) {
     if (quantity <= 1) {
-      ReusableMethods.showtoastification(
+      showToastification(
         context: context,
         message: "Minemun number is 1",
       );

@@ -21,7 +21,7 @@ class WishListProvider with ChangeNotifier {
     }
 
     favoriteItems = [...favoriteItems, item];
-    ReusableMethods.showtoastification(
+    showToastification(
       message: "Item added to favorite",
       type: ToastificationType.success,
     );
@@ -37,7 +37,7 @@ class WishListProvider with ChangeNotifier {
         if (favoriteItems[i].id != item.id) favoriteItems[i]
       }
     ];
-    ReusableMethods.showtoastification(
+    showToastification(
       message: "Item removed from favorite",
     );
 

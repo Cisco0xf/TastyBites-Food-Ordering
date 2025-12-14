@@ -286,7 +286,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                     showwConfirmUpdateDialog(
                                         gcontext: this.context);
                                   } else if (updateInfo.chickUserUpdate) {
-                                    ReusableMethods.showtoastification(
+                                    showToastification(
                                       message: "nothing_changes"
                                           .localeValue(context: context),
                                     );

@@ -75,7 +75,7 @@ class RemoveItemFromCartWidget extends StatelessWidget {
                                 .whenComplete(
                               () {
                                 Navigator.pop(context);
-                                ReusableMethods.showtoastification(
+                                showToastification(
                                   message: "Item removed from cart",
                                 );
                               },

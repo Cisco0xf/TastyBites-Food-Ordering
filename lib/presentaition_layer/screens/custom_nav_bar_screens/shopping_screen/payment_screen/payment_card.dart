@@ -303,7 +303,7 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                   },
                 );
               } else {
-                ReusableMethods.showtoastification(
+                showToastification(
                   message: "Please enter the correct information",
                   type: ToastificationType.error,
                   progressBarColor: Colors.red,

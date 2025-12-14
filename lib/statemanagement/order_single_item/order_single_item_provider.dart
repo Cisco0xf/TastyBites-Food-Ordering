@@ -52,13 +52,13 @@ class SingleItemProvider with ChangeNotifier {
   void decreaseStock({required BuildContext context}) {
     if (orderedItem.foodType == "Sushi") {
       if (orderedItem.stock == 5) {
-        ReusableMethods.showtoastification(message: "Minimum quantity is 5");
+        showToastification(message: "Minimum quantity is 5");
       } else {
         orderedItem.stock--;
       }
     } else {
       if (orderedItem.stock == 1) {
-        ReusableMethods.showtoastification(
+        showToastification(
           message: "Minimum quiantity 1",
         );
       } else {

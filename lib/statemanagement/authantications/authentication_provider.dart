@@ -25,10 +25,7 @@ class AuthenticationProvider with ChangeNotifier {
     if (isUserLoggedin && isEmailVerified) {
       log("User Is not login");
     } else {
-      log(
-        "User Is log in successfully",
-        time: DateTime.now(),
-      );
+      log("User Is log in successfully");
     }
     notifyListeners();
   }
@@ -157,7 +154,7 @@ class AuthenticationProvider with ChangeNotifier {
         log("Password : ${passwordController.text}");
         clearCreatingAccountControllers;
       } else {
-        ReusableMethods.showtoastification(
+        showToastification(
           message: "Password is not matching",
           type: ToastificationType.error,
         );
