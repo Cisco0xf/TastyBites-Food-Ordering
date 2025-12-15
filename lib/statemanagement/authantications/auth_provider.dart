@@ -4,12 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/my_logger.dart';
+import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/presentaition_layer/auth/components/send_vrification_dialog.dart';
 import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart';
+import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
+import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
 class AuthControllers {
@@ -261,7 +266,6 @@ class FireAuthProvider extends ChangeNotifier {
   // Sign in with Google
 
   Future<void> signInWithGoogleAccount() async {
-    _switchLoading();
     try {
       final GoogleSignIn google = GoogleSignIn();
 
@@ -290,12 +294,49 @@ class FireAuthProvider extends ChangeNotifier {
       showToastification(message: "Please check ibternet connection");
     } catch (error) {
       Log.error("Google Sign In Error => $error");
+    }
+  }
+
+  // Sign out
+
+  void _resetAppForSignOut() {
+    final BuildContext context = navigationKey.currentContext as BuildContext;
+    context.read<CurrentIndexProvider>().switchContent(0);
+    pushTo(const PushAuthScreen(), type: Push.clear);
+  }
+
+  Future<void> signOutFromApp() async {
+    _switchLoading();
+
+    final GoogleSignIn google = GoogleSignIn();
+    final bool isGoogle = await google.isSignedIn();
+
+    final bool isAccount = _auth.currentUser != null;
+
+    try {
+      if (isGoogle) {
+        await google.disconnect();
+        _resetAppForSignOut();
+
+        return;
+      }
+
+      if (isAccount) {
+        await _auth.signOut();
+        _resetAppForSignOut();
+
+        return;
+      }
+
+      Log.log("Can not found SignIn Value", color: LColor.white);
+    } on FirebaseAuthException catch (error) {
+      Log.error("FirebaseAuthExciption = > ${error.code}");
+    } on SocketException {
+      showToastification(message: "Chatck you internet");
+    } catch (error) {
+      Log.error("Catch error from signOut => $error");
     } finally {
       _switchLoading();
     }
   }
-
-  // Delete account
-
-  // Sign out
 }

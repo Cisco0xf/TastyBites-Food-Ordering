@@ -32,7 +32,7 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => RattingProvider()),
     ChangeNotifierProvider(create: (context) => ThemeProvider()),
     ChangeNotifierProvider(create: (context) => LocalizationProvider()),
-    ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
+    //ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
     ChangeNotifierProvider(create: (context) => PersonalInfoProvider()),
     ChangeNotifierProvider(create: (context) => NotificationProvider()),
     ChangeNotifierProvider(create: (context) => SaveNotificationsProvider()),

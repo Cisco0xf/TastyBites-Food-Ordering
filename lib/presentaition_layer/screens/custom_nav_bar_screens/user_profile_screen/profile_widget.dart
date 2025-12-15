@@ -197,9 +197,7 @@ class UserProfileWidget extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: borderRaduis(10.0),
-                  onTap: () {
-                    showLogoutDialog;
-                  },
+                  onTap: () async => await showLogoutDialog(),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[

@@ -57,4 +57,6 @@ class Assets {
   static const String dinner = "${_paymentBase}dinners_club.png";
   static const String jcb = "${_paymentBase}jcb.png";
   static const String verve = "${_paymentBase}verve.png";
+
+  static const String googleSignIn = "${_imagesAppBase}auth/google.png";
 }
