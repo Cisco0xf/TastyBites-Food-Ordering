@@ -127,7 +127,7 @@ class PersonalInfoProvider with ChangeNotifier {
     );
     notifyListeners();
   }
-
+/* 
   // Re-Authenticate to delete the account
 
   final TextEditingController deleteEmailController = TextEditingController();
@@ -228,8 +228,8 @@ class PersonalInfoProvider with ChangeNotifier {
       log("Error happens during delete user account : $error");
     }
     notifyListeners();
-  }
-
+  } */
+/* 
   // Re-set user password
 
   final TextEditingController resetEmailController = TextEditingController();
@@ -331,7 +331,7 @@ class PersonalInfoProvider with ChangeNotifier {
         message: "Please chick your internet connection",
       );
     }
-  }
+  } */
 
   // Some User info
 

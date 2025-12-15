@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
 import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
 import 'package:foodapp/common/reusable_methods.dart';

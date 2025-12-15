@@ -1,4 +1,5 @@
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:foodapp/statemanagement/authantications/auth_operations.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
 import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
 import 'package:foodapp/statemanagement/cloud_messaging/notification_messaging.dart';
@@ -46,7 +47,8 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => PriceFilterProvider()),
     ChangeNotifierProvider(create: (context) => SearchingProvider()),
     ChangeNotifierProvider(create: (context) => ManageReceiptHistory()),
-    ChangeNotifierProvider(create: (context) => FireAuthProvider())
+    ChangeNotifierProvider(create: (context) => FireAuthProvider()), 
+    ChangeNotifierProvider(create: (context) => AuthOperations()),
   ];
 
   return providers;

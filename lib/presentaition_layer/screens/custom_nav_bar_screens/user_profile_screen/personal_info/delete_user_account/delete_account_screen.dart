@@ -110,13 +110,7 @@ class DeleteUserAccountScreen extends StatelessWidget {
                 height: context.screenHeight * .07,
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const ConfirmUserScreen();
-                        },
-                      ),
-                    );
+                    pushTo(const ConfirmUserScreen());
                   },
                   color: const Color(0xFFDDDDDD),
                   shape: RoundedRectangleBorder(
@@ -166,7 +160,7 @@ class DeleteInfoWidget extends StatelessWidget {
           ),
           SizedBox(
             width: context.screenWidth * .78,
-            child: Text(
+            child:  Text(
               title,
               textAlign: TextAlign.left,
               style: const TextStyle(

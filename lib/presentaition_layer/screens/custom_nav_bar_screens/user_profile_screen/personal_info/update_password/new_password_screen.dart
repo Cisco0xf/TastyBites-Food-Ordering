@@ -5,6 +5,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
+import 'package:foodapp/statemanagement/authantications/auth_operations.dart';
 import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
 import 'package:foodapp/common/app_dimention.dart';
@@ -18,121 +21,124 @@ class NewPasswordScreen extends StatefulWidget {
 }
 
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
-  final GlobalKey<FormState> resetPasswordKey = GlobalKey<FormState>();
+  /* final GlobalKey<FormState> resetPasswordKey = GlobalKey<FormState>(); */
+  @override
+  void initState() {
+    AuthControllers.initUpdatePwsController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    AuthControllers.disposeUpdatePasswordControllers();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<PersonalInfoProvider>(
-        builder: (context, resetPassword, child) {
-          return Column(
+      body: Column(
+        children: <Widget>[
+          const Gap(hRatio: 0.05),
+          Row(
             children: <Widget>[
-              SizedBox(
-                height: context.screenHeight * .05,
-              ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      size: 35,
-                      color: Colors.orange,
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.screenWidth * .15,
-                  ),
-                  const Text(
-                    "Reset password",
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const Divider(),
-              SizedBox(
-                height: context.screenHeight * .03,
-              ),
-              SizedBox(
-                width: context.screenWidth * .7,
-                height: context.screenHeight * .23,
-                child: SvgPicture.asset(
-                  "asstes/images/app_images/auth/update_password.svg",
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 35,
+                  color: Colors.orange,
                 ),
               ),
-              SizedBox(
-                height: context.screenHeight * .03,
+              const Gap(wRatio: 0.0156),
+              const Text(
+                "Reset password",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
+            ],
+          ),
+          const Divider(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const Gap(hRatio: 0.03),
+                  SizedBox.square(
+                    dimension: context.screenHeight * .23,
+                    child: SvgPicture.asset(
+                      "asstes/images/app_images/auth/update_password.svg",
+                    ),
+                  ),
+                  const Gap(hRatio: 0.03),
+                  Column(
                     children: <Widget>[
-                      Form(
-                        key: resetPasswordKey,
-                        child: Column(
-                          children: <Widget>[
-                            AuthField(
-                              controller: resetPassword.enterNewPassword,
-                              textFeildTitle: "Enter new password",
-                              textInputType: TextInputType.emailAddress,
-                              hintText: "New password",
-                             /*  validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "This feild can not be empty";
-                                }
-                                return null;
-                              }, */
-                            ),
-                            SizedBox(
-                              height: context.screenHeight * .04,
-                            ),
-                            AuthField(
-                              controller: resetPassword.enterConfirmPassword,
-                              textFeildTitle: "Confirm password",
-                              textInputType: TextInputType.emailAddress,
-                              hintText: "confrim new password",
-                              /* validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "This feild can not be empty";
-                                }
-                                return null;
-                              }, */
-                            ),
-                          ],
-                        ),
+                      Column(
+                        children: <Widget>[
+                          AuthField(
+                            controller: AuthControllers.updatePws!,
+                            textFeildTitle: "Enter new password",
+                            textInputType: TextInputType.visiblePassword,
+                            hasObscure: true,
+                            hintText: "New password",
+                            /*  validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "This feild can not be empty";
+                                  }
+                                  return null;
+                                }, */
+                          ),
+                          const Gap(hRatio: 0.04),
+                          AuthField(
+                            controller: AuthControllers.reupdatePws!,
+                            textFeildTitle: "Confirm password",
+                            textInputType: TextInputType.visiblePassword,
+                            hasObscure: true,
+                            hintText: "confrim new password",
+                            /* validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "This feild can not be empty";
+                                  }
+                                  return null;
+                                }, */
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: context.screenHeight * .06,
-                      ),
+                      const Gap(hRatio: 0.06),
                       SizedBox(
                         width: context.screenWidth * .6,
                         height: context.screenHeight * .08,
                         child: MaterialButton(
                           onPressed: () async {
-                            if (resetPasswordKey.currentState!.validate()) {
-                              resetPassword.saveNewPassword(context: context);
-                            } else {
-                              log("Something goes wrong while save new password");
-                            }
+                            /* if (resetPasswordKey.currentState!.validate()) {
+                                  resetPassword.saveNewPassword(context: context);
+                                } else {
+                                  log("Something goes wrong while save new password");
+                                } */
+                            await context
+                                .read<AuthOperations>()
+                                .updateCurrentUserPawwsord();
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: borderRaduis(20),
                           ),
                           color: const Color(0xFF8DECB4),
-                          child: const Text("Save new password"),
+                          child: context.watch<AuthOperations>().isOperating
+                              ? const Center(child: CircularProgressIndicator())
+                              : const Text("Save new password"),
                         ),
                       ),
                     ],
                   ),
-                ),
+                ],
               ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }

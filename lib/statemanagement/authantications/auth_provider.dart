@@ -7,64 +7,15 @@ import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/constants/enums.dart';
-import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/presentaition_layer/auth/components/send_vrification_dialog.dart';
 import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart';
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
+import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
-
-class AuthControllers {
-  // Create New Account Controllers
-  static TextEditingController? username;
-  static TextEditingController? emailController;
-  static TextEditingController? pswController;
-  static TextEditingController? rePwsController;
-
-  static void initCreateAccoutnControllers() {
-    username = TextEditingController();
-    emailController = TextEditingController();
-    pswController = TextEditingController();
-    rePwsController = TextEditingController();
-  }
-
-  static void disposeCreateAccoutnControllers() {
-    username!.dispose();
-    emailController!.dispose();
-    pswController!.dispose();
-    rePwsController!.dispose();
-  }
-
-  // Log in controllers
-
-  static TextEditingController? logEmailController;
-  static TextEditingController? logPwsController;
-
-  static void initLogInControllers() {
-    logEmailController = TextEditingController();
-    logPwsController = TextEditingController();
-  }
-
-  static void disposeLogInControllers() {
-    logEmailController!.dispose();
-    logPwsController!.dispose();
-  }
-
-  // Reset Paassword Controllers
-
-  static TextEditingController? resetPassworsEmail;
-
-  static void initResetPwsEmailController() {
-    resetPassworsEmail = TextEditingController();
-  }
-
-  static void diposeResetPwsEmailController() {
-    resetPassworsEmail!.dispose();
-  }
-}
 
 class FireAuthProvider extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
