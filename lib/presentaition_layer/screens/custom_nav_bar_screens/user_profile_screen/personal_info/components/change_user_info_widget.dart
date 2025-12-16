@@ -15,12 +15,12 @@ class ChangeUserInfoWidget extends StatelessWidget {
     required this.onChange,
     required this.controller,
     required this.unFocuse,
-    required this.validator,
+    /* required this.validator, */
     this.maxLines = 1,
     this.maxLength,
   });
 
-  final UpdateUserInfoValidator validator;
+  /* final UpdateUserInfoValidator validator; */
   final TextEditingController controller;
   final FocuseUnFocuseFeild unFocuse;
   final UpdateUserInfo onChange;
@@ -71,7 +71,7 @@ class ChangeUserInfoWidget extends StatelessWidget {
                 },
                 maxLines: maxLines,
                 maxLength: maxLength,
-                validator: validator,
+                /* validator: validator, */
                 decoration: InputDecoration(
                   filled: true,
                   enabled: unFocuseFeild,

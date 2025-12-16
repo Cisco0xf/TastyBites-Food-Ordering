@@ -12,6 +12,7 @@ import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart'
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -102,6 +103,8 @@ class FireAuthProvider extends ChangeNotifier {
           type: ToastificationType.success,
         );
       });
+
+      await ManageFirestore().addNewUserMetadata();
 
       // Push to log in
       pushTo(const LogInScreen(), type: Push.clear);

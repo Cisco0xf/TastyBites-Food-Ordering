@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthControllers {
@@ -76,5 +77,18 @@ class AuthControllers {
   static void disposeReauthControllers() {
     reauthEmail!.dispose();
     reauthPws!.dispose();
+  }
+
+  // Update username controller
+  static TextEditingController? updateUsername;
+
+  static void initUpdateUsernamContorller() {
+    final String currentUser =
+        FirebaseAuth.instance.currentUser!.displayName ?? "";
+    updateUsername = TextEditingController(text: currentUser);
+  }
+
+  static void disposeUsername() {
+    updateUsername!.dispose();
   }
 }

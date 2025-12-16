@@ -30,7 +30,7 @@ class PersonalInfoProvider with ChangeNotifier {
   }
   // Update userName
 
-  late TextEditingController updateDisplayNameController;
+  //late TextEditingController updateDisplayNameController;
 
   bool isUpdateUserNameFocused = false;
 
@@ -57,20 +57,20 @@ class PersonalInfoProvider with ChangeNotifier {
   bool get chickUserUpdate {
     String? currentUserName =
         FirebaseAuth.instance.currentUser!.displayName as String;
-    String userNameControllerText = updateDisplayNameController.text;
-    bool isUserNameUpdated = currentUserName == userNameControllerText;
+    //String userNameControllerText = updateDisplayNameController.text;
+    // bool isUserNameUpdated = currentUserName == userNameControllerText;
 
     String userBIOController = bioController.text;
 
     bool isBIOUpdated = userBIOController == currentBIO;
 
-    bool isUserUpdateAnyThing = isUserNameUpdated && isBIOUpdated;
+    bool isUserUpdateAnyThing = /* isUserNameUpdated && */ isBIOUpdated;
 
     notifyListeners();
 
     return isUserUpdateAnyThing;
   }
-
+/* 
   Future<void> updateUserName({required BuildContext context}) async {
     try {
       await FirebaseAuth.instance.currentUser!.updateDisplayName(
@@ -82,7 +82,7 @@ class PersonalInfoProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-
+ */
   // Update user BIO
 
   late TextEditingController bioController;
@@ -343,9 +343,9 @@ class PersonalInfoProvider with ChangeNotifier {
   // Call needed methods in constructor
 
   PersonalInfoProvider() {
-    updateDisplayNameController = TextEditingController(
+    /* updateDisplayNameController = TextEditingController(
       text: getCurrentUserName,
-    );
+    ); */
     currentBIO = "Hello my name is $getCurrentUserName";
 
     intializeBio();

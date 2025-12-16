@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
@@ -23,12 +24,19 @@ class PersonalInfoScreen extends StatefulWidget {
 }
 
 class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
-  final GlobalKey<FormState> updateInfoKey = GlobalKey<FormState>();
-  late final PersonalInfoProvider accountActions;
+  /* final GlobalKey<FormState> updateInfoKey = GlobalKey<FormState>();
+  late final PersonalInfoProvider accountActions; */
   @override
   void initState() {
-    accountActions = Provider.of<PersonalInfoProvider>(context, listen: false);
+    /* accountActions = Provider.of<PersonalInfoProvider>(context, listen: false); */
+    AuthControllers.initUpdateUsernamContorller();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    AuthControllers.disposeUsername();
+    super.dispose();
   }
 
   @override
@@ -226,75 +234,73 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   builder: (context, updateInfo, child) {
                     return Expanded(
                       child: SingleChildScrollView(
-                        child: Form(
-                          key: updateInfoKey,
-                          child: Column(
-                            children: <Widget>[
-                              ChangeUserInfoWidget(
-                                controller:
-                                    updateInfo.updateDisplayNameController,
-                                feildTilte: "Re-name",
-                                unFocuseFeild:
-                                    updateInfo.isUpdateUserNameFocused,
-                                onChange: (value) {
-                                  log("Feild Value : $value");
-                                },
-                                unFocuse: () {
-                                  updateInfo.focuseUnfocuse(
-                                    context: context,
+                        child: Column(
+                          children: <Widget>[
+                            ChangeUserInfoWidget(
+                              controller: AuthControllers.updateUsername!,
+                              feildTilte: "Re-name",
+                              unFocuseFeild: updateInfo.isUpdateUserNameFocused,
+                              onChange: (value) {
+                                log("Feild Value : $value");
+                              },
+                              unFocuse: () {
+                                updateInfo.focuseUnfocuse(
+                                  context: context,
+                                );
+                              },
+                              /*  validator: (vlaue) {
+                                if (updateInfo.updateDisplayNameController
+                                    .text.isEmpty) {
+                                  return "This feild can not be empty";
+                                }
+                                return null;
+                              }, */
+                            ),
+                            SizedBox(
+                              height: context.screenHeight * .03,
+                            ),
+                            ChangeUserInfoWidget(
+                              controller: updateInfo.bioController,
+                              feildTilte: "BIO",
+                              unFocuseFeild: updateInfo.isbioFocused,
+                              onChange: (value) {
+                                log("Feild Value : $value");
+                              },
+                              unFocuse: () {
+                                updateInfo.isbioFocuse(context: context);
+                              },
+                              /*  validator: (vlaue) {
+                                if (updateInfo.bioController.text.isEmpty) {
+                                  return "This feild can not be empty";
+                                }
+                                return null;
+                              }, */
+                              maxLines: 4,
+                              maxLength: 120,
+                            ),
+                            SizedBox(
+                              height: context.screenHeight * .03,
+                            ),
+                            AuthButton(
+                              buttonTitle:
+                                  "save_changes".localeValue(context: context),
+                              authantication: () async {
+                                await showConfirmUpdateDialog(
+                                  gcontext: context,
+                                );
+                                /*  if (updateInfoKey.currentState!.validate() &&
+                                    !updateInfo.chickUserUpdate) {
+                                  showwConfirmUpdateDialog(
+                                      gcontext: this.context);
+                                } else if (updateInfo.chickUserUpdate) {
+                                  showToastification(
+                                    message: "nothing_changes"
+                                        .localeValue(context: context),
                                   );
-                                },
-                                validator: (vlaue) {
-                                  if (updateInfo.updateDisplayNameController
-                                      .text.isEmpty) {
-                                    return "This feild can not be empty";
-                                  }
-                                  return null;
-                                },
-                              ),
-                              SizedBox(
-                                height: context.screenHeight * .03,
-                              ),
-                              ChangeUserInfoWidget(
-                                controller: updateInfo.bioController,
-                                feildTilte: "BIO",
-                                unFocuseFeild: updateInfo.isbioFocused,
-                                onChange: (value) {
-                                  log("Feild Value : $value");
-                                },
-                                unFocuse: () {
-                                  updateInfo.isbioFocuse(context: context);
-                                },
-                                validator: (vlaue) {
-                                  if (updateInfo.bioController.text.isEmpty) {
-                                    return "This feild can not be empty";
-                                  }
-                                  return null;
-                                },
-                                maxLines: 4,
-                                maxLength: 120,
-                              ),
-                              SizedBox(
-                                height: context.screenHeight * .03,
-                              ),
-                              AuthButton(
-                                buttonTitle: "save_changes"
-                                    .localeValue(context: context),
-                                authantication: () {
-                                  if (updateInfoKey.currentState!.validate() &&
-                                      !updateInfo.chickUserUpdate) {
-                                    showwConfirmUpdateDialog(
-                                        gcontext: this.context);
-                                  } else if (updateInfo.chickUserUpdate) {
-                                    showToastification(
-                                      message: "nothing_changes"
-                                          .localeValue(context: context),
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
+                                } */
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     );

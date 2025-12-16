@@ -9,6 +9,7 @@ import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/personal_info/personal_info_screen.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
 import 'package:toastification/toastification.dart';
 
 class AuthOperations extends ChangeNotifier {
@@ -99,6 +100,7 @@ class AuthOperations extends ChangeNotifier {
       }
 
       await user!.delete();
+      await ManageFirestore().deleteUserFromDatabase();
       pushTo(const PushAuthScreen(), type: Push.clear);
     } on FirebaseAuthException catch (error) {
       showToastification(message: "Something went wrong.");
@@ -161,6 +163,51 @@ class AuthOperations extends ChangeNotifier {
     } catch (error) {
       showToastification(message: "Something went wrong.");
       Log.error('Deletion Erro => $error');
+    } finally {
+      _switchOperationState();
+    }
+  }
+
+  // Update Current Username
+
+  String get _usernameUpdate => AuthControllers.updateUsername!.text.trim();
+
+  bool hasUsername() => _usernameUpdate.isNotEmpty;
+
+  bool hasChange() {
+    final String oldUsername = _auth.currentUser!.displayName ?? "";
+
+    final bool hasUpdate = oldUsername != _usernameUpdate;
+
+    return hasUpdate;
+  }
+
+  Future<void> updateCurrentUsername() async {
+    _switchOperationState();
+    try {
+      if (!hasUsername()) {
+        showToastification(message: "Username cannot be empty");
+
+        return;
+      }
+
+      if (!hasChange()) {
+        showToastification(message: "You cannot update username to old one");
+        return;
+      }
+
+      await _auth.currentUser!.updateDisplayName(_usernameUpdate);
+
+      await ManageFirestore().updateUserMetadata();
+
+      showToastification(
+        message: "Username has been updated succcessfully",
+        type: ToastificationType.success,
+      );
+
+      Log.log("Username updated successfully");
+    } catch (error) {
+      Log.error("Username Update Error => $error");
     } finally {
       _switchOperationState();
     }

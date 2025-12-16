@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/statemanagement/authantications/auth_operations.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
@@ -10,7 +11,7 @@ import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:provider/provider.dart';
 
-Future<void> showwConfirmUpdateDialog({
+Future<void> showConfirmUpdateDialog({
   required BuildContext gcontext,
 }) async {
   final BuildContext navContext = navigationKey.currentContext!;
@@ -55,34 +56,41 @@ Future<void> showwConfirmUpdateDialog({
                 width: context.screenWidth * .3,
                 height: context.screenHeight * .06,
                 child: MaterialButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.of(context).pop();
-                    updateInfo.updateUserName(
+                    /* updateInfo.updateUserName(
                       context: context,
-                    );
+                    ); */
+
+                    await context
+                        .read<AuthOperations>()
+                        .updateCurrentUsername();
+
                     updateInfo.updateBIO();
-                    ReusableMethods.showAwesomDialog(
+                    /* ReusableMethods.showAwesomDialog(
                       context: gcontext,
                       description:
                           "ubdated_successfully".localeValue(context: context),
                       title: "account_updated".localeValue(context: context),
                       dialogType: DialogType.success,
-                    );
+                    ); */
                   },
                   color: const Color(0xFFFFBB64),
                   shape: RoundedRectangleBorder(
                     borderRadius: borderRaduis(15),
                   ),
-                  child: Text(
-                    "save".localeValue(context: context),
-                    style: context.isEnglish
-                        ? const TextStyle(
-                            fontSize: 17,
-                          )
-                        : const TextStyle(
-                            fontFamily: FontFamily.mainArabic,
-                          ),
-                  ),
+                  child: context.watch<AuthOperations>().isOperating
+                      ? const Center(child: CircularProgressIndicator())
+                      : Text(
+                          "save".localeValue(context: context),
+                          style: context.isEnglish
+                              ? const TextStyle(
+                                  fontSize: 17,
+                                )
+                              : const TextStyle(
+                                  fontFamily: FontFamily.mainArabic,
+                                ),
+                        ),
                 ),
               ),
             ],
