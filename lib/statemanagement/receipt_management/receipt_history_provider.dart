@@ -8,6 +8,7 @@ import 'package:foodapp/data_layer/data_base/receipt_db/receipt_db.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,8 @@ class ManageReceiptHistory extends ChangeNotifier {
     notifyListeners();
 
     await ManageReceiptDB.addNewReceipt(receipt: receipt);
+
+    await ManageFirestore().addNewReceuptToFirestore(receipt: receipt);
   }
 
   Future<void> _removeReceipt(ReceiptModel receipt) async {
@@ -45,12 +48,16 @@ class ManageReceiptHistory extends ChangeNotifier {
     notifyListeners();
 
     await ManageReceiptDB.removeReceipt(receipt: receipt);
+
+    await ManageFirestore().removeReceiptFromFirestore(receipt);
   }
 
   Future<void> clearHistory() async {
     state = [];
 
     await ManageReceiptDB.clearDB();
+
+    await ManageFirestore().clearReceiptFirestore();
   }
 
   void initializeReceiptHistoryFromDatabase(List<ReceiptModel> db) {
@@ -105,14 +112,14 @@ class ManageReceiptHistory extends ChangeNotifier {
   }
 
   String singleOrderReceipt() {
-    final BuildContext context  = navigationKey.currentContext as BuildContext;
+    final BuildContext context = navigationKey.currentContext as BuildContext;
 
     final SingleItemProvider order =
         Provider.of<SingleItemProvider>(context, listen: false);
 
-        final CartManager cart = Provider.of<CartManager>(context, listen: false);
+    final CartManager cart = Provider.of<CartManager>(context, listen: false);
 
-  final FoodModel orderedItem = order.orderedItem;
+    final FoodModel orderedItem = order.orderedItem;
 
     StringBuffer receipt = StringBuffer();
     receipt.writeln("Thanks for your oreder");
@@ -127,7 +134,8 @@ class ManageReceiptHistory extends ChangeNotifier {
         ? receipt.writeln("Delivery : \$ 11")
         : receipt.writeln("Service : \$ 5");
     receipt.writeln("-" * 30);
-    receipt.writeln("Item price : ${order.getTotalPriceAfterDiscountAndService()}");
+    receipt.writeln(
+        "Item price : ${order.getTotalPriceAfterDiscountAndService()}");
     receipt.writeln("-" * 30);
     receipt.writeln(cart.orderPlace());
 

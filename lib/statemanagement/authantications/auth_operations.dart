@@ -100,7 +100,9 @@ class AuthOperations extends ChangeNotifier {
       }
 
       await user!.delete();
+
       await ManageFirestore().deleteUserFromDatabase();
+
       pushTo(const PushAuthScreen(), type: Push.clear);
     } on FirebaseAuthException catch (error) {
       showToastification(message: "Something went wrong.");

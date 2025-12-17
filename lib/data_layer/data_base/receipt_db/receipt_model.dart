@@ -14,4 +14,12 @@ class ReceiptModel {
     required this.newReceipt,
     required this.dateTime,
   }) : id = DateTime.now().toIso8601String();
+
+  Map<String, dynamic> fromModel(ReceiptModel receipt) {
+    return {
+      "id": receipt.id,
+      "receipt": receipt.newReceipt,
+      "dateTime": receipt.dateTime,
+    };
+  }
 }

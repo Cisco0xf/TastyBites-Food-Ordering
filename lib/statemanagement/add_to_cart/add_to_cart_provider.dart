@@ -3,12 +3,12 @@ import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
 import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
 import 'package:foodapp/statemanagement/user_table/get_user_table.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
 import 'package:toastification/toastification.dart';
 
 class CartManager extends ChangeNotifier {
@@ -38,6 +38,10 @@ class CartManager extends ChangeNotifier {
     );
 
     await cartDb.addDBItem(food);
+
+    // Push To Firestore
+
+    await ManageFirestore().addNewItemToFirestoreCart(target: food);
   }
 
   Future<void> removeItemFromCart(FoodModel food) async {
@@ -54,6 +58,10 @@ class CartManager extends ChangeNotifier {
     );
 
     await cartDb.removeDBItem(food);
+
+    // Remove item from Firestore
+
+    await ManageFirestore().removeItemFromFirestoreCart(target: food);
   }
 
   Future<void> clearCart() async {
@@ -65,6 +73,10 @@ class CartManager extends ChangeNotifier {
     context.read<AddressProvider>().clearAddress();
 
     await cartDb.clearDb();
+
+    // Firestore cart
+
+    await ManageFirestore().clearFirestoreCart();
   }
 
   void initializeCartFromDatabase(List<FoodModel> db) {

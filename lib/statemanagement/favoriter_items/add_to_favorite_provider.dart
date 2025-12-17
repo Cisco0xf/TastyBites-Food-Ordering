@@ -3,6 +3,7 @@ import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
 import 'package:toastification/toastification.dart';
 
 class WishListProvider with ChangeNotifier {
@@ -29,6 +30,8 @@ class WishListProvider with ChangeNotifier {
     notifyListeners();
 
     await _wishList.addDBItem(item);
+
+    await ManageFirestore().addNewItemToWishlist(item);
   }
 
   Future<void> removeItemFromFavorite({required FoodModel item}) async {
@@ -44,6 +47,8 @@ class WishListProvider with ChangeNotifier {
     notifyListeners();
 
     await _wishList.removeDBItem(item);
+
+     await ManageFirestore().removeItemFromWhishList(item);
   }
 
   Future<void> clearFavorite() async {

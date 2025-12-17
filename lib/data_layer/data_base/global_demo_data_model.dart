@@ -45,8 +45,8 @@ class FoodModel extends HiveObject {
     this.calories = 0,
     this.dishCountry,
     this.dishCountryFlag,
-    this.ingredientsNames ,
-    this.ingredientsImages ,
+    this.ingredientsNames,
+    this.ingredientsImages,
   }) : id = "$foodType$foodName";
 
   FoodModel copyWith({
@@ -62,5 +62,21 @@ class FoodModel extends HiveObject {
       foodType: foodType,
       stock: stock ?? this.stock,
     );
+  }
+
+  Map<String, dynamic> fromModel({required FoodModel item}) {
+    return {
+      "itemName": item.foodName,
+      "itemPrice": item.foodPrice,
+      "itemRate": item.foodRate,
+      "description": item.description,
+      "imagePath": item.imagePath,
+      "stock": item.stock,
+      "country": item.dishCountry,
+      "flag": item.dishCountryFlag,
+      "ingNames": item.ingredientsNames,
+      "ingImages": item.ingredientsImages,
+      "id": item.id,
+    };
   }
 }

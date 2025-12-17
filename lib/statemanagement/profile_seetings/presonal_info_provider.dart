@@ -55,8 +55,8 @@ class PersonalInfoProvider with ChangeNotifier {
   // Chick if user really update his info
 
   bool get chickUserUpdate {
-    String? currentUserName =
-        FirebaseAuth.instance.currentUser!.displayName as String;
+    /* String? currentUserName =
+        FirebaseAuth.instance.currentUser!.displayName as String; */
     //String userNameControllerText = updateDisplayNameController.text;
     // bool isUserNameUpdated = currentUserName == userNameControllerText;
 
