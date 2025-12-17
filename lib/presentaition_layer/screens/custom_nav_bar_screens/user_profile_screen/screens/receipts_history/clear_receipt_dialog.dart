@@ -34,9 +34,7 @@ Future<void> clearReceiptDialog(BuildContext context) async {
             ),
             actions: <Widget>[
               TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+                onPressed: () => Navigator.pop(context),
                 child: Text(
                   "cancle".localeValue(context: context),
                   style: TextStyle(
@@ -47,7 +45,7 @@ Future<void> clearReceiptDialog(BuildContext context) async {
               ),
               MaterialButton(
                 onPressed: () async {
-                  await clearReceipt.clearHistory();
+                  await clearReceipt.clearReceiptsFirestoreDB();
                   Navigator.pop(navigationKey.currentContext!);
                 },
                 shape: RoundedRectangleBorder(

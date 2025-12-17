@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
 BorderRadius borderRaduis(double raduis, {Side side = Side.all}) {
   final Map<Side, BorderRadius> raduisMap = {
@@ -107,3 +110,21 @@ class CheckDivider extends StatelessWidget {
     );
   }
 }
+/* 
+class LoadingState<T extends ChangeNotifier> extends StatelessWidget {
+  const LoadingState({super.key, required this.child, required this.provider});
+
+  final Widget child;
+  final T provider;
+
+  @override
+  Widget build(BuildContext context) {
+    return context.watch<T>().isOperating
+        ? LoadingAnimationWidget.inkDrop(
+            color: Colors.orange,
+            size: 30.0,
+          )
+        : child;
+  }
+}
+ */

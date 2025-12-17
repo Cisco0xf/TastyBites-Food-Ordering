@@ -278,20 +278,27 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
                                         ),
                                         type: Push.replace,
                                       );
-                                      await saveReceipt.addNewReceipt(
-                                          isSingle: widget.isSingleItem);
+                                      await saveReceipt
+                                          .addNewReceiptToFirestore(
+                                        isSingle: widget.isSingleItem,
+                                      );
                                     },
                                     color: Colors.orange,
-                                    child: Text(
-                                      "confim".localeValue(context: context),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: context.isEnglish
-                                            ? null
-                                            : FontFamily.mainArabic,
-                                        fontSize: context.isEnglish ? null : 16,
-                                      ),
-                                    ),
+                                    child: saveReceipt.isLoading
+                                        ? const Center(
+                                            child: CircularProgressIndicator())
+                                        : Text(
+                                            "confim"
+                                                .localeValue(context: context),
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: context.isEnglish
+                                                  ? null
+                                                  : FontFamily.mainArabic,
+                                              fontSize:
+                                                  context.isEnglish ? null : 16,
+                                            ),
+                                          ),
                                   );
                                 },
                               ),

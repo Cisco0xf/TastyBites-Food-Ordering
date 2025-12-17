@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/ratting_sector.dart';
+import 'package:foodapp/presentaition_layer/widgets/favorite_button.dart';
 import 'package:foodapp/statemanagement/favoriter_items/add_to_favorite_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/common/app_dimention.dart';
@@ -11,62 +15,27 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/presentaition_layer/widgets/pop_button_widget.dart';
 import 'package:provider/provider.dart';
 
-class FoodDetials extends StatefulWidget {
+class FoodDetials extends StatelessWidget {
   const FoodDetials({
     super.key,
-    /* required this.imagePath,
-    required this.foodName,
-    required this.foodPrice,
-    required this.description,
-    required this.rate,
-    required this.calories,
-    required this.numberOfReviewers,
-    required this.item,
-    required this.heroTage, */
     required this.item,
   });
 
-  /*  final String imagePath;
-  final String foodName;
-  final String description;
-  final int calories;
-  final double foodPrice;
-  final double rate;
-  final int numberOfReviewers;
-  final String heroTage;
-  final FoodModel item; */
-
   final FoodModel item;
 
-  @override
-  State<FoodDetials> createState() => _FoodDetialsState();
-}
-
-class _FoodDetialsState extends State<FoodDetials> {
-  late double reviewers;
-  @override
-  void initState() {
-    reviewers = widget.item.numberOfReviewers.toDouble();
-
-    super.initState();
-  }
-
   double get numberOfReviewersGreaterThousand {
-    if (reviewers > 1000) {
-      reviewers = reviewers / 1000;
-      return reviewers;
-    } else {
-      return reviewers;
+    if (item.numberOfReviewers > 1000) {
+      return item.numberOfReviewers / 1000;
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    return item.numberOfReviewers.toDouble();
   }
 
   @override
   Widget build(BuildContext context) {
+    final List<FoodModel> wishListItem =
+        context.watch<WishListProvider>().favoriteItems;
+
+    final bool isExist = wishListItem.any((food) => item.id == food.id);
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.ltr,
@@ -80,58 +49,25 @@ class _FoodDetialsState extends State<FoodDetials> {
                 children: <Widget>[
                   Center(
                     child: Hero(
-                      tag: widget.item.foodName,
-                      child: Image.asset(widget.item.imagePath),
+                      tag: item.foodName,
+                      child: Image.asset(item.imagePath),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 7),
+                    padding: padding(7.0, from: From.horizontal),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         const PopButtonWidget(),
                         Text(
-                          widget.item.foodName,
+                          item.foodName,
                           style: const TextStyle(
                             fontFamily: FontFamily.mainFont,
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color(0xFFFF6D28),
-                              width: 1,
-                            ),
-                            color: Colors.white24,
-                            borderRadius: borderRaduis(7),
-                          ),
-                          child: Consumer<WishListProvider>(
-                            builder: (context, addToFavorite, child) {
-                              return IconButton(
-                                padding: const EdgeInsets.all(0),
-                                onPressed: () async {
-                                  await addToFavorite.addItemToFavorite(
-                                    item: widget.item,
-                                  );
-                                },
-                                icon: addToFavorite.favoriteItems
-                                        .contains(widget.item)
-                                    ? const Icon(
-                                        Icons.favorite,
-                                        color: Color(0xFFFF6D28),
-                                        size: 30,
-                                      )
-                                    : const Icon(
-                                        Icons.favorite_border,
-                                        size: 30,
-                                        color: Color(0xFFFF6D28),
-                                      ),
-                              );
-                            },
-                          ),
-                        )
+                        FavoriteButtonWidget(item: item),
                       ],
                     ),
                   ),
@@ -140,13 +76,9 @@ class _FoodDetialsState extends State<FoodDetials> {
             ),
             Expanded(
               child: Container(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                ),
+                padding: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
+                  borderRadius: borderRaduis(20.0, side: Side.top),
                   color: SwitchColors.backgroundMianColor,
                 ),
                 child: Stack(
@@ -160,7 +92,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  widget.item.foodName,
+                                  item.foodName,
                                   style: const TextStyle(
                                     fontFamily: FontFamily.subFont,
                                     fontWeight: FontWeight.bold,
@@ -168,7 +100,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                                   ),
                                 ),
                                 Text(
-                                  "${widget.item.foodPrice.toStringAsFixed(2)} \$",
+                                  "${item.foodPrice.toStringAsFixed(2)} \$",
                                   style: const TextStyle(
                                     fontFamily: FontFamily.subFont,
                                     fontWeight: FontWeight.bold,
@@ -180,7 +112,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: padding(20.0, from: From.horizontal),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
@@ -193,7 +125,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                                     ),
                                     children: <InlineSpan>[
                                       TextSpan(
-                                        text: "${widget.item.calories} calory",
+                                        text: "${item.calories} calory",
                                         style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
@@ -206,9 +138,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: context.screenHeight * .01,
-                          ),
+                          const Gap(hRatio: 0.01),
                           const Divider(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -220,7 +150,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                                     color: Color(0xFFEE5007),
                                   ),
                                   Text(
-                                    widget.item.foodRate.toStringAsFixed(1),
+                                    item.foodRate.toStringAsFixed(1),
                                     style: const TextStyle(
                                       color: Color(0xFFEE5007),
                                       fontFamily: FontFamily.mainFont,
@@ -229,7 +159,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                                     ),
                                   ),
                                   Text(
-                                    widget.item.numberOfReviewers > 1000
+                                    item.numberOfReviewers > 1000
                                         ? "   (${numberOfReviewersGreaterThousand.toStringAsFixed(1)} K reviewer)"
                                         : "   (${numberOfReviewersGreaterThousand.toInt()} reviewer)",
                                     style: const TextStyle(
@@ -245,7 +175,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                                 itemCount: 5,
                                 itemSize: 30,
                                 direction: Axis.horizontal,
-                                initialRating: widget.item.foodRate,
+                                initialRating: item.foodRate,
                                 allowHalfRating: true,
                                 itemBuilder: (context, index) {
                                   return const Icon(
@@ -279,7 +209,7 @@ class _FoodDetialsState extends State<FoodDetials> {
                               bottom: 10,
                             ),
                             child: Text(
-                              widget.item.description,
+                              item.description,
                               textAlign: TextAlign.left,
                               textDirection: TextDirection.ltr,
                               style: const TextStyle(
@@ -288,18 +218,12 @@ class _FoodDetialsState extends State<FoodDetials> {
                               ),
                             ),
                           ),
-                          QuantityWidget(
-                            item: widget.item,
-                          ),
-                          SizedBox(
-                            height: context.screenHeight * .1,
-                          )
+                          QuantityWidget(item: item),
+                          const Gap(hRatio: 0.1),
                         ],
                       ),
                     ),
-                    OrderOrAddtoCartWidget(
-                      item: widget.item,
-                    ),
+                    OrderOrAddtoCartWidget(item: item),
                   ],
                 ),
               ),

@@ -126,10 +126,13 @@ class FavoriteItemWidget extends StatelessWidget {
                 builder: (context, wishList, child) {
                   return GestureDetector(
                     onTap: () async {
-                      await wishList.removeItemFromFavorite(item: item);
+                      await wishList.removeItemFromFirestoreWishList(item);
                     },
-                    child: const Icon(Icons.delete,
-                        color: Color(0xFFFF5B22), size: 30),
+                    child: const Icon(
+                      Icons.delete,
+                      color: Color(0xFFFF5B22),
+                      size: 30,
+                    ),
                   );
                 },
               ),

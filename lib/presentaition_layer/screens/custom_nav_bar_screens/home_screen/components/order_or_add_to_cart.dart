@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -8,6 +9,7 @@ import 'package:foodapp/statemanagement/order_single_item/order_single_item_prov
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/style.dart';
 import 'package:foodapp/presentaition_layer/widgets/order_button.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class OrderOrAddtoCartWidget extends StatelessWidget {
@@ -34,11 +36,11 @@ class OrderOrAddtoCartWidget extends StatelessWidget {
                   addToCart.state.any((element) => element.id == item.id);
               return GestureDetector(
                 onTap: () async {
-                  await addToCart.addFoodItemToCart(item);
+                  await addToCart.addFoodItemToFirestoreCart(item);
                 },
                 child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  padding: const EdgeInsets.all(10),
+                  margin: padding(10, from: From.horizontal),
+                  padding: padding(10),
                   height: context.screenHeight * .07,
                   width: context.screenWidth * .45,
                   decoration: BoxDecoration(
@@ -46,48 +48,46 @@ class OrderOrAddtoCartWidget extends StatelessWidget {
                       color: const Color(0xFFFF785B),
                       width: 1,
                     ),
-                    borderRadius: borderRaduis(20),
+                    borderRadius: borderRaduis(30),
                     color: SwitchColors.addToCartBGColor,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      addToCart.state.contains(item)
-                          ? const Icon(
-                              Icons.shopping_bag,
-                              color: Color(0xFFFF785B),
+                  child: addToCart.isOperating
+                      ? LoadingAnimationWidget.inkDrop(
+                          color: Colors.orange,
+                          size: 30.0,
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            addToCart.state.contains(item)
+                                ? const Icon(
+                                    Icons.shopping_bag,
+                                    color: Color(0xFFFF785B),
+                                  )
+                                : const Icon(
+                                    Icons.shopping_bag_outlined,
+                                    color: Color(0xFFFF785B),
+                                  ),
+                            Text(
+                              isExist
+                                  ? "added_to_cart"
+                                      .localeValue(context: context)
+                                  : "add_to_cart".localeValue(context: context),
+                              style: AppTextStyles.addToCartButtonTextStyle(
+                                  context: context),
                             )
-                          : const Icon(
-                              Icons.shopping_bag_outlined,
-                              color: Color(0xFFFF785B),
-                            ),
-                      Text(
-                        isExist
-                            ? "added_to_cart".localeValue(context: context)
-                            : "add_to_cart".localeValue(context: context),
-                        style: AppTextStyles.addToCartButtonTextStyle(
-                            context: context),
-                      )
-                    ],
-                  ),
+                          ],
+                        ),
                 ),
               );
             },
           ),
-          SizedBox(
-            height: context.screenHeight * .07,
+          OrderButtonWidget(
+            item: item,
+            buttonColor: orderButtonColor,
+            height: context.screenHeight * 0.07,
             width: context.screenWidth * .45,
-            child: ClipRRect(
-              borderRadius: borderRaduis(20),
-              child: Consumer<SingleItemProvider>(
-                builder: (context, orderNow, child) {
-                  return OrderButtonWidget(
-                    item: item,
-                    buttonColor: orderButtonColor,
-                  );
-                },
-              ),
-            ),
+            raduis: 30.0,
           ),
         ],
       ),

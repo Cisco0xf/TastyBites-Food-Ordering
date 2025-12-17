@@ -1,8 +1,15 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/common/my_logger.dart';
+import 'package:foodapp/constants/texts.dart';
 import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
 import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
 import 'package:foodapp/statemanagement/user_table/get_user_table.dart';
@@ -18,30 +25,127 @@ class CartManager extends ChangeNotifier {
 
   CartManager(this.context);
 
-  final ManageCartDB cartDb = ManageCartDB(HiveKeys.CART_KEY);
+  // Manage the Firestore Cart Database
 
-  Future<void> addFoodItemToCart(FoodModel food) async {
-    final bool isExist = state.any((item) => item.id == food.id);
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    if (isExist) {
-      removeItemFromCart(food);
+  CollectionReference get _cartCollection {
+    final String user = _auth.currentUser!.uid;
+
+    final CollectionReference cart = _firestore
+        .collection(Collections.USER_COLLECTION)
+        .doc(user)
+        .collection(Collections.CART_COLLECTION);
+
+    return cart;
+  }
+
+  bool isOperating = false;
+
+  void _switchLoadingState() {
+    isOperating = !isOperating;
+    notifyListeners();
+  }
+
+  Future<void> addFoodItemToFirestoreCart(FoodModel target) async {
+    final bool isExistInLocale = state.any((item) => target.id == item.id);
+
+    if (isExistInLocale) {
+      await removeFoodItemFromFirestoreCart(target);
 
       return;
     }
 
+    _switchLoadingState();
+
+    try {
+      await _cartCollection.doc(target.id).set(target.fromModel(item: target));
+
+      await addFoodItemToCart(target);
+
+      showToastification(message: addedCart, type: ToastificationType.success);
+
+      Log.log("${target.foodName} has been added to Firestore");
+    } on SocketException {
+      showToastification(message: internet, type: ToastificationType.error);
+    } on FirebaseException catch (error) {
+      Log.error("FIrebaseException => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } catch (error) {
+      Log.error("Cart Action Error => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } finally {
+      _switchLoadingState();
+    }
+  }
+
+  Future<void> removeFoodItemFromFirestoreCart(FoodModel target) async {
+    _switchLoadingState();
+    try {
+      await _cartCollection.doc(target.id).delete();
+
+      await removeItemFromCart(target);
+
+      showToastification(
+        message: removedCart,
+        type: ToastificationType.success,
+      );
+
+      Log.log("${target.foodName} has been removed from Firestore");
+    } on SocketException {
+      showToastification(message: internet, type: ToastificationType.error);
+    } on FirebaseException catch (error) {
+      Log.error("FIrebaseException => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } catch (error) {
+      Log.error("Cart Action Error => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } finally {
+      _switchLoadingState();
+    }
+  }
+
+  Future<void> clearFirestoreCart() async {
+    _switchLoadingState();
+    try {
+      final QuerySnapshot cartQuery = await _cartCollection.get();
+
+      final List<QueryDocumentSnapshot> cartData = cartQuery.docs;
+
+      final WriteBatch batch = _firestore.batch();
+
+      for (int i = 0; i < cartData.length; i++) {
+        batch.delete(cartData[i].reference);
+      }
+
+      await batch.commit();
+
+      await clearCart();
+
+      Log.log("Cart Collection has been deleted successfully...");
+    } on SocketException {
+      showToastification(message: internet, type: ToastificationType.error);
+    } on FirebaseException catch (error) {
+      Log.error("FIrebaseException => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } catch (error) {
+      Log.error("Cart Action Error => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } finally {
+      _switchLoadingState();
+    }
+  }
+
+  // Manage the Cart Locale Database
+
+  final ManageCartDB cartDb = ManageCartDB(HiveKeys.CART_KEY);
+
+  Future<void> addFoodItemToCart(FoodModel food) async {
     state = [...state, food];
     notifyListeners();
 
-    showToastification(
-      message: "Item has been added to cart",
-      type: ToastificationType.success,
-    );
-
     await cartDb.addDBItem(food);
-
-    // Push To Firestore
-
-    await ManageFirestore().addNewItemToFirestoreCart(target: food);
   }
 
   Future<void> removeItemFromCart(FoodModel food) async {
@@ -53,15 +157,7 @@ class CartManager extends ChangeNotifier {
 
     notifyListeners();
 
-    showToastification(
-      message: "Item has been removed from cart",
-    );
-
     await cartDb.removeDBItem(food);
-
-    // Remove item from Firestore
-
-    await ManageFirestore().removeItemFromFirestoreCart(target: food);
   }
 
   Future<void> clearCart() async {
@@ -77,10 +173,6 @@ class CartManager extends ChangeNotifier {
     // Firestore cart
 
     await ManageFirestore().clearFirestoreCart();
-  }
-
-  void initializeCartFromDatabase(List<FoodModel> db) {
-    state = db;
   }
 
   void increaseQnt(FoodModel food) {
@@ -171,7 +263,6 @@ class CartManager extends ChangeNotifier {
 
     return double.parse(orderTotal.toStringAsFixed(2));
   }
-  // Get the receipt && its components
 
   // Chick the user choice
 
@@ -187,6 +278,59 @@ class CartManager extends ChangeNotifier {
       return "Delivery : \$ 11";
     }
     return "Service : \$ 5";
+  }
+
+  // Data Ininitializer
+
+  void initializeCartFromDatabase(List<FoodModel> db) {
+    state = db;
+  }
+
+  Future<void> _loacleCartDatabase() async {
+    try {
+      final List<FoodModel> localCahse = await cartDb.retrivedDataFromDB();
+
+      state = localCahse;
+    } catch (error) {
+      Log.error("Error while Inin Cart From Local Cash => $error");
+    }
+  }
+
+  Future<FoodModel> _getFoodItem(QueryDocumentSnapshot shot) async {
+    final Map<String, dynamic> itemData = shot.data() as Map<String, dynamic>;
+
+    final FoodModel target = FoodModel.fromSnapshots(
+      snapshot: itemData,
+    );
+
+    return target;
+  }
+
+  Future<void> initCartFromFirestoreOrLocalDatabaseInFallback() async {
+    try {
+      final QuerySnapshot cartQuery = await _cartCollection.get();
+
+      final List<QueryDocumentSnapshot> cartDocs = cartQuery.docs;
+
+      final List<FoodModel> cartData = await Future.wait([
+        for (QueryDocumentSnapshot q in cartDocs) ...{
+          _getFoodItem(q),
+        }
+      ]);
+
+      state = cartData;
+    } on SocketException {
+      showToastification(message: internet, type: ToastificationType.error);
+      _loacleCartDatabase();
+    } on FirebaseException catch (error) {
+      Log.error("FIrebaseException => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+      _loacleCartDatabase();
+    } catch (error) {
+      Log.error("Getting Cart Data Error => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+      _loacleCartDatabase();
+    }
   }
 }
 

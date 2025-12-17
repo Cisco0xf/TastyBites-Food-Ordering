@@ -230,9 +230,7 @@ class DessertsDetails extends StatelessWidget {
                                   fontSize: 18,
                                 ),
                               ),
-                              FavoriteButtonWidget(
-                                item: item,
-                              ),
+                              FavoriteButtonWidget(item: item),
                             ],
                           ),
                         ),

@@ -1,41 +1,155 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/constants/texts.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_db.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
-import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 class ManageReceiptHistory extends ChangeNotifier {
   List<ReceiptModel> state = [];
 
-  Future<void> addNewReceipt({bool isSingle = false}) async {
+  bool isLoading = false;
+
+  void _switchLoading() {
+    isLoading = !isLoading;
+    notifyListeners();
+  }
+
+  // Manage Receipt Database on Fierstore
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  CollectionReference get _receiptsColltion {
+    final String userId = _auth.currentUser!.uid;
+
+    final CollectionReference receipts = _firestore
+        .collection(Collections.USER_COLLECTION)
+        .doc(userId)
+        .collection(Collections.RECEIPTS_COLLECTION);
+
+    return receipts;
+  }
+
+  Future<void> addNewReceiptToFirestore({bool isSingle = false}) async {
+    final ReceiptModel receipt = _generatedReciept(isSingle);
+
+    final bool isExistInLocale = state.any((test) => test.id == receipt.id);
+
+    if (isExistInLocale) {
+      await removeReceiptFromFirestore(receipt);
+      return;
+    }
+
+    _switchLoading();
+    try {
+      await _receiptsColltion.doc(receipt.id).set(receipt.fromModel(receipt));
+
+      await addNewReceipt();
+
+      Log.log("Receipt has been added to Firestore");
+    } on SocketException {
+      showToastification(message: internet, type: ToastificationType.error);
+    } on FirebaseException catch (error) {
+      Log.error("FIrebaseException => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } catch (error) {
+      Log.error("Receipt Action Error => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } finally {
+      _switchLoading();
+    }
+  }
+
+  Future<void> removeReceiptFromFirestore(ReceiptModel receipt) async {
+    _switchLoading();
+    try {
+      await _receiptsColltion.doc(receipt.id).delete();
+
+      await _removeReceipt(receipt);
+
+      Log.log("Receipt has been removed from Firestore");
+    } on SocketException {
+      showToastification(message: internet, type: ToastificationType.error);
+    } on FirebaseException catch (error) {
+      Log.error("FirebaseException => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } catch (error) {
+      Log.error("Receipt Action Error => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } finally {
+      _switchLoading();
+    }
+  }
+
+  Future<void> clearReceiptsFirestoreDB() async {
+    _switchLoading();
+    try {
+      final QuerySnapshot receiptsQuery = await _receiptsColltion.get();
+
+      final List<QueryDocumentSnapshot> receiptsData = receiptsQuery.docs;
+
+      final WriteBatch batch = _firestore.batch();
+
+      for (int i = 0; i < receiptsData.length; i++) {
+        batch.delete(receiptsData[i].reference);
+      }
+
+      await batch.commit();
+
+      await clearHistory();
+
+      Log.log("Receipts Firestore DB has been deleted...");
+    } on SocketException {
+      showToastification(message: internet, type: ToastificationType.error);
+    } on FirebaseException catch (error) {
+      Log.error("FirebaseException => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } catch (error) {
+      Log.error("Receipt Action Error => $error");
+      showToastification(message: someError, type: ToastificationType.error);
+    } finally {
+      _switchLoading();
+    }
+  }
+
+  ReceiptModel _generatedReciept(bool isSingle) {
     final ReceiptModel receipt = ReceiptModel(
       newReceipt: isSingle ? singleOrderReceipt() : getRecepit(isHistory: true),
       dateTime: dateTime,
     );
 
-    final bool isExist = state.any((item) => item.id == receipt.id);
+    return receipt;
+  }
 
-    if (isExist) {
-      await _removeReceipt(receipt);
-      return;
-    }
+  // Manage Receipts Locale Database
+
+  Future<void> addNewReceipt({bool isSingle = false}) async {
+    final ReceiptModel receipt = _generatedReciept(isSingle);
 
     state = [...state, receipt];
 
-    notifyListeners();
+    // notifyListeners();
 
     await ManageReceiptDB.addNewReceipt(receipt: receipt);
 
-    await ManageFirestore().addNewReceuptToFirestore(receipt: receipt);
+    // await ManageFirestore().addNewReceuptToFirestore(receipt: receipt);
   }
 
   Future<void> _removeReceipt(ReceiptModel receipt) async {
@@ -45,24 +159,26 @@ class ManageReceiptHistory extends ChangeNotifier {
       }
     ];
 
-    notifyListeners();
-
     await ManageReceiptDB.removeReceipt(receipt: receipt);
 
-    await ManageFirestore().removeReceiptFromFirestore(receipt);
+    // await ManageFirestore().removeReceiptFromFirestore(receipt);
   }
 
   Future<void> clearHistory() async {
     state = [];
 
+    notifyListeners();
+
     await ManageReceiptDB.clearDB();
 
-    await ManageFirestore().clearReceiptFirestore();
+    //await ManageFirestore().clearReceiptFirestore();
   }
 
   void initializeReceiptHistoryFromDatabase(List<ReceiptModel> db) {
     state = db;
   }
+
+  // Generate the Receipt Frormat for User
 
   bool get hasData => state.isNotEmpty;
 
@@ -142,6 +258,8 @@ class ManageReceiptHistory extends ChangeNotifier {
     String orderReceipt = receipt.toString();
     return orderReceipt;
   }
+
+  
 }
 /* 
 class ReceiptHistoryProvider with ChangeNotifier {

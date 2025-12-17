@@ -128,6 +128,14 @@ class ManageCartDB {
     }
   }
 
+  Future<List<FoodModel>> retrivedDataFromDB() async {
+    final Box box = await _cartDB.openBox;
+
+    final List<FoodModel> db = _cartDB.getFoodDtaFromDatabase(box: box);
+
+    return db;
+  }
+
   Future<void> initializeDataFromDB({
     InitType type = InitType.cart,
   }) async {

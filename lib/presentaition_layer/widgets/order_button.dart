@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -18,39 +19,48 @@ class OrderButtonWidget extends StatelessWidget {
     this.buttonColor = const Color(0xFFef6c00),
     this.orderTitle = "order_now",
     required this.item,
+    this.height,
+    this.raduis,
+    this.width,
   });
 
   final Color buttonColor;
   final String orderTitle;
   final FoodModel item;
 
+  final double? width;
+  final double? height;
+  final double? raduis;
+
+  ShapeBorder? get _borderRaduis => raduis != null
+      ? RoundedRectangleBorder(borderRadius: borderRaduis(raduis!))
+      : null;
+
   @override
   Widget build(BuildContext context) {
-    CurrentIndexProvider currentIndex =
-        Provider.of<CurrentIndexProvider>(context, listen: false);
+    final int currentIndex = context.watch<CurrentIndexProvider>().currentIndex;
+    final bool changeColor = currentIndex == 3 || currentIndex == 4;
     return Consumer<SingleItemProvider>(
       builder: (context, orderNow, child) {
-        return MaterialButton(
-          onPressed: () {
-            orderNow.item(item: item);
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return const ChickOutWidget(isSingleItem: true);
-                },
+        return SizedBox(
+          width: width,
+          height: height,
+          child: MaterialButton(
+            onPressed: () {
+              orderNow.item(item: item);
+              pushTo(const ChickOutWidget(isSingleItem: true));
+            },
+            color: changeColor
+                ? buttonColor
+                : context.isLight
+                    ? AppLightColors.orderButtonColor
+                    : AppDarkColors.orderButtonColor,
+            shape: _borderRaduis,
+            child: Text(
+              orderTitle.localeValue(context: context),
+              style: AppTextStyles.orderNowButtonTextStyle(
+                context: context,
               ),
-            );
-          },
-          color:
-              currentIndex.currentIndex == 3 || currentIndex.currentIndex == 4
-                  ? buttonColor
-                  : context.isLight
-                      ? AppLightColors.orderButtonColor
-                      : AppDarkColors.orderButtonColor,
-          child: Text(
-            orderTitle.localeValue(context: context),
-            style: AppTextStyles.orderNowButtonTextStyle(
-              context: context,
             ),
           ),
         );

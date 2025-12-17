@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class CartIconButton extends StatelessWidget {
@@ -19,7 +20,7 @@ class CartIconButton extends StatelessWidget {
       builder: (context, cart, _) {
         return Clicker(
           onClick: () async {
-            await cart.addFoodItemToCart(target);
+            await cart.addFoodItemToFirestoreCart(target);
           },
           isCircular: true,
           innerPadding: 0.0,
@@ -32,18 +33,18 @@ class CartIconButton extends StatelessWidget {
               );
             },
             child: isExist
-                ? const Icon(
-                    key: ValueKey("REMOVE_KEY"),
-                    Icons.remove_circle,
-                     color: Colors.green,
-                    size: 35.0,
-                  )
-                : const Icon(
-                    key: ValueKey("ADD_KEY"),
-                    Icons.add_circle,
-                    color: Colors.orange,
-                    size: 35.0,
-                  ),
+                    ? const Icon(
+                        key: ValueKey("REMOVE_KEY"),
+                        Icons.remove_circle,
+                        color: Colors.green,
+                        size: 35.0,
+                      )
+                    : const Icon(
+                        key: ValueKey("ADD_KEY"),
+                        Icons.add_circle,
+                        color: Colors.orange,
+                        size: 35.0,
+                      ),
           ),
         );
       },

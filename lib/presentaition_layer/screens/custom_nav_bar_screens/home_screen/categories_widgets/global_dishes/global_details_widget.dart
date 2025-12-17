@@ -12,6 +12,7 @@ import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/ratting_sector.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/order_or_add_to_cart.dart';
 import 'package:foodapp/presentaition_layer/widgets/pop_button_widget.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class GlobalDishesDetails extends StatelessWidget {
@@ -44,6 +45,12 @@ class GlobalDishesDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<FoodModel> wishList =
+        context.watch<WishListProvider>().favoriteItems;
+    final bool isExist = wishList.any((test) => test.id == item.id);
+
+    final bool isLoading = context.watch<WishListProvider>().isLoading;
+
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.ltr,
@@ -358,15 +365,18 @@ class GlobalDishesDetails extends StatelessWidget {
                             ),
                             shape: BoxShape.circle,
                           ),
-                          child: Consumer<WishListProvider>(
-                            builder: (context, addGlobalToFavorite, child) {
-                              return IconButton(
-                                onPressed: () async {
-                                  await addGlobalToFavorite.addItemToFavorite(
-                                      item: item);
-                                },
-                                icon: addGlobalToFavorite.favoriteItems
-                                        .contains(item)
+                          child: IconButton(
+                            onPressed: () async {
+                              await context
+                                  .read<WishListProvider>()
+                                  .addItemToFirestoreWishList(item);
+                            },
+                            icon: isLoading
+                                ? LoadingAnimationWidget.threeArchedCircle(
+                                    color: Colors.orange,
+                                    size: 25.0,
+                                  )
+                                : isExist
                                     ? const Icon(
                                         Icons.favorite,
                                         color: Color(0xFFef6c00),
@@ -377,8 +387,6 @@ class GlobalDishesDetails extends StatelessWidget {
                                         color: Color(0xFFef6c00),
                                         size: 30,
                                       ),
-                              );
-                            },
                           ),
                         ),
                       ],

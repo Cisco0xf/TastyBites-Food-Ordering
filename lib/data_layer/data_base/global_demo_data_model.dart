@@ -77,6 +77,26 @@ class FoodModel extends HiveObject {
       "ingNames": item.ingredientsNames,
       "ingImages": item.ingredientsImages,
       "id": item.id,
+      "calories": item.calories,
+      "type": item.foodType,
     };
+  }
+
+  factory FoodModel.fromSnapshots({required Map<String, dynamic> snapshot}) {
+    return FoodModel(
+      ingredientsImages: snapshot["ingImages"],
+      ingredientsNames: snapshot["ingNames"],
+      description: snapshot["description"],
+      dishCountryFlag: snapshot["flag"],
+      foodPrice: snapshot["itemPrice"],
+      imagePath: snapshot["imagePath"],
+      dishCountry: snapshot["country"],
+      numberOfReviewers: snapshot[""],
+      foodRate: snapshot["itemRate"],
+      foodName: snapshot["itemName"],
+      calories: snapshot["calories"],
+      foodType: snapshot["type"],
+      stock: snapshot["stock"],
+    );
   }
 }
