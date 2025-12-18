@@ -76,14 +76,26 @@ class ManageReceiptDB {
     await _receiptDB.clearDB(box: box);
   }
 
-  static Future<void> initializeReceiptHistoryFromDatabase() async {
+  static Future<List<ReceiptModel>> receiptFromLocaleDatabase() async {
     final Box box = await _receiptDB.openBox;
+
+    final List<ReceiptModel> receiptsDb = _receiptDB.getFoodDtaFromDatabase(
+      box: box,
+    );
+
+    return receiptsDb;
+  }
+
+  static Future<void> initializeReceiptHistoryFromDatabase() async {
+
+    /// TODO : REmove this Function from the Code (NO LONGER USED)
+    /* final Box box = await _receiptDB.openBox;
 
     final List<ReceiptModel> db = _receiptDB.getFoodDtaFromDatabase(box: box);
 
     Provider.of<ManageReceiptHistory>(
       navigationKey.currentContext!,
       listen: false,
-    ).initializeReceiptHistoryFromDatabase(db);
+    ).initializeReceiptHistoryFromDatabase(db); */
   }
 }

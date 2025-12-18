@@ -13,7 +13,8 @@ class ReceiptModel {
   ReceiptModel({
     required this.newReceipt,
     required this.dateTime,
-  }) : id = DateTime.now().toIso8601String();
+    required this.id,
+  }) ;
 
   Map<String, dynamic> fromModel(ReceiptModel receipt) {
     return {
@@ -21,5 +22,13 @@ class ReceiptModel {
       "receipt": receipt.newReceipt,
       "dateTime": receipt.dateTime,
     };
+  }
+
+  factory ReceiptModel.fromSnapshot({required Map<String, dynamic> snapshots}) {
+    return ReceiptModel(
+      newReceipt: snapshots["newReceipt"] as String,
+      dateTime: snapshots["dateTime"] as String,
+      id: snapshots["id"] as String,
+    );
   }
 }

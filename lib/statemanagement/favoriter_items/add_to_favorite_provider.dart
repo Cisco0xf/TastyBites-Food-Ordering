@@ -102,24 +102,11 @@ class WishListProvider with ChangeNotifier {
   Future<void> addItemToFavorite({
     required FoodModel item,
   }) async {
-    /*  final bool isExist = favoriteItems.any((ele) => item.id == ele.id);
-    if (isExist) {
-      await removeItemFromFavorite(item: item);
-
-      return;
-    } */
-
     favoriteItems = [...favoriteItems, item];
-    /*  showToastification(
-      message: "Item added to favorite",
-      type: ToastificationType.success,
-    ); */
 
     notifyListeners();
 
     await _wishList.addDBItem(item);
-
-    //await ManageFirestore().addNewItemToWishlist(item);
   }
 
   Future<void> removeItemFromFavorite({required FoodModel item}) async {
@@ -128,9 +115,6 @@ class WishListProvider with ChangeNotifier {
         if (favoriteItems[i].id != item.id) favoriteItems[i]
       }
     ];
-    /* showToastification(
-      message: "Item removed from favorite",
-    ); */
 
     notifyListeners();
 
@@ -140,14 +124,50 @@ class WishListProvider with ChangeNotifier {
   }
 
 /* 
-  Future<void> clearFavorite() async {
-    favoriteItems = [];
-
-    await _wishList.clearDb();
-    notifyListeners();
-  }
- */
   void initializeWishListFromDatabase(List<FoodModel> db) {
     favoriteItems = [...db];
+  } */
+
+  // Data initialization'
+
+  Future<void> _initWishlistFromLocaleDB() async {
+    try {
+      final List<FoodModel> db = await _wishList.retrivedDataFromDB();
+
+      favoriteItems = db;
+    } catch (error) {
+      Log.error("Error init Wishlist from Locale DB => $error");
+    }
+  }
+
+  Future<void> initializeWishList() async {
+    try {
+      final QuerySnapshot wishListQuery = await _wishListCollection.get();
+
+      final List<QueryDocumentSnapshot> wishListData = wishListQuery.docs;
+
+      List<FoodModel> wishListItems = [];
+
+      for (int i = 0; i < wishListData.length; i++) {
+        final Map<String, dynamic> item =
+            wishListData[i].data() as Map<String, dynamic>;
+
+        final FoodModel foodItem = FoodModel.fromSnapshots(snapshot: item);
+
+        wishListItems.add(foodItem);
+      }
+
+      favoriteItems = wishListItems;
+
+      Log.log("WishList has been retrived from Firestore successfully");
+    } on SocketException {
+      await _initWishlistFromLocaleDB();
+    } on FirebaseException catch (error) {
+      Log.error("FirebaseException => $error");
+      await _initWishlistFromLocaleDB();
+    } catch (error) {
+      Log.error("WishList Action Error => $error");
+      await _initWishlistFromLocaleDB();
+    }
   }
 }

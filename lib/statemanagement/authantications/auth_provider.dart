@@ -7,6 +7,9 @@ import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
+import 'package:foodapp/data_layer/data_base/hive_keys.dart';
+import 'package:foodapp/data_layer/data_base/receipt_db/receipt_db.dart';
 import 'package:foodapp/presentaition_layer/auth/components/send_vrification_dialog.dart';
 import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart';
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
@@ -253,9 +256,25 @@ class FireAuthProvider extends ChangeNotifier {
 
   // Sign out
 
-  void _resetAppForSignOut() {
-    final BuildContext context = navigationKey.currentContext as BuildContext;
-    context.read<CurrentIndexProvider>().switchContent(0);
+  Future<void> _resetLocaleDatabaseForNewUser() async {
+    final ManageCartDB cartDatabase = ManageCartDB(HiveKeys.CART_KEY);
+    await cartDatabase.clearDb();
+
+    Log.log("Cart Locale DB Cleared...");
+
+    final ManageCartDB wishListDB = ManageCartDB(HiveKeys.WISH_LIST_KEY);
+    await wishListDB.clearDb();
+
+    Log.log("WishListCart Locale DB Cleared...");
+
+    await ManageReceiptDB.clearDB();
+    Log.log("Receipt Locale DB Cleared...");
+  }
+
+  Future<void> _resetAppForSignOut() async {
+    await _resetLocaleDatabaseForNewUser();
+
+    navigationKey.currentContext!.read<CurrentIndexProvider>().switchContent(0);
     pushTo(const PushAuthScreen(), type: Push.clear);
   }
 
@@ -270,14 +289,15 @@ class FireAuthProvider extends ChangeNotifier {
     try {
       if (isGoogle) {
         await google.disconnect();
-        _resetAppForSignOut();
+
+        await _resetAppForSignOut();
 
         return;
       }
 
       if (isAccount) {
         await _auth.signOut();
-        _resetAppForSignOut();
+        await _resetAppForSignOut();
 
         return;
       }

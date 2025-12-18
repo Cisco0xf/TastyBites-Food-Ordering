@@ -132,6 +132,7 @@ class ManageReceiptHistory extends ChangeNotifier {
   ReceiptModel _generatedReciept(bool isSingle) {
     final ReceiptModel receipt = ReceiptModel(
       newReceipt: isSingle ? singleOrderReceipt() : getRecepit(isHistory: true),
+      id: DateTime.now().toIso8601String(),
       dateTime: dateTime,
     );
 
@@ -173,11 +174,11 @@ class ManageReceiptHistory extends ChangeNotifier {
 
     //await ManageFirestore().clearReceiptFirestore();
   }
-
+/* 
   void initializeReceiptHistoryFromDatabase(List<ReceiptModel> db) {
     state = db;
   }
-
+ */
   // Generate the Receipt Frormat for User
 
   bool get hasData => state.isNotEmpty;
@@ -259,7 +260,54 @@ class ManageReceiptHistory extends ChangeNotifier {
     return orderReceipt;
   }
 
-  
+  // Initialize Receipts Item from the Firestore || Database
+
+  Future<void> _localeDbReceipts() async {
+    try {
+      final List<ReceiptModel> db =
+          await ManageReceiptDB.receiptFromLocaleDatabase();
+
+      state = db;
+    } catch (error) {
+      Log.error("Init Receipt DB Error => $error");
+    }
+  }
+
+  Future<void> initializeReceipts() async {
+    try {
+      final QuerySnapshot receiptsQuery = await _receiptsColltion.get();
+
+      final List<QueryDocumentSnapshot> receiptsDocs = receiptsQuery.docs;
+
+      List<ReceiptModel> cloudReceipts = [];
+
+      for (int i = 0; i < receiptsDocs.length; i++) {
+        final Map<String, dynamic> receiptMap =
+            receiptsDocs[i].data() as Map<String, dynamic>;
+
+        final ReceiptModel receipt = ReceiptModel.fromSnapshot(
+          snapshots: receiptMap,
+        );
+
+        cloudReceipts.add(receipt);
+      }
+
+      state = cloudReceipts;
+
+      Log.log(
+          "Receipt has Database has been init From the Firestore Successfully");
+    } on SocketException {
+      await _localeDbReceipts();
+    } on FirebaseException catch (error) {
+      Log.error("FirebaseException => $error");
+      await _localeDbReceipts();
+      showToastification(message: someError, type: ToastificationType.error);
+    } catch (error) {
+      Log.error("Receipt Action Error => $error");
+      await _localeDbReceipts();
+      showToastification(message: someError, type: ToastificationType.error);
+    }
+  }
 }
 /* 
 class ReceiptHistoryProvider with ChangeNotifier {

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:hive/hive.dart';
 
 part 'global_demo_data_model.g.dart';
@@ -58,6 +60,11 @@ class FoodModel extends HiveObject {
       foodRate: foodRate,
       description: description,
       imagePath: imagePath,
+      calories: calories,
+      dishCountry: dishCountry,
+      dishCountryFlag: dishCountryFlag,
+      ingredientsImages: ingredientsImages,
+      ingredientsNames: ingredientsNames,
       numberOfReviewers: numberOfReviewers,
       foodType: foodType,
       stock: stock ?? this.stock,
@@ -66,37 +73,47 @@ class FoodModel extends HiveObject {
 
   Map<String, dynamic> fromModel({required FoodModel item}) {
     return {
-      "itemName": item.foodName,
-      "itemPrice": item.foodPrice,
-      "itemRate": item.foodRate,
-      "description": item.description,
-      "imagePath": item.imagePath,
-      "stock": item.stock,
-      "country": item.dishCountry,
-      "flag": item.dishCountryFlag,
-      "ingNames": item.ingredientsNames,
+      "reviewersNumber": item.numberOfReviewers,
       "ingImages": item.ingredientsImages,
-      "id": item.id,
+      "ingNames": item.ingredientsNames,
+      "description": item.description,
+      "flag": item.dishCountryFlag,
+      "itemPrice": item.foodPrice,
+      "country": item.dishCountry,
+      "imagePath": item.imagePath,
+      "itemRate": item.foodRate,
+      "itemName": item.foodName,
       "calories": item.calories,
       "type": item.foodType,
+      "stock": item.stock,
+      "id": item.id,
     };
   }
 
   factory FoodModel.fromSnapshots({required Map<String, dynamic> snapshot}) {
+    final List<String>? ingImages =
+        (snapshot["ingImages"] as List?)?.cast<String>();
+
+    final List<String>? ingNames = (snapshot["ingNames"] as List<dynamic>?)
+        ?.map((item) => item.toString())
+        .toList();
+
     return FoodModel(
-      ingredientsImages: snapshot["ingImages"],
-      ingredientsNames: snapshot["ingNames"],
-      description: snapshot["description"],
-      dishCountryFlag: snapshot["flag"],
-      foodPrice: snapshot["itemPrice"],
-      imagePath: snapshot["imagePath"],
-      dishCountry: snapshot["country"],
-      numberOfReviewers: snapshot[""],
-      foodRate: snapshot["itemRate"],
-      foodName: snapshot["itemName"],
-      calories: snapshot["calories"],
-      foodType: snapshot["type"],
-      stock: snapshot["stock"],
+      numberOfReviewers: snapshot["reviewersNumber"] as int,
+      ingredientsImages: ingImages,
+      ingredientsNames: ingNames,
+      /* ingredientsImages: snapshot["ingImages"] as List<String>?,
+      ingredientsNames: snapshot["ingNames"] as List<String>?, */
+      description: snapshot["description"] as String,
+      dishCountryFlag: snapshot["flag"] as String?,
+      dishCountry: snapshot["country"] as String?,
+      foodPrice: snapshot["itemPrice"] as double,
+      imagePath: snapshot["imagePath"] as String,
+      foodRate: snapshot["itemRate"] as double,
+      foodName: snapshot["itemName"] as String,
+      calories: snapshot["calories"] as int,
+      foodType: snapshot["type"] as String,
+      stock: snapshot["stock"] as int,
     );
   }
 }

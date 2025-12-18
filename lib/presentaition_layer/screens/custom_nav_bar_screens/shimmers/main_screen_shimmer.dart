@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:foodapp/statemanagement/favoriter_items/add_to_favorite_provider.dart';
+import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:foodapp/statemanagement/theming/is_light.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/presentaition_layer/screens/main_screen/main_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MainScreenShimmer extends StatefulWidget {
@@ -17,15 +22,21 @@ class _MainScreenShimmerState extends State<MainScreenShimmer> {
   @override
   void initState() {
     Future.delayed(
-      const Duration(seconds: 5),
-      () {
-        Navigator.of(navigationKey.currentContext!).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) {
-              return const MainScreen();
-            },
-          ),
-        );
+      const Duration(seconds: 3),
+      () async {
+        if (mounted) {
+          await context.read<CartManager>().initializeCart();
+        }
+
+        if (mounted) {
+          await context.read<WishListProvider>().initializeWishList();
+        }
+
+        if (mounted) {
+          await context.read<ManageReceiptHistory>().initializeReceipts();
+        }
+
+        pushTo(const MainScreen(), type: Push.replace);
       },
     );
     super.initState();

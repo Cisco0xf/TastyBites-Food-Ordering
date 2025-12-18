@@ -172,7 +172,7 @@ class CartManager extends ChangeNotifier {
 
     // Firestore cart
 
-    await ManageFirestore().clearFirestoreCart();
+    // await ManageFirestore().clearFirestoreCart();
   }
 
   void increaseQnt(FoodModel food) {
@@ -282,54 +282,50 @@ class CartManager extends ChangeNotifier {
 
   // Data Ininitializer
 
-  void initializeCartFromDatabase(List<FoodModel> db) {
-    state = db;
-  }
-
   Future<void> _loacleCartDatabase() async {
     try {
-      final List<FoodModel> localCahse = await cartDb.retrivedDataFromDB();
+      final List<FoodModel> localeCashe = await cartDb.retrivedDataFromDB();
 
-      state = localCahse;
+      state = localeCashe;
     } catch (error) {
       Log.error("Error while Inin Cart From Local Cash => $error");
     }
   }
 
-  Future<FoodModel> _getFoodItem(QueryDocumentSnapshot shot) async {
-    final Map<String, dynamic> itemData = shot.data() as Map<String, dynamic>;
-
-    final FoodModel target = FoodModel.fromSnapshots(
-      snapshot: itemData,
-    );
-
-    return target;
-  }
-
-  Future<void> initCartFromFirestoreOrLocalDatabaseInFallback() async {
+  Future<void> initializeCart() async {
     try {
       final QuerySnapshot cartQuery = await _cartCollection.get();
 
       final List<QueryDocumentSnapshot> cartDocs = cartQuery.docs;
 
-      final List<FoodModel> cartData = await Future.wait([
-        for (QueryDocumentSnapshot q in cartDocs) ...{
-          _getFoodItem(q),
-        }
-      ]);
+      final List<FoodModel> cartData = List<FoodModel>.generate(
+        cartDocs.length,
+        (index) {
+          final Map<String, dynamic> data =
+              cartDocs[index].data() as Map<String, dynamic>;
+
+          final FoodModel foodItem = FoodModel.fromSnapshots(
+            snapshot: data,
+          );
+
+          return foodItem;
+        },
+      );
 
       state = cartData;
+
+      Log.log("Data has been retrived from the Firestore DB");
     } on SocketException {
       showToastification(message: internet, type: ToastificationType.error);
-      _loacleCartDatabase();
+      await _loacleCartDatabase();
     } on FirebaseException catch (error) {
       Log.error("FIrebaseException => $error");
       showToastification(message: someError, type: ToastificationType.error);
-      _loacleCartDatabase();
+      await _loacleCartDatabase();
     } catch (error) {
       Log.error("Getting Cart Data Error => $error");
       showToastification(message: someError, type: ToastificationType.error);
-      _loacleCartDatabase();
+      await _loacleCartDatabase();
     }
   }
 }

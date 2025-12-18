@@ -59,4 +59,9 @@ class Assets {
   static const String verve = "${_paymentBase}verve.png";
 
   static const String googleSignIn = "${_imagesAppBase}auth/google.png";
+
+  static const String _animationBase ="asstes/animations/"; 
+
+  static const String delivAnimation = "${_animationBase}delivary.json";
+  static const String restAnimation = "${_animationBase}making_food.json";
 }

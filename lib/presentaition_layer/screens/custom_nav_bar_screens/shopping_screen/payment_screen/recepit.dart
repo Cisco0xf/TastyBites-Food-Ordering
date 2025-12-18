@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
@@ -33,58 +34,61 @@ class RecepitWidget extends StatelessWidget {
             }
           },
           child: Scaffold(
-            body: clearCart.isOperating
-                ? Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        LoadingAnimationWidget.inkDrop(
-                          color: Colors.orange,
-                          size: 35.0,
-                        )
-                      ],
-                    ),
-                  )
-                : Column(
+            body: Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(
+                    top: context.screenHeight * .05,
+                  ),
+                  height: context.screenHeight * .13,
+                  decoration: BoxDecoration(
+                    color: SwitchColors.receiptAppBarColor,
+                    borderRadius: borderRaduis(10.0, side: Side.bottom),
+                  ),
+                  child: Row(
                     children: <Widget>[
-                      Container(
-                        padding: EdgeInsets.only(
-                          top: context.screenHeight * .05,
-                        ),
-                        height: context.screenHeight * .13,
-                        decoration: BoxDecoration(
-                          color: SwitchColors.receiptAppBarColor,
-                          borderRadius: borderRaduis(10.0, side: Side.bottom),
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: () async {
-                                if (!isSingleItem) {
-                                  await clearCart.clearFirestoreCart();
-                                }
+                      IconButton(
+                        onPressed: () async {
+                          if (!isSingleItem) {
+                            await clearCart.clearFirestoreCart();
+                          }
 
-                                pushTo(const MainScreen(), type: Push.replace);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios,
-                                size: 35,
-                              ),
-                            ),
-                            SizedBox(
-                              width: context.screenWidth * .12,
-                            ),
-                            const Text(
-                              "Order Recepit",
-                              style: TextStyle(
-                                fontSize: 23,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
+                          pushTo(const MainScreen(), type: Push.replace);
+                        },
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                          size: 35,
                         ),
                       ),
-                      Expanded(
+                      SizedBox(
+                        width: context.screenWidth * .12,
+                      ),
+                      const Text(
+                        "Order Recepit",
+                        style: TextStyle(
+                          fontSize: 23,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                clearCart.isOperating
+                    ? SizedBox(
+                        width: context.screenWidth,
+                        child: Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LoadingAnimationWidget.inkDrop(
+                                color: Colors.orange,
+                                size: 35.0,
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    : Expanded(
                         child: SingleChildScrollView(
                           child: Column(
                             children: <Widget>[
@@ -94,12 +98,8 @@ class RecepitWidget extends StatelessWidget {
                                     width: context.screenWidth * .8,
                                     height: context.screenHeight * .25,
                                     child: orderPlace.isTakeaway
-                                        ? Lottie.asset(
-                                            "asstes/animations/delivary.json",
-                                          )
-                                        : Lottie.asset(
-                                            "asstes/animations/making_food.json",
-                                          ),
+                                        ? Lottie.asset(Assets.delivAnimation)
+                                        : Lottie.asset(Assets.restAnimation),
                                   );
                                 },
                               ),
@@ -112,9 +112,7 @@ class RecepitWidget extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: borderRaduis(7),
                                     border: Border.all(
-                                      color: Colors.grey,
-                                      width: 1.5,
-                                    ),
+                                        color: Colors.grey, width: 1.5),
                                     color: SwitchColors.receiptColor,
                                   ),
                                   child: Consumer<ManageReceiptHistory>(
@@ -193,8 +191,8 @@ class RecepitWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ],
-                  ),
+              ],
+            ),
           ),
         );
       },

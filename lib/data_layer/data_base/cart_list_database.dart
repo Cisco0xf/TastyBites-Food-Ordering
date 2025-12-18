@@ -144,15 +144,15 @@ class ManageCartDB {
 
     final bool initCart = type == InitType.cart;
 
-    if (initCart) {
+    /* if (initCart) {
       Provider.of<CartManager>(navigationKey.currentContext!, listen: false)
           .initializeCartFromDatabase(db);
 
       return;
-    }
+    } */
 
-    Provider.of<WishListProvider>(navigationKey.currentContext!, listen: false)
-        .initializeWishListFromDatabase(db);
+    /* Provider.of<WishListProvider>(navigationKey.currentContext!, listen: false)
+        .initializeWishListFromDatabase(db); */
   }
 }
 

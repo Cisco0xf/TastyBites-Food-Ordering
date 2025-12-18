@@ -19,6 +19,7 @@ class ReceiptModelAdapter extends TypeAdapter<ReceiptModel> {
     return ReceiptModel(
       newReceipt: fields[1] as String,
       dateTime: fields[2] as String,
+      id: fields[0] as String,
     );
   }
 
