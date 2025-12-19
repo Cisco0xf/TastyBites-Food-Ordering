@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/my_logger.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/constants/app_colors.dart';
 
@@ -8,6 +10,7 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/fast_food/details.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_details_widget.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/salads_vegetarian_widgets/components/details_of_dishes.dart';
+import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -46,14 +49,15 @@ class CartItemsWidget extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: context.screenHeight * .1),
                 itemCount: cartInfo.state.length,
                 itemBuilder: (context, index) {
+                  final FoodModel item = cartInfo.state[index];
                   return GestureDetector(
                     onTap: () {
-                      final FoodModel item = cartInfo.state[index];
                       pushTo(_pushTarget(item)[item.foodType]!);
                     },
-                    child: CartItemWidget(
-                      index: index,
-                      foodList: cartInfo.state,
+                    child: CartItem(
+                      /*   index: index,
+                      foodList: cartInfo.state, */
+                      item: item,
                       increaseQuantity: () {
                         cartInfo.increaseQnt(cartInfo.state[index]);
                       },
@@ -72,29 +76,27 @@ class CartItemsWidget extends StatelessWidget {
   }
 }
 
-class CartItemWidget extends StatelessWidget {
-  const CartItemWidget({
+class CartItem extends StatelessWidget {
+  const CartItem({
     super.key,
-    required this.index,
-    required this.foodList,
+    required this.item,
     required this.increaseQuantity,
     required this.decreaseQuantity,
   });
 
-  final int index;
-  final List<FoodModel> foodList;
+  final FoodModel item;
   final void Function()? increaseQuantity;
   final void Function()? decreaseQuantity;
 
   String get _rate => double.parse(
-        foodList[index].foodRate.toString(),
+        item.foodRate.toString(),
       ).toStringAsFixed(1);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(10),
+      padding: padding(10),
+      margin: padding(10),
       decoration: BoxDecoration(
         borderRadius: borderRaduis(15),
         color: SwitchColors.cartItemColor,
@@ -103,15 +105,11 @@ class CartItemWidget extends StatelessWidget {
         children: [
           Row(
             children: <Widget>[
-              SizedBox(
-                width: context.screenWidth * .32,
-                height: context.screenHeight * .15,
+              SizedBox.square(
+                dimension: context.screenHeight * .15,
                 child: ClipRRect(
                   borderRadius: borderRaduis(5),
-                  child: Image.asset(
-                    foodList[index].imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.asset(item.imagePath, fit: BoxFit.cover),
                 ),
               ),
               Padding(
@@ -122,11 +120,9 @@ class CartItemWidget extends StatelessWidget {
                     SizedBox(
                       width: context.screenWidth * .5,
                       child: Text(
-                        foodList[index].foodName,
+                        item.foodName,
                         style: const TextStyle(
-                          fontFamily: FontFamily.mainFont,
-                          fontSize: 16,
-                        ),
+                            fontFamily: FontFamily.mainFont, fontSize: 16),
                       ),
                     ),
                     Row(
@@ -139,21 +135,17 @@ class CartItemWidget extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           "${double.parse(
-                            foodList[index].foodPrice.toString(),
+                            item.foodPrice.toString(),
                           ).toStringAsFixed(2)} \$",
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(
-                          width: context.screenWidth * .05,
-                        ),
+                        const Gap(wRatio: 0.05),
                         Container(
-                          padding: const EdgeInsets.only(
-                            top: 5,
-                            bottom: 5,
-                            left: 7,
-                            right: 7,
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 5.0,
+                            horizontal: 7.0,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: borderRaduis(7),
@@ -162,7 +154,6 @@ class CartItemWidget extends StatelessWidget {
                               width: 1,
                             ),
                           ),
-                          // Deterimain the quantity
                           child: Row(
                             children: <Widget>[
                               GestureDetector(
@@ -171,10 +162,8 @@ class CartItemWidget extends StatelessWidget {
                               ),
                               Container(
                                 width: context.screenWidth * .09,
-                                padding: const EdgeInsets.all(5),
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: 9,
-                                ),
+                                padding: padding(5),
+                                margin: padding(10.0, from: From.horizontal),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: const Color(0xFFe0e0e0),
@@ -183,7 +172,7 @@ class CartItemWidget extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    foodList[index].stock.toString(),
+                                    item.stock.toString(),
                                     style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -205,8 +194,16 @@ class CartItemWidget extends StatelessWidget {
               ),
             ],
           ),
-          RemoveItemFromCartWidget(
-            item: foodList[index],
+          Positioned(
+            top: 0.0,
+            left: context.isEnglish ? null : 0.0,
+            right: context.isEnglish ? 0.0 : null,
+            child: Clicker(
+              onClick: () async {
+                await showRemoveCartItemDialog(context, item: item);
+              },
+              child: const Icon(Icons.close, size: 20),
+            ),
           ),
         ],
       ),

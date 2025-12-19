@@ -135,7 +135,7 @@ class UserProfileWidget extends StatelessWidget {
               ),
               child: Column(
                 children: <Widget>[
-                  ProfileReusableWidget(
+                  ProfileAvatar(
                     title: "personal_info".localeValue(context: context),
                     trailing: const Icon(
                       Icons.person_2_outlined,
@@ -143,7 +143,7 @@ class UserProfileWidget extends StatelessWidget {
                     ),
                     targetWidget: const PersonalInfoScreen(),
                   ),
-                  ProfileReusableWidget(
+                  ProfileAvatar(
                     title: "settings".localeValue(context: context),
                     trailing: const Icon(
                       Icons.settings,
@@ -165,7 +165,7 @@ class UserProfileWidget extends StatelessWidget {
               ),
               child: Column(
                 children: <Widget>[
-                  ProfileReusableWidget(
+                  ProfileAvatar(
                     title: "receipt_history".localeValue(context: context),
                     trailing: const Icon(
                       Icons.newspaper_rounded,
@@ -173,7 +173,7 @@ class UserProfileWidget extends StatelessWidget {
                     ),
                     targetWidget: const ReceiptHistoryWidget(),
                   ),
-                  ProfileReusableWidget(
+                  ProfileAvatar(
                     title: "number_of_orders".localeValue(context: context),
                     trailing: const Icon(
                       Icons.inventory_2_outlined,

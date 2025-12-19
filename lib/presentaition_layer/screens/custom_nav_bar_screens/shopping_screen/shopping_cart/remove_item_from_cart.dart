@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/constants/fonts.dart';
+import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -9,113 +12,110 @@ import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:provider/provider.dart';
 
-class RemoveItemFromCartWidget extends StatelessWidget {
-  const RemoveItemFromCartWidget({
-    super.key,
-    required this.item,
-  });
-  final dynamic item;
+Future<void> showRemoveCartItemDialog(
+  BuildContext context, {
+  required FoodModel item,
+}) async {
+  await showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (context) {
+      return RemoveItemFromCart(item: item);
+    },
+  );
+}
+
+class RemoveItemFromCart extends StatelessWidget {
+  const RemoveItemFromCart({super.key, required this.item});
+
+  final FoodModel item;
+
+  String removeLabel(BuildContext context) {
+    final String clear = "remove_item".localeValue(context: context);
+    final String cart = "from_cart".localeValue(context: context);
+    final String itemname = item.foodName;
+
+    final String fullLabel = "$clear $itemname $cart";
+
+    return fullLabel;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: -15,
-      left: context.isEnglish ? null : -10,
-      right: context.isEnglish ? -10 : null,
-      child: SizedBox(
-        width: context.screenWidth * .1,
-        height: context.screenHeight * .07,
-        child: GestureDetector(
-          onTap: () {
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) {
-                return AlertDialog(
-                  insetPadding: const EdgeInsets.all(10),
-                  contentPadding: const EdgeInsets.all(0),
-                  title: Text(
-                    "${"remove_item".localeValue(context: context)} \"${item.foodName}\" ${"from_cart".localeValue(context: context)} ",
-                    style: TextStyle(
-                      fontFamily: context.isEnglish
-                          ? FontFamily.mainFont
-                          : FontFamily.mainArabic,
-                      fontSize: 18,
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: borderRaduis(15.0)),
+      child: Padding(
+        padding: padding(10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            SizedBox.square(
+              dimension: context.screenHeight * .13,
+              child: SvgPicture.asset(Assets.removeFromCart),
+            ),
+            const Gap(height: 15.0),
+            Text(
+              removeLabel(context),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Gap(height: 15.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                OutlinedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: OutlinedButton.styleFrom(
+                    shape: ContinuousRectangleBorder(
+                      borderRadius: borderRaduis(17),
+                    ),
+                    side: const BorderSide(
+                      color: Colors.orange,
                     ),
                   ),
-                  actions: <Widget>[
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
+                  child: Text(
+                    "no".localeValue(context: context),
+                    style: TextStyle(
+                      color: Colors.orange,
+                      fontFamily:
+                          context.isEnglish ? null : FontFamily.mainArabic,
+                      fontSize: context.isEnglish ? null : 16,
+                    ),
+                  ),
+                ),
+                Consumer<CartManager>(
+                  builder: (context, cartRemove, child) {
+                    return MaterialButton(
+                      onPressed: () async {
+                        await cartRemove.addFoodItemToFirestoreCart(item);
+
+                        popScreen();
                       },
-                      style: OutlinedButton.styleFrom(
-                        shape: ContinuousRectangleBorder(
-                          borderRadius: borderRaduis(17),
-                        ),
-                        side: const BorderSide(
-                          color: Colors.orange,
-                        ),
+                      shape: ContinuousRectangleBorder(
+                        borderRadius: borderRaduis(17),
                       ),
+                      color: const Color(0xFFF3B664),
                       child: Text(
-                        "no".localeValue(context: context),
+                        "remove".localeValue(context: context),
                         style: TextStyle(
-                          color: Colors.orange,
+                          color: Colors.white,
                           fontFamily:
                               context.isEnglish ? null : FontFamily.mainArabic,
                           fontSize: context.isEnglish ? null : 16,
                         ),
                       ),
-                    ),
-                    Consumer<CartManager>(
-                      builder: (context, removeFromCart, child) {
-                        return MaterialButton(
-                          onPressed: () async {
-                            await removeFromCart
-                                .removeItemFromCart(item)
-                                .whenComplete(
-                              () {
-                                Navigator.pop(context);
-                                showToastification(
-                                  message: "Item removed from cart",
-                                );
-                              },
-                            );
-                          },
-                          shape: ContinuousRectangleBorder(
-                            borderRadius: borderRaduis(17),
-                          ),
-                          color: const Color(0xFFF3B664),
-                          child: Text(
-                            "remove".localeValue(context: context),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: context.isEnglish
-                                  ? null
-                                  : FontFamily.mainArabic,
-                              fontSize: context.isEnglish ? null : 16,
-                            ),
-                          ),
-                        );
-                      },
-                    )
-                  ],
-                  content: SizedBox(
-                    height: context.screenHeight * .13,
-                    child: ClipRRect(
-                      borderRadius: borderRaduis(15),
-                      child: SvgPicture.asset(
-                        "asstes/images/app_images/screens_images/remove_from_cart.svg",
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          },
-          child: const Icon(
-            Icons.close,
-            size: 20,
-          ),
+                    );
+                  },
+                )
+              ],
+            )
+          ],
         ),
       ),
     );

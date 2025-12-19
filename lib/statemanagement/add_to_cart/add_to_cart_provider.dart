@@ -11,6 +11,7 @@ import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.dart';
 import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
 import 'package:foodapp/statemanagement/user_table/get_user_table.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
@@ -298,21 +299,24 @@ class CartManager extends ChangeNotifier {
 
       final List<QueryDocumentSnapshot> cartDocs = cartQuery.docs;
 
-      final List<FoodModel> cartData = List<FoodModel>.generate(
-        cartDocs.length,
-        (index) {
-          final Map<String, dynamic> data =
-              cartDocs[index].data() as Map<String, dynamic>;
+      List<FoodModel> cartData = [];
 
-          final FoodModel foodItem = FoodModel.fromSnapshots(
-            snapshot: data,
-          );
+      for (int i = 0; i < cartDocs.length; i++) {
+        final Map<String, dynamic> foodItem =
+            cartDocs[i].data() as Map<String, dynamic>;
 
-          return foodItem;
-        },
-      );
+        final FoodModel target = FoodModel.fromSnapshots(snapshot: foodItem);
+
+        cartData.add(target);
+      }
 
       state = cartData;
+
+      await SyncLocaleWithCloud.syncFoodLocaleDBWithFirestore(
+        cartData,
+        dbKey: HiveKeys.CART_KEY,
+        prefKey: PrefsKeys.CART_PREFS_KEY,
+      );
 
       Log.log("Data has been retrived from the Firestore DB");
     } on SocketException {

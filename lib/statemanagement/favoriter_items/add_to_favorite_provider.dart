@@ -10,6 +10,7 @@ import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.dart';
 import 'package:toastification/toastification.dart';
 
 class WishListProvider with ChangeNotifier {
@@ -158,6 +159,12 @@ class WishListProvider with ChangeNotifier {
       }
 
       favoriteItems = wishListItems;
+
+      await SyncLocaleWithCloud.syncFoodLocaleDBWithFirestore(
+        wishListItems,
+        dbKey: HiveKeys.WISH_LIST_KEY,
+        prefKey: PrefsKeys.WISHLIST_PREFS_KEY,
+      );
 
       Log.log("WishList has been retrived from Firestore successfully");
     } on SocketException {

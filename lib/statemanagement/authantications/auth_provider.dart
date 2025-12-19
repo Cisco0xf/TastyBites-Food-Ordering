@@ -16,6 +16,7 @@ import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.d
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -271,8 +272,29 @@ class FireAuthProvider extends ChangeNotifier {
     Log.log("Receipt Locale DB Cleared...");
   }
 
+  Future<void> _resetSyncLocaleWithCloud() async {
+    const SaveSyncPref cartPrefs = SaveSyncPref(
+      key: PrefsKeys.CART_PREFS_KEY,
+    );
+
+    await cartPrefs.saveValueToPref(isInit: false);
+
+    const SaveSyncPref wishLitPrefs = SaveSyncPref(
+      key: PrefsKeys.WISHLIST_PREFS_KEY,
+    );
+
+    await wishLitPrefs.saveValueToPref(isInit: false);
+
+    const SaveSyncPref receiptsPrefs = SaveSyncPref(
+      key: PrefsKeys.RECEIPT_PREFS_KEY,
+    );
+
+    await receiptsPrefs.saveValueToPref(isInit: false);
+  }
+
   Future<void> _resetAppForSignOut() async {
     await _resetLocaleDatabaseForNewUser();
+    await _resetSyncLocaleWithCloud();
 
     navigationKey.currentContext!.read<CurrentIndexProvider>().switchContent(0);
     pushTo(const PushAuthScreen(), type: Push.clear);

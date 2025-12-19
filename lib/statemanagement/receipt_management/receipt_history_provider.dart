@@ -16,6 +16,7 @@ import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -294,8 +295,9 @@ class ManageReceiptHistory extends ChangeNotifier {
 
       state = cloudReceipts;
 
-      Log.log(
-          "Receipt has Database has been init From the Firestore Successfully");
+      await SyncLocaleWithCloud.syncReceiptLocaleDBWithFirestore(cloudReceipts);
+
+      Log.log("Receipt Database has been init From the Firestore Successfully");
     } on SocketException {
       await _localeDbReceipts();
     } on FirebaseException catch (error) {

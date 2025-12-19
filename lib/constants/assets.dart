@@ -60,8 +60,11 @@ class Assets {
 
   static const String googleSignIn = "${_imagesAppBase}auth/google.png";
 
-  static const String _animationBase ="asstes/animations/"; 
+  static const String _animationBase = "asstes/animations/";
 
   static const String delivAnimation = "${_animationBase}delivary.json";
   static const String restAnimation = "${_animationBase}making_food.json";
+
+  static const removeFromCart =
+      "${_imagesAppBase}screens_images/remove_from_cart.svg";
 }
