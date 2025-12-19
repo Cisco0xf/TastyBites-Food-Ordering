@@ -10,7 +10,7 @@ import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
-import 'package:foodapp/statemanagement/cloud_firestore/manage_firestore.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_metadata.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.dart';
 import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
 import 'package:foodapp/statemanagement/user_table/get_user_table.dart';
@@ -173,7 +173,7 @@ class CartManager extends ChangeNotifier {
 
     // Firestore cart
 
-    // await ManageFirestore().clearFirestoreCart();
+    // await ManageUserMetadata().clearFirestoreCart();
   }
 
   void increaseQnt(FoodModel food) {

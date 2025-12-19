@@ -121,7 +121,7 @@ class WishListProvider with ChangeNotifier {
 
     await _wishList.removeDBItem(item);
 
-    // await ManageFirestore().removeItemFromWhishList(item);
+    // await ManageUserMetadata().removeItemFromWhishList(item);
   }
 
 /* 

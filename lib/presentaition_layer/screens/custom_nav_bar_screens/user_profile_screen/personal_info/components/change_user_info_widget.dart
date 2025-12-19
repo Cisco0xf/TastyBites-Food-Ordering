@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/fonts.dart';
-
+/* 
 typedef UpdateUserInfo = void Function(String?)?;
 typedef FocuseUnFocuseFeild = void Function()?;
-typedef UpdateUserInfoValidator = String? Function(String?)?;
+typedef UpdateUserInfoValidator = String? Function(String?)?; */
 
-class ChangeUserInfoWidget extends StatelessWidget {
-  const ChangeUserInfoWidget({
+class ChangeUserMeta extends StatefulWidget {
+  const ChangeUserMeta({
     super.key,
     required this.feildTilte,
-    required this.unFocuseFeild,
+    /*  required this.unFocuseFeild,
     required this.onChange,
+    required this.unFocuse, */
     required this.controller,
-    required this.unFocuse,
     /* required this.validator, */
     this.maxLines = 1,
     this.maxLength,
@@ -22,12 +22,23 @@ class ChangeUserInfoWidget extends StatelessWidget {
 
   /* final UpdateUserInfoValidator validator; */
   final TextEditingController controller;
-  final FocuseUnFocuseFeild unFocuse;
-  final UpdateUserInfo onChange;
-  final bool unFocuseFeild;
+  /* final FocuseUnFocuseFeild unFocuse;
+  final UpdateUserInfo onChange; */
+/*   final bool unFocuseFeild; */
   final String feildTilte;
   final int? maxLength;
   final int maxLines;
+
+  @override
+  State<ChangeUserMeta> createState() => _ChangeUserMetaState();
+}
+
+class _ChangeUserMetaState extends State<ChangeUserMeta> {
+  bool isEnabled = false;
+
+  void _switchEnable() {
+    setState(() => isEnabled = !isEnabled);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +53,7 @@ class ChangeUserInfoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                feildTilte,
+                widget.feildTilte,
                 style: const TextStyle(
                   fontSize: 17,
                   fontFamily: FontFamily.mainFont,
@@ -59,7 +70,7 @@ class ChangeUserInfoWidget extends StatelessWidget {
               ),
               width: context.screenWidth * .8,
               child: TextFormField(
-                controller: controller,
+                controller: widget.controller,
                 keyboardType: TextInputType.text,
                 style: const TextStyle(
                   fontFamily: FontFamily.mainFont,
@@ -69,12 +80,12 @@ class ChangeUserInfoWidget extends StatelessWidget {
                     FocusNode(),
                   );
                 },
-                maxLines: maxLines,
-                maxLength: maxLength,
+                maxLines: widget.maxLines,
+                maxLength: widget.maxLength,
                 /* validator: validator, */
                 decoration: InputDecoration(
                   filled: true,
-                  enabled: unFocuseFeild,
+                  enabled: isEnabled,
                   fillColor: const Color(0xFFeceff1),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: borderRaduis(15),
@@ -114,7 +125,7 @@ class ChangeUserInfoWidget extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: unFocuse,
+              onPressed: () => _switchEnable(),
               icon: const Icon(
                 Icons.edit,
                 size: 25,

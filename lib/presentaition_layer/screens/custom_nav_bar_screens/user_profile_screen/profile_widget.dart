@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/fonts.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_metadata.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
 import 'package:foodapp/statemanagement/theming/is_light.dart';
@@ -34,29 +35,14 @@ class UserProfileWidget extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: const EdgeInsets.all(10),
-              child: Consumer<PersonalInfoProvider>(
+              child: Consumer<ManageUserMetadata>(
                 builder: (context, personalInfo, child) {
                   return Column(
                     children: <Widget>[
                       Row(
                         textDirection: TextDirection.ltr,
                         children: <Widget>[
-                          const SizedBox(
-                            child: ShowProfileImageWidget(
-                              imagePath:
-                                  "asstes/images/app_images/profile/profile.jpg",
-                              child: Hero(
-                                tag: "profile_image",
-                                child: CircleAvatar(
-                                  radius: 35,
-                                  backgroundColor: Colors.transparent,
-                                  backgroundImage: AssetImage(
-                                    "asstes/images/app_images/profile/profile.jpg",
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          const Profile(raduis: 35.0),
                           Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: Column(
@@ -66,7 +52,7 @@ class UserProfileWidget extends StatelessWidget {
                                 SizedBox(
                                   width: context.screenWidth * .6,
                                   child: Text(
-                                    personalInfo.getCurrentUserName,
+                                    personalInfo.userName,
                                     textAlign: TextAlign.start,
                                     textDirection: TextDirection.ltr,
                                     style: const TextStyle(
@@ -100,7 +86,7 @@ class UserProfileWidget extends StatelessWidget {
                                 SizedBox(
                                   width: context.screenWidth * .6,
                                   child: Text(
-                                    personalInfo.currentBIO,
+                                    ManageUserMetadata.sessionBIO,
                                     textAlign: TextAlign.start,
                                     textDirection: TextDirection.ltr,
                                     style: const TextStyle(

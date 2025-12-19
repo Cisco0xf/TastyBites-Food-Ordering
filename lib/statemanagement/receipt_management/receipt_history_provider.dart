@@ -151,7 +151,7 @@ class ManageReceiptHistory extends ChangeNotifier {
 
     await ManageReceiptDB.addNewReceipt(receipt: receipt);
 
-    // await ManageFirestore().addNewReceuptToFirestore(receipt: receipt);
+    // await ManageUserMetadata().addNewReceuptToFirestore(receipt: receipt);
   }
 
   Future<void> _removeReceipt(ReceiptModel receipt) async {
@@ -163,7 +163,7 @@ class ManageReceiptHistory extends ChangeNotifier {
 
     await ManageReceiptDB.removeReceipt(receipt: receipt);
 
-    // await ManageFirestore().removeReceiptFromFirestore(receipt);
+    // await ManageUserMetadata().removeReceiptFromFirestore(receipt);
   }
 
   Future<void> clearHistory() async {
@@ -173,7 +173,7 @@ class ManageReceiptHistory extends ChangeNotifier {
 
     await ManageReceiptDB.clearDB();
 
-    //await ManageFirestore().clearReceiptFirestore();
+    //await ManageUserMetadata().clearReceiptFirestore();
   }
 /* 
   void initializeReceiptHistoryFromDatabase(List<ReceiptModel> db) {

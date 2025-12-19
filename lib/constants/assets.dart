@@ -67,4 +67,7 @@ class Assets {
 
   static const removeFromCart =
       "${_imagesAppBase}screens_images/remove_from_cart.svg";
+
+
+      static const String profileImage = "${_imagesAppBase}profile/profile.jpg";
 }

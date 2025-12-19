@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/personal_info/personal_info_screen.dart';
-
+/* 
 class PersonalInfoProvider with ChangeNotifier {
   String get getCurrentUserName {
     String currentUserName =
@@ -351,3 +351,4 @@ class PersonalInfoProvider with ChangeNotifier {
     intializeBio();
   }
 }
+ */

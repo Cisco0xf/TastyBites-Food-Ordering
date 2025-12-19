@@ -2,6 +2,7 @@ import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/authantications/auth_operations.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
 import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_metadata.dart';
 import 'package:foodapp/statemanagement/cloud_messaging/notification_messaging.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:foodapp/statemanagement/favoriter_items/add_to_favorite_provider.dart';
@@ -34,7 +35,6 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => ThemeProvider()),
     ChangeNotifierProvider(create: (context) => LocalizationProvider()),
     //ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
-    ChangeNotifierProvider(create: (context) => PersonalInfoProvider()),
     ChangeNotifierProvider(create: (context) => NotificationProvider()),
     ChangeNotifierProvider(create: (context) => SaveNotificationsProvider()),
 
@@ -49,6 +49,7 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => ManageReceiptHistory()),
     ChangeNotifierProvider(create: (context) => FireAuthProvider()), 
     ChangeNotifierProvider(create: (context) => AuthOperations()),
+    ChangeNotifierProvider(create: (context) => ManageUserMetadata()),
   ];
 
   return providers;

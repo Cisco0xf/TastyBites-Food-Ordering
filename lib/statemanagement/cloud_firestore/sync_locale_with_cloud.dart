@@ -35,9 +35,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 */
 
 class PrefsKeys {
+  // Locale to cloud Prefs keys
   static const String CART_PREFS_KEY = "aksfJJONon_mjkf9";
   static const String WISHLIST_PREFS_KEY = "DJNIDifn-_of";
   static const String RECEIPT_PREFS_KEY = "MOddignei09_m";
+
+  // User metadata prefs keys
+
+  static const String USERNAME_KEYS = "MIDNonf-dom_c093";
+  static const String USER_BIO_KEY = "NBiegON03_-cmnfnm";
 }
 
 class SaveSyncPref {
@@ -99,5 +105,25 @@ class SyncLocaleWithCloud {
 
       Log.log("Receipts Locale Database has been init from Firestore...");
     }
+  }
+}
+
+class SaveMetadata {
+  final String prefKey;
+
+  const SaveMetadata({required this.prefKey});
+
+  Future<void> saveMetadata({required String data}) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString(prefKey, data);
+  }
+
+  Future<String> metadataValue() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final String data = prefs.getString(prefKey) ?? "BIO";
+
+    return data;
   }
 }

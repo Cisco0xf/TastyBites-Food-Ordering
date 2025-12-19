@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_metadata.dart';
 
 class AuthControllers {
   // Create New Account Controllers
@@ -81,14 +82,21 @@ class AuthControllers {
 
   // Update username controller
   static TextEditingController? updateUsername;
+  static TextEditingController? bioController;
 
-  static void initUpdateUsernamContorller() {
+  static void initMetaContorllers() {
     final String currentUser =
-        FirebaseAuth.instance.currentUser!.displayName ?? "";
+        FirebaseAuth.instance.currentUser!.displayName ?? "USERNAME";
     updateUsername = TextEditingController(text: currentUser);
+
+    final String bio = ManageUserMetadata.sessionBIO;
+    bioController = TextEditingController(text: bio);
   }
 
-  static void disposeUsername() {
+  static void disposeMetaControllers() {
     updateUsername!.dispose();
+    bioController!.dispose();
   }
+
+  // Update User BIO text
 }

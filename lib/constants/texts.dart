@@ -6,3 +6,5 @@ const String addedCart = "Item has been added to cart";
 
 const String addedFavorite = "Item has been added to Favorite";
 const String removedFavorite = "Item has been removed from Favorite";
+
+const String emptyBio = "User Bio can not be empty";

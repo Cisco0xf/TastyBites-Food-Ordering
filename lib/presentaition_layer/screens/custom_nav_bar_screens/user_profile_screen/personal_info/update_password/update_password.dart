@@ -36,119 +36,115 @@ class _UpdateUserPasswordScreenState extends State<UpdateUserPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<PersonalInfoProvider>(
-        builder: (context, updatePassword, child) {
-          return Column(
+      body: Column(
+        children: <Widget>[
+          SizedBox(
+            height: context.screenHeight * .05,
+          ),
+          Row(
             children: <Widget>[
-              SizedBox(
-                height: context.screenHeight * .05,
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_new,
+                  color: Colors.orange,
+                  size: 35,
+                ),
               ),
-              Row(
-                children: <Widget>[
-                  IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.orange,
-                      size: 35,
+              SizedBox(
+                width: context.screenWidth * .15,
+              ),
+              const Text(
+                "Confirm account",
+                style: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const Divider(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: context.screenHeight * .03,
+                  ),
+                  SizedBox(
+                    width: context.screenWidth * .7,
+                    height: context.screenHeight * .3,
+                    child: SvgPicture.asset(
+                      "asstes/images/app_images/auth/confirm_user.svg",
                     ),
                   ),
                   SizedBox(
-                    width: context.screenWidth * .15,
+                    height: context.screenHeight * .02,
                   ),
-                  const Text(
-                    "Confirm account",
-                    style: TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
+                  Column(
+                    children: <Widget>[
+                      AuthField(
+                        controller: AuthControllers.reauthEmail!,
+                        textFeildTitle: "Email",
+                        textInputType: TextInputType.emailAddress,
+                        hintText: "Enter your email",
+                        /*   validator: (val) {
+                              if (val!.isEmpty) {
+                                return "This feild can not be empty";
+                              }
+                              return null;
+                            }, */
+                      ),
+                      SizedBox(
+                        height: context.screenHeight * .04,
+                      ),
+                      AuthField(
+                        controller: AuthControllers.reauthPws!,
+                        textFeildTitle: "Password",
+                        hasObscure: true,
+                        textInputType: TextInputType.emailAddress,
+                        hintText: "Enter password",
+                        /*  validator: (val) {
+                              if (val!.isEmpty) {
+                                return "This feild can not be empty";
+                              }
+                              return null;
+                            }, */
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: context.screenHeight * .05,
+                  ),
+                  SizedBox(
+                    width: context.screenWidth * .7,
+                    height: context.screenHeight * .07,
+                    child: MaterialButton(
+                      onPressed: () async {
+                        await context
+                            .read<AuthOperations>()
+                            .reauthenticateCurrentUserForCriticalAction(
+                          actionAfterReauthenticate: () {
+                            pushTo(const NewPasswordScreen());
+                          },
+                        );
+                      },
+                      color: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: borderRaduis(20),
+                      ),
+                      child: context.watch<AuthOperations>().isOperating
+                          ? const Center(child: CircularProgressIndicator())
+                          : const Text("Confirm"),
                     ),
                   ),
                 ],
               ),
-              const Divider(),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: context.screenHeight * .03,
-                      ),
-                      SizedBox(
-                        width: context.screenWidth * .7,
-                        height: context.screenHeight * .3,
-                        child: SvgPicture.asset(
-                          "asstes/images/app_images/auth/confirm_user.svg",
-                        ),
-                      ),
-                      SizedBox(
-                        height: context.screenHeight * .02,
-                      ),
-                      Column(
-                        children: <Widget>[
-                          AuthField(
-                            controller: AuthControllers.reauthEmail!,
-                            textFeildTitle: "Email",
-                            textInputType: TextInputType.emailAddress,
-                            hintText: "Enter your email",
-                            /*   validator: (val) {
-                              if (val!.isEmpty) {
-                                return "This feild can not be empty";
-                              }
-                              return null;
-                            }, */
-                          ),
-                          SizedBox(
-                            height: context.screenHeight * .04,
-                          ),
-                          AuthField(
-                            controller: AuthControllers.reauthPws!,
-                            textFeildTitle: "Password",
-                            hasObscure: true,
-                            textInputType: TextInputType.emailAddress,
-                            hintText: "Enter password",
-                            /*  validator: (val) {
-                              if (val!.isEmpty) {
-                                return "This feild can not be empty";
-                              }
-                              return null;
-                            }, */
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: context.screenHeight * .05,
-                      ),
-                      SizedBox(
-                        width: context.screenWidth * .7,
-                        height: context.screenHeight * .07,
-                        child: MaterialButton(
-                          onPressed: () async {
-                            await context
-                                .read<AuthOperations>()
-                                .reauthenticateCurrentUserForCriticalAction(
-                              actionAfterReauthenticate: () {
-                                pushTo(const NewPasswordScreen());
-                              },
-                            );
-                          },
-                          color: Colors.orange,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: borderRaduis(20),
-                          ),
-                          child: context.watch<AuthOperations>().isOperating
-                              ? const Center(child: CircularProgressIndicator())
-                              : const Text("Confirm"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_metadata.dart';
 import 'package:foodapp/statemanagement/favoriter_items/add_to_favorite_provider.dart';
 import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:foodapp/statemanagement/theming/is_light.dart';
@@ -35,6 +36,8 @@ class _MainScreenShimmerState extends State<MainScreenShimmer> {
         if (mounted) {
           await context.read<ManageReceiptHistory>().initializeReceipts();
         }
+        
+        await ManageUserMetadata().setBio();
 
         pushTo(const MainScreen(), type: Push.replace);
       },

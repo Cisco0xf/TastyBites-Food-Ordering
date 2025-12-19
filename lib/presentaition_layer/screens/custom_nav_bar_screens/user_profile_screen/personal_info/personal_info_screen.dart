@@ -1,7 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
+import 'package:foodapp/statemanagement/cloud_firestore/manage_metadata.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
@@ -29,13 +31,13 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
   @override
   void initState() {
     /* accountActions = Provider.of<PersonalInfoProvider>(context, listen: false); */
-    AuthControllers.initUpdateUsernamContorller();
+    AuthControllers.initMetaContorllers();
     super.initState();
   }
 
   @override
   void dispose() {
-    AuthControllers.disposeUsername();
+    AuthControllers.disposeMetaControllers();
     super.dispose();
   }
 
@@ -44,7 +46,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.ltr,
-        child: Consumer<PersonalInfoProvider>(
+        child: Consumer<ManageUserMetadata>(
           builder: (context, userInfo, child) {
             return Column(
               children: <Widget>[
@@ -177,7 +179,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   child: const Stack(
                     alignment: Alignment.center,
                     children: <Widget>[
-                      ShowProfileImageWidget(
+                      /*  ShowProfileImageWidget(
                         imagePath:
                             "asstes/images/app_images/profile/profile.jpg",
                         child: Hero(
@@ -190,7 +192,8 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                             ),
                           ),
                         ),
-                      ),
+                      ), */
+                      Profile(raduis: 60),
                       Positioned(
                         bottom: 12,
                         right: 40,
@@ -209,7 +212,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      userInfo.getCurrentUserName,
+                      userInfo.userName,
                       style: const TextStyle(
                         fontSize: 20,
                         fontFamily: FontFamily.mainFont,
@@ -219,7 +222,7 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                   ],
                 ),
                 Text(
-                  userInfo.getCurrerentUserEmail,
+                  userInfo.userEmail,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 16,
@@ -230,65 +233,45 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                 SizedBox(
                   height: context.screenHeight * .04,
                 ),
-                Consumer<PersonalInfoProvider>(
-                  builder: (context, updateInfo, child) {
-                    return Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            ChangeUserInfoWidget(
-                              controller: AuthControllers.updateUsername!,
-                              feildTilte: "Re-name",
-                              unFocuseFeild: updateInfo.isUpdateUserNameFocused,
-                              onChange: (value) {
-                                log("Feild Value : $value");
-                              },
-                              unFocuse: () {
-                                updateInfo.focuseUnfocuse(
-                                  context: context,
-                                );
-                              },
-                              /*  validator: (vlaue) {
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        ChangeUserMeta(
+                          controller: AuthControllers.updateUsername!,
+                          feildTilte: "Re-name",
+
+                          /*  validator: (vlaue) {
                                 if (updateInfo.updateDisplayNameController
                                     .text.isEmpty) {
                                   return "This feild can not be empty";
                                 }
                                 return null;
                               }, */
-                            ),
-                            SizedBox(
-                              height: context.screenHeight * .03,
-                            ),
-                            ChangeUserInfoWidget(
-                              controller: updateInfo.bioController,
-                              feildTilte: "BIO",
-                              unFocuseFeild: updateInfo.isbioFocused,
-                              onChange: (value) {
-                                log("Feild Value : $value");
-                              },
-                              unFocuse: () {
-                                updateInfo.isbioFocuse(context: context);
-                              },
-                              /*  validator: (vlaue) {
+                        ),
+                        SizedBox(height: context.screenHeight * .03),
+                        ChangeUserMeta(
+                          controller: AuthControllers.bioController!,
+                          feildTilte: "BIO",
+
+                          /*  validator: (vlaue) {
                                 if (updateInfo.bioController.text.isEmpty) {
                                   return "This feild can not be empty";
                                 }
                                 return null;
                               }, */
-                              maxLines: 4,
-                              maxLength: 120,
-                            ),
-                            SizedBox(
-                              height: context.screenHeight * .03,
-                            ),
-                            AuthButton(
-                              buttonTitle:
-                                  "save_changes".localeValue(context: context),
-                              authantication: () async {
-                                await showConfirmUpdateDialog(
-                                  gcontext: context,
-                                );
-                                /*  if (updateInfoKey.currentState!.validate() &&
+                          maxLines: 4,
+                          maxLength: 120,
+                        ),
+                        SizedBox(
+                          height: context.screenHeight * .03,
+                        ),
+                        AuthButton(
+                          buttonTitle:
+                              "save_changes".localeValue(context: context),
+                          authantication: () async {
+                            await showConfirmUpdateDialog();
+                            /*  if (updateInfoKey.currentState!.validate() &&
                                     !updateInfo.chickUserUpdate) {
                                   showwConfirmUpdateDialog(
                                       gcontext: this.context);
@@ -298,13 +281,11 @@ class _PersonalInfoScreenState extends State<PersonalInfoScreen> {
                                         .localeValue(context: context),
                                   );
                                 } */
-                              },
-                            ),
-                          ],
+                          },
                         ),
-                      ),
-                    );
-                  },
+                      ],
+                    ),
+                  ),
                 ),
               ],
             );

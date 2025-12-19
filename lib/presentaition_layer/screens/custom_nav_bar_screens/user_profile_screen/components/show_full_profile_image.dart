@@ -1,12 +1,15 @@
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:provider/provider.dart';
-
+/* 
 class ShowProfileImageWidget extends StatelessWidget {
   const ShowProfileImageWidget({
     super.key,
@@ -270,6 +273,89 @@ class _ShowFullImageWidgetState extends State<ShowFullImageWidget>
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+ */
+
+class Profile extends StatelessWidget {
+  const Profile({super.key, required this.raduis});
+
+  final double raduis;
+
+  @override
+  Widget build(BuildContext context) {
+    return Clicker(
+      onClick: () async {
+        await showUserAvatarImage();
+      },
+      isCircular: true,
+      innerPadding: 0.0,
+      child: CircleAvatar(
+          radius: raduis,
+          backgroundColor: Colors.transparent,
+          // asstes/images/app_images/profile/profile.jpg
+          backgroundImage: const AssetImage(Assets.profileImage)),
+    );
+  }
+}
+
+Future<void> showUserAvatarImage() async {
+  final BuildContext context = navigationKey.currentContext as BuildContext;
+
+  await showDialog(
+    context: context,
+    builder: (context) {
+      return const UserFullImage();
+    },
+  );
+}
+
+class UserFullImage extends StatelessWidget {
+  const UserFullImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog.fullscreen(
+      backgroundColor: Colors.transparent,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: padding(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                ClipRect(
+                  child: ClipRRect(
+                    borderRadius: borderRaduis(7.0),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: borderRaduis(7.0),
+                          border: Border.all(color: Colors.white12),
+                        ),
+                        child: Clicker(
+                          onClick: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Icon(Icons.close, color: Colors.red),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: InteractiveViewer(
+              child: Image.asset(Assets.profileImage),
+            ),
+          )
         ],
       ),
     );
