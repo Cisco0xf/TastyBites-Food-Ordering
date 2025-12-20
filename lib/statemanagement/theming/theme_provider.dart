@@ -72,6 +72,7 @@ class ThemeNotifier extends ChangeNotifier {
       SwitchColor.itemGradeint = DarkColors.itemGradeint;
       SwitchColor.cartItem = DarkColors.cartItem;
       SwitchColor.base = DarkColors.base;
+      SwitchColor.checkout = DarkColors.checkout;
     } else {
       SwitchColor.bgColor = LightColors.bgColor;
       SwitchColor.primaryO = LightColors.primaryO;
@@ -86,6 +87,7 @@ class ThemeNotifier extends ChangeNotifier {
       SwitchColor.itemGradeint = LightColors.itemGradeint;
       SwitchColor.cartItem = LightColors.cartItem;
       SwitchColor.base = LightColors.base;
+      SwitchColor.checkout = LightColors.checkout;
     }
 
     notifyListeners();

@@ -218,8 +218,7 @@ class DessertsDetails extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              const PopButtonWidget(
-                                buttonColor: Colors.white,
+                              const PopBtn(
                               ),
                               Text(
                                 item.foodName,

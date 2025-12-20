@@ -14,10 +14,11 @@ class LightColors {
   static const Color receiptColor = Color(0xFFFFF9C9);
   static const Color cartItem = Color(0xFFfaf6f0);
   static const Color base = Colors.white70;
+  static const Color checkout = Color(0xFFd2aea3);
 
   // Gradient Colors
   static const List<Color> itemGradeint = [
-    Color(0xFFEC8F5E),
+    Colors.orange,
     Color(0xFFF3B664),
     Color(0xFFFECDA6),
     Color(0xFFF1EB90),
@@ -41,11 +42,12 @@ class DarkColors {
   static const Color base = Colors.black87;
 
   static const List<Color> itemGradeint = [
-    Color(0xFF5b2901),
+    Colors.orange,
     Color(0xFFa04413),
     Color(0xFF9d5e0c),
     Color(0xFF716b0e),
   ];
+  static const Color checkout = Color(0xFF5d392e);
 }
 
 class SwitchColor {
@@ -62,6 +64,8 @@ class SwitchColor {
   static List<Color> itemGradeint = LightColors.itemGradeint;
   static Color cartItem = LightColors.cartItem;
   static Color base = LightColors.base;
+  static Color checkout = LightColors.checkout;
+
 }
 
 class AppLightColors {

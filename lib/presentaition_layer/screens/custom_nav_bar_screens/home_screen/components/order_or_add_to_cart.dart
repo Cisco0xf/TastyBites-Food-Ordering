@@ -53,7 +53,7 @@ class OrderOrAddtoCartWidget extends StatelessWidget {
                           width: 1,
                         ),
                         borderRadius: borderRaduis(30),
-                        color: SwitchColor.borderColor,
+                        color: SwitchColor.base,
                       ),
                       child: Clicker(
                         onClick: () async {

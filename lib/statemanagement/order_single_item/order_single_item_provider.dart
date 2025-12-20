@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
+import 'package:provider/provider.dart';
 
 class SingleItemProvider with ChangeNotifier {
   // Cach the ordered item
@@ -71,9 +75,14 @@ class SingleItemProvider with ChangeNotifier {
 
   // Get the final price after discount and the service
 
-  double getTotalPriceAfterDiscountAndService({bool idDelivery = false}) {
+  final BuildContext context = navigationKey.currentContext as BuildContext;
+
+  double getTotalPriceAfterDiscountAndService() {
     double finalPrice = 0;
-    if (idDelivery) {
+
+    final bool isTakeAway = context.read<PlaceProvider>().isTakeaway;
+
+    if (isTakeAway) {
       finalPrice = getTotalOrderPrice + 11 - offerDiscout;
     } else {
       finalPrice = getTotalOrderPrice + 5 - offerDiscout;

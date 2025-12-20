@@ -5,6 +5,7 @@ import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/ratting_sector.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/components/show_full_profile_image.dart';
 import 'package:foodapp/presentaition_layer/widgets/favorite_button.dart';
 import 'package:foodapp/statemanagement/favoriter_items/add_to_favorite_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
@@ -32,10 +33,10 @@ class FoodDetials extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<FoodModel> wishListItem =
-        context.watch<WishListProvider>().favoriteItems;
+    /*  final List<FoodModel> wishListItem =
+        context.watch<WishListProvider>().favoriteItems; */
 
-    final bool isExist = wishListItem.any((food) => item.id == food.id);
+    // final bool isExist = wishListItem.any((food) => item.id == food.id);
     return Scaffold(
       body: Directionality(
         textDirection: TextDirection.ltr,
@@ -47,10 +48,15 @@ class FoodDetials extends StatelessWidget {
               padding: EdgeInsets.only(top: context.screenHeight * .06),
               child: Stack(
                 children: <Widget>[
-                  Center(
-                    child: Hero(
-                      tag: item.foodName,
-                      child: Image.asset(item.imagePath),
+                  Clicker(
+                    onClick: () async {
+                      await showFullImage(item.imagePath);
+                    },
+                    child: Center(
+                      child: Hero(
+                        tag: item.foodName,
+                        child: Image.asset(item.imagePath),
+                      ),
                     ),
                   ),
                   Padding(
@@ -58,7 +64,7 @@ class FoodDetials extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        const PopButtonWidget(),
+                        const PopBtn(),
                         Text(
                           item.foodName,
                           style: const TextStyle(

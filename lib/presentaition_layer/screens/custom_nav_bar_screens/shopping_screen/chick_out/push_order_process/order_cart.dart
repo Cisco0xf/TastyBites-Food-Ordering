@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -22,6 +23,7 @@ class OrderAllCartWidget extends StatelessWidget {
       builder: (context, orderPlace, child) {
         return Column(
           children: <Widget>[
+            const Gap(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -58,7 +60,6 @@ class OrderAllCartWidget extends StatelessWidget {
             DetailsRow(
               detail: "order_totle".localeValue(context: context),
               price: "\$ $totalAfter",
-              color: Colors.black,
             )
           ],
         );

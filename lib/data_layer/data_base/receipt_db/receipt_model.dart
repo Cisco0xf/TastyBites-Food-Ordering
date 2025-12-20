@@ -26,7 +26,7 @@ class ReceiptModel {
 
   factory ReceiptModel.fromSnapshot({required Map<String, dynamic> snapshots}) {
     return ReceiptModel(
-      newReceipt: snapshots["newReceipt"] as String,
+      newReceipt: snapshots["receipt"] as String,
       dateTime: snapshots["dateTime"] as String,
       id: snapshots["id"] as String,
     );

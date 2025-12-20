@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/constants/enums.dart';
@@ -75,19 +76,18 @@ class RecepitWidget extends StatelessWidget {
                 ),
                 clearCart.isOperating
                     ? SizedBox(
-                        width: context.screenWidth,
-                        child: Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              LoadingAnimationWidget.inkDrop(
-                                color: Colors.orange,
-                                size: 35.0,
-                              )
-                            ],
-                          ),
+                      width: context.screenWidth,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Gap(hRatio: 0.3),
+                            LoadingAnimationWidget.inkDrop(
+                              color: Colors.orange,
+                              size: 35.0,
+                            )
+                          ],
                         ),
-                      )
+                    )
                     : Expanded(
                         child: SingleChildScrollView(
                           child: Column(

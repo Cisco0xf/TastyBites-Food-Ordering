@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/constants/style.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
@@ -41,18 +43,10 @@ class _TablesSheetState extends State<TablesSheet> {
       builder: (context, userTable, _) {
         return Column(
           children: <Widget>[
-            Container(
-              padding: padding(5),
-              margin: padding(10),
-              width: context.screenWidth * .6,
-              height: context.screenHeight * .05,
-              decoration: BoxDecoration(
-                borderRadius: borderRaduis(15),
-                color: const Color(0xFFF3B664),
-              ),
-              alignment: Alignment.center,
-              child: Text("choose_table".localeValue(context: context),
-                  style: AppTextStyles.chooseButtonTextStyle(context: context)),
+            const Gap(height: 15.0),
+            Text(
+              "choose_table".localeValue(context: context),
+              style: AppTextStyles.chooseButtonTextStyle(context: context),
             ),
             Expanded(
               child: ListView.builder(

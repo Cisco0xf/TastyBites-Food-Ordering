@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -33,28 +34,21 @@ class OrderSingleItemWidget extends StatelessWidget {
                   fontSize: 21,
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Localizations(
-                locale: const Locale("en"),
-                delegates: const <LocalizationsDelegate<dynamic>>[
-                  DefaultWidgetsLocalizations.delegate,
-                  DefaultMaterialLocalizations.delegate
-                ],
+              const Gap(height: 10.0),
+              Directionality(
+                textDirection: TextDirection.ltr,
                 child: Container(
                   padding: padding(10),
                   margin: padding(10.0, from: From.horizontal),
                   decoration: BoxDecoration(
                     borderRadius: borderRaduis(15),
-                    color: SwitchColor.primaryO.withOpacity(0.5),
-                    border: Border.all(color: Colors.grey),
+                    color: SwitchColor.cartItem,
+                    border: Border.all(color: SwitchColor.borderColor),
                   ),
                   child: Row(
                     children: <Widget>[
-                      SizedBox(
-                        width: context.screenWidth * .26,
-                        height: context.screenHeight * .11,
+                      SizedBox.square(
+                        dimension: context.screenHeight * .11,
                         child: ClipRRect(
                           borderRadius: borderRaduis(7),
                           child: Image.asset(
@@ -112,7 +106,6 @@ class OrderSingleItemWidget extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: Colors.grey,
-                                      width: 1,
                                     ),
                                     borderRadius: borderRaduis(5),
                                     color: SwitchColor.fillColor,
@@ -137,17 +130,14 @@ class OrderSingleItemWidget extends StatelessWidget {
                                         ),
                                       ),
                                       Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 10,
-                                        ),
-                                        margin: const EdgeInsets.symmetric(
-                                          horizontal: 10,
-                                        ),
+                                        padding: padding(10.0,
+                                            from: From.horizontal),
+                                        margin: padding(10.0,
+                                            from: From.horizontal),
                                         decoration: BoxDecoration(
                                           borderRadius: borderRaduis(5),
                                           border: Border.all(
-                                            color: Colors.grey,
-                                            width: 1,
+                                            color: SwitchColor.borderColor,
                                           ),
                                         ),
                                         child: Text(
@@ -203,15 +193,10 @@ class OrderSingleItemWidget extends StatelessWidget {
                 },
               ),
               const CheckDivider(),
-              Consumer<PlaceProvider>(
-                builder: (context, isDelivery, child) {
-                  return DetailsRow(
-                    detail: "totle_price".localeValue(context: context),
-                    price:
-                        "\$ ${singleOrder.getTotalPriceAfterDiscountAndService(idDelivery: isDelivery.isTakeaway)}",
-                    color: context.isLight ? Colors.black : Colors.white,
-                  );
-                },
+              DetailsRow(
+                detail: "totle_price".localeValue(context: context),
+                price:
+                    "\$ ${singleOrder.getTotalPriceAfterDiscountAndService()}",
               )
             ],
           ),

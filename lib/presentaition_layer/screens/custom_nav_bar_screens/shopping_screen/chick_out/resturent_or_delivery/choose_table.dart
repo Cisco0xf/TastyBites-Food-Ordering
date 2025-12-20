@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/resturent_or_delivery/tables_bottom_sheet.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -31,20 +32,21 @@ class ChoosTableWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: borderRaduis(30),
             color: SwitchColor.fillColor,
+            border: Border.all(color: SwitchColor.borderColor),
           ),
           child: Clicker(
             onClick: () => showTablesSheet(),
             innerPadding: 0.0,
             raduis: 30,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: padding(10.0, from: From.horizontal),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Row(
                     children: [
-                      const Icon(Icons.location_on, color: Colors.orange),
-                      const Gap(wRatio: 0.04),
+                      const Icon(Icons.table_bar),
+                      const Gap(width: 6.0),
                       Text.rich(
                         TextSpan(
                           children: <InlineSpan>[
@@ -65,7 +67,7 @@ class ChoosTableWidget extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                                 color: userTable.hasTable
                                     ? const Color(0xFFFF5B22)
-                                    : const Color(0xFFB0A695),
+                                    : null,
                               ),
                             ),
                           ],
@@ -73,8 +75,7 @@ class ChoosTableWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Icon(Icons.keyboard_arrow_down_sharp,
-                      color: Colors.orange)
+                  const Icon(Icons.keyboard_arrow_down_sharp)
                 ],
               ),
             ),

@@ -226,7 +226,7 @@ class DrinksDetailes extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            const PopButtonWidget(),
+                            const PopBtn(),
                             SizedBox(
                               width: context.screenWidth * .6,
                               child: FittedBox(

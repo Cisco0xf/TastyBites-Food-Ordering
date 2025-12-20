@@ -87,7 +87,8 @@ class GridFoodItem extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: borderRaduis(20),
-        color: SwitchColor.primaryO.withOpacity(0.8),
+        color: SwitchColor.primaryO,
+        border: Border.all(color: SwitchColor.borderColor),
       ),
       margin: padding(7.0),
       child: Clicker(

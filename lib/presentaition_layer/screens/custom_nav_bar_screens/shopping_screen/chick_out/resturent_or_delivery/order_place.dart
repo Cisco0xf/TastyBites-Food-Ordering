@@ -26,7 +26,7 @@ class OrderPlaceWidget extends StatelessWidget {
           padding: padding(5.0),
           decoration: BoxDecoration(
             borderRadius: borderRaduis(30.0),
-            color: SwitchColor.primaryO.withOpacity(0.9),
+            color: SwitchColor.primaryO,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -76,6 +76,7 @@ class OrderChoice extends StatelessWidget {
         onClick: onSelect,
         raduis: 20.0,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox.square(
               dimension: context.screenHeight * .04,

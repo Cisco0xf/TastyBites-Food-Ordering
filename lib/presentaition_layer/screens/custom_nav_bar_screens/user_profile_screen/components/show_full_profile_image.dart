@@ -289,7 +289,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Clicker(
       onClick: () async {
-        await showUserAvatarImage();
+        await showFullImage(Assets.profileImage);
       },
       isCircular: true,
       innerPadding: 0.0,
@@ -302,19 +302,21 @@ class Profile extends StatelessWidget {
   }
 }
 
-Future<void> showUserAvatarImage() async {
+Future<void> showFullImage(String targetImage) async {
   final BuildContext context = navigationKey.currentContext as BuildContext;
 
   await showDialog(
     context: context,
     builder: (context) {
-      return const UserFullImage();
+      return UserFullImage(targetImage: targetImage);
     },
   );
 }
 
 class UserFullImage extends StatelessWidget {
-  const UserFullImage({super.key});
+  const UserFullImage({super.key, required this.targetImage});
+
+  final String targetImage;
 
   @override
   Widget build(BuildContext context) {
@@ -353,7 +355,7 @@ class UserFullImage extends StatelessWidget {
           ),
           Expanded(
             child: InteractiveViewer(
-              child: Image.asset(Assets.profileImage),
+              child: Image.asset(targetImage),
             ),
           )
         ],

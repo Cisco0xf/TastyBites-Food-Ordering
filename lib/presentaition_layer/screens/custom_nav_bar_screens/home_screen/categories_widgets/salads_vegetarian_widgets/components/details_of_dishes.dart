@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/constants/app_colors.dart';
 
@@ -9,6 +10,7 @@ import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/order_or_add_to_cart.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/quantity_widget.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/components/show_full_profile_image.dart';
 import 'package:foodapp/presentaition_layer/widgets/favorite_button.dart';
 import 'package:foodapp/presentaition_layer/widgets/pop_button_widget.dart';
 
@@ -24,19 +26,14 @@ class ShowDishesDetailsWidget extends StatelessWidget {
         textDirection: TextDirection.ltr,
         child: Stack(
           children: <Widget>[
-            Positioned(
+            Positioned.fill(
               top: context.screenHeight * .3,
-              right: 0,
-              left: 0,
-              bottom: 0,
               child: Container(
                 padding: EdgeInsets.only(
                   top: context.screenHeight * .1,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
+                  borderRadius: borderRaduis(20.0, side: Side.top),
                   color: SwitchColor.bgColor,
                 ),
                 child: Stack(
@@ -44,11 +41,9 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                     SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          const SizedBox(height: 10),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: padding(20.0, from: From.horizontal),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -73,7 +68,7 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                         const Gap(hRatio: .01),
+                          const Gap(hRatio: .01),
                           const Divider(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -168,51 +163,7 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                for (int i = 0;
-                                    i < item.ingredientsNames!.length;
-                                    i++)
-                                  Container(
-                                    padding: const EdgeInsets.all(5),
-                                    margin: const EdgeInsets.only(
-                                      left: 5,
-                                      right: 5,
-                                      top: 5,
-                                      bottom: 10,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: const Color(0xFFc6ff00),
-                                        width: 1,
-                                      ),
-                                      color: Colors.white30,
-                                      borderRadius: borderRaduis(15),
-                                    ),
-                                    child: Column(
-                                      children: <Widget>[
-                                        SizedBox(
-                                          width: context.screenWidth * .2,
-                                          height: context.screenHeight * .1,
-                                          child: Image.asset(
-                                              item.ingredientsImages![i]),
-                                        ),
-                                        Text(
-                                          item.ingredientsNames![i],
-                                          style: const TextStyle(
-                                            fontFamily: FontFamily.subFont,
-                                            fontSize: 15,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                              ],
-                            ),
-                          ),
+                          IngredientsList(item: item),
                           QuantityWidget(item: item),
                           const Gap(hRatio: .1),
                         ],
@@ -231,23 +182,27 @@ class ShowDishesDetailsWidget extends StatelessWidget {
               child: Container(
                 height: context.screenHeight * .4,
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(20),
-                  ),
+                decoration:  BoxDecoration(
+                  borderRadius: borderRaduis(20.0, side: Side.bottom)
                 ),
                 child: Stack(
                   children: <Widget>[
                     Positioned.fill(
                       child: Hero(
                         tag: item.foodName.toString(),
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(
-                            bottom: Radius.circular(20),
-                          ),
-                          child: Image.asset(
-                            item.imagePath,
-                            fit: BoxFit.fill,
+                        child: Clicker(
+                          innerPadding: 0.0,
+                          onClick: () async {
+                            await showFullImage(item.imagePath);
+                          },
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.vertical(
+                              bottom: Radius.circular(20),
+                            ),
+                            child: Image.asset(
+                              item.imagePath,
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
                       ),
@@ -261,7 +216,7 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            const PopButtonWidget(),
+                            const PopBtn(),
                             SizedBox(
                               width: context.screenWidth * .6,
                               child: FittedBox(
@@ -289,6 +244,58 @@ class ShowDishesDetailsWidget extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class IngredientsList extends StatelessWidget {
+  const IngredientsList({super.key, required this.item});
+
+  final FoodModel item;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          for (int i = 0; i < item.ingredientsNames!.length; i++)
+            Container(
+              padding: padding(5),
+              margin: const EdgeInsets.only(
+                left: 5,
+                right: 5,
+                top: 5,
+                bottom: 10,
+              ),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color(0xFFc6ff00)
+          
+                ),
+                color: Colors.white30,
+                borderRadius: borderRaduis(15),
+              ),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    width: context.screenWidth * .2,
+                    height: context.screenHeight * .1,
+                    child: Image.asset(item.ingredientsImages![i]),
+                  ),
+                  Text(
+                    item.ingredientsNames![i],
+                    style: const TextStyle(
+                      fontFamily: FontFamily.subFont,
+                      fontSize: 15,
+                    ),
+                  )
+                ],
+              ),
+            )
+        ],
       ),
     );
   }

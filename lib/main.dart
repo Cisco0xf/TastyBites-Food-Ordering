@@ -86,7 +86,7 @@ class MainWidget extends StatelessWidget {
               },
               // App Thame
               theme: ThemeData(
-                scaffoldBackgroundColor: SwitchColor.bgColor,
+                scaffoldBackgroundColor: SwitchColor.bgColor.withOpacity(0.93),
                 colorScheme: ColorScheme.fromSeed(
                   seedColor: SwitchColor.primaryO,
                   brightness: brightness,

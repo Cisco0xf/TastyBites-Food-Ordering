@@ -65,11 +65,54 @@ class _ChickOutWidgetState extends State<ChickOutWidget> {
         },
         child: Consumer<PlaceProvider>(
           builder: (context, orderPlace, child) {
-            return Container(
-              width: context.screenWidth,
-              height: context.screenHeight,
-              padding: EdgeInsets.only(top: context.screenHeight * .04),
-              child: Stack(
+            return Column(
+              children: <Widget>[
+                const Gap(hRatio: 0.06),
+                Row(
+                  children: <Widget>[
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back_ios, size: 35),
+                    ),
+                    const Gap(wRatio: .2),
+                    const Text(
+                      "CHICKOUT",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                  ],
+                ),
+                const Divider(),
+                const OrderPlaceWidget(),
+                orderPlace.isTakeaway
+                    ? const AddLocaltionWidget()
+                    : const ChoosTableWidget(),
+                Expanded(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      borderRadius: borderRaduis(20, side: Side.top),
+                      color: SwitchColor.checkout,
+                    ),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          widget.isSingleItem
+                              ? const OrderSingleItemWidget()
+                              : const OrderAllCartWidget(),
+                          _gap,
+                          const PaymentsMethods(),
+                          _gap,
+                          PayManager(isSingleItem: widget.isSingleItem)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
+                /*  Stack(
                 children: <Widget>[
                   Positioned.fill(
                     bottom: null,
@@ -108,27 +151,24 @@ class _ChickOutWidgetState extends State<ChickOutWidget> {
                           orderPlace.isTakeaway
                               ? const AddLocaltionWidget()
                               : const ChoosTableWidget(),
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                decoration: BoxDecoration(
-                                  color: SwitchColor.primaryO.withOpacity(0.5),
-                                  borderRadius:
-                                      borderRaduis(15.0, side: Side.top),
-                                ),
-                                child: Column(
-                                  children: <Widget>[
-                                    widget.isSingleItem
-                                        ? const OrderSingleItemWidget()
-                                        : const OrderAllCartWidget(),
-                                    _gap,
-                                    const PaymentsMethods(),
-                                    _gap,
-                                    PayManager(
-                                        isSingleItem: widget.isSingleItem)
-                                  ],
-                                ),
+                          SingleChildScrollView(
+                            child: Container(
+                              margin: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                color: SwitchColor.primaryO.withOpacity(0.5),
+                                borderRadius:
+                                    borderRaduis(15.0, side: Side.top),
+                              ),
+                              child: Column(
+                                children: <Widget>[
+                                  widget.isSingleItem
+                                      ? const OrderSingleItemWidget()
+                                      : const OrderAllCartWidget(),
+                                  _gap,
+                                  const PaymentsMethods(),
+                                  _gap,
+                                  PayManager(isSingleItem: widget.isSingleItem)
+                                ],
                               ),
                             ),
                           )
@@ -137,7 +177,8 @@ class _ChickOutWidgetState extends State<ChickOutWidget> {
                     ),
                   )
                 ],
-              ),
+              ), */
+              ],
             );
           },
         ),
@@ -156,37 +197,27 @@ class PayManager extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AddressProvider>(
-      builder: (context, address, child) {
-        return Consumer<PlaceProvider>(
-          builder: (context, orderPlace, child) {
-            return Consumer<TableProvider>(
-              builder: (context, userTable, child) {
-                return MainButtonWidget(
-                  buttonPropus: "payment".localeValue(context: context),
-                  onPressed: () {
-                    if (orderPlace.isTakeaway) {
-                      address.chickStatement(
-                        context: context,
-                        isSingleItem: isSingleItem,
-                      );
-                      return;
-                    }
-                    if (userTable.hasTable) {
-                      pushTo(PaymentCardScreen(isSingleItem: isSingleItem));
+    return MainButtonWidget(
+      buttonPropus: "payment".localeValue(context: context),
+      onPressed: () {
+        if (context.read<PlaceProvider>().isTakeaway) {
+          context.read<AddressProvider>().chickStatement(
+                context: context,
+                isSingleItem: isSingleItem,
+              );
 
-                      return;
-                    }
-                    showToastification(
-                      message: "enter_your_table_toast"
-                          .localeValue(context: context),
-                      type: ToastificationType.error,
-                    );
-                  },
-                );
-              },
-            );
-          },
+          return;
+        }
+
+        if (context.read<TableProvider>().hasTable) {
+          pushTo(PaymentCardScreen(isSingleItem: isSingleItem));
+
+          return;
+        }
+
+        showToastification(
+          message: "enter_your_table_toast".localeValue(context: context),
+          type: ToastificationType.error,
         );
       },
     );
