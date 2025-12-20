@@ -78,14 +78,14 @@ class FilterSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: padding(10),
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: Colors.green,
                       width: 1.5,
                     ),
                     borderRadius: borderRaduis(10),
-                    color: SwitchColors.filteredItemColor,
+                    color: SwitchColor.accent,
                   ),
                   child: Text(
                     filterPrice.priceRange(context: context),
@@ -101,14 +101,14 @@ class FilterSheet extends StatelessWidget {
                 Consumer<RattingProvider>(
                   builder: (context, rattingFilter, child) {
                     return Container(
-                      padding: const EdgeInsets.all(10),
+                      padding: padding(10),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.green,
                           width: 1.5,
                         ),
                         borderRadius: borderRaduis(10),
-                        color: SwitchColors.filteredItemColor,
+                        color: SwitchColor.accent,
                       ),
                       child: Text(
                         rattingFilter.rattingFilter(),
@@ -127,7 +127,7 @@ class FilterSheet extends StatelessWidget {
             ),
             const Divider(),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: padding(8.0),
               child: Row(
                 children: <Widget>[
                   Text(

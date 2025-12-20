@@ -16,7 +16,8 @@ class CustomNavigationBarItem extends StatelessWidget {
   final void Function() onSelect;
   final bool isSelected;
 
-  Color? get _color => isSelected ? SwitchColors.selectedNavColor : null;
+  Color? get _color =>
+      isSelected ? SwitchColor.primaryO.withOpacity(0.7) : null;
 
   Icon get _icon => isSelected
       ? Icon(

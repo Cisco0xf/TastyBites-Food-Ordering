@@ -50,7 +50,7 @@ class _QuantityWidgetState extends State<QuantityWidget> {
                     margin: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: borderRaduis(10),
-                      color: SwitchColors.quantityButtonColor,
+                      color: SwitchColor.fillColor,
                       border: Border.all(
                         color: Colors.grey,
                         width: 1,

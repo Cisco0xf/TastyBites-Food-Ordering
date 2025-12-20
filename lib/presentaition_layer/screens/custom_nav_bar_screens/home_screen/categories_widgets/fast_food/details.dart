@@ -79,7 +79,7 @@ class FoodDetials extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                   borderRadius: borderRaduis(20.0, side: Side.top),
-                  color: SwitchColors.backgroundMianColor,
+                  color: SwitchColor.bgColor,
                 ),
                 child: Stack(
                   children: <Widget>[

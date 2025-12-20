@@ -10,46 +10,27 @@ class ThemeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
+    return Consumer<ThemeNotifier>(
       builder: (context, mode, child) {
+        final style = TextStyle(
+          fontFamily:
+              context.isEnglish ? FontFamily.mainFont : FontFamily.mainArabic,
+        );
+        
         return Column(
           children: <Widget>[
             RadioListTile(
-              value: "light",
-              title: Text(
-                "light".localeValue(context: context),
-                style: TextStyle(
-                  fontFamily: context.isEnglish
-                      ? FontFamily.mainFont
-                      : FontFamily.mainArabic,
-                ),
-              ),
-              groupValue: mode.currentTheme,
-              onChanged: (lightTheme) {
-                mode.changeAppTheme(
-                  userChoice: lightTheme as String,
-                );
-                mode.changeAppColors;
-              },
+              value: false,
+              title: Text("light".localeValue(context: context), style: style),
+              groupValue: mode.isDark,
+              onChanged: (_) async => await mode.switchTheme(),
             ),
             const Divider(),
             RadioListTile(
-              value: "dark",
-              title: Text(
-                "dark".localeValue(context: context),
-                style: TextStyle(
-                  fontFamily: context.isEnglish
-                      ? FontFamily.mainFont
-                      : FontFamily.mainArabic,
-                ),
-              ),
-              groupValue: mode.currentTheme,
-              onChanged: (darkTheme) {
-                mode.changeAppTheme(
-                  userChoice: darkTheme as String,
-                );
-                mode.changeAppColors;
-              },
+              value: true,
+              title: Text("dark".localeValue(context: context), style: style),
+              groupValue: mode.isDark,
+              onChanged: (_) async => await mode.switchTheme(),
             ),
           ],
         );

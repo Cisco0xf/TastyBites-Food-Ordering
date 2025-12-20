@@ -57,7 +57,7 @@ class ReceiptList extends StatelessWidget {
                 padding: padding(10),
                 margin: padding(10),
                 decoration: BoxDecoration(
-                  color: SwitchColors.receiptColor,
+                  color: SwitchColor.receiptColor,
                   borderRadius: borderRaduis(15),
                 ),
                 child: Column(
@@ -81,7 +81,7 @@ class ReceiptList extends StatelessWidget {
                                 margin: padding(5),
                                 decoration: BoxDecoration(
                                   borderRadius: borderRaduis(10),
-                                  color: SwitchColors.dateBoxColor,
+                                  color: SwitchColor.fillColor,
                                   border: Border.all(
                                     color: Colors.black,
                                     width: 1,

@@ -58,32 +58,24 @@ class _ChickOutWidgetState extends State<ChickOutWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: SwitchColors.chickoutAppBarColor,
       resizeToAvoidBottomInset: false,
       body: GestureDetector(
         onTap: () {
-          FocusScope.of(context).requestFocus(
-            FocusNode(),
-          );
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Consumer<PlaceProvider>(
           builder: (context, orderPlace, child) {
             return Container(
               width: context.screenWidth,
               height: context.screenHeight,
-              padding: EdgeInsets.only(
-                top: context.screenHeight * .04,
-              ),
+              padding: EdgeInsets.only(top: context.screenHeight * .04),
               child: Stack(
                 children: <Widget>[
                   Positioned.fill(
                     bottom: null,
                     child: Container(
                       height: context.screenHeight * .11,
-                      decoration: BoxDecoration(
-                        color: SwitchColors.chickoutAppBarColor,
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: padding(8.0, from: From.horizontal),
                       child: Row(
                         children: <Widget>[
                           IconButton(
@@ -108,7 +100,7 @@ class _ChickOutWidgetState extends State<ChickOutWidget> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: borderRaduis(15.0, side: Side.top),
-                        color: SwitchColors.chickoutOrderPlaceColor,
+                        color: SwitchColor.secondary.withOpacity(0.4),
                       ),
                       child: Column(
                         children: <Widget>[
@@ -121,7 +113,7 @@ class _ChickOutWidgetState extends State<ChickOutWidget> {
                               child: Container(
                                 margin: const EdgeInsets.only(top: 10),
                                 decoration: BoxDecoration(
-                                  color: SwitchColors.chickoutDetailsColor,
+                                  color: SwitchColor.primaryO.withOpacity(0.5),
                                   borderRadius:
                                       borderRaduis(15.0, side: Side.top),
                                 ),

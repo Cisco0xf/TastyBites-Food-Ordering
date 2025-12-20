@@ -9,14 +9,9 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopp
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/empty_cart_screen.dart';
 import 'package:provider/provider.dart';
 
-class CartWidget extends StatefulWidget {
+class CartWidget extends StatelessWidget {
   const CartWidget({super.key});
 
-  @override
-  State<CartWidget> createState() => _CartWidgetState();
-}
-
-class _CartWidgetState extends State<CartWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -24,7 +19,7 @@ class _CartWidgetState extends State<CartWidget> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: borderRaduis(15.0, side: Side.top),
-          color: SwitchColors.shoppingBGColor,
+          color: SwitchColor.bgColor,
         ),
         child: Consumer<CartManager>(
           builder: (context, cart, child) {

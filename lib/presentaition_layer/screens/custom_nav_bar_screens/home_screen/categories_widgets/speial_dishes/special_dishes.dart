@@ -112,19 +112,18 @@ class ListFoodItem extends StatelessWidget {
 
   final bool isGreen;
 
-  Color get _itemColor =>
-      isGreen ? SwitchColors.greenItemColor : SwitchColors.itemBackgoundColor;
+  Color get _itemColor => isGreen ? Colors.green : SwitchColor.primaryO;
 
   Color get _btnColor =>
-      isGreen ? const Color(0xFF1b5e20) : const Color(0xFFef6c00);
+      isGreen ? const Color(0xFF1b5e20) : SwitchColor.btnColor;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: padding(10),
       decoration: BoxDecoration(
         borderRadius: borderRaduis(20),
-        color: _itemColor,
+        color: _itemColor.withOpacity(0.8),
       ),
       child: Clicker(
         onClick: onTap,

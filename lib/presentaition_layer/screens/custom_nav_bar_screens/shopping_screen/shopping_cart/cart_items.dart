@@ -99,7 +99,8 @@ class CartItem extends StatelessWidget {
       margin: padding(10),
       decoration: BoxDecoration(
         borderRadius: borderRaduis(15),
-        color: SwitchColors.cartItemColor,
+        color: SwitchColor.cartItem,
+        border: Border.all(color: SwitchColor.borderColor, width: 0.5),
       ),
       child: Stack(
         children: [

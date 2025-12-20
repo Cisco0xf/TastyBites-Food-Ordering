@@ -30,7 +30,7 @@ class ChoosTableWidget extends StatelessWidget {
           height: context.screenHeight * .07,
           decoration: BoxDecoration(
             borderRadius: borderRaduis(30),
-            color: SwitchColors.chickoutFillColor,
+            color: SwitchColor.fillColor,
           ),
           child: Clicker(
             onClick: () => showTablesSheet(),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
@@ -29,55 +31,69 @@ class OrderOrAddtoCartWidget extends StatelessWidget {
       left: 0,
       right: 0,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Consumer<CartManager>(
             builder: (context, addToCart, child) {
               final bool isExist =
                   addToCart.state.any((element) => element.id == item.id);
-              return GestureDetector(
-                onTap: () async {
-                  await addToCart.addFoodItemToFirestoreCart(item);
-                },
-                child: Container(
-                  margin: padding(10, from: From.horizontal),
-                  padding: padding(10),
-                  height: context.screenHeight * .07,
-                  width: context.screenWidth * .45,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFFFF785B),
-                      width: 1,
-                    ),
-                    borderRadius: borderRaduis(30),
-                    color: SwitchColors.addToCartBGColor,
-                  ),
-                  child: addToCart.isOperating
-                      ? LoadingAnimationWidget.inkDrop(
-                          color: Colors.orange,
-                          size: 30.0,
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            addToCart.state.contains(item)
-                                ? const Icon(
-                                    Icons.shopping_bag,
-                                    color: Color(0xFFFF785B),
-                                  )
-                                : const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    color: Color(0xFFFF785B),
-                                  ),
-                            Text(
-                              isExist
-                                  ? "added_to_cart"
-                                      .localeValue(context: context)
-                                  : "add_to_cart".localeValue(context: context),
-                              style: AppTextStyles.addToCartButtonTextStyle(
-                                  context: context),
-                            )
-                          ],
+              return ClipRRect(
+                borderRadius: borderRaduis(30),
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                    child: Container(
+                      //margin: padding(10, from: From.horizontal),
+
+                      height: context.screenHeight * .07,
+                      width: context.screenWidth * .45,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFFFF785B),
+                          width: 1,
                         ),
+                        borderRadius: borderRaduis(30),
+                        color: SwitchColor.borderColor,
+                      ),
+                      child: Clicker(
+                        onClick: () async {
+                          await addToCart.addFoodItemToFirestoreCart(item);
+                        },
+                        raduis: 30.0,
+                        innerPadding: 10.0,
+                        child: addToCart.isOperating
+                            ? LoadingAnimationWidget.inkDrop(
+                                color: Colors.orange,
+                                size: 30.0,
+                              )
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  isExist
+                                      ? const Icon(
+                                          Icons.shopping_bag,
+                                          color: Color(0xFFFF785B),
+                                        )
+                                      : const Icon(
+                                          Icons.shopping_bag_outlined,
+                                          color: Color(0xFFFF785B),
+                                        ),
+                                  Text(
+                                    isExist
+                                        ? "added_to_cart"
+                                            .localeValue(context: context)
+                                        : "add_to_cart"
+                                            .localeValue(context: context),
+                                    style:
+                                        AppTextStyles.addToCartButtonTextStyle(
+                                            context: context),
+                                  )
+                                ],
+                              ),
+                      ),
+                    ),
+                  ),
                 ),
               );
             },

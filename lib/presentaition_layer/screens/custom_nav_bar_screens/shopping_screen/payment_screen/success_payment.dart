@@ -72,7 +72,7 @@ class _SuccessfulPaymentWidgetState extends State<SuccessfulPaymentWidget>
             ),
             height: context.screenHeight * .13,
             decoration: BoxDecoration(
-              color: SwitchColors.successfulAppBarColor,
+              color: SwitchColor.secondary,
               borderRadius: const BorderRadius.vertical(
                 bottom: Radius.circular(15),
               ),

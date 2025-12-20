@@ -121,7 +121,7 @@ class DessertsItemWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: borderRaduis(20),
               gradient: LinearGradient(
-                colors: SwitchColors.dessertInfoBoxColor,
+                colors: SwitchColor.itemGradeint,
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),

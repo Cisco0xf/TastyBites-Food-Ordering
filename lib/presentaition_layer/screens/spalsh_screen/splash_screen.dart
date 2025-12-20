@@ -2,11 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:foodapp/common/app_dimention.dart';
+import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/app_colors.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
+import 'package:foodapp/statemanagement/theming/theme_provider.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,25 +24,27 @@ class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
+    SaveTheme.initThemeStateFromDb();
+
     SystemChrome.setEnabledSystemUIMode(
       SystemUiMode.manual,
-      overlays: SystemUiOverlay.values,
+      overlays: [],
     );
+
     Future.delayed(
-      const Duration(seconds: 4),
+      const Duration(seconds: 3),
       () {
-        Navigator.of(navigationKey.currentContext!).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) {
-              return (FirebaseAuth.instance.currentUser != null &&
-                      FirebaseAuth.instance.currentUser!.emailVerified)
-                  ? const MainScreenShimmer()
-                  : const PushAuthScreen();
-            },
-          ),
-        );
+        final User? user = FirebaseAuth.instance.currentUser;
+
+        final bool goodToGo = (user != null && user.emailVerified);
+
+        final Widget target =
+            goodToGo ? const MainScreenShimmer() : const PushAuthScreen();
+
+        pushTo(target, type: Push.replace);
       },
     );
+
     super.initState();
   }
 
@@ -48,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
       overlays: SystemUiOverlay.values,
     );
 
-    InitDB.initDB();
+    //  InitDB.initDB();
 
     super.dispose();
   }
@@ -72,15 +79,17 @@ class _SplashScreenState extends State<SplashScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Gap(hRatio: 0.1),
-            SizedBox(
-              width: context.screenWidth * .65,
-              height: context.screenHeight * .35,
+            SizedBox.square(
+              dimension: context.screenHeight * 0.35,
               child: Image.asset(
                 "asstes/images/app_images/splash_screen-images/food_logo_large.png",
                 fit: BoxFit.contain,
               ),
             ),
-            const CircularProgressIndicator(),
+            LoadingAnimationWidget.fourRotatingDots(
+              color: SwitchColor.primaryO,
+              size: 35.0,
+            ),
             const Gap(hRatio: 0.27),
             const Text(
               "TastyBites",

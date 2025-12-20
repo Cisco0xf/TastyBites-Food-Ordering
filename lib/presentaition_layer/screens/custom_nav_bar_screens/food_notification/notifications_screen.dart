@@ -20,7 +20,7 @@ class NotificationsWidget extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(
                 top: Radius.circular(15),
               ),
-              color: SwitchColors.backgroundMianColor,
+              color: SwitchColor.bgColor,
             ),
             child: receivedNotifications.isNotificationEmpty
                 ? const EmptyNotificationsWidget()

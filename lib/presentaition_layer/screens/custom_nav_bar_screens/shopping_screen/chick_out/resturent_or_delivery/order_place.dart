@@ -26,7 +26,7 @@ class OrderPlaceWidget extends StatelessWidget {
           padding: padding(5.0),
           decoration: BoxDecoration(
             borderRadius: borderRaduis(30.0),
-            color: SwitchColors.orderPlaceBGColor,
+            color: SwitchColor.primaryO.withOpacity(0.9),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -70,7 +70,7 @@ class OrderChoice extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: borderRaduis(25.0),
-        color: isSelected ? SwitchColors.selectedPlaceColor : null,
+        color: isSelected ? SwitchColor.base : null,
       ),
       child: Clicker(
         onClick: onSelect,

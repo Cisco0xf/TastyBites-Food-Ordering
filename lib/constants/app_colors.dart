@@ -1,7 +1,72 @@
 import 'package:flutter/material.dart';
 
+class LightColors {
+  static const Color bgColor = Color(0xFFfefaf1);
+  static const Color primaryO = Colors.orange;
+  static const Color secondary = Color(0xFFbd9d00);
+  static const Color accent = Color(0xFF8affe9);
+  static const Color borderColor = Colors.black38;
+
+  static const Color btnColor = Color(0xFFef6c00);
+  static const Color fillColor = Colors.white54;
+
+  static const Color txtColor = Color(0xFF130d01);
+  static const Color receiptColor = Color(0xFFFFF9C9);
+  static const Color cartItem = Color(0xFFfaf6f0);
+  static const Color base = Colors.white70;
+
+  // Gradient Colors
+  static const List<Color> itemGradeint = [
+    Color(0xFFEC8F5E),
+    Color(0xFFF3B664),
+    Color(0xFFFECDA6),
+    Color(0xFFF1EB90),
+  ];
+}
+
+class DarkColors {
+  static const Color bgColor = Color(0xFF0e0a01); //
+  static const Color primaryO = Colors.orange; //
+  static const Color secondary = Color(0xFFffe042);
+  static const Color accent = Color(0xFF007560); //
+  static const Color borderColor = Colors.white30; //
+
+  static const Color btnColor = Color(0xFFf0ba0a); //
+  static const Color fillColor = Colors.black54; //
+
+  static const Color txtColor = Color(0xFFfef8ec);
+  static const Color receiptColor = Color(0xFF435055);
+
+  static const Color cartItem = Color(0xFF0f0b05);
+  static const Color base = Colors.black87;
+
+  static const List<Color> itemGradeint = [
+    Color(0xFF5b2901),
+    Color(0xFFa04413),
+    Color(0xFF9d5e0c),
+    Color(0xFF716b0e),
+  ];
+}
+
+class SwitchColor {
+  static Color bgColor = LightColors.borderColor;
+  static Color primaryO = LightColors.primaryO;
+  static Color secondary = LightColors.secondary;
+  static Color accent = LightColors.accent;
+  static Color borderColor = LightColors.borderColor;
+  static Color btnColor = LightColors.btnColor;
+  static Color fillColor = LightColors.fillColor;
+  static Color txtColor = LightColors.txtColor;
+  //
+  static Color receiptColor = LightColors.receiptColor;
+  static List<Color> itemGradeint = LightColors.itemGradeint;
+  static Color cartItem = LightColors.cartItem;
+  static Color base = LightColors.base;
+}
+
 class AppLightColors {
-  // Home Page colors
+  final c = Colors.orange;
+  // Home Page colors  shoppingBGColor
   static const Color backgroundMianColor = Color(0xFFE5E5E5);
   static const Color itemBackgoundColor = Color(0xFFffd180);
   static const Color orderButtonColor = Color(0xFFef6c00);
@@ -19,7 +84,7 @@ class AppLightColors {
   // Shoping Page colors
   static const Color shoppingBGColor = Color(0xFFe0e0e0);
   static const Color detailsBoxColor = Color(0xFFEBE3D5);
-  static const Color cartItemColor = Color(0xFFFAF6F0);
+  static const Color cartItemColor = Color(0xFFFAF6F0); //////////////////
   static const Color itemPriceInAddedToCart = Color(0xFFe0e0e0);
   // Chickout page color
   static const Color chickoutAppBarColor = Color(0xFFF8F0E5);
@@ -45,7 +110,7 @@ class AppLightColors {
   static const Color profileBackgroundColor = Color(0xFFF3EEEA);
   static const Color profileItemsColor = Color(0xFFe0e0e0);
   // Successful page colors
-  static const successfulAppBarColor = Color(0xFFF5F5DC);
+  static const successfulAppBarColor = Color.fromARGB(255, 2, 2, 1);
   // Receipt page colors
   static const Color receiptAppBarColor = Color(0xFFFFDBAA);
   static const Color receiptColor = Color(0xFFFFF9C9);
@@ -89,7 +154,7 @@ class AppDarkColors {
   static const Color discoverButtonColor = Color(0xFFC87941);
 
   static const List<Color> favoriteItemsColor = <Color>[
-    Color(0xFF321F28),
+    Colors.orange,
     Color(0xFF734046),
     Color(0xFFA05344),
     Color(0xFFE79E4F),
@@ -104,7 +169,7 @@ class AppDarkColors {
   static const Color otherFiltersColor = Color(0xFFD49B54);
   static const filteredItemColor = Color(0xFF2e7d32);
 }
-
+/* 
 class SwitchColors {
   static late Color backgroundMianColor;
   static late Color itemBackgoundColor;
@@ -141,3 +206,4 @@ class SwitchColors {
   static late Color dessertsBGCOlor;
   static late List<Color> dessertInfoBoxColor;
 }
+ */

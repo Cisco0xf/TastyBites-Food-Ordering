@@ -54,7 +54,7 @@ class _PaymentCardScreenState extends State<PaymentCardScreen> {
       ],
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        backgroundColor: SwitchColors.backgroundMianColor,
+        backgroundColor: SwitchColor.bgColor,
         body: Column(
           children: <Widget>[
             Container(

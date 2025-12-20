@@ -37,7 +37,7 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(20),
                   ),
-                  color: SwitchColors.backgroundMianColor,
+                  color: SwitchColor.bgColor,
                 ),
                 child: Stack(
                   children: <Widget>[

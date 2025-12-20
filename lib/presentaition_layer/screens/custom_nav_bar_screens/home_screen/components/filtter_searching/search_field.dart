@@ -22,7 +22,7 @@ class SearchField extends StatelessWidget {
         child: Consumer<CurrentIndexProvider>(
           builder: (context, currentIndex, child) {
             final String search = "search".localeValue(context: context);
-            
+
             final String currentCategory =
                 categoriesItems[currentIndex.currentIndex]
                     .itemTitle
@@ -47,18 +47,14 @@ class SearchField extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderRadius: borderRaduis(22),
                   borderSide: const BorderSide(
-                    color: Colors.transparent,
-                    width: 0,
+                    color: Colors.grey,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: borderRaduis(22),
-                  borderSide: const BorderSide(
-                    color: Colors.grey,
-                    width: 1,
-                  ),
+                  borderSide: const BorderSide(color: Colors.orange),
                 ),
-                fillColor: SwitchColors.searchFieldFillColor,
+                fillColor: SwitchColor.fillColor,
                 filled: true,
                 hintText: hintText,
                 hintStyle: context.isEnglish

@@ -29,7 +29,7 @@ class UserProfileWidget extends StatelessWidget {
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(15),
           ),
-          color: SwitchColors.profileBackgroundColor,
+          color: SwitchColor.bgColor,
         ),
         child: Column(
           children: <Widget>[

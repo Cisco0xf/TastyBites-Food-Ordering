@@ -34,7 +34,7 @@ class FavoriteItemWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: borderRaduis(15),
         gradient: LinearGradient(
-          colors: SwitchColors.favoriteItemsColor,
+          colors: SwitchColor.itemGradeint,
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),

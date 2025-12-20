@@ -85,10 +85,9 @@ class GridFoodItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      /* height: context.screenHeight * .43, */
       decoration: BoxDecoration(
         borderRadius: borderRaduis(20),
-        color: SwitchColors.itemBackgoundColor,
+        color: SwitchColor.primaryO.withOpacity(0.8),
       ),
       margin: padding(7.0),
       child: Clicker(

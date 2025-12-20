@@ -9,14 +9,9 @@ import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/style.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 
-class SearchingFilterWidget extends StatefulWidget {
-  const SearchingFilterWidget({super.key});
+class ShowFilter extends StatelessWidget {
+  const ShowFilter({super.key});
 
-  @override
-  State<SearchingFilterWidget> createState() => _SearchingFilterWidgetState();
-}
-
-class _SearchingFilterWidgetState extends State<SearchingFilterWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,7 +24,7 @@ class _SearchingFilterWidgetState extends State<SearchingFilterWidget> {
           right: context.isEnglish ? 0 : 10,
         ),
         decoration: BoxDecoration(
-          color: SwitchColors.filterColor,
+          color: SwitchColor.accent,
           borderRadius: borderRaduis(22),
         ),
         child: const FittedBox(
@@ -56,9 +51,8 @@ class SelectPriceFilter extends StatelessWidget {
   final bool isSelected;
   final void Function() onSelect;
 
-  Color get _selectedColor => isSelected
-      ? SwitchColors.selectedFilterColor
-      : SwitchColors.otherFiltersColor;
+  Color get _selectedColor =>
+      isSelected ? SwitchColor.primaryO : SwitchColor.fillColor;
 
   Border get _selectedBorder => isSelected
       ? Border.all(color: Colors.orange, width: 1.5)
@@ -68,7 +62,7 @@ class SelectPriceFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 250),
-      margin: const EdgeInsets.all(10),
+      margin: padding(10),
       width: context.screenWidth * .42,
       decoration: BoxDecoration(
         borderRadius: borderRaduis(isSelected ? 30 : 20),
@@ -78,6 +72,7 @@ class SelectPriceFilter extends StatelessWidget {
       child: Clicker(
         onClick: onSelect,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox.square(
               dimension: context.screenHeight * .04,

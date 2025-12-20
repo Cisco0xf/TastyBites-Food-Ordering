@@ -40,11 +40,11 @@ class FavoriteItemsScreen extends StatelessWidget {
     final bool empty = favItem.isEmpty;
     return Expanded(
       child: empty
-          ? const EmptyFavoriteWidget()
+          ? const EmptyFavorite()
           : Container(
               decoration: BoxDecoration(
                 borderRadius: borderRaduis(15, side: Side.top),
-                color: SwitchColors.backgroundMianColor,
+                color: SwitchColor.bgColor,
               ),
               child: ListView.builder(
                 padding: EdgeInsets.only(bottom: context.screenHeight * .13),

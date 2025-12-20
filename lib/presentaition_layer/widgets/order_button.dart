@@ -50,11 +50,7 @@ class OrderButtonWidget extends StatelessWidget {
               orderNow.item(item: item);
               pushTo(const ChickOutWidget(isSingleItem: true));
             },
-            color: changeColor
-                ? buttonColor
-                : context.isLight
-                    ? AppLightColors.orderButtonColor
-                    : AppDarkColors.orderButtonColor,
+            color: changeColor ? buttonColor : SwitchColor.btnColor,
             shape: _borderRaduis,
             child: Text(
               orderTitle.localeValue(context: context),

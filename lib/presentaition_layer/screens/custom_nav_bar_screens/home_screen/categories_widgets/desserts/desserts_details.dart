@@ -46,8 +46,7 @@ class DessertsDetails extends StatelessWidget {
               bottom: 0,
               child: Container(
                 padding: EdgeInsets.only(top: context.screenHeight * .1),
-                decoration:
-                    BoxDecoration(color: SwitchColors.backgroundMianColor),
+                decoration: BoxDecoration(color: SwitchColor.bgColor),
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
@@ -187,7 +186,7 @@ class DessertsDetails extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 20),
                     height: context.screenHeight * .4,
                     decoration: BoxDecoration(
-                      color: SwitchColors.dessertsBGCOlor,
+                      color: SwitchColor.primaryO,
                       borderRadius: borderRaduis(30),
                     ),
                     child: Stack(

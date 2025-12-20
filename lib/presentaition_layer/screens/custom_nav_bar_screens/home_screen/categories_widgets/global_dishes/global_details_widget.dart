@@ -64,7 +64,7 @@ class GlobalDishesDetails extends StatelessWidget {
                       top: context.screenHeight * .27,
                     ),
                     decoration: BoxDecoration(
-                      color: SwitchColors.backgroundMianColor,
+                      color: SwitchColor.bgColor,
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(20),
                       ),

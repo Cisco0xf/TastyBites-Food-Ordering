@@ -9,15 +9,15 @@ InputDecoration dropDownInputDecoration() {
   return InputDecoration(
     focusedBorder: OutlineInputBorder(
       borderRadius: borderRaduis(20),
-      borderSide: const BorderSide(
-        color: Colors.orange,
+      borderSide: BorderSide(
+        color: SwitchColor.primaryO,
       ),
     ),
     fillColor: const Color(0xFFF8F0E5),
     filled: true,
-    prefixIcon: const Icon(
+    prefixIcon: Icon(
       Icons.timelapse,
-      color: Colors.orange,
+      color: SwitchColor.primaryO,
     ),
     enabledBorder: OutlineInputBorder(
       borderSide: BorderSide.none,
@@ -31,7 +31,7 @@ InputDecoration textFeildDecpration({
   isCollapsed = false,
 }) {
   return InputDecoration(
-    fillColor: SwitchColors.chickoutFillColor,
+    fillColor: SwitchColor.fillColor,
     isCollapsed: isCollapsed,
     filled: true,
     hintText: "address".localeValue(context: context),
@@ -39,19 +39,11 @@ InputDecoration textFeildDecpration({
       fontFamily: context.isEnglish ? null : FontFamily.mainArabic,
       fontWeight: FontWeight.bold,
     ),
-    prefixIcon: const Icon(
-      Icons.location_on_outlined,
-      color: Colors.orange,
-    ),
-    suffixIcon: const Icon(
-      Icons.keyboard_arrow_down_sharp,
-      color: Colors.orange,
-    ),
+    prefixIcon: Icon(Icons.location_on_outlined, color: SwitchColor.primaryO),
+    suffixIcon:
+        Icon(Icons.keyboard_arrow_down_sharp, color: SwitchColor.primaryO),
     focusedBorder: OutlineInputBorder(
-      borderSide: const BorderSide(
-        color: Colors.orange,
-        width: 1,
-      ),
+      borderSide: BorderSide(color: SwitchColor.primaryO),
       borderRadius: borderRaduis(20),
     ),
     enabledBorder: OutlineInputBorder(
@@ -71,20 +63,14 @@ InputDecoration creditCardinputDecoration({
       borderRadius: borderRaduis(10),
     ),
     filled: true,
-    fillColor: SwitchColors.cardFormFieldFillColor,
+    fillColor: SwitchColor.fillColor,
     focusedBorder: OutlineInputBorder(
       borderRadius: borderRaduis(10),
-      borderSide: const BorderSide(
-        color: Colors.orange,
-        width: 1,
-      ),
+      borderSide: BorderSide(color: SwitchColor.primaryO),
     ),
     border: OutlineInputBorder(
       borderRadius: borderRaduis(10),
-      borderSide: const BorderSide(
-        color: Colors.orange,
-        width: 1,
-      ),
+      borderSide: BorderSide(color: SwitchColor.primaryO),
     ),
     labelText: lableText,
     hintText: hintText,

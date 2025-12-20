@@ -105,7 +105,7 @@ class _AddedToCartSuccessfullyWidgetState
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: borderRaduis(10),
-              color: SwitchColors.itemPriceInAddedToCart,
+              color: SwitchColor.primaryO,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -44,7 +44,7 @@ class NewReceiptWidget extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: borderRaduis(15),
-                color: SwitchColors.receiptColor,
+                color: SwitchColor.receiptColor,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class NewReceiptWidget extends StatelessWidget {
                         margin: padding(5),
                         decoration: BoxDecoration(
                           borderRadius: borderRaduis(10),
-                          color: SwitchColors.dateBoxColor,
+                          color: SwitchColor.borderColor,
                           border: Border.all(color: Colors.black),
                         ),
                         child: Text(receipt.dateTime),

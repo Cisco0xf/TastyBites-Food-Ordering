@@ -139,11 +139,11 @@ class ManageCartDB {
   Future<void> initializeDataFromDB({
     InitType type = InitType.cart,
   }) async {
-    final Box box = await _cartDB.openBox;
+    /* final Box box = await _cartDB.openBox;
     final List<FoodModel> db = _cartDB.getFoodDtaFromDatabase(box: box);
 
     final bool initCart = type == InitType.cart;
-
+ */
     /* if (initCart) {
       Provider.of<CartManager>(navigationKey.currentContext!, listen: false)
           .initializeCartFromDatabase(db);

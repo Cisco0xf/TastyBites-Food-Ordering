@@ -42,7 +42,7 @@ class RecepitWidget extends StatelessWidget {
                   ),
                   height: context.screenHeight * .13,
                   decoration: BoxDecoration(
-                    color: SwitchColors.receiptAppBarColor,
+                    color: SwitchColor.secondary,
                     borderRadius: borderRaduis(10.0, side: Side.bottom),
                   ),
                   child: Row(
@@ -113,7 +113,7 @@ class RecepitWidget extends StatelessWidget {
                                     borderRadius: borderRaduis(7),
                                     border: Border.all(
                                         color: Colors.grey, width: 1.5),
-                                    color: SwitchColors.receiptColor,
+                                    color: SwitchColor.receiptColor,
                                   ),
                                   child: Consumer<ManageReceiptHistory>(
                                     builder:
@@ -140,7 +140,7 @@ class RecepitWidget extends StatelessWidget {
                                                   borderRadius:
                                                       borderRaduis(10),
                                                   color:
-                                                      SwitchColors.dateBoxColor,
+                                                      SwitchColor.borderColor,
                                                   border: Border.all(
                                                       color: Colors.black),
                                                 ),

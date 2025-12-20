@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const MainWidget());
 
   SystemChrome.setPreferredOrientations(
@@ -48,50 +50,49 @@ class MainWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: appProviders,
-      child: Consumer<ThemeProvider>(
-        builder: (context, theme, child) {
-          return Consumer<LocalizationProvider>(
-            builder: (context, locale, child) {
-              return ToastificationWrapper(
-                child: MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  navigatorKey: navigationKey,
-                  home: const SplashScreen(),
-                  // App Localization
-                  locale: locale.getAppLocale,
-                  supportedLocales: const <Locale>[
-                    Locale("en"),
-                    Locale("ar"),
-                    Locale("ur"),
-                  ],
-                  localizationsDelegates: const <LocalizationsDelegate<
-                      dynamic>>[
-                    CustomLocalizationDelegate.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  localeResolutionCallback: (Locale? deviceLocale,
-                      Iterable<Locale> supportedLocales) {
-                    for (Locale locale in supportedLocales) {
-                      if (deviceLocale != null &&
-                          deviceLocale.languageCode == locale.languageCode) {
-                        return deviceLocale;
-                      }
-                    }
+      child: Consumer<LocalizationProvider>(
+        builder: (context, locale, child) {
+          final Brightness brightness =
+              context.watch<ThemeNotifier>().appBrightnss;
 
-                    return supportedLocales.first;
-                  },
-                  // App Thame
-                  theme: ThemeData(
-                    colorScheme: ColorScheme.fromSeed(
-                      seedColor: const Color(0xFFFF785B),
-                      brightness: theme.getAppTheme,
-                    ),
-                  ),
+          return ToastificationWrapper(
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              navigatorKey: navigationKey,
+              home: const SplashScreen(),
+              // App Localization
+              locale: locale.getAppLocale,
+              supportedLocales: const <Locale>[
+                Locale("en"),
+                Locale("ar"),
+                Locale("ur"),
+              ],
+              localizationsDelegates: const <LocalizationsDelegate<dynamic>>[
+                CustomLocalizationDelegate.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              localeResolutionCallback:
+                  (Locale? deviceLocale, Iterable<Locale> supportedLocales) {
+                for (Locale locale in supportedLocales) {
+                  if (deviceLocale != null &&
+                      deviceLocale.languageCode == locale.languageCode) {
+                    return deviceLocale;
+                  }
+                }
+
+                return supportedLocales.first;
+              },
+              // App Thame
+              theme: ThemeData(
+                scaffoldBackgroundColor: SwitchColor.bgColor,
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: SwitchColor.primaryO,
+                  brightness: brightness,
                 ),
-              );
-            },
+              ),
+            ),
           );
         },
       ),

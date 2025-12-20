@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
@@ -42,17 +43,12 @@ class OrderSingleItemWidget extends StatelessWidget {
                   DefaultMaterialLocalizations.delegate
                 ],
                 child: Container(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
+                  padding: padding(10),
+                  margin: padding(10.0, from: From.horizontal),
                   decoration: BoxDecoration(
                     borderRadius: borderRaduis(15),
-                    color: SwitchColors.singleItemOrderColor,
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1,
-                    ),
+                    color: SwitchColor.primaryO.withOpacity(0.5),
+                    border: Border.all(color: Colors.grey),
                   ),
                   child: Row(
                     children: <Widget>[
@@ -106,7 +102,7 @@ class OrderSingleItemWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.all(5),
+                                  padding: padding(5),
                                   margin: const EdgeInsets.only(
                                     top: 5,
                                     bottom: 5,
@@ -119,7 +115,7 @@ class OrderSingleItemWidget extends StatelessWidget {
                                       width: 1,
                                     ),
                                     borderRadius: borderRaduis(5),
-                                    color: SwitchColors.searchFieldFillColor,
+                                    color: SwitchColor.fillColor,
                                   ),
                                   child: Row(
                                     mainAxisAlignment:

@@ -24,16 +24,11 @@ class PriceDetailsWidget extends StatelessWidget {
     return Container(
       width: context.screenWidth,
       height: context.screenHeight * .24,
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.only(
-        top: 10,
-        bottom: 0,
-        left: 10,
-        right: 10,
-      ),
+      padding: padding(10),
+      margin: padding(10.0),
       decoration: BoxDecoration(
         borderRadius: borderRaduis(15),
-        color: SwitchColors.detailsBoxColor,
+        color: SwitchColor.primaryO.withOpacity(0.2),
       ),
       child: Column(
         children: <Widget>[
@@ -43,6 +38,7 @@ class PriceDetailsWidget extends StatelessWidget {
                 "price_details".localeValue(context: context),
                 style: TextStyle(
                   fontSize: 17,
+                  color: SwitchColor.txtColor,
                   fontWeight: FontWeight.bold,
                   fontFamily: context.isEnglish
                       ? FontFamily.mainFont
@@ -61,7 +57,6 @@ class PriceDetailsWidget extends StatelessWidget {
                   fontFamily: context.isEnglish
                       ? FontFamily.subFont
                       : FontFamily.mainArabic,
-                  color: const Color(0xFF757575),
                 ),
               ),
               Text(
@@ -69,7 +64,6 @@ class PriceDetailsWidget extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 13,
                   fontFamily: FontFamily.subFont,
-                  color: Color(0xFF757575),
                 ),
               )
             ],
@@ -80,7 +74,6 @@ class PriceDetailsWidget extends StatelessWidget {
               Text(
                 "totle_discount".localeValue(context: context),
                 style: TextStyle(
-                  color: const Color(0xFF757575),
                   fontSize: 13,
                   fontFamily: context.isEnglish
                       ? FontFamily.subFont
@@ -90,7 +83,6 @@ class PriceDetailsWidget extends StatelessWidget {
               Text(
                 "\$ $discount",
                 style: TextStyle(
-                  color: const Color(0xFF757575),
                   fontSize: 13,
                   fontFamily: context.isEnglish
                       ? FontFamily.subFont
@@ -107,6 +99,7 @@ class PriceDetailsWidget extends StatelessWidget {
                 "order_totle".localeValue(context: context),
                 style: TextStyle(
                   fontSize: 15,
+                  color: SwitchColor.txtColor,
                   fontFamily: context.isEnglish
                       ? FontFamily.mainFont
                       : FontFamily.mainArabic,
@@ -128,15 +121,7 @@ class PriceDetailsWidget extends StatelessWidget {
             height: context.screenHeight * .055,
             child: MaterialButton(
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return const ChickOutWidget(
-                        isSingleItem: false,
-                      );
-                    },
-                  ),
-                );
+                pushTo(const ChickOutWidget(isSingleItem: false));
               },
               shape: ContinuousRectangleBorder(
                 borderRadius: borderRaduis(15),

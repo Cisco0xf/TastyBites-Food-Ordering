@@ -56,7 +56,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           child: Container(
             padding: padding(10, from: From.vertical),
             decoration: BoxDecoration(
-              color: SwitchColors.backgroundMianColor,
+              color: SwitchColor.bgColor,
               borderRadius: borderRaduis(15.0, side: Side.top),
             ),
             child: Column(
@@ -67,7 +67,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       SearchField(),
-                      SearchingFilterWidget(),
+                      ShowFilter(),
                     ],
                   ),
                 ),
