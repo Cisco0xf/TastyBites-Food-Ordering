@@ -1,21 +1,17 @@
 // ignore_for_file: use_build_context_synchronously, unused_local_variable
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
-import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
-import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_auth_button.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
 import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:toastification/toastification.dart';
 
 class SignInMainScreen extends StatefulWidget {
   const SignInMainScreen({super.key});
@@ -114,12 +110,6 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                       textFeildTitle: "User name",
                       textInputType: TextInputType.name,
                       hintText: "Enter user name",
-                      /* validator: (validate) {
-                            if ((validate as String).isEmpty) {
-                              return "This field can not be empty";
-                            }
-                            return null;
-                          }, */
                     ),
                     const Gap(height: 15.0),
                     const Gap(height: 15.0),
@@ -128,12 +118,6 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                       textFeildTitle: "Email",
                       textInputType: TextInputType.emailAddress,
                       hintText: "example@gmail.com",
-                      /*  validator: (validate) {
-                            if ((validate as String).isEmpty) {
-                              return "This field can not be empty";
-                            }
-                            return null;
-                          }, */
                     ),
                     const Gap(height: 15.0),
                     AuthField(
@@ -141,20 +125,7 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                       textFeildTitle: "Password",
                       textInputType: TextInputType.text,
                       hasObscure: true,
-                      //isObscure: userSignIn.isPaswrdObscured,
                       hintText: "Enter strong password",
-                      /* suffixIcon: IconButton(
-                            onPressed: () {
-                              userSignIn.showPassword;
-                            },
-                            icon: userSignIn.paswrdIcon,
-                          ),
-                          validator: (validate) {
-                            if ((validate as String).isEmpty) {
-                              return "This field can not be empty";
-                            }
-                            return null;
-                          }, */
                     ),
                     const Gap(height: 15.0),
                     AuthField(
@@ -163,19 +134,6 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                       textInputType: TextInputType.text,
                       hasObscure: true,
                       hintText: "Re-enter password",
-                      /*  isObscure: userSignIn.isRePaswrdObscured,
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              userSignIn.showErEnterPassword;
-                            },
-                            icon: userSignIn.rePaswrdIcon,
-                          ),
-                          validator: (validate) {
-                            if ((validate as String).isEmpty) {
-                              return "This field can not be empty";
-                            }
-                            return null;
-                          }, */
                     ),
                     const Gap(height: 20.0),
                     AuthButton(
@@ -184,17 +142,6 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                         await context
                             .read<FireAuthProvider>()
                             .createNewAccountWithEmailAndPassword();
-                        /*  if (signUpKey.currentState!.validate()) {
-                              userSignIn.chickIsEverythingOk();
-                              userSignIn.createAccountWithEmailAndPssword(
-                                context: context,
-                              );
-                            } else {
-                              showToastification(
-                                message: "Plsease enter the needed info",
-                                type: ToastificationType.error,
-                              );
-                            } */
                       },
                     ),
                     Row(
@@ -209,16 +156,6 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            /* Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const LogInScreen();
-                                },
-                              ),
-                              (route) {
-                                return false;
-                              },
-                            ); */
                             pushTo(const LogInScreen(), type: Push.clear);
                           },
                           child: const Text(
@@ -233,9 +170,7 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
-                      height: context.screenHeight * .09,
-                    ),
+                    const Gap(hRatio: 0.09),
                   ],
                 ),
               ),

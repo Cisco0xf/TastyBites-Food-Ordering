@@ -7,8 +7,7 @@ import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/ratting_sector.dart';
-import 'package:foodapp/statemanagement/theming/is_light.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories/global_dishes/ratting_sector.dart';
 
 class GlobalBody extends StatelessWidget {
   const GlobalBody({super.key, required this.item});
@@ -97,40 +96,7 @@ class GlobalBody extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: context.screenWidth * .55,
-                    child: Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Row(
-                            children: <Widget>[
-                              Text(
-                                "Description",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                            bottom: 10,
-                          ),
-                          child: Text(
-                            item.description,
-                            textAlign: TextAlign.left,
-                            textDirection: TextDirection.ltr,
-                            style: const TextStyle(
-                              fontSize: 17,
-                              fontFamily: FontFamily.subFont,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: ItemDescription(description: item.description),
                   ),
                   const ReviewersSector(),
                 ],

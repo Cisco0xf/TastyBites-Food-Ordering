@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,7 +5,6 @@ import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/personal_info/update_password/new_password_screen.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/authantications/auth_operations.dart';
-import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +18,6 @@ class UpdateUserPasswordScreen extends StatefulWidget {
 }
 
 class _UpdateUserPasswordScreenState extends State<UpdateUserPasswordScreen> {
-  /* final GlobalKey<FormState> resePasswordKey = GlobalKey<FormState>(); */
   @override
   void initState() {
     AuthControllers.initReauthControllers();

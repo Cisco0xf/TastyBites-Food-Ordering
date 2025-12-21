@@ -1,11 +1,9 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/authantications/auth_operations.dart';
-import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
@@ -19,7 +17,6 @@ class ConfirmUserScreen extends StatefulWidget {
 }
 
 class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
-  /* GlobalKey<FormState> deleteAccountKey = GlobalKey<FormState>(); */
 
   @override
   void initState() {
@@ -123,20 +120,8 @@ class _ConfirmUserScreenState extends State<ConfirmUserScreen> {
                         hasObscure: true,
                         hintText: "Password",
                         textFeildTitle: "Enter password",
-                        //isObscure: deleteAccount.isObscure,
                         textInputType: TextInputType.text,
-                        /* suffixIcon: IconButton(
-                              onPressed: () {
-                                deleteAccount.unbObscure();
-                              },
-                              icon: deleteAccount.obscureIcon,
-                            ),
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return "This feild can not be empty";
-                              }
-                              return null;
-                            }, */
+                       
                       ),
                     ],
                   ),

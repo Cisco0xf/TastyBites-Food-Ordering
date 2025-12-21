@@ -5,7 +5,6 @@ import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/statemanagement/user_address/get_user_address.dart';
 import 'package:foodapp/constants/app_colors.dart';
 
 import 'package:foodapp/common/app_dimention.dart';

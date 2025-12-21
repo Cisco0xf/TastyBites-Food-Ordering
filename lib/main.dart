@@ -17,7 +17,6 @@ import 'package:foodapp/statemanagement/app_providers.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/localization/localization_provider.dart';
 import 'package:foodapp/statemanagement/theming/theme_provider.dart';
-import 'package:foodapp/statemanagement/receipt_management/receipt_model.dart';
 import 'package:toastification/toastification.dart';
 
 Future<void> main() async {

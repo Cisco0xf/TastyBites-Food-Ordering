@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
-import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/manage_metadata.dart';
@@ -36,7 +36,7 @@ class _MainScreenShimmerState extends State<MainScreenShimmer> {
         if (mounted) {
           await context.read<ManageReceiptHistory>().initializeReceipts();
         }
-        
+
         await ManageUserMetadata().setBio();
 
         pushTo(const MainScreen(), type: Push.replace);
@@ -57,13 +57,9 @@ class _MainScreenShimmerState extends State<MainScreenShimmer> {
                 context.isLight ? Colors.grey.shade100 : Colors.grey.shade700,
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: context.screenHeight * .07,
-                ),
+                const Gap(hRatio: .07),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 10.0,
-                  ),
+                  padding: const EdgeInsets.only(bottom: 10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[

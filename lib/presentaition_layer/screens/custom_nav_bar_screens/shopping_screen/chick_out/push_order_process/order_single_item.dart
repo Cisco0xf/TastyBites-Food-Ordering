@@ -5,7 +5,6 @@ import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
-import 'package:foodapp/statemanagement/theming/is_light.dart';
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';

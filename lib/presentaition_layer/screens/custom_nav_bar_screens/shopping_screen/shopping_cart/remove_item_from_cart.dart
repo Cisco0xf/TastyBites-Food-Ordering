@@ -8,7 +8,6 @@ import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:provider/provider.dart';
 

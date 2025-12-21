@@ -1,15 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:flutter/material.dart';
-import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/my_logger.dart';
-import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_db.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
-import 'package:foodapp/statemanagement/theming/theme_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /* 

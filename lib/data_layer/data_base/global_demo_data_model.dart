@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:hive/hive.dart';
 
 part 'global_demo_data_model.g.dart';

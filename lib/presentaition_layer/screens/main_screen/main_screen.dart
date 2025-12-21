@@ -9,7 +9,6 @@ import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/cloud_messaging/notification_messaging.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:foodapp/statemanagement/theming/is_light.dart';
-import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/presentaition_layer/screens/main_screen/show_exit_dialog.dart';
 import 'package:provider/provider.dart';
 
@@ -156,67 +155,6 @@ class _MainScreenState extends State<MainScreen> {
                       if (i == 1) const Gap(wRatio: 0.12),
                     },
                   },
-                  /* CustomNavigationBarItem(
-                    selectedColor:
-                        context.read<CurrentIndexProvider>().currentContent == 0
-                            ? SwitchColors.selectedNavColor
-                            : null,
-                    icon: context.read<CurrentIndexProvider>().currentContent == 0
-                        ? const Icon(
-                            Icons.home,
-                          )
-                        : const Icon(
-                            Icons.home_outlined,
-                          ),
-                    onPressed: () {
-                      context.read<CurrentIndexProvider>().switchContent(1);
-                    },
-                  ),
-                  CustomNavigationBarItem(
-                    selectedColor:
-                        context.read<CurrentIndexProvider>().currentContent == 1
-                            ? SwitchColors.selectedNavColor
-                            : null,
-                    icon: context.read<CurrentIndexProvider>().currentContent == 1
-                        ? const Icon(Icons.favorite)
-                        : const Icon(
-                            Icons.favorite_outline,
-                          ),
-                    onPressed: () {
-                      context.read<CurrentIndexProvider>().switchContent(2);
-                    },
-                  ),
-                  SizedBox(
-                    width: context.screenWidth * .12,
-                  ),
-                  CustomNavigationBarItem(
-                    selectedColor: currentContent == 3
-                        ? SwitchColors.selectedNavColor
-                        : null,
-                    icon: currentContent == 3
-                        ? const Icon(
-                            Icons.notifications,
-                          )
-                        : const Icon(
-                            Icons.notifications_none_outlined,
-                          ),
-                    onPressed: () {
-                      context.read<CurrentIndexProvider>().switchContent(4);
-                    },
-                  ),
-                  CustomNavigationBarItem(
-                    selectedColor: currentContent == 4
-                        ? SwitchColors.selectedNavColor
-                        : null,
-                    icon: currentContent == 4
-                        ? const Icon(Icons.person_2)
-                        : const Icon(
-                            Icons.person_2_outlined,
-                          ),
-                    onPressed: () {
-                      context.read<CurrentIndexProvider>().switchContent(5);
-                    },
-                  ), */
                 ],
               ),
             ),

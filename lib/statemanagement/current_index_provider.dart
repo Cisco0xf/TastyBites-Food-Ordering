@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/common/navigator_key.dart';
-import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:provider/provider.dart';
 

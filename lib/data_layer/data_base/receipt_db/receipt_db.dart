@@ -1,11 +1,8 @@
 import 'package:foodapp/common/my_logger.dart';
-import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
 import 'package:foodapp/data_layer/data_base/locale_repository.dart';
 import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
-import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
 
 class ReceiptDB extends Database<ReceiptModel> {
   @override
@@ -86,16 +83,4 @@ class ManageReceiptDB {
     return receiptsDb;
   }
 
-  static Future<void> initializeReceiptHistoryFromDatabase() async {
-
-    /// TODO : REmove this Function from the Code (NO LONGER USED)
-    /* final Box box = await _receiptDB.openBox;
-
-    final List<ReceiptModel> db = _receiptDB.getFoodDtaFromDatabase(box: box);
-
-    Provider.of<ManageReceiptHistory>(
-      navigationKey.currentContext!,
-      listen: false,
-    ).initializeReceiptHistoryFromDatabase(db); */
-  }
 }

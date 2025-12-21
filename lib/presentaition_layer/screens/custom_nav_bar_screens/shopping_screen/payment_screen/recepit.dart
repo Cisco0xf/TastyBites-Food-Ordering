@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
-import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
@@ -165,28 +164,7 @@ class RecepitWidget extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              /*  Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            /* SizedBox(
-                              width: context.screenWidth * .8,
-                              height: context.screenHeight * .08,
-                              child: MaterialButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: borderRaduis(15),
-                                ),
-                                color: const Color(0xFFA9B388),
-                                child: const Text("Track you order"),
-                              ),
-                            ), 
-                            SizedBox(
-                              height: context.screenHeight * .08,
-                            ),*/
-                          ],
-                        ), */
+                       
                             ],
                           ),
                         ),

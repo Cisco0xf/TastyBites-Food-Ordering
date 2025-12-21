@@ -1,14 +1,11 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/authantications/auth_operations.dart';
-import 'package:foodapp/statemanagement/profile_seetings/presonal_info_provider.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:provider/provider.dart';
@@ -85,12 +82,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                             textInputType: TextInputType.visiblePassword,
                             hasObscure: true,
                             hintText: "New password",
-                            /*  validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "This feild can not be empty";
-                                  }
-                                  return null;
-                                }, */
                           ),
                           const Gap(hRatio: 0.04),
                           AuthField(
@@ -99,12 +90,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                             textInputType: TextInputType.visiblePassword,
                             hasObscure: true,
                             hintText: "confrim new password",
-                            /* validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "This feild can not be empty";
-                                  }
-                                  return null;
-                                }, */
                           ),
                         ],
                       ),
@@ -114,11 +99,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                         height: context.screenHeight * .08,
                         child: MaterialButton(
                           onPressed: () async {
-                            /* if (resetPasswordKey.currentState!.validate()) {
-                                  resetPassword.saveNewPassword(context: context);
-                                } else {
-                                  log("Something goes wrong while save new password");
-                                } */
                             await context
                                 .read<AuthOperations>()
                                 .updateCurrentUserPawwsord();

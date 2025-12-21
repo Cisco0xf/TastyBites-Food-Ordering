@@ -6,8 +6,6 @@ import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
-import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
-import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/presentaition_layer/auth/components/auth_social_media.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_auth_button.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
@@ -16,7 +14,6 @@ import 'package:foodapp/presentaition_layer/auth/sign_up/sign_up_main_screen.dar
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:toastification/toastification.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});

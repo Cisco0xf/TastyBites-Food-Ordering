@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:foodapp/common/app_dimention.dart';
-import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
-import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/constants/style.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';

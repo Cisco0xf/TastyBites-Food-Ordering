@@ -1,12 +1,9 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
-import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
-import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_auth_button.dart';
 import 'package:foodapp/presentaition_layer/auth/components/custom_text_feild.dart';
 import 'package:foodapp/common/app_dimention.dart';
@@ -21,15 +18,6 @@ class ForgetPassWordScreen extends StatefulWidget {
 }
 
 class _ForgetPassWordScreenState extends State<ForgetPassWordScreen> {
-  /*  late TextEditingController emailController;
-  @override
-  void initState() {
-    emailController = TextEditingController();
-    super.initState();
-  } */
-
-  //<FormState> forgetPasswordKey = GlobalKey<FormState>();
-
   @override
   void initState() {
     AuthControllers.initResetPwsEmailController();
@@ -137,16 +125,6 @@ class _ForgetPassWordScreenState extends State<ForgetPassWordScreen> {
                       await context
                           .read<FireAuthProvider>()
                           .sendResetPasswordEmail();
-                      /* if (forgetPasswordKey.currentState!.validate()) {
-                            forgetPassword.sentResetPasswordLink();
-                            ReusableMethods.showAwesomDialog(
-                              context: context,
-                              description:
-                                  "We have sent a link to your email to reset your password",
-                              title: "Chick your eamil",
-                              dialogType: DialogType.info,
-                            );
-                          } */
                     },
                   ),
                 ],

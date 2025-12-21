@@ -5,7 +5,7 @@ import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/data_layer/data_models/global_dishes_model.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_details.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories/global_dishes/global_details.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FoodSlider extends StatelessWidget {

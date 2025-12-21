@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/enums.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_details.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/cart_items.dart';
 import 'package:provider/provider.dart';
 
 import 'package:foodapp/constants/app_colors.dart';
@@ -12,9 +10,6 @@ import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/favoriter_items/add_to_favorite_provider.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/favotie_items/favorite_empty.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/favotie_items/item_widget.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/fast_food/details.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/desserts/desserts_details.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/salads_vegetarian_widgets/components/details_of_dishes.dart';
 
 class FavoriteItemsScreen extends StatelessWidget {
   const FavoriteItemsScreen({super.key});

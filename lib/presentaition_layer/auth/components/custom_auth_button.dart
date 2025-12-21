@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
-import 'package:foodapp/statemanagement/authantications/authentication_provider.dart';
-import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:provider/provider.dart';
 

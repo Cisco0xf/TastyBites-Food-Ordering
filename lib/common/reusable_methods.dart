@@ -1,6 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:toastification/toastification.dart';
@@ -37,77 +35,4 @@ void showToastification({
       ),
     ),
   );
-}
-
-class ReusableMethods {
-  static Future<dynamic> showAwesomDialog({
-    required BuildContext context,
-    required String description,
-    required String title,
-    DialogType dialogType = DialogType.error,
-  }) {
-    return AwesomeDialog(
-      context: context,
-      animType: AnimType.rightSlide,
-      dialogType: dialogType,
-      title: title,
-      titleTextStyle: const TextStyle(
-        fontFamily: FontFamily.mainFont,
-        color: Color(0xFFFE7A36),
-        fontWeight: FontWeight.bold,
-        fontSize: 22,
-      ),
-      transitionAnimationDuration: const Duration(
-        milliseconds: 250,
-      ),
-      autoHide: const Duration(
-        seconds: 3,
-      ),
-      desc: description,
-      descTextStyle: const TextStyle(
-        fontSize: 17,
-        color: Colors.grey,
-        fontWeight: FontWeight.normal,
-        fontFamily: FontFamily.mainFont,
-      ),
-      dismissOnTouchOutside: true,
-    ).show();
-  }
-
-  static void showNotification({
-    required String title,
-    required String description,
-    ToastificationType type = ToastificationType.info,
-  }) {
-    toastification.show(
-      context: navigationKey.currentContext!,
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-          color: Colors.orange,
-          fontFamily: FontFamily.mainFont,
-        ),
-      ),
-      description: Text(
-        description,
-        style: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-          fontFamily: FontFamily.mainFont,
-        ),
-      ),
-      type: type,
-      direction: TextDirection.ltr,
-      alignment: Alignment.topCenter,
-      borderRadius: borderRaduis(15),
-      showProgressBar: true,
-      animationDuration: const Duration(milliseconds: 2),
-      autoCloseDuration: const Duration(seconds: 2),
-      applyBlurEffect: true,
-      dragToClose: true,
-      dismissDirection: DismissDirection.horizontal,
-    );
-  }
 }

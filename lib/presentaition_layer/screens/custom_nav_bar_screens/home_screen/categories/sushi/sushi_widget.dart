@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/desserts/desserts_details.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/fast_food/details.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories/desserts/desserts_details.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/constants/style.dart';
 
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/x_not_found/not_found_category.dart';
 import 'package:provider/provider.dart';
 
 class SushiWidget extends StatelessWidget {
@@ -19,7 +17,7 @@ class SushiWidget extends StatelessWidget {
     return Consumer<SearchingProvider>(
       builder: (context, searching, child) {
         return searching.searchingWithoutData
-            ? const NotFounCategoryWidget()
+            ? const EmptySearch()
             : Expanded(
                 child: ListView.builder(
                   padding: EdgeInsets.only(bottom: context.screenHeight * .1),

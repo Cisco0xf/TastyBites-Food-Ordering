@@ -4,7 +4,6 @@ import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
-import 'package:foodapp/statemanagement/theming/is_light.dart';
 import 'package:foodapp/constants/app_colors.dart';
 
 import 'package:foodapp/constants/style.dart';

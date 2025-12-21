@@ -125,11 +125,6 @@ class GridFoodItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         OrderButtonWidget(item: item),
-                        /* const Icon(
-                          Icons.add_circle,
-                          color: Color(0xFF1F8A70),
-                          size: 35,
-                        ), */
                         CartIconButton(target: item),
                       ],
                     )

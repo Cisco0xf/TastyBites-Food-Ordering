@@ -13,16 +13,13 @@ class AuthField extends StatefulWidget {
     required this.textFeildTitle,
     required this.textInputType,
     required this.hintText,
-    //required this.validator,
-    /* this.suffixIcon = const SizedBox(), */
+ 
     this.hasObscure = false,
   });
 
   final TextEditingController controller;
   final TextInputType textInputType;
-  //final SignUpValidator validator;
   final String textFeildTitle;
-  /* final Widget suffixIcon; */
   final String hintText;
   final bool hasObscure;
 

@@ -120,7 +120,6 @@ class ListFoodItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                      
                         const Gap(wRatio: 0.03),
                         Text(
                           "(${item.numberOfReviewers} reviewer)",
@@ -138,15 +137,7 @@ class ListFoodItem extends StatelessWidget {
                           item: item,
                           buttonColor: _btnColor,
                         ),
-                        /*   SizedBox(
-                          width: context.screenWidth * .03,
-                        ), */
                         const Gap(wRatio: 0.03),
-                        /* const Icon(
-                          Icons.add_circle,
-                          color: Color(0xFF1F8A70),
-                          size: 35,
-                        ), */
                         CartIconButton(target: item),
                       ],
                     )

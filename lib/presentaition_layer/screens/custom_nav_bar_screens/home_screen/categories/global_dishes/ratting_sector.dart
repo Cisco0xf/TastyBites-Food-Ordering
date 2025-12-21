@@ -25,22 +25,6 @@ class ReviewerOpinoinWidget extends StatelessWidget {
       children: <Widget>[
         Row(
           children: <Widget>[
-            /* Container(
-              width: 35,
-              height: 35,
-              decoration: BoxDecoration(
-                borderRadius: borderRaduis(5),
-              ),
-              child: ClipRRect(
-                borderRadius: borderRaduis(7),
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
-                  width: 35,
-                  height: 35,
-                ),
-              ),
-            ), */
             Container(
               padding: padding(5.0),
               decoration: BoxDecoration(
@@ -123,55 +107,6 @@ class ReviewersSector extends StatelessWidget {
               ),
               if (i != reviewers.length - 1) const Divider(),
             },
-            /*  ReviewerOpinoinWidget(
-              reviewerName: "Sarah Oftli",
-              reviewerOpinion: "I like it but it was a little bite cold",
-              reviewerRate: 3.0,
-              imagePath: "asstes/images/app_images/profile/woman_1.jpg",
-              fromWhen: "3 munite ago",
-            ),
-            Divider(),
-            ReviewerOpinoinWidget(
-              reviewerName: "John Oftli",
-              reviewerOpinion:
-                  "One of the most delicious dish I vave ever tast",
-              reviewerRate: 4.6,
-              imagePath: "asstes/images/app_images/profile/man_2.jpg",
-              fromWhen: "3 hours ago",
-            ),
-            Divider(),
-            ReviewerOpinoinWidget(
-              reviewerName: "Alix Oftli",
-              reviewerOpinion: "I like it but it was a little bite cold",
-              reviewerRate: 4.0,
-              imagePath: "asstes/images/app_images/profile/man_3.jpg",
-              fromWhen: "3 days ago",
-            ),
-            Divider(),
-            ReviewerOpinoinWidget(
-              reviewerName: "Sarah Ali",
-              reviewerOpinion:
-                  "One of the most delicious dish I vave ever tast",
-              reviewerRate: 5.0,
-              imagePath: "asstes/images/app_images/profile/woman_2.jpg",
-              fromWhen: "3 munite ago",
-            ),
-            Divider(),
-            ReviewerOpinoinWidget(
-              reviewerName: "Khaled Moneer",
-              reviewerOpinion: "It's perfect but the delevery was too late",
-              reviewerRate: 3.8,
-              imagePath: "asstes/images/app_images/profile/man_3.jpg",
-              fromWhen: "32 munite ago",
-            ),
-            Divider(),
-            ReviewerOpinoinWidget(
-              reviewerName: "Ali Mossa",
-              reviewerOpinion: "I like it ,will try again",
-              reviewerRate: 4.5,
-              imagePath: "asstes/images/app_images/profile/man_4.jpg",
-              fromWhen: "12 munite ago",
-            ), */
           ],
         ),
       ),

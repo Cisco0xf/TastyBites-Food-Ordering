@@ -10,15 +10,13 @@ import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/style.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_models/global_dishes_model.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/food_slider.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories/global_dishes/food_slider.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_details.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/x_not_found/not_found_category.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories/global_dishes/global_details.dart';
 import 'package:provider/provider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class GlobalDishesWidget extends StatefulWidget {
   const GlobalDishesWidget({super.key});
@@ -91,8 +89,7 @@ class _GlobalDishesWidgetState extends State<GlobalDishesWidget> {
                   SliverList(
                     delegate: SliverChildListDelegate(
                       <Widget>[
-                        const NotFounCategoryWidget(
-                        ),
+                        const EmptySearch(),
                         const Gap(hRatio: .13),
                       ],
                     ),
@@ -116,51 +113,6 @@ class _GlobalDishesWidgetState extends State<GlobalDishesWidget> {
                     ),
                   ),
                 },
-
-                /*  searching.isItemNotExist
-                    ? SliverList(
-                        delegate: SliverChildListDelegate(
-                          [
-                            const NotFounCategoryWidget(
-                              category: "global_dishes",
-                            ),
-                            const Gap(hRatio: .13), 
-                          ],
-                        ),
-                      )
-                    : SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          childCount: searching.isSearchingBarEmpty
-                              ? globalDishesDemoData.length
-                              : searching.filteredList.length,
-                          (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) {
-                                      return searching.isSearchingBarEmpty
-                                          ? GlobalDishesDetails(
-                                              item: globalDishesDemoData[index],
-                                            )
-                                          : GlobalDishesDetails(
-                                              item:
-                                                  searching.filteredList[index],
-                                            );
-                                    },
-                                  ),
-                                );
-                              },
-                              child: GlobalDishItem(
-                                index: index,
-                                foodList: searching.isSearchingBarEmpty
-                                    ? globalDishesDemoData
-                                    : searching.filteredList,
-                              ),
-                            );
-                          },
-                        ),
-                      ), */
               ],
             );
           },
@@ -173,14 +125,9 @@ class _GlobalDishesWidgetState extends State<GlobalDishesWidget> {
 class GlobalDishItem extends StatelessWidget {
   const GlobalDishItem({
     super.key,
-    /* required this.index,
-    required this.foodList, */
     required this.item,
     required this.onTap,
   });
-
-  /*  final int index;
-  final List<FoodModel> foodList; */
 
   final FoodModel item;
   final void Function() onTap;
@@ -196,7 +143,6 @@ class GlobalDishItem extends StatelessWidget {
       child: Container(
         height: context.screenHeight * .28,
         margin: padding(10.0),
-        //padding: const EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
           borderRadius: borderRaduis(15),
           color: const Color(0xFFFFCF81),

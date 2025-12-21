@@ -6,8 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/constants/texts.dart';
-import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
-import 'package:foodapp/data_layer/data_base/receipt_db/receipt_model.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.dart';

@@ -8,8 +8,7 @@ import 'package:foodapp/statemanagement/searching_system/searching_provider.dart
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/style.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/desserts/desserts_details.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/x_not_found/not_found_category.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories/desserts/desserts_details.dart';
 import 'package:foodapp/presentaition_layer/widgets/order_button.dart';
 import 'package:provider/provider.dart';
 
@@ -22,73 +21,32 @@ class DessertsWidget extends StatelessWidget {
       child: Consumer<SearchingProvider>(
         builder: (context, searching, child) {
           return searching.searchingWithoutData
-              ? const NotFounCategoryWidget()
+              ? const EmptySearch()
               : ListView.builder(
                   padding: EdgeInsets.only(bottom: context.screenHeight * .14),
                   itemCount: searching.filtred.length,
                   itemBuilder: (context, index) {
                     final FoodModel target = searching.filtred[index];
 
-                    return DessertsItemWidget(
+                    return DessertsItem(
                         item: target,
                         onTap: () {
                           pushTo(FoodDetails(item: target));
                         });
                   },
                 );
-
-          /* searching.isItemNotExist
-              ? const NotFounCategoryWidget(category: "desserts")
-              : ListView.builder(
-                  padding: EdgeInsets.only(bottom: context.screenHeight * .1),
-                  itemCount: searching.isSearchingBarEmpty
-                      ? dessertDemoData.length
-                      : searching.filteredList.length,
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return searching.isSearchingBarEmpty
-                                    ? FoodDetails(
-                                        item: dessertDemoData[index],
-                                      )
-                                    : FoodDetails(
-                                        item: searching.filteredList[index],
-                                      );
-                              },
-                            ),
-                          );
-                        },
-                        child: DessertsItemWidget(
-                          index: index,
-                          foodList: searching.isSearchingBarEmpty
-                              ? dessertDemoData
-                              : searching.filteredList,
-                        ),
-                      ),
-                    );
-                  },
-                ); */
         },
       ),
     );
   }
 }
 
-class DessertsItemWidget extends StatelessWidget {
-  const DessertsItemWidget({
+class DessertsItem extends StatelessWidget {
+  const DessertsItem({
     super.key,
-    /* required this.index,
-    required this.foodList, */
     required this.item,
     required this.onTap,
   });
-  /* final int index;
-  final List<FoodModel> foodList; */
 
   final FoodModel item;
   final void Function() onTap;

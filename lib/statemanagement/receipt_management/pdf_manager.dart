@@ -21,8 +21,9 @@ class ReceiptPdf {
     if (!isGranted) {
       await Permission.storage.request();
 
-      return false;
+      return isGranted;
     }
+    
     return true;
   }
 

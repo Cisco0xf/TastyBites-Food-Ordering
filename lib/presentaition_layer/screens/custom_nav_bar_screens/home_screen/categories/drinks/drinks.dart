@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/statemanagement/current_index_provider.dart';
-import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/drinks/tab_bar_widgets/type_drinks.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories/drinks/type_drinks.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:provider/provider.dart';
 
