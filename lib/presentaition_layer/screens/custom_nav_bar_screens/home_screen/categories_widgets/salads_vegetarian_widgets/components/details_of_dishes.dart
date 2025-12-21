@@ -146,20 +146,17 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                   children: <Widget>[
                     Positioned.fill(
                       child: Hero(
-                        tag: item.foodName.toString(),
+                        tag: item.foodName,
                         child: Clicker(
                           innerPadding: 0.0,
                           onClick: () async {
                             await showFullImage(item.imagePath);
                           },
-                          child: Hero(
-                            tag: item.foodName,
-                            child: ClipRRect(
-                              borderRadius: borderRaduis(20.0, side: Side.bottom),
-                              child: Image.asset(
-                                item.imagePath,
-                                fit: BoxFit.cover,
-                              ),
+                          child: ClipRRect(
+                            borderRadius: borderRaduis(20.0, side: Side.bottom),
+                            child: Image.asset(
+                              item.imagePath,
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),

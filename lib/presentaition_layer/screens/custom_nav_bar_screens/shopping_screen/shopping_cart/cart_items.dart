@@ -20,21 +20,11 @@ import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/price_details.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/remove_item_from_cart.dart';
 
+
 class CartItemsWidget extends StatelessWidget {
   const CartItemsWidget({super.key});
 
-  Widget _pushTarget(FoodModel item) {
-    final Map<String, Widget> routs = {
-      "GlobalDishe": GlobalDishesDetails(item: item),
-      "Salad": ShowDishesDetailsWidget(item: item),
-      "Vegetarian": ShowDishesDetailsWidget(item: item),
-    };
-
-    final Widget target = routs[item.foodType] ?? FoodDetails(item: item);
-
-    return target;
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Consumer<CartManager>(
@@ -50,7 +40,7 @@ class CartItemsWidget extends StatelessWidget {
                   final FoodModel item = cartInfo.state[index];
                   return GestureDetector(
                     onTap: () {
-                      pushTo(_pushTarget(item));
+                      pushTo(customRouts(item));
                     },
                     child: CartItem(
                       /*   index: index,

@@ -7,6 +7,9 @@ import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/desserts/desserts_details.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_details.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/salads_vegetarian_widgets/components/details_of_dishes.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/theming/is_light.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -118,7 +121,19 @@ class CheckDivider extends StatelessWidget {
   }
 }
 
+Widget customRouts(FoodModel item) {
+  final Widget defaultRout = FoodDetails(item: item);
 
+  final Map<String, Widget> routs = {
+    "Salad": ShowDishesDetailsWidget(item: item),
+    "Vegetarian": ShowDishesDetailsWidget(item: item),
+    "GlobalDishe": GlobalDishesDetails(item: item),
+  };
+
+  final Widget target = routs[item.foodType] ?? defaultRout;
+
+  return target;
+}
 
 class ItemRating extends StatelessWidget {
   const ItemRating({super.key, required this.rate});

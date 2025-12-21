@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_details.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/shopping_cart/cart_items.dart';
 import 'package:provider/provider.dart';
 
 import 'package:foodapp/constants/app_colors.dart';
@@ -16,21 +18,6 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_
 
 class FavoriteItemsScreen extends StatelessWidget {
   const FavoriteItemsScreen({super.key});
-
-  Widget _targetWidget(String key, FoodModel item) {
-    final Widget defaultRout = FoodDetails(item: item);
-
-    final Map<String, Widget> routs = {
-      "FastFood": defaultRout,
-      "Dessert": FoodDetails(item: item),
-      "Salad": ShowDishesDetailsWidget(item: item),
-      "Vegetarian": ShowDishesDetailsWidget(item: item),
-    };
-
-    final Widget target = routs[key] ?? defaultRout;
-
-    return target;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +41,7 @@ class FavoriteItemsScreen extends StatelessWidget {
                   return FavoriteItemWidget(
                     item: item,
                     discover: () {
-                      pushTo(_targetWidget(item.foodType, item));
+                      pushTo(customRouts(item));
                     },
                   );
                 },
