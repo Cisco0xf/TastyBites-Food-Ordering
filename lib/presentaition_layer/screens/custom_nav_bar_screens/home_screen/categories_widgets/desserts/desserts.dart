@@ -22,7 +22,7 @@ class DessertsWidget extends StatelessWidget {
       child: Consumer<SearchingProvider>(
         builder: (context, searching, child) {
           return searching.searchingWithoutData
-              ? const NotFounCategoryWidget(category: "desserts")
+              ? const NotFounCategoryWidget()
               : ListView.builder(
                   padding: EdgeInsets.only(bottom: context.screenHeight * .14),
                   itemCount: searching.filtred.length,
@@ -32,7 +32,7 @@ class DessertsWidget extends StatelessWidget {
                     return DessertsItemWidget(
                         item: target,
                         onTap: () {
-                          pushTo(DessertsDetails(item: target));
+                          pushTo(FoodDetails(item: target));
                         });
                   },
                 );
@@ -53,10 +53,10 @@ class DessertsWidget extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) {
                                 return searching.isSearchingBarEmpty
-                                    ? DessertsDetails(
+                                    ? FoodDetails(
                                         item: dessertDemoData[index],
                                       )
-                                    : DessertsDetails(
+                                    : FoodDetails(
                                         item: searching.filteredList[index],
                                       );
                               },

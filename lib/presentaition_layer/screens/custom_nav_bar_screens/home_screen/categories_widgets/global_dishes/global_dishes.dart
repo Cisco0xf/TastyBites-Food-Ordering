@@ -92,7 +92,6 @@ class _GlobalDishesWidgetState extends State<GlobalDishesWidget> {
                     delegate: SliverChildListDelegate(
                       <Widget>[
                         const NotFounCategoryWidget(
-                          category: "global_dishes",
                         ),
                         const Gap(hRatio: .13),
                       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/list_item.dart';
 import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/speial_dishes/special_dishes.dart';
@@ -28,10 +29,8 @@ class GreenDish extends StatelessWidget {
     return Consumer<SearchingProvider>(
       builder: (context, searching, child) {
         if (searching.searchingWithoutData) {
-          return NotFounCategoryWidget(
-            category: context.read<CurrentIndexProvider>().currentIndex == 3
-                ? "salads"
-                : "vegetarian",
+          return const NotFounCategoryWidget(
+           
           );
         }
 

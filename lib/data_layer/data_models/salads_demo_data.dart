@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 List<FoodModel> saladDamoData = [
   FoodModel(
@@ -10,7 +11,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Coleslaw.jpg",
     foodPrice: 23.0,
     foodRate: 3.5,
-    numberOfReviewers: 2421,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}1/1-ingredient.png",
       "${Assets.saladIngBase}1/2-ingredient.png",
@@ -36,7 +38,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Caesar-salad.jpg",
     foodPrice: 34.0,
     foodRate: 3.9,
-    numberOfReviewers: 765,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}2/1-ingredient.png",
       "${Assets.saladIngBase}2/2-ingredient.png",
@@ -66,7 +69,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Horiatiki-salata.jpg",
     foodPrice: 21.0,
     foodRate: 4.4,
-    numberOfReviewers: 432,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}3/1-ingredient.png",
       "${Assets.saladIngBase}3/2-ingredient.png",
@@ -96,7 +100,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Caprese-Salad.jpg",
     foodPrice: 22.99,
     foodRate: 4.3,
-    numberOfReviewers: 232,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}4/1-ingredient.png",
       "${Assets.saladIngBase}4/2-ingredient.png",
@@ -118,7 +123,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Macaroni-Salad.jpg",
     foodPrice: 32.0,
     foodRate: 3.1,
-    numberOfReviewers: 321,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}5/1-ingredient.png",
       "${Assets.saladIngBase}5/2-ingredient.png",
@@ -148,7 +154,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Fattoush.jpg",
     foodPrice: 21.0,
     foodRate: 4.4,
-    numberOfReviewers: 4320,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}6/1-ingredient.png",
       "${Assets.saladIngBase}6/2-ingredient.png",
@@ -178,7 +185,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Olivier-Salad.jpg",
     foodPrice: 43.0,
     foodRate: 4.0,
-    numberOfReviewers: 345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}7/1-ingredient.png",
       "${Assets.saladIngBase}7/2-ingredient.png",
@@ -206,7 +214,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Kisir.jpg",
     foodPrice: 44.0,
     foodRate: 4.1,
-    numberOfReviewers: 2345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}8/1-ingredient.png",
       "${Assets.saladIngBase}8/2-ingredient.png",
@@ -236,7 +245,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Tabbouleh.jpg",
     foodPrice: 23.0,
     foodRate: 4.1,
-    numberOfReviewers: 253,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}9/1-ingredient.png",
       "${Assets.saladIngBase}9/2-ingredient.png",
@@ -264,7 +274,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Vinegret.jpg",
     foodPrice: 112.0,
     foodRate: 3.8,
-    numberOfReviewers: 2305,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}10/1-ingredient.png",
       "${Assets.saladIngBase}10/2-ingredient.png",
@@ -294,7 +305,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Horta.jpg",
     foodPrice: 57.0,
     foodRate: 4.5,
-    numberOfReviewers: 969,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}11/1-ingredient.png",
       "${Assets.saladIngBase}11/2-ingredient.png",
@@ -319,7 +331,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Chinese-Chicken-Salad.jpg",
     foodPrice: 43.0,
     foodRate: 4.4,
-    numberOfReviewers: 76,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}12/1-ingredient.png",
       "${Assets.saladIngBase}12/2-ingredient.png",
@@ -349,7 +362,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Mizeria.jpg",
     foodPrice: 23.0,
     foodRate: 4.1,
-    numberOfReviewers: 435,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}13/1-ingredient.png",
       "${Assets.saladIngBase}13/2-ingredient.png",
@@ -369,7 +383,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Kartoffelsalat.jpg",
     foodPrice: 34.0,
     foodRate: 4.0,
-    numberOfReviewers: 440,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}14/1-ingredient.png",
       "${Assets.saladIngBase}14/2-ingredient.png",
@@ -395,7 +410,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Yusheng.jpg",
     foodPrice: 39.0,
     foodRate: 3.1,
-    numberOfReviewers: 986,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}15/1-ingredient.png",
       "${Assets.saladIngBase}15/2-ingredient.png",
@@ -425,7 +441,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Piyaz.jpg",
     foodPrice: 232.0,
     foodRate: 4.2,
-    numberOfReviewers: 332,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}16/1-ingredient.png",
       "${Assets.saladIngBase}16/2-ingredient.png",
@@ -455,7 +472,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Patatosalata.jpg",
     foodPrice: 11.0,
     foodRate: 4.1,
-    numberOfReviewers: 7787,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}17/1-ingredient.png",
       "${Assets.saladIngBase}17/2-ingredient.png",
@@ -481,7 +499,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Ohitashi.jpg",
     foodPrice: 43.0,
     foodRate: 4.0,
-    numberOfReviewers: 103,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}18/1-ingredient.png",
       "${Assets.saladIngBase}18/2-ingredient.png",
@@ -509,7 +528,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Zaalouk.jpg",
     foodPrice: 77.0,
     foodRate: 4.1,
-    numberOfReviewers: 352,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}19/1-ingredient.png",
       "${Assets.saladIngBase}19/2-ingredient.png",
@@ -537,7 +557,8 @@ List<FoodModel> saladDamoData = [
     imagePath: "${Assets.saladBase}Salată-orientală.jpg",
     foodPrice: 23.0,
     foodRate: 3.4,
-    numberOfReviewers: 5421,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsImages: [
       "${Assets.saladIngBase}20/1-ingredient.png",
       "${Assets.saladIngBase}20/2-ingredient.png",

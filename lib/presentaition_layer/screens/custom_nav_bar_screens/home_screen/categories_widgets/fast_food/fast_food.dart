@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/grid_item.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/common/app_dimention.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/desserts/desserts_details.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/drinks/tab_bar_widgets/type_drinks.dart';
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 
@@ -18,7 +20,7 @@ class FastFoodCategoryWidget extends StatelessWidget {
       child: Consumer<SearchingProvider>(
         builder: (context, searching, child) {
           return searching.searchingWithoutData
-              ? const NotFounCategoryWidget(category: "fast_food")
+              ? const NotFounCategoryWidget()
               : Directionality(
                   textDirection: TextDirection.ltr,
                   child: GridView.builder(
@@ -35,7 +37,7 @@ class FastFoodCategoryWidget extends StatelessWidget {
                       final FoodModel item = searching.filtred[index];
                       return GridFoodItem(
                         item: item,
-                        onTap: () => pushTo(FoodDetials(item: item)),
+                        onTap: () => pushTo(FoodDetails(item: item)),
                       );
                     },
                   ),

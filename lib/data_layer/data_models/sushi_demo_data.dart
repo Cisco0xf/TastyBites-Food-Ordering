@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 List<FoodModel> sushiDemoData = [
   FoodModel(
@@ -11,7 +12,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Chirashi.png",
     foodPrice: 21.44,
     foodRate: 4.1,
-    numberOfReviewers: 2654,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -22,7 +24,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Gunkan.png",
     foodPrice: 76.66,
     foodRate: 3.9,
-    numberOfReviewers: 345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -33,7 +36,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Inari.png",
     foodPrice: 90.99,
     foodRate: 4.0,
-    numberOfReviewers: 987,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -44,7 +48,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Maki.png",
     foodPrice: 21.44,
     foodRate: 4.1,
-    numberOfReviewers: 2654,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -55,7 +60,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Nigiri.png",
     foodPrice: 76.66,
     foodRate: 3.9,
-    numberOfReviewers: 345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -66,7 +72,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Oshizushi.png",
     foodPrice: 87.22,
     foodRate: 4.3,
-    numberOfReviewers: 892,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -77,7 +84,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Sashimi.png",
     foodPrice: 21.44,
     foodRate: 4.6,
-    numberOfReviewers: 2654,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -88,7 +96,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Uramaki.png",
     foodPrice: 76.66,
     foodRate: 3.9,
-    numberOfReviewers: 345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -99,7 +108,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Alaska-Roll.png",
     foodPrice: 87.22,
     foodRate: 4.3,
-    numberOfReviewers: 892,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -110,7 +120,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Boston-Roll.png",
     foodPrice: 21.44,
     foodRate: 4.2,
-    numberOfReviewers: 2654,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -121,7 +132,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Cucumber-Roll.jpg",
     foodPrice: 76.66,
     foodRate: 3.9,
-    numberOfReviewers: 345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -132,7 +144,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Dragon-Roll.png",
     foodPrice: 90.99,
     foodRate: 4.0,
-    numberOfReviewers: 987,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -143,7 +156,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}King-Crab-Roll.png",
     foodPrice: 21.44,
     foodRate: 4.1,
-    numberOfReviewers: 2654,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -154,7 +168,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Philadelphia-Roll.png",
     foodPrice: 76.66,
     foodRate: 3.9,
-    numberOfReviewers: 345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -165,7 +180,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Rainbow-Roll.png",
     foodPrice: 87.22,
     foodRate: 4.3,
-    numberOfReviewers: 892,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -176,7 +192,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Spider-Roll.png",
     foodPrice: 21.44,
     foodRate: 4.1,
-    numberOfReviewers: 2654,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -187,7 +204,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Shrimp-Tempura-Rolls.png",
     foodPrice: 76.66,
     foodRate: 3.9,
-    numberOfReviewers: 345,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -198,7 +216,8 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Beef-Roll.png",
     foodPrice: 90.99,
     foodRate: 4.0,
-    numberOfReviewers: 987,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Sushi",
@@ -209,6 +228,7 @@ List<FoodModel> sushiDemoData = [
     imagePath: "${Assets.sushiBase}Chicken-Mayo-Roll.png",
     foodPrice: 87.22,
     foodRate: 4.3,
-    numberOfReviewers: 892,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
 ];

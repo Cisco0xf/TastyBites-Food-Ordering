@@ -23,18 +23,16 @@ import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopp
 class CartItemsWidget extends StatelessWidget {
   const CartItemsWidget({super.key});
 
-  Map<String, Widget> _pushTarget(FoodModel item) {
-    return {
-      "FastFood": FoodDetials(item: item),
-      "Dessert": DessertsDetails(item: item),
-      "ColdDrink": FoodDetials(item: item),
-      "HotDrink": FoodDetials(item: item),
-      "SpecialFood": FoodDetials(item: item),
+  Widget _pushTarget(FoodModel item) {
+    final Map<String, Widget> routs = {
       "GlobalDishe": GlobalDishesDetails(item: item),
       "Salad": ShowDishesDetailsWidget(item: item),
       "Vegetarian": ShowDishesDetailsWidget(item: item),
-      "Sushi": FoodDetials(item: item),
     };
+
+    final Widget target = routs[item.foodType] ?? FoodDetails(item: item);
+
+    return target;
   }
 
   @override
@@ -52,7 +50,7 @@ class CartItemsWidget extends StatelessWidget {
                   final FoodModel item = cartInfo.state[index];
                   return GestureDetector(
                     onTap: () {
-                      pushTo(_pushTarget(item)[item.foodType]!);
+                      pushTo(_pushTarget(item));
                     },
                     child: CartItem(
                       /*   index: index,

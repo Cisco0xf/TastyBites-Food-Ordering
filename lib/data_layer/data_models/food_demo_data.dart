@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 List<FoodModel> italianFoodDemoData = [
   FoodModel(
@@ -10,7 +11,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 19.99,
     imagePath: "${Assets.italianBase}Pizza_Napoletana.webp",
     foodRate: 4.5,
-    numberOfReviewers: 34,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -20,7 +22,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 21.99,
     imagePath: "${Assets.italianBase}Polenta.webp",
     foodRate: 4.9,
-    numberOfReviewers: 43,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -30,7 +33,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 30.99,
     imagePath: "${Assets.italianBase}Ribollita.webp",
     foodRate: 3.9,
-    numberOfReviewers: 56,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -40,7 +44,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 20.5,
     imagePath: "${Assets.italianBase}Risotto_alla_Milanese.webp",
     foodRate: 4.3,
-    numberOfReviewers: 12,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -50,7 +55,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 40.99,
     imagePath: "${Assets.italianBase}Osso_Buco_alla_Milanese.webp",
     foodRate: 4.7,
-    numberOfReviewers: 67,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -60,7 +66,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 60.99,
     imagePath: "${Assets.italianBase}Risotto_di_Seppie_alla_Veneziana.webp",
     foodRate: 4.1,
-    numberOfReviewers: 76,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -70,7 +77,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 10.99,
     imagePath: "${Assets.italianBase}Bottarga.webp",
     foodRate: 3.7,
-    numberOfReviewers: 78,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -80,7 +88,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 32.99,
     imagePath: "${Assets.italianBase}Baccalà.webp",
     foodRate: 4.6,
-    numberOfReviewers: 89,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -90,7 +99,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 90.99,
     imagePath: "${Assets.italianBase}Vitello_Tonnato.webp",
     foodRate: 3.4,
-    numberOfReviewers: 45,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -100,7 +110,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 53.99,
     imagePath: "${Assets.italianBase}Canederli.webp",
     foodRate: 4.1,
-    numberOfReviewers: 34,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -110,7 +121,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 42.99,
     imagePath: "${Assets.italianBase}Fritto_Misto.webp",
     foodRate: 4.2,
-    numberOfReviewers: 455,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -120,7 +132,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 67.99,
     imagePath: "${Assets.italianBase}Ragù_alla_Bolognese.webp",
     foodRate: 5.0,
-    numberOfReviewers: 66,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -130,7 +143,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 25.99,
     imagePath: "${Assets.italianBase}Bistecca_Fiorentina.webp",
     foodRate: 4.9,
-    numberOfReviewers: 22,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -140,7 +154,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 55.99,
     imagePath: "${Assets.italianBase}Arancini.webp",
     foodRate: 4.5,
-    numberOfReviewers: 27,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -150,7 +165,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 87.99,
     imagePath: "${Assets.italianBase}Melanzane_alla_Parmigiana.webp",
     foodRate: 4.4,
-    numberOfReviewers: 72,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -160,7 +176,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 32.99,
     imagePath: "${Assets.italianBase}Saltimbocca_alla_Romana.webp",
     foodRate: 3.4,
-    numberOfReviewers: 56,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -170,7 +187,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 99.99,
     imagePath: "${Assets.italianBase}Cacio_e_Pepe.webp",
     foodRate: 4.3,
-    numberOfReviewers: 65,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -180,7 +198,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 50.99,
     imagePath: "${Assets.italianBase}Gnocchi.webp",
     foodRate: 4.5,
-    numberOfReviewers: 13,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -190,7 +209,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 105.0,
     imagePath: "${Assets.italianBase}Spaghetti_alle_Vongole.webp",
     foodRate: 4.8,
-    numberOfReviewers: 65,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -200,7 +220,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 60.0,
     imagePath: "${Assets.italianBase}Lasagna.webp",
     foodRate: 4.2,
-    numberOfReviewers: 56,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -210,7 +231,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 120.99,
     imagePath: "${Assets.italianBase}Minestrone.webp",
     foodRate: 4.9,
-    numberOfReviewers: 99,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -220,7 +242,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 22.99,
     imagePath: "${Assets.italianBase}Focaccia.webp",
     foodRate: 4.1,
-    numberOfReviewers: 34,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -230,7 +253,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 190.0,
     imagePath: "${Assets.italianBase}Pasta_puttanesca.webp",
     foodRate: 5.0,
-    numberOfReviewers: 56,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -240,7 +264,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 90.0,
     imagePath: "${Assets.italianBase}Bagna_cauda.webp",
     foodRate: 4.6,
-    numberOfReviewers: 11,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -250,7 +275,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 20.0,
     imagePath: "${Assets.italianBase}Andrew's_Herb_Risotto.webp",
     foodRate: 4.5,
-    numberOfReviewers: 22,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -260,7 +286,8 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 50.0,
     imagePath: "${Assets.italianBase}Risotto_alla_Pavese.webp",
     foodRate: 4.3,
-    numberOfReviewers: 53,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "SpecialFood",
@@ -270,6 +297,7 @@ List<FoodModel> italianFoodDemoData = [
     foodPrice: 33.0,
     imagePath: "${Assets.italianBase}Panettone.webp",
     foodRate: 4.4,
-    numberOfReviewers: 90,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
 ];

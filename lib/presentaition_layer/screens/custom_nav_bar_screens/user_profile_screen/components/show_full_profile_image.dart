@@ -322,42 +322,47 @@ class UserFullImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog.fullscreen(
       backgroundColor: Colors.transparent,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: <Widget>[
-          Padding(
-            padding: padding(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                ClipRect(
-                  child: ClipRRect(
-                    borderRadius: borderRaduis(7.0),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: borderRaduis(7.0),
-                          border: Border.all(color: Colors.white12),
-                        ),
-                        child: Clicker(
-                          onClick: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Icon(Icons.close, color: Colors.red),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              ],
+          Positioned.fill(
+            child: InteractiveViewer(
+              child: Padding(
+                padding: padding(10.0),
+                child: Image.asset(targetImage),
+              ),
             ),
           ),
-          Expanded(
-            child: InteractiveViewer(
-              child: Image.asset(targetImage),
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: () {
+                popScreen();
+              },
             ),
-          )
+          ),
+          Positioned(
+            top: 100.0,
+            right: 20.0,
+            child: ClipRect(
+              child: ClipRRect(
+                borderRadius: borderRaduis(7.0),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: borderRaduis(7.0),
+                      border: Border.all(color: Colors.white12),
+                    ),
+                    child: Clicker(
+                      onClick: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Icon(Icons.close, color: Colors.red),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

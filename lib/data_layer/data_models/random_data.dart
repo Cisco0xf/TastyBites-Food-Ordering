@@ -1,6 +1,8 @@
 import 'dart:math';
 
 class RandomData {
+  static final Random randomValue = Random();
+  
   static double get getRandomPrice {
     Random randomVlaue = Random();
     double randomPrice =
@@ -9,21 +11,21 @@ class RandomData {
   }
 
   static double get getRandomRate {
-    Random randomVlaue = Random();
-    double randomRate =
-        double.parse((randomVlaue.nextDouble() * 5.0).toStringAsFixed(2));
-    return randomRate;
+    double rate = double.parse(
+      (randomValue.nextDouble() + 2).toStringAsFixed(2),
+    );
+
+    return rate;
   }
 
   static int get getRandomCalories {
-    Random randomValue = Random();
     int randomCalories = randomValue.nextInt(2000);
     return randomCalories;
   }
 
   static int get getRandomReviewers {
     Random randomValue = Random();
-    int randomReviewers = randomValue.nextInt(10000);
+    int randomReviewers = randomValue.nextInt(10000) + 50;
     return randomReviewers;
   }
 }

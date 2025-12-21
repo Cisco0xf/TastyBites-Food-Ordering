@@ -8,6 +8,7 @@ import 'package:foodapp/constants/app_colors.dart';
 
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_body.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/order_or_add_to_cart.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/quantity_widget.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/components/show_full_profile_image.dart';
@@ -29,9 +30,6 @@ class ShowDishesDetailsWidget extends StatelessWidget {
             Positioned.fill(
               top: context.screenHeight * .3,
               child: Container(
-                padding: EdgeInsets.only(
-                  top: context.screenHeight * .1,
-                ),
                 decoration: BoxDecoration(
                   borderRadius: borderRaduis(20.0, side: Side.top),
                   color: SwitchColor.bgColor,
@@ -41,8 +39,8 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                     SingleChildScrollView(
                       child: Column(
                         children: <Widget>[
-                          const SizedBox(height: 10),
-                          Padding(
+                          const Gap(hRatio: 0.1),
+                          /* Padding(
                             padding: padding(20.0, from: From.horizontal),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +65,8 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          ),
+                          ), */
+                          ItemTitle(item: item),
                           const Gap(hRatio: .01),
                           const Divider(),
                           Row(
@@ -100,7 +99,7 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                                   )
                                 ],
                               ),
-                              RatingBar.builder(
+                              /*  RatingBar.builder(
                                 maxRating: 5.0,
                                 minRating: 0.0,
                                 itemCount: 5,
@@ -115,55 +114,14 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                                   );
                                 },
                                 onRatingUpdate: (double rating) {},
-                              ),
+                              ), */
+                              ItemRating(rate: item.foodRate),
                             ],
                           ),
                           const Divider(),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 10, top: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Description",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                              right: 10,
-                              bottom: 10,
-                            ),
-                            child: Text(
-                              item.description,
-                              textAlign: TextAlign.left,
-                              textDirection: TextDirection.ltr,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                fontFamily: FontFamily.subFont,
-                              ),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 10, top: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Ingredients",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          IngredientsList(item: item),
+                          ItemDescription(description: item.description),
+                          IngerdeintsItems(item: item, isGreen: true),
+                          // IngredientsList(item: item),
                           QuantityWidget(item: item),
                           const Gap(hRatio: .1),
                         ],
@@ -182,9 +140,8 @@ class ShowDishesDetailsWidget extends StatelessWidget {
               child: Container(
                 height: context.screenHeight * .4,
                 width: double.infinity,
-                decoration:  BoxDecoration(
-                  borderRadius: borderRaduis(20.0, side: Side.bottom)
-                ),
+                decoration: BoxDecoration(
+                    borderRadius: borderRaduis(20.0, side: Side.bottom)),
                 child: Stack(
                   children: <Widget>[
                     Positioned.fill(
@@ -195,13 +152,14 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                           onClick: () async {
                             await showFullImage(item.imagePath);
                           },
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.vertical(
-                              bottom: Radius.circular(20),
-                            ),
-                            child: Image.asset(
-                              item.imagePath,
-                              fit: BoxFit.fill,
+                          child: Hero(
+                            tag: item.foodName,
+                            child: ClipRRect(
+                              borderRadius: borderRaduis(20.0, side: Side.bottom),
+                              child: Image.asset(
+                                item.imagePath,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -212,28 +170,12 @@ class ShowDishesDetailsWidget extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 7),
+                        padding: padding(7.0, from: From.horizontal),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             const PopBtn(),
-                            SizedBox(
-                              width: context.screenWidth * .6,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Text(
-                                  item.foodName,
-                                  style: const TextStyle(
-                                    fontFamily: FontFamily.mainFont,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            FavoriteButtonWidget(
-                              item: item,
-                            ),
+                            FavoriteButtonWidget(item: item),
                           ],
                         ),
                       ),
@@ -248,7 +190,7 @@ class ShowDishesDetailsWidget extends StatelessWidget {
     );
   }
 }
-
+/* 
 class IngredientsList extends StatelessWidget {
   const IngredientsList({super.key, required this.item});
 
@@ -300,3 +242,4 @@ class IngredientsList extends StatelessWidget {
     );
   }
 }
+ */

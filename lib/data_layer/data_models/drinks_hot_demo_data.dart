@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 List<FoodModel> dirnksDemoData = [
   FoodModel(
@@ -10,7 +11,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Black-Tea.jpg',
     foodPrice: 22.21,
     foodRate: 4.2,
-    numberOfReviewers: 7153,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -20,7 +22,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Matcha.jpg',
     foodPrice: 32.57,
     foodRate: 4.5,
-    numberOfReviewers: 232,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -30,7 +33,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Green-Tea.jpg',
     foodPrice: 21.99,
     foodRate: 3.9,
-    numberOfReviewers: 728,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -40,7 +44,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Pu-Erh.jpg',
     foodPrice: 32.57,
     foodRate: 4.5,
-    numberOfReviewers: 2092,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -50,7 +55,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Gunpowder-Tea.jpg',
     foodPrice: 21.99,
     foodRate: 3.9,
-    numberOfReviewers: 728,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -60,7 +66,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Lotus-Tea.jpg',
     foodPrice: 32.57,
     foodRate: 4.5,
-    numberOfReviewers: 2092,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -70,7 +77,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Russian-Caravan.jpg',
     foodPrice: 21.99,
     foodRate: 3.9,
-    numberOfReviewers: 728,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -80,7 +88,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Espresso.jpg',
     foodPrice: 8.76,
     foodRate: 4.8,
-    numberOfReviewers: 2092,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -90,7 +99,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Cappuccino.jpg',
     foodPrice: 32.57,
     foodRate: 4.5,
-    numberOfReviewers: 232,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -100,7 +110,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Cortado.jpg',
     foodPrice: 8.76,
     foodRate: 4.8,
-    numberOfReviewers: 245,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -110,7 +121,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Caffè-Americano.jpg',
     foodPrice: 22.13,
     foodRate: 4.1,
-    numberOfReviewers: 1029,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -120,7 +132,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Caffè-latte.jpg',
     foodPrice: 11.32,
     foodRate: 3.7,
-    numberOfReviewers: 245,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -130,7 +143,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Arabic-Coffee.jpg',
     foodPrice: 22.13,
     foodRate: 4.1,
-    numberOfReviewers: 586,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -140,7 +154,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Caffè-moka.jpg',
     foodPrice: 8.76,
     foodRate: 4.8,
-    numberOfReviewers: 347,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -150,7 +165,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Café-au-lait.jpg',
     foodPrice: 22.13,
     foodRate: 4.1,
-    numberOfReviewers: 424,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -160,7 +176,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Flat-White.jpg',
     foodPrice: 11.32,
     foodRate: 4.2,
-    numberOfReviewers: 256,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -170,7 +187,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Teh-Tarik.jpg',
     foodPrice: 32.57,
     foodRate: 4.5,
-    numberOfReviewers: 6474,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -180,7 +198,8 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Gyokuro.jpg',
     foodPrice: 11.32,
     foodRate: 3.6,
-    numberOfReviewers: 563,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "HotDrink",
@@ -190,6 +209,7 @@ List<FoodModel> dirnksDemoData = [
     imagePath: '${Assets.hotDrinkBase}Buckwheat-Tea.jpg',
     foodPrice: 22.13,
     foodRate: 4.1,
-    numberOfReviewers: 364,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
 ];

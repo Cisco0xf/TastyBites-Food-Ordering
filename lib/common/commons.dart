@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:foodapp/common/app_dimention.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/enums.dart';
+import 'package:foodapp/constants/fonts.dart';
+import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
+import 'package:foodapp/statemanagement/theming/is_light.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -110,6 +117,201 @@ class CheckDivider extends StatelessWidget {
     );
   }
 }
+
+
+
+class ItemRating extends StatelessWidget {
+  const ItemRating({super.key, required this.rate});
+
+  final double rate;
+
+  @override
+  Widget build(BuildContext context) {
+    return RatingBar(
+      maxRating: 5.0,
+      minRating: 0.0,
+      itemCount: 5,
+      itemSize: 30,
+      direction: Axis.horizontal,
+      initialRating: rate,
+      allowHalfRating: true,
+      tapOnlyMode: true,
+      ignoreGestures: true,
+      ratingWidget: RatingWidget(
+          full: const Icon(Icons.star_rate_rounded, color: Colors.amber),
+          half: const Icon(Icons.star_half_rounded, color: Colors.amber),
+          empty: const Icon(Icons.star_rate_rounded, color: Colors.grey)),
+      onRatingUpdate: (double rating) {},
+    );
+  }
+}
+
+class IngerdeintsItems extends StatelessWidget {
+  const IngerdeintsItems({super.key, required this.item, this.isGreen = false});
+
+  final FoodModel item;
+  final bool isGreen;
+
+  Color get _borderColor =>
+      isGreen ? const Color(0xFFc6ff00) : SwitchColor.primaryO;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "INGREDIENTS",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
+        if (item.ingredientsImages != null)
+          SizedBox(
+            height: context.screenHeight * .17,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: item.ingredientsImages!.length,
+              itemBuilder: (context, index) {
+                return SizedBox.square(
+                  dimension: context.screenHeight * .16,
+                  child: Container(
+                    margin: padding(7),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: _borderColor),
+                      borderRadius: borderRaduis(15),
+                      color: context.isLight ? Colors.white : Colors.black38,
+                    ),
+                    child: item.ingredientsImages != null
+                        ? Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              SizedBox.square(
+                                dimension: context.screenHeight * .1,
+                                child: Image.asset(
+                                  item.ingredientsImages![index],
+                                ),
+                              ),
+                              Text(item.ingredientsNames![index])
+                            ],
+                          )
+                        : const SizedBox.shrink(),
+                  ),
+                );
+              },
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class ItemTitle extends StatelessWidget {
+  const ItemTitle({super.key, required this.item});
+
+  final FoodModel item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding(20.0, from: From.horizontal),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                item.foodName,
+                style: TextStyle(
+                  fontFamily: FontFamily.mainFont,
+                  fontWeight: FontWeight.bold,
+                  color: SwitchColor.txtColor,
+                  fontSize: 20,
+                ),
+              ),
+              const Gap(height: 6.0),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    const TextSpan(
+                      text: "CALORIES: ",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: "${item.calories} cal",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: SwitchColor.txtColor,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Text(
+            "${item.foodPrice} \$",
+            style: const TextStyle(
+              fontFamily: FontFamily.subFont,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF0FA958),
+              fontSize: 20,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ItemDescription extends StatelessWidget {
+  const ItemDescription({super.key, required this.description});
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        const Row(
+          children: <Widget>[
+            Gap(width: 10.0),
+            Text(
+              "Description",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: padding(10.0),
+          child: Text(
+            description,
+            textAlign: TextAlign.left,
+            textDirection: TextDirection.ltr,
+            style: const TextStyle(
+              fontSize: 17,
+              fontFamily: FontFamily.subFont,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 /* 
 class LoadingState<T extends ChangeNotifier> extends StatelessWidget {
   const LoadingState({super.key, required this.child, required this.provider});

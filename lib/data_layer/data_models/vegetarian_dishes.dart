@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 List<FoodModel> vegetarianDishesDemoData = [
   FoodModel(
@@ -10,7 +11,8 @@ List<FoodModel> vegetarianDishesDemoData = [
     imagePath: "${Assets.vegBase}Hummus.jpg",
     foodPrice: 22.0,
     foodRate: 4.4,
-    numberOfReviewers: 234,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsNames: [
       "CHICKPEAS",
       "SESAME SEEDS",
@@ -38,7 +40,8 @@ List<FoodModel> vegetarianDishesDemoData = [
     imagePath: "${Assets.vegBase}Guacamole.jpg",
     foodPrice: 232,
     foodRate: 4.1,
-    numberOfReviewers: 235,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsNames: [
       "AVOCADO",
       "LIME",
@@ -64,7 +67,8 @@ List<FoodModel> vegetarianDishesDemoData = [
     imagePath: "${Assets.vegBase}Dal.jpg",
     foodPrice: 34.3,
     foodRate: 3.0,
-    numberOfReviewers: 3422,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsNames: [
       "LENTILS",
       "PEAS",
@@ -94,7 +98,8 @@ List<FoodModel> vegetarianDishesDemoData = [
     imagePath: "${Assets.vegBase}Ratatouille.jpg",
     foodPrice: 22.11,
     foodRate: 3.2,
-    numberOfReviewers: 220,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsNames: [
       "ZUCCHINI",
       "EGGPLANT",
@@ -124,7 +129,8 @@ List<FoodModel> vegetarianDishesDemoData = [
     imagePath: "${Assets.vegBase}Kuku.jpg",
     foodPrice: 23.99,
     foodRate: 3.2,
-    numberOfReviewers: 247,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsNames: [
       "ZUCCHINI",
       "EGGPLANT",
@@ -154,7 +160,8 @@ List<FoodModel> vegetarianDishesDemoData = [
     imagePath: "${Assets.vegBase}Gazpacho.jpg",
     foodPrice: 23.98,
     foodRate: 3.6,
-    numberOfReviewers: 3451,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsNames: [
       "BREAD",
       "TOMATO",
@@ -184,7 +191,8 @@ List<FoodModel> vegetarianDishesDemoData = [
     imagePath: "${Assets.vegBase}Vinegret.jpg",
     foodPrice: 23.88,
     foodRate: 3.8,
-    numberOfReviewers: 365,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     ingredientsNames: [
       "CHICKPEAS",
       "SESAME SEEDS",

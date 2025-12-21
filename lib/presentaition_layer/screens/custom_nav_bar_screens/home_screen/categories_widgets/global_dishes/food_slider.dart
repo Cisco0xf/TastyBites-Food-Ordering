@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/constants/app_colors.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/data_layer/data_models/global_dishes_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/categories_widgets/global_dishes/global_details.dart';
@@ -46,17 +48,11 @@ class FoodSlider extends StatelessWidget {
                 onTap: () => pushTo(
                   GlobalDishesDetails(item: pageViewGlobalDishes[index]),
                 ),
-                child: Localizations(
-                  locale: const Locale("en"),
-                  delegates: const <LocalizationsDelegate<dynamic>>[
-                    DefaultMaterialLocalizations.delegate,
-                    DefaultWidgetsLocalizations.delegate
-                  ],
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
                   child: Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                    ),
-                    padding: const EdgeInsets.all(10),
+                    margin: padding(10.0, from: From.horizontal),
+                    padding: padding(10),
                     decoration: BoxDecoration(
                       borderRadius: borderRaduis(20),
                       image: DecorationImage(
@@ -73,7 +69,7 @@ class FoodSlider extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
                             Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: padding(10),
                               decoration: BoxDecoration(
                                 borderRadius: borderRaduis(20),
                                 color: Colors.white38,
@@ -123,14 +119,9 @@ class FoodSlider extends StatelessWidget {
         SmoothPageIndicator(
           controller: controller,
           count: pageViewGlobalDishes.length,
-          effect: const JumpingDotEffect(
-            activeDotColor: Color(0xFFFF785B),
-          ),
+          effect: JumpingDotEffect(activeDotColor: SwitchColor.primaryO),
         ),
-        const Divider(
-          endIndent: 40,
-          indent: 40,
-        ),
+        const Divider(endIndent: 30.0, indent: 30.0),
       ],
     );
   }

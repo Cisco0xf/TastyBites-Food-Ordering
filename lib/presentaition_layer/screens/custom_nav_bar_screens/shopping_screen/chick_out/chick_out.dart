@@ -258,7 +258,7 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
                       dimension: context.screenHeight * .12,
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 250),
-                        margin: const EdgeInsets.all(10),
+                        margin: padding(10),
                         decoration: BoxDecoration(
                           borderRadius: borderRaduis(10),
                           border: isSelected
@@ -291,7 +291,7 @@ class _PaymentsMethodsState extends State<PaymentsMethods> {
                     top: 0,
                     right: 7,
                     child: Container(
-                      padding: const EdgeInsets.all(2),
+                      padding: padding(2),
                       decoration: const BoxDecoration(
                         color: Colors.orange,
                         shape: BoxShape.circle,

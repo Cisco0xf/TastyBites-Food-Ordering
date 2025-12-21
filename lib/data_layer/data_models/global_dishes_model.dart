@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 List<FoodModel> globalDishesDemoData = <FoodModel>[
   FoodModel(
@@ -11,7 +12,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Butter-Garlic-Naan.jpg",
     foodPrice: 243.0,
     foodRate: 4.8,
-    numberOfReviewers: 123,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "INDIA",
     dishCountryFlag: "${Assets.flageBase}Inde.svg",
     ingredientsNames: [
@@ -42,7 +44,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Pan-de-bono.jpg",
     foodPrice: 102.0,
     foodRate: 4.9,
-    numberOfReviewers: 231,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "COLOMBIA",
     dishCountryFlag: "${Assets.flageBase}Colombie.svg",
     ingredientsNames: [
@@ -75,7 +78,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Tonkotsu-ramen.jpg",
     foodPrice: 27.0,
     foodRate: 4.3,
-    numberOfReviewers: 326,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "FUKUOKA, JAPAN",
     dishCountryFlag: "${Assets.flageBase}Japon.svg",
     ingredientsNames: [
@@ -107,7 +111,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Carnitas.jpg",
     foodPrice: 109.0,
     foodRate: 4.6,
-    numberOfReviewers: 234,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "MICHOACÁN, MEXICO",
     dishCountryFlag: "${Assets.flageBase}Mexique.svg",
     ingredientsNames: [
@@ -130,7 +135,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Châteaubriand.jpg",
     foodPrice: 209.0,
     foodRate: 4.6,
-    numberOfReviewers: 213,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "FRANCE",
     dishCountryFlag: "${Assets.flageBase}France.svg",
     ingredientsNames: [
@@ -163,7 +169,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Carne-asada-tacos.jpg",
     foodPrice: 134.0,
     foodRate: 4.3,
-    numberOfReviewers: 253,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "MEXICO",
     dishCountryFlag: "${Assets.flageBase}Mexique.svg",
     ingredientsNames: [
@@ -193,7 +200,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Khinkali.jpg",
     foodPrice: 342.0,
     foodRate: 4.3,
-    numberOfReviewers: 932,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "GEORGIA",
     dishCountryFlag: "${Assets.flageBase}Georgie.svg",
     ingredientsNames: [
@@ -223,7 +231,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Pernil.jpg",
     foodPrice: 434.0,
     foodRate: 4.6,
-    numberOfReviewers: 6424,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "PUERTO RICO",
     dishCountryFlag: "${Assets.flageBase}PUERTORICO.svg",
     ingredientsNames: [
@@ -254,7 +263,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Tombik-Döner.jpg",
     foodPrice: 232.0,
     foodRate: 4.6,
-    numberOfReviewers: 1099,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "TURKIYE",
     dishCountryFlag: "${Assets.flageBase}Turquie.svg",
     ingredientsNames: [
@@ -280,7 +290,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Païdakia.jpg",
     foodPrice: 200.0,
     foodRate: 4.6,
-    numberOfReviewers: 2153,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "GREECE",
     dishCountryFlag: "${Assets.flageBase}Grece.svg",
     ingredientsNames: [
@@ -312,7 +323,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Provoleta.jpg",
     foodPrice: 232.0,
     foodRate: 4.6,
-    numberOfReviewers: 535,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "ARGENTINA",
     dishCountryFlag: "${Assets.flageBase}Argentine.svg",
     ingredientsNames: [
@@ -334,7 +346,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Gyoza.jpg",
     foodPrice: 334.99,
     foodRate: 4.5,
-    numberOfReviewers: 5245,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "JAPAN",
     dishCountryFlag: "${Assets.flageBase}Japon.svg",
     ingredientsNames: [
@@ -364,7 +377,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Guacamole.jpg",
     foodPrice: 232.0,
     foodRate: 4.5,
-    numberOfReviewers: 6746,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "MEXICO",
     dishCountryFlag: "${Assets.flageBase}Mexique.svg",
     ingredientsNames: [
@@ -392,7 +406,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Dondurma.jpg",
     foodPrice: 223.0,
     foodRate: 4.5,
-    numberOfReviewers: 755,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "Turkiye",
     dishCountryFlag: "${Assets.flageBase}Turquie.svg",
     ingredientsNames: [
@@ -418,7 +433,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Poke.jpg",
     foodPrice: 16.0,
     foodRate: 4.5,
-    numberOfReviewers: 221,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "America",
     dishCountryFlag: "${Assets.flageBase}america.svg",
     ingredientsNames: [
@@ -448,7 +464,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Manti.jpg",
     foodPrice: 25.0,
     foodRate: 4.5,
-    numberOfReviewers: 653,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "TURKIYE",
     dishCountryFlag: "${Assets.flageBase}Turquie.svg",
     ingredientsNames: [
@@ -478,7 +495,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Raclette.jpg",
     foodPrice: 23.0,
     foodRate: 4.5,
-    numberOfReviewers: 543,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "Switzerland",
     dishCountryFlag: "${Assets.flageBase}Suisse.svg",
     ingredientsNames: [
@@ -502,7 +520,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Tikka.jpg",
     foodPrice: 234.0,
     foodRate: 4.5,
-    numberOfReviewers: 4321,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "India",
     dishCountryFlag: "${Assets.flageBase}Inde.svg",
     ingredientsNames: [
@@ -534,7 +553,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Kaiserschmarrn.jpg",
     foodPrice: 232.0,
     foodRate: 4.5,
-    numberOfReviewers: 6538,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "AUSTRIA",
     dishCountryFlag: "${Assets.flageBase}Australie.svg",
     ingredientsNames: [
@@ -566,7 +586,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Medovik.jpg",
     foodPrice: 97.0,
     foodRate: 4.3,
-    numberOfReviewers: 341,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "RUSSIA",
     dishCountryFlag: "${Assets.flageBase}Russie.svg",
     ingredientsNames: [
@@ -594,7 +615,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Jianbing.jpg",
     foodPrice: 76.0,
     foodRate: 4.5,
-    numberOfReviewers: 112,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "AUSTRIA",
     dishCountryFlag: "${Assets.flageBase}Australie.svg",
     ingredientsNames: [
@@ -623,7 +645,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Escondidinho.jpg",
     foodPrice: 34.0,
     foodRate: 4.5,
-    numberOfReviewers: 953,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "BRAZIL",
     dishCountryFlag: "${Assets.flageBase}Belize.svg",
     ingredientsNames: [
@@ -656,7 +679,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Boiled-Maine-Lobster.jpg",
     foodPrice: 80.0,
     foodRate: 4.6,
-    numberOfReviewers: 6543,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "United States of America",
     dishCountryFlag: "${Assets.flageBase}america.svg",
     ingredientsNames: [
@@ -676,7 +700,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Mutabal.jpg",
     foodPrice: 34.0,
     foodRate: 4.5,
-    numberOfReviewers: 7467,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "LEBANON",
     dishCountryFlag: "${Assets.flageBase}Liban.svg",
     ingredientsNames: [
@@ -706,7 +731,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Koldūnai.jpg",
     foodPrice: 242.0,
     foodRate: 4.2,
-    numberOfReviewers: 323,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "LITHUANIA",
     dishCountryFlag: "${Assets.flageBase}Liban.svg",
     ingredientsNames: [
@@ -730,7 +756,8 @@ List<FoodModel> globalDishesDemoData = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Giouvetsi.jpg",
     foodPrice: 53.0,
     foodRate: 4.5,
-    numberOfReviewers: 351,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "GREECE",
     dishCountryFlag: "${Assets.flageBase}Grece.svg",
     ingredientsNames: [
@@ -766,7 +793,8 @@ List<FoodModel> pageViewGlobalDishes = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Pizza-Napoletana.jpg",
     foodPrice: 24.0,
     foodRate: 4.8,
-    numberOfReviewers: 209,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "NAPLES,ITALY",
     dishCountryFlag: "${Assets.flageBase}Italie.svg",
     ingredientsNames: [
@@ -798,7 +826,8 @@ List<FoodModel> pageViewGlobalDishes = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Picanha.jpg",
     foodPrice: 90.0,
     foodRate: 4.7,
-    numberOfReviewers: 130,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "BRAZIL",
     dishCountryFlag: "${Assets.flageBase}Belize.svg",
     ingredientsNames: [
@@ -816,7 +845,8 @@ List<FoodModel> pageViewGlobalDishes = <FoodModel>[
     imagePath: "asstes/images/global_dishes/global_dishes_images/Guotie.jpg",
     foodPrice: 81.0,
     foodRate: 4.7,
-    numberOfReviewers: 350,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "CHINA",
     dishCountryFlag: "${Assets.flageBase}Chine.svg",
     ingredientsNames: [
@@ -844,7 +874,8 @@ List<FoodModel> pageViewGlobalDishes = <FoodModel>[
         "asstes/images/global_dishes/global_dishes_images/Roti-canai.jpg",
     foodPrice: 90.0,
     foodRate: 4.7,
-    numberOfReviewers: 209,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
     dishCountry: "MALAYSIA",
     dishCountryFlag: "${Assets.flageBase}Malaisie.svg",
     ingredientsNames: [

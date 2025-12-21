@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/common/app_dimention.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/order_or_add_to_cart.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/quantity_widget.dart';
+import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/components/show_full_profile_image.dart';
 import 'package:foodapp/presentaition_layer/widgets/favorite_button.dart';
 import 'package:foodapp/presentaition_layer/widgets/pop_button_widget.dart';
 
-class DessertsDetails extends StatelessWidget {
-  const DessertsDetails({
+class FoodDetails extends StatelessWidget {
+  const FoodDetails({
     super.key,
     /* required this.imagePath,
     required this.dessertName,
@@ -35,9 +39,132 @@ class DessertsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: SwitchColor.bgColor,
       body: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Stack(
+          textDirection: TextDirection.ltr,
+          child: Stack(
+            children: <Widget>[
+              Positioned.fill(
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverPersistentHeader(
+                      pinned: true,
+                      delegate: _DetailsDelegate(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: SwitchColor.accent.withOpacity(0.2),
+                            borderRadius: borderRaduis(30, side: Side.bottom),
+                          ),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                bottom: 15.0,
+                                left: 20.0,
+                                right: 20.0,
+                                child: SizedBox(
+                                  height: context.screenHeight * .25,
+                                  child: Clicker(
+                                    onClick: () async => await showFullImage(
+                                      item.imagePath,
+                                    ),
+                                    child: Hero(
+                                      tag: item.foodName,
+                                      child: ClipRRect(
+                                        borderRadius: borderRaduis(10),
+                                        child: Image.asset(
+                                          item.imagePath,
+                                          fit: BoxFit.fill,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  /* decoration: BoxDecoration(
+                                    borderRadius: borderRaduis(10),
+                                    color: Colors.amber,
+                                    image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: ,
+                                    ),
+                                  ), */
+                                ),
+                              ),
+                              Positioned(
+                                /*  padding:
+                                    padding(10.0, from: From.horizontal), */
+                                right: 10.0,
+                                left: 10.0,
+                                top: context.screenHeight * .05,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    const PopBtn(),
+                                    FavoriteButtonWidget(item: item),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Column(
+                        children: <Widget>[
+                          const Gap(height: 10.0),
+                          ItemTitle(item: item),
+                          const Gap(hRatio: 0.01),
+                          const Divider(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Row(
+                                children: [
+                                  const Icon(Icons.star_rate,
+                                      color: Color(0xFFEE5007)),
+                                  Text(
+                                    "${item.foodRate}",
+                                    style: const TextStyle(
+                                      color: Color(0xFFEE5007),
+                                      fontFamily: FontFamily.mainFont,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: context.screenWidth * .01,
+                                  ),
+                                  Text(
+                                    "   (${item.numberOfReviewers} reviewer)",
+                                    style: const TextStyle(
+                                      fontFamily: FontFamily.subFont,
+                                      fontSize: 15,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              // Rate Here
+                              ItemRating(rate: item.foodRate),
+                            ],
+                          ),
+                          const Divider(),
+                          ItemDescription(description: item.description),
+                          QuantityWidget(item: item),
+                          /* SizedBox(
+                              height: context.screenHeight * .1,
+                            ), */
+                          const Gap(hRatio: 0.1),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              OrderOrAddtoCartWidget(item: item),
+            ],
+          )
+
+          /*  Stack(
           children: <Widget>[
             Positioned(
               top: context.screenHeight * .3,
@@ -50,11 +177,10 @@ class DessertsDetails extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      const SizedBox(
-                        height: 10,
-                      ),
+                  
+                      const Gap(height: 10.0),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: padding(20.0, from: From.horizontal),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -78,9 +204,8 @@ class DessertsDetails extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
-                        height: context.screenHeight * .01,
-                      ),
+                   
+                      const Gap(hRatio: 0.01),
                       const Divider(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -89,7 +214,7 @@ class DessertsDetails extends StatelessWidget {
                             children: [
                               const Icon(
                                 Icons.star_rate,
-                                color: Color(0xFFEE5007),
+                                color: Color(0xFFEE5007)
                               ),
                               Text(
                                 "${item.foodRate}",
@@ -112,45 +237,30 @@ class DessertsDetails extends StatelessWidget {
                               )
                             ],
                           ),
-                          RatingBar.builder(
-                            maxRating: 5.0,
-                            minRating: 0.0,
-                            itemCount: 5,
-                            itemSize: 30,
-                            direction: Axis.horizontal,
-                            initialRating: item.foodRate,
-                            allowHalfRating: true,
-                            itemBuilder: (context, index) {
-                              return const Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              );
-                            },
-                            onRatingUpdate: (double rating) {},
-                          ),
+                          // Rate Here
+                          ItemRating(rate: item.foodRate),
                         ],
                       ),
                       const Divider(),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 10, top: 10),
-                        child: Row(
-                          children: <Widget>[
-                            Text(
-                              "Description",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 22,
-                              ),
+                      const Row(
+                        children: <Widget>[
+                          Gap(width: 10.0),
+                          Text(
+                            "Description",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
+                        padding: padding(10.0),
+                        /*  const EdgeInsets.only(
                           left: 10,
                           right: 10,
                           bottom: 10,
-                        ),
+                        ), */
                         child: Text(
                           item.description,
                           textAlign: TextAlign.left,
@@ -161,12 +271,11 @@ class DessertsDetails extends StatelessWidget {
                           ),
                         ),
                       ),
-                      QuantityWidget(
-                        item: item,
-                      ),
-                      SizedBox(
+                      QuantityWidget(item: item),
+                      /* SizedBox(
                         height: context.screenHeight * .1,
-                      ),
+                      ), */
+                      const Gap(hRatio: 0.1),
                     ],
                   ),
                 ),
@@ -211,15 +320,11 @@ class DessertsDetails extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            right: 10,
-                            left: 10,
-                          ),
+                          padding: padding(10.0, from: From.horizontal),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              const PopBtn(
-                              ),
+                              const PopBtn(),
                               Text(
                                 item.foodName,
                                 style: const TextStyle(
@@ -235,19 +340,44 @@ class DessertsDetails extends StatelessWidget {
                       ],
                     ),
                   ),
-                  OrderOrAddtoCartWidget(
-                    item: item,
-                  ),
+                  OrderOrAddtoCartWidget(item: item),
                 ],
               ),
             ),
           ],
-        ),
-      ),
+        ), */
+          ),
     );
   }
 }
 
+class _DetailsDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+          BuildContext context, double shrinkOffset, bool overlapsContent) =>
+      child;
+
+  final Widget child;
+
+  _DetailsDelegate({required this.child});
+
+  final BuildContext context = navigationKey.currentContext as BuildContext;
+
+  @override
+  double get maxExtent => context.screenHeight * .4;
+
+  @override
+  double get minExtent => context.screenHeight * .3;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    final bool shouldRebuild = oldDelegate.minExtent != minExtent ||
+        oldDelegate.maxExtent != maxExtent;
+
+    return shouldRebuild;
+  }
+}
+/* 
 class CustomDessertDetailsClipper extends CustomClipper<Path> {
   @override
   // CustomClipper takes the width and height of the widget which wrapped with it.
@@ -289,4 +419,4 @@ class CustomDessertDetailsClipper extends CustomClipper<Path> {
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return false;
   }
-}
+} */

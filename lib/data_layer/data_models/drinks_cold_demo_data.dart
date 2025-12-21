@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 List<FoodModel> coldDrinksDemoData = [
   FoodModel(
@@ -10,7 +11,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Kombucha-Pomegranate-Tonic.webp",
     foodPrice: 23.54,
     foodRate: 4.2,
-    numberOfReviewers: 2520,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -20,7 +22,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Mango-Smoothie.webp",
     foodPrice: 11.99,
     foodRate: 3.9,
-    numberOfReviewers: 3243,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -30,7 +33,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Watermelon-Mint-Agua-Fresca.webp",
     foodPrice: 31.27,
     foodRate: 4.4,
-    numberOfReviewers: 572,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -40,7 +44,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Cold-Brew-Iced-Tea.webp",
     foodPrice: 11.99,
     foodRate: 3.9,
-    numberOfReviewers: 3243,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -50,7 +55,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Tropical-Creamsicle-Smoothie.webp",
     foodPrice: 31.27,
     foodRate: 4.7,
-    numberOfReviewers: 572,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -61,7 +67,8 @@ List<FoodModel> coldDrinksDemoData = [
         "${Assets.cldDrnkBase}Kale-Smoothie-With-Pineapple-and-Banana.webp",
     foodPrice: 23.54,
     foodRate: 4.2,
-    numberOfReviewers: 2520,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -71,7 +78,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}creamy_data_sheet.webp",
     foodPrice: 11.99,
     foodRate: 3.9,
-    numberOfReviewers: 3243,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -81,7 +89,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Tom-Collins.webp",
     foodPrice: 23.54,
     foodRate: 4.2,
-    numberOfReviewers: 2520,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -91,7 +100,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Classic-Margarita.webp",
     foodPrice: 31.27,
     foodRate: 4.7,
-    numberOfReviewers: 572,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -101,7 +111,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Mojito.webp",
     foodPrice: 24.67,
     foodRate: 3.7,
-    numberOfReviewers: 1352,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -111,7 +122,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}boozy.webp",
     foodPrice: 31.27,
     foodRate: 4.7,
-    numberOfReviewers: 572,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -121,7 +133,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Holiday-Punch.webp",
     foodPrice: 23.54,
     foodRate: 4.2,
-    numberOfReviewers: 2520,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -131,7 +144,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Boozy-Apple-Cider-Slushie.webp",
     foodPrice: 11.99,
     foodRate: 3.9,
-    numberOfReviewers: 3243,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -141,7 +155,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}White-Russian.webp",
     foodPrice: 31.27,
     foodRate: 4.5,
-    numberOfReviewers: 572,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -151,7 +166,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}special_apple.jpg",
     foodPrice: 11.99,
     foodRate: 3.9,
-    numberOfReviewers: 3243,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -161,7 +177,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Molasses-Spiced-Spiked-Cider.webp",
     foodPrice: 24.67,
     foodRate: 3.7,
-    numberOfReviewers: 1352,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -171,7 +188,8 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Microwave-Mulled-Wine.webp",
     foodPrice: 31.27,
     foodRate: 4.0,
-    numberOfReviewers: 572,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "ColdDrink",
@@ -181,6 +199,7 @@ List<FoodModel> coldDrinksDemoData = [
     imagePath: "${Assets.cldDrnkBase}Gin-Cider-Punch.webp",
     foodPrice: 11.99,
     foodRate: 3.9,
-    numberOfReviewers: 3243,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
 ];

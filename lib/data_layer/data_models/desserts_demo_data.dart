@@ -1,5 +1,6 @@
 import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
+import 'package:foodapp/data_layer/data_models/random_data.dart';
 
 // GlobalDamoDataModel
 
@@ -12,7 +13,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 10.0,
     imagePath: "${Assets.dessertsBase}classic_cookies.jpeg",
     foodRate: 4.0,
-    numberOfReviewers: 33,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -22,7 +24,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 40.0,
     imagePath: "${Assets.dessertsBase}Cherry_Cobbler.jpeg",
     foodRate: 4.2,
-    numberOfReviewers: 21,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -32,7 +35,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 29.0,
     imagePath: "${Assets.dessertsBase}Vanilla_Cake.jpeg",
     foodRate: 4.1,
-    numberOfReviewers: 35,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -42,7 +46,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 27.0,
     imagePath: "${Assets.dessertsBase}Chocolate_Chip_Cookies.jpeg",
     foodRate: 4.4,
-    numberOfReviewers: 12,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -52,7 +57,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 30.0,
     imagePath: "${Assets.dessertsBase}Lemon_Meringue_Pie.jpeg",
     foodRate: 4.8,
-    numberOfReviewers: 22,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -62,7 +68,8 @@ List<FoodModel> dessertDemoData = [
         "For our simple and iconic shortcake, we discovered a great double-stacking technique that creates super light and high biscuits that are easy to split. This makes them easy to fill without crumbling. A simple recipe like this one allows its ingredients to shine, so use the very best berries you can find.",
     imagePath: "${Assets.dessertsBase}Strawberry_Shortcake.jpeg",
     foodRate: 4.2,
-    numberOfReviewers: 65,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -72,7 +79,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 50.0,
     imagePath: "${Assets.dessertsBase}Creme_Brulee.jpeg",
     foodRate: 4.9,
-    numberOfReviewers: 52,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -82,7 +90,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 29.0,
     imagePath: "${Assets.dessertsBase}Coconut_Layer_Cake.jpeg",
     foodRate: 4.2,
-    numberOfReviewers: 21,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -92,7 +101,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 90.0,
     imagePath: "${Assets.dessertsBase}Lemon_Bars.jpeg",
     foodRate: 4.1,
-    numberOfReviewers: 110,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -102,7 +112,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 110.0,
     imagePath: "${Assets.dessertsBase}Tiramisu.jpeg",
     foodRate: 4.9,
-    numberOfReviewers: 230,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -112,7 +123,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 120.0,
     imagePath: "${Assets.dessertsBase}Cheesecake.jpeg",
     foodRate: 4.3,
-    numberOfReviewers: 308,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -122,7 +134,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 102.0,
     imagePath: "${Assets.dessertsBase}Fudgy_Brownies.jpeg",
     foodRate: 4.2,
-    numberOfReviewers: 209,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -132,7 +145,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 203.0,
     imagePath: "${Assets.dessertsBase}Banana_Pudding.jpeg",
     foodRate: 4.3,
-    numberOfReviewers: 302,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -142,7 +156,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 39.99,
     imagePath: "${Assets.dessertsBase}Peanut_Brittle.jpeg",
     foodRate: 4.0,
-    numberOfReviewers: 32,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -152,7 +167,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 201.0,
     imagePath: "${Assets.dessertsBase}Apple_Pie.jpeg",
     foodRate: 4.1,
-    numberOfReviewers: 25,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -162,7 +178,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 23.0,
     imagePath: "${Assets.dessertsBase}Butter_Cookies.jpeg",
     foodRate: 4.9,
-    numberOfReviewers: 230,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -172,7 +189,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 76.0,
     imagePath: "${Assets.dessertsBase}Peach_Cobbler.jpeg",
     foodRate: 4.6,
-    numberOfReviewers: 370,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -182,7 +200,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 98.0,
     imagePath: "${Assets.dessertsBase}Peanut_Butter_Cookies.jpeg",
     foodRate: 4.5,
-    numberOfReviewers: 220,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -192,7 +211,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 13.0,
     imagePath: "${Assets.dessertsBase}Chocolate_Lava_Cakes.jpeg",
     foodRate: 4.0,
-    numberOfReviewers: 805,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -202,7 +222,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 10.0,
     imagePath: "${Assets.dessertsBase}No-Bake-Cheesecake.jpeg",
     foodRate: 4.1,
-    numberOfReviewers: 320,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -212,7 +233,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 22.0,
     imagePath: "${Assets.dessertsBase}Chocolate-Cupcakes.jpeg",
     foodRate: 4.2,
-    numberOfReviewers: 124,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -222,7 +244,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 210.0,
     imagePath: "${Assets.dessertsBase}Banana-Cake.jpeg",
     foodRate: 3.9,
-    numberOfReviewers: 210,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -232,7 +255,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 99.99,
     imagePath: "${Assets.dessertsBase}Oatmeal-Raisin-Cookies.jpeg",
     foodRate: 4.0,
-    numberOfReviewers: 32,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -242,7 +266,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 202.0,
     imagePath: "${Assets.dessertsBase}Bread-Pudding.jpeg",
     foodRate: 4.7,
-    numberOfReviewers: 707,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -252,7 +277,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 90.0,
     imagePath: "${Assets.dessertsBase}Vanilla-Cupcakes.jpeg",
     foodRate: 4.5,
-    numberOfReviewers: 94,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -262,7 +288,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 23.0,
     imagePath: "${Assets.dessertsBase}Crepes.jpeg",
     foodRate: 4.8,
-    numberOfReviewers: 219,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -272,7 +299,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 22.0,
     imagePath: "${Assets.dessertsBase}Key_Lime_Pie.jpeg",
     foodRate: 4.0,
-    numberOfReviewers: 703,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -282,7 +310,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 201.0,
     imagePath: "${Assets.dessertsBase}Crispy-Chocolate-Chip-Cookies.jpeg",
     foodRate: 4.1,
-    numberOfReviewers: 674,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -292,7 +321,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 220.0,
     imagePath: "${Assets.dessertsBase}Coconut-Cream-Pie.jpeg",
     foodRate: 4.2,
-    numberOfReviewers: 229,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -302,7 +332,8 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 34.0,
     imagePath: "${Assets.dessertsBase}Pecan-Pie.jpeg",
     foodRate: 4.9,
-    numberOfReviewers: 341,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
   FoodModel(
     foodType: "Dessert",
@@ -312,6 +343,7 @@ List<FoodModel> dessertDemoData = [
     foodPrice: 229.0,
     imagePath: "${Assets.dessertsBase}Fruitcake.jpeg",
     foodRate: 5.0,
-    numberOfReviewers: 720,
+    calories: RandomData.getRandomCalories,
+    numberOfReviewers: RandomData.getRandomReviewers,
   ),
 ];

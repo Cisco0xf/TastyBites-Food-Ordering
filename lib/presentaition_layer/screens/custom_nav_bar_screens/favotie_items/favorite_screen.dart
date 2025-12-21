@@ -18,11 +18,11 @@ class FavoriteItemsScreen extends StatelessWidget {
   const FavoriteItemsScreen({super.key});
 
   Widget _targetWidget(String key, FoodModel item) {
-    final Widget defaultRout = FoodDetials(item: item);
+    final Widget defaultRout = FoodDetails(item: item);
 
     final Map<String, Widget> routs = {
       "FastFood": defaultRout,
-      "Dessert": DessertsDetails(item: item),
+      "Dessert": FoodDetails(item: item),
       "Salad": ShowDishesDetailsWidget(item: item),
       "Vegetarian": ShowDishesDetailsWidget(item: item),
     };
