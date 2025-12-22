@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/statemanagement/theming/is_light.dart';
 import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/screens/settings/localization/localization_widget.dart';
@@ -35,13 +34,11 @@ class SettingsMainWidget extends StatelessWidget {
             titleFlex: 2,
           ),
           Container(
-            padding: const EdgeInsets.all(10.0),
-            margin: const EdgeInsets.all(10.0),
+            padding: padding(10.0),
+            margin: padding(10.0),
             decoration: BoxDecoration(
               borderRadius: borderRaduis(15),
-              color: context.isLight
-                  ? AppLightColors.profileItemsColor
-                  : AppDarkColors.profileItemsColor,
+              color:  SwitchColor.fillColor,
             ),
             child: const ThemeWidget(),
           ),
@@ -50,13 +47,11 @@ class SettingsMainWidget extends StatelessWidget {
             titleFlex: context.isEnglish ? 3 : 2,
           ),
           Container(
-            padding: const EdgeInsets.all(10.0),
-            margin: const EdgeInsets.all(10.0),
+            padding: padding(10.0),
+            margin: padding(10.0),
             decoration: BoxDecoration(
               borderRadius: borderRaduis(15),
-              color: context.isLight
-                  ? AppLightColors.profileItemsColor
-                  : AppDarkColors.profileItemsColor,
+               color: SwitchColor.fillColor,
             ),
             child: const LanguageWidget(),
           ),

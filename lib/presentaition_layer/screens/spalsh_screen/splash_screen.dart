@@ -5,6 +5,7 @@ import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/app_colors.dart';
+import 'package:foodapp/constants/assets.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shimmers/main_screen_shimmer.dart';
@@ -79,10 +80,7 @@ class _SplashScreenState extends State<SplashScreen>
             const Gap(hRatio: 0.1),
             SizedBox.square(
               dimension: context.screenHeight * 0.35,
-              child: Image.asset(
-                "asstes/images/app_images/splash_screen-images/food_logo_large.png",
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset(Assets.largLogo, fit: BoxFit.contain),
             ),
             LoadingAnimationWidget.fourRotatingDots(
               color: SwitchColor.primaryO,

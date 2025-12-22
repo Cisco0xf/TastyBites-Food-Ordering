@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/fonts.dart';
 
 typedef SignUpValidator = String? Function(String?)?;
@@ -13,7 +14,6 @@ class AuthField extends StatefulWidget {
     required this.textFeildTitle,
     required this.textInputType,
     required this.hintText,
- 
     this.hasObscure = false,
   });
 
@@ -100,7 +100,7 @@ class _AuthFieldState extends State<AuthField> {
             },
             decoration: InputDecoration(
               filled: true,
-              fillColor: const Color(0xFFeceff1),
+              fillColor: SwitchColor.fillColor,
               enabledBorder: OutlineInputBorder(
                 borderRadius: borderRaduis(15),
                 borderSide: const BorderSide(

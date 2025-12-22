@@ -28,8 +28,6 @@ List<SingleChildWidget> get appProviders {
     ChangeNotifierProvider(create: (context) => LocalizationProvider()),
     ChangeNotifierProvider(create: (context) => NotificationProvider()),
     ChangeNotifierProvider(create: (context) => SaveNotificationsProvider()),
-
-    ///
     ChangeNotifierProvider(create: (context) => CurrentIndexProvider()),
     ChangeNotifierProvider(create: (context) => PlaceProvider()),
     ChangeNotifierProvider(create: (context) => TableProvider()),

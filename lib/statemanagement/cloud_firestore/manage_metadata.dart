@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:foodapp/common/my_logger.dart';
-import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/constants/texts.dart';
 import 'package:foodapp/statemanagement/authantications/auth_controllers.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
@@ -12,7 +12,7 @@ import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.d
 import 'package:toastification/toastification.dart';
 
 class ManageUserMetadata extends ChangeNotifier {
-   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   //================ METADATA ================
 
@@ -132,8 +132,8 @@ class ManageUserMetadata extends ChangeNotifier {
 
   Future<bool> hasChange() async => (await currentBio() != _bioText);
 
-   String get userName => _auth.currentUser!.displayName ?? "NULL NAME";
-   String get userEmail => _auth.currentUser!.email ?? "NULL EMAIL";
+  String get userName => _auth.currentUser!.displayName ?? "NULL NAME";
+  String get userEmail => _auth.currentUser!.email ?? "NULL EMAIL";
 
   static String sessionBIO = "";
 
@@ -183,7 +183,7 @@ class ManageUserMetadata extends ChangeNotifier {
       Log.error("Cart Action Error => $error");
       showToastification(message: someError, type: ToastificationType.error);
     } finally {
-       isLoading = false;
+      isLoading = false;
       notifyListeners();
     }
   }

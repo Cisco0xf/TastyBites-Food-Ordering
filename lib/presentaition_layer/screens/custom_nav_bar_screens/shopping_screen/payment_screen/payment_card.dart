@@ -7,7 +7,6 @@ import 'package:foodapp/statemanagement/add_to_cart/add_to_cart_provider.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
 import 'package:foodapp/statemanagement/order_single_item/order_single_item_provider.dart';
-import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/statemanagement/receipt_management/receipt_history_provider.dart';
 import 'package:foodapp/constants/app_colors.dart';
 

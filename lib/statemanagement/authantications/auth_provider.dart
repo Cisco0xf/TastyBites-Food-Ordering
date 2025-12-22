@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/my_logger.dart';
 import 'package:foodapp/common/navigator_key.dart';
-import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';

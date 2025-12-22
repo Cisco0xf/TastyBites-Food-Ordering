@@ -8,7 +8,7 @@ import 'package:foodapp/constants/texts.dart';
 import 'package:foodapp/data_layer/data_base/cart_list_database.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
 import 'package:foodapp/data_layer/data_base/hive_keys.dart';
-import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/collections.dart';
 import 'package:foodapp/statemanagement/cloud_firestore/sync_locale_with_cloud.dart';
 import 'package:toastification/toastification.dart';

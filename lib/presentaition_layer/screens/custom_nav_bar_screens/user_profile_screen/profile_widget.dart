@@ -33,7 +33,7 @@ class UserProfileWidget extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.all(10),
+              margin: padding(10),
               child: Consumer<ManageUserMetadata>(
                 builder: (context, personalInfo, child) {
                   return Column(
@@ -110,13 +110,12 @@ class UserProfileWidget extends StatelessWidget {
               height: context.screenHeight * .01,
             ),
             Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
+              padding: padding(10),
+              margin: padding(10),
               decoration: BoxDecoration(
                 borderRadius: borderRaduis(20),
-                color: context.isLight
-                    ? AppLightColors.profileItemsColor
-                    : AppDarkColors.profileItemsColor,
+                color: SwitchColor.fillColor,
+                border: Border.all(color: SwitchColor.borderColor),
               ),
               child: Column(
                 children: <Widget>[
@@ -140,13 +139,12 @@ class UserProfileWidget extends StatelessWidget {
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
+              padding: padding(10),
+              margin: padding(10),
               decoration: BoxDecoration(
                 borderRadius: borderRaduis(20),
-                color: context.isLight
-                    ? AppLightColors.profileItemsColor
-                    : AppDarkColors.profileItemsColor,
+                color: SwitchColor.fillColor,
+                border: Border.all(color: SwitchColor.borderColor),
               ),
               child: Column(
                 children: <Widget>[
@@ -158,62 +156,46 @@ class UserProfileWidget extends StatelessWidget {
                     ),
                     targetWidget: const ReceiptHistoryWidget(),
                   ),
-                  ProfileAvatar(
-                    title: "number_of_orders".localeValue(context: context),
-                    trailing: const Icon(
-                      Icons.inventory_2_outlined,
-                      color: Colors.cyan,
-                    ),
-                    targetWidget: const ReceiptHistoryWidget(),
-                  ),
                 ],
               ),
             ),
             Container(
-              padding: const EdgeInsets.all(10),
-              margin: const EdgeInsets.all(10),
+              padding: padding(10),
+              margin: padding(10),
               decoration: BoxDecoration(
                 borderRadius: borderRaduis(20),
-                color: context.isLight
-                    ? AppLightColors.profileItemsColor
-                    : AppDarkColors.profileItemsColor,
+                color: SwitchColor.fillColor,
+                border: Border.all(color: SwitchColor.borderColor),
               ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: borderRaduis(10.0),
-                  onTap: () async => await showLogoutDialog(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 25,
-                            backgroundColor: context.isLight
-                                ? Colors.white
-                                : Colors.black45.withOpacity(0.5),
-                            child: const Icon(
-                              Icons.logout_outlined,
-                              color: Colors.red,
-                            ),
+              child: Clicker(
+                raduis: 10.0,
+                onClick: () async => await showLogoutDialog(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 25,
+                          backgroundColor: context.isLight
+                              ? Colors.white
+                              : Colors.black45.withOpacity(0.5),
+                          child: const Icon(
+                            Icons.logout_outlined,
+                            color: Colors.red,
                           ),
-                          const SizedBox(
-                            width: 20,
+                        ),
+                        const SizedBox(width: 20),
+                        Text(
+                          "log_out".localeValue(context: context),
+                          style: AppTextStyles.profileWidgetTextStyle(
+                            context: context,
                           ),
-                          Text(
-                            "log_out".localeValue(context: context),
-                            style: AppTextStyles.profileWidgetTextStyle(
-                              context: context,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const Icon(
-                        Icons.arrow_forward_ios_rounded,
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                    const Icon(Icons.arrow_forward_ios_rounded),
+                  ],
                 ),
               ),
             )

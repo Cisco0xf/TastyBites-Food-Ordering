@@ -19,6 +19,7 @@ import 'package:foodapp/statemanagement/localization/localization_delegate.dart'
 import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:foodapp/statemanagement/theming/is_light.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 BorderRadius borderRaduis(double raduis, {Side side = Side.all}) {
   final Map<Side, BorderRadius> raduisMap = {
@@ -73,6 +74,40 @@ class Clicker extends StatelessWidget {
     );
   }
 }
+
+
+void showToastification({
+  required String message,
+  Color progressBarColor = const Color(0xFFEE9322),
+  ToastificationType type = ToastificationType.info,
+  bool showProgressBar = false,
+}) {
+  final BuildContext context = navigationKey.currentContext!;
+  toastification.show(
+    context: context,
+    applyBlurEffect: true,
+    dragToClose: true,
+    showProgressBar: showProgressBar,
+    autoCloseDuration: const Duration(seconds: 2),
+    direction: context.isEnglish ? TextDirection.ltr : TextDirection.rtl,
+    alignment: Alignment.bottomCenter,
+    animationDuration: const Duration(milliseconds: 250),
+    progressBarTheme: ProgressIndicatorThemeData(
+      color: progressBarColor,
+    ),
+    type: type,
+    description: Text(
+      message,
+      textAlign: context.isEnglish ? TextAlign.left : TextAlign.right,
+      style: TextStyle(
+        fontFamily:
+            context.isEnglish ? FontFamily.mainFont : FontFamily.mainArabic,
+        fontSize: 14,
+      ),
+    ),
+  );
+}
+
 
 void pushTo(Widget target, {Push type = Push.push}) {
   final BuildContext context = navigationKey.currentContext as BuildContext;

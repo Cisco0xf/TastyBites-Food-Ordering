@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/my_logger.dart';
-import 'package:foodapp/common/reusable_methods.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/presentaition_layer/auth/push_to_auth/push_auth_screen.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/user_profile_screen/personal_info/personal_info_screen.dart';

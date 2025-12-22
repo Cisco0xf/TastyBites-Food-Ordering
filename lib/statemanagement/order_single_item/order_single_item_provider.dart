@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:foodapp/common/navigator_key.dart';
 import 'package:foodapp/data_layer/data_base/global_demo_data_model.dart';
-import 'package:foodapp/common/reusable_methods.dart';
+import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/chick_out/order_place_provider.dart';
 import 'package:provider/provider.dart';
 
