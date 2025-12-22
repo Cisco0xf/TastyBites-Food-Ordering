@@ -8,8 +8,8 @@ import 'package:foodapp/statemanagement/searching_system/searching_provider.dart
 
 import 'package:provider/provider.dart';
 
-class FastFoodCategoryWidget extends StatelessWidget {
-  const FastFoodCategoryWidget({super.key});
+class FastFoodCategory extends StatelessWidget {
+  const FastFoodCategory({super.key});
 
   @override
   Widget build(BuildContext context) {

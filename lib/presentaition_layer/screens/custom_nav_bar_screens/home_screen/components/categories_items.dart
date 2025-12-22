@@ -34,7 +34,7 @@ List<CategoriesItemsModel> categoriesItems = <CategoriesItemsModel>[
   CategoriesItemsModel(
     itemTitle: "fast_food",
     itemImage: "asstes/images/app_images/categories_images/fast_food.svg",
-    targetWidget: const FastFoodCategoryWidget(),
+    targetWidget: const FastFoodCategory(),
     filteredList: fastFoodDemoData,
   ),
   CategoriesItemsModel(
@@ -52,7 +52,7 @@ List<CategoriesItemsModel> categoriesItems = <CategoriesItemsModel>[
   CategoriesItemsModel(
     itemTitle: "salads",
     itemImage: "asstes/images/app_images/categories_images/salads.svg",
-    targetWidget: const GreenDish() /* const SaladsTypeWidget() */,
+    targetWidget: const GreenDish(),
     filteredList: saladDamoData,
   ),
   CategoriesItemsModel(
