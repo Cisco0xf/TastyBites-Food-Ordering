@@ -90,6 +90,7 @@ lib/statemanagement/cloud_messaging/notification_messaging.dart
 # Firebase config (if using .env or config files)
 lib/firebase_options.dart
 lib/config/firebase_config.dart
+firebase.json
 
 # 🔑 API KEYS & SECRETS
 .env
