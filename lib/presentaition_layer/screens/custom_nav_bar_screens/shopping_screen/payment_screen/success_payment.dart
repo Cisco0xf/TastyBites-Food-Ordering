@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:foodapp/common/navigator_key.dart';
+import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/shopping_screen/payment_screen/recepit.dart';
@@ -40,14 +40,9 @@ class _SuccessfulPaymentWidgetState extends State<SuccessfulPaymentWidget>
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Navigator.of(navigationKey.currentContext!).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) {
-              return RecepitWidget(
-                isSingleItem: widget.isSingleItem,
-              );
-            },
-          ),
+        pushTo(
+          RecepitWidget(isSingleItem: widget.isSingleItem),
+          type: Push.replace,
         );
       },
     );
@@ -66,33 +61,21 @@ class _SuccessfulPaymentWidgetState extends State<SuccessfulPaymentWidget>
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(
-              top: context.screenHeight * .05,
-            ),
-            height: context.screenHeight * .13,
-            decoration: BoxDecoration(
-              color: SwitchColor.secondary,
-              borderRadius: const BorderRadius.vertical(
-                bottom: Radius.circular(15),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "successful_payment".localeValue(context: context),
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontFamily:
-                          context.isEnglish ? null : FontFamily.mainArabic,
-                      fontWeight: FontWeight.bold,
-                    ),
+          Padding(
+            padding: padding(8.0, from: From.horizontal),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "successful_payment".localeValue(context: context),
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontFamily:
+                        context.isEnglish ? null : FontFamily.mainArabic,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Expanded(
