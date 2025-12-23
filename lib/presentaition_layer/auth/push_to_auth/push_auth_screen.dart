@@ -2,6 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
+import 'package:foodapp/constants/app_colors.dart';
+import 'package:foodapp/constants/assets.dart';
+import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/presentaition_layer/auth/log_in/log_in_main_screen.dart';
 import 'package:foodapp/presentaition_layer/auth/sign_up/sign_up_main_screen.dart';
 import 'package:foodapp/common/app_dimention.dart';
@@ -17,32 +21,17 @@ class PushAuthScreen extends StatelessWidget {
         builder: (context, isLoadding, child) {
           return Stack(
             children: <Widget>[
-              Positioned(
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: SizedBox(
-                  child: Image.asset(
-                    "asstes/images/app_images/auth/main_BG.jpeg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              Positioned.fill(
+                child: Image.asset(Assets.bgImg, fit: BoxFit.cover),
               ),
               Positioned(
                 bottom: context.screenHeight * .2,
                 left: 0,
                 right: 0,
                 child: BackdropFilter(
-                  filter: ImageFilter.blur(
-                    sigmaX: 2,
-                    sigmaY: 2,
-                    tileMode: TileMode.clamp,
-                  ),
+                  filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                   child: Container(
-                    margin: EdgeInsets.symmetric(
-                      horizontal: context.screenWidth * .12,
-                    ),
+                    margin: padding(context.screenWidth, from: From.horizontal),
                     height: context.screenHeight * .3,
                     decoration: BoxDecoration(
                       color: Colors.white54.withOpacity(0.3),
@@ -51,31 +40,13 @@ class PushAuthScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        AuthButtonWidget(
-                          pushAuth: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const SignInMainScreen();
-                                },
-                              ),
-                            );
-                          },
+                        _AuthButton(
+                          pushAuth: () => pushTo(const SignInMainScreen()),
                           authTitle: "SIGN UP",
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        AuthButtonWidget(
-                          pushAuth: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const LogInScreen();
-                                },
-                              ),
-                            );
-                          },
+                        const Gap(height: 20.0),
+                        _AuthButton(
+                          pushAuth: () => pushTo(const LogInScreen()),
                           authTitle: "LOG IN",
                         )
                       ],
@@ -163,16 +134,13 @@ class PushAuthScreen extends StatelessWidget {
   }
 }
 
-typedef Authantication = void Function()?;
-
-class AuthButtonWidget extends StatelessWidget {
-  const AuthButtonWidget({
-    super.key,
+class _AuthButton extends StatelessWidget {
+  const _AuthButton({
     required this.pushAuth,
     required this.authTitle,
   });
 
-  final Authantication pushAuth;
+  final void Function() pushAuth;
   final String authTitle;
 
   @override
@@ -182,15 +150,11 @@ class AuthButtonWidget extends StatelessWidget {
       height: context.screenHeight * .07,
       child: MaterialButton(
         onPressed: pushAuth,
-        shape: RoundedRectangleBorder(
-          borderRadius: borderRaduis(20),
-        ),
-        color: Colors.orange,
+        shape: RoundedRectangleBorder(borderRadius: borderRaduis(20)),
+        color: SwitchColor.primaryO,
         child: Text(
           authTitle,
-          style: const TextStyle(
-            fontSize: 17,
-          ),
+          style: const TextStyle(fontSize: 17),
         ),
       ),
     );

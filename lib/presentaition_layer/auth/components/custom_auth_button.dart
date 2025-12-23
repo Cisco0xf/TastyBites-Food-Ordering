@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/constants/app_colors.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/statemanagement/authantications/auth_provider.dart';
 import 'package:foodapp/common/app_dimention.dart';
@@ -26,7 +27,7 @@ class AuthButton extends StatelessWidget {
       height: context.screenHeight * .08,
       child: MaterialButton(
         onPressed: authantication,
-        color: Colors.orange,
+        color: SwitchColor.primaryO,
         shape: RoundedRectangleBorder(borderRadius: borderRaduis(10)),
         child: isLoading
             ? const Center(child: CircularProgressIndicator())

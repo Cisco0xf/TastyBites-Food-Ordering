@@ -103,24 +103,15 @@ class _AuthFieldState extends State<AuthField> {
               fillColor: SwitchColor.fillColor,
               enabledBorder: OutlineInputBorder(
                 borderRadius: borderRaduis(15),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                  width: 1,
-                ),
+                borderSide: BorderSide(color: SwitchColor.borderColor),
               ),
               border: OutlineInputBorder(
                 borderRadius: borderRaduis(15),
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                  width: 0,
-                ),
+                borderSide: BorderSide(color: SwitchColor.borderColor),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: borderRaduis(15),
-                borderSide: const BorderSide(
-                  color: Colors.orange,
-                  width: 1,
-                ),
+                borderSide: const BorderSide(color: Colors.orange),
               ),
               hintText: widget.hintText,
               hintStyle: const TextStyle(

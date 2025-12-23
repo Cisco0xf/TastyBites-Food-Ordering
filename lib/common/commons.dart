@@ -176,17 +176,19 @@ Widget customRouts(FoodModel item) {
 }
 
 class ItemRating extends StatelessWidget {
-  const ItemRating({super.key, required this.rate});
+  const ItemRating({super.key, required this.rate, this.size = 30.0});
 
   final double rate;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
+
     return RatingBar(
       maxRating: 5.0,
       minRating: 0.0,
       itemCount: 5,
-      itemSize: 30,
+      itemSize: size,
       direction: Axis.horizontal,
       initialRating: rate,
       allowHalfRating: true,

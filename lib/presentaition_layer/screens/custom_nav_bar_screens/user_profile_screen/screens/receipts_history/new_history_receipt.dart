@@ -106,9 +106,8 @@ class PdfDownloadButton extends StatelessWidget {
       child: Clicker(
         onClick: () async {
           await showLoadingPdfDialog();
-          final ReceiptPdf pdf = ReceiptPdf();
 
-          await pdf.generatePdfFile(receipt: receipt).whenComplete(() {
+          await ReceiptPdf().generateREceipt(receipt).whenComplete(() {
             // ignore: use_build_context_synchronously
             Navigator.pop(context);
           });

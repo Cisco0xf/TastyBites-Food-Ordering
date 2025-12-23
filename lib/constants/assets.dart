@@ -72,4 +72,6 @@ class Assets {
 
   static const String largLogo =
       "${_imagesAppBase}splash_screen-images/food_logo_large.png";
+
+  static const String bgImg = "${_imagesAppBase}auth/main_BG.jpeg";
 }

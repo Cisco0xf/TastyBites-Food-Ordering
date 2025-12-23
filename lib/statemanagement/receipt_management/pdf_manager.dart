@@ -11,25 +11,9 @@ import 'package:pdf/widgets.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class ReceiptPdf {
-  // Check Storage permission
-
-  Future<bool> _checkStoragePermission() async {
-    final PermissionStatus storage = await Permission.storage.status;
-
-    final bool isGranted = storage == PermissionStatus.granted;
-
-    if (!isGranted) {
-      await Permission.storage.request();
-
-      return isGranted;
-    }
-
-    return true;
-  }
-
   // Get the Directory of the file
 
-  Future<String> _targetFilePath() async {
+  Future<String> _targetFilePath(String fileName) async {
     late final Directory dire;
 
     try {
@@ -38,45 +22,41 @@ class ReceiptPdf {
       Log.error("App Directory Error => $error");
     }
 
-    final String path = dire.path;
+    final String fullPath = "${dire.path}/${fileName}_TastyBites.pdf";
 
-    return path;
+    return fullPath;
   }
 
-  // Save to the Locale Storage
+  // Save File After Generating
 
-  Future<File> savePdfAfterGenerating({
-    required String fileName,
-    required Document pdf,
-  }) async {
-    final Uint8List pdfFile = await pdf.save();
+  Future<String> _writeFile(
+      {required Document pdf, required String fileName}) async {
+    final String filePath = await _targetFilePath(fileName);
 
-    final String path = await _targetFilePath();
+    final Uint8List pdfBytes = await pdf.save();
 
-    final String fullPath = "$path/${fileName}_TastyBites.pdf";
-
-    final File file = File(fullPath);
+    final File file = File(filePath);
 
     try {
-      await file.writeAsBytes(pdfFile, flush: true);
+      await file.writeAsBytes(pdfBytes, flush: true);
     } catch (error) {
-      Log.error("Error Writes Pdf => $error");
+      Log.error("Write Pdf Error => $error");
     }
 
-    return file;
+    return filePath;
   }
 
   // Generate the file
 
-  Future<void> generatePdfFile({required ReceiptModel receipt}) async {
-    final bool hasPermission = await _checkStoragePermission();
+  Future<void> _generatePdfFile({required ReceiptModel receipt}) async {
+    /*  final bool hasPermission = await _checkStoragePermission();
 
     if (!hasPermission) {
       showToastification(
         message: "You need Storage permission to download the pdf receipt",
       );
       return;
-    }
+    } */
 
     final Document pdf = Document();
 
@@ -121,15 +101,34 @@ class ReceiptPdf {
       ),
     );
 
-    final File file = await savePdfAfterGenerating(
-      fileName: receipt.id,
-      pdf: pdf,
-    );
+    final String file = await _writeFile(pdf: pdf, fileName: receipt.id);
 
     try {
-      await OpenFile.open(file.path);
+      await OpenFile.open(file);
     } catch (error) {
       Log.error("Open file error => $error");
     }
+  }
+
+  // Check Storage permission && Implement the Logic
+
+  Future<void> generateREceipt(ReceiptModel receipt) async {
+    PermissionStatus storage = await Permission.storage.status;
+
+    if (!storage.isGranted) {
+      await _generatePdfFile(receipt: receipt);
+
+      return;
+    }
+
+    if (storage.isGranted) {
+      await _generatePdfFile(receipt: receipt);
+
+      return;
+    }
+
+    showToastification(
+      message: "You need Storage permission to download the pdf receipt",
+    );
   }
 }

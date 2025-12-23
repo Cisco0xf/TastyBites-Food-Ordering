@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:foodapp/common/commons.dart';
 import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/statemanagement/theming/is_light.dart';
@@ -54,23 +53,7 @@ class ReviewerOpinoinWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            RatingBar.builder(
-              maxRating: 5.0,
-              minRating: 0.0,
-              itemCount: 5,
-              itemSize: 20,
-              direction: Axis.horizontal,
-              initialRating: reviewerRate,
-              allowHalfRating: true,
-              tapOnlyMode: true,
-              itemBuilder: (context, index) {
-                return const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                );
-              },
-              onRatingUpdate: (double rating) {},
-            ),
+            ItemRating(rate: reviewerRate, size: 20.0),
             Text(reviewerRate.toString()),
           ],
         ),
