@@ -47,7 +47,6 @@ class _SignInMainScreenState extends State<SignInMainScreen> {
           hintText: "Enter user name",
         ),
         const Gap(height: 15.0),
-        const Gap(height: 15.0),
         AuthField(
           controller: AuthControllers.emailController!,
           textFeildTitle: "Email",
