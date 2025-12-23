@@ -6,7 +6,7 @@ import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/constants/fonts.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/food_notification/empty_notifications.dart';
 import 'package:provider/provider.dart';
-
+// Needs to be update
 class NotificationsWidget extends StatelessWidget {
   const NotificationsWidget({super.key});
 
