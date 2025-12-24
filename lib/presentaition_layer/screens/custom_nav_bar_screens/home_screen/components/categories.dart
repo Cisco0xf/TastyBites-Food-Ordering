@@ -70,9 +70,7 @@ class _CategoriesSectorWidgetState extends State<CategoriesSectorWidget> {
                       .read<CurrentIndexProvider>()
                       .getNewIndex(newIndex: index);
 
-                  context
-                      .read<SearchingProvider>()
-                      .filtesearchWithFilterCategoriesItems();
+                  
 
                   _scrollToCategory(index: index);
                 },

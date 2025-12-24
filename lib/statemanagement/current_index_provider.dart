@@ -4,11 +4,15 @@ import 'package:foodapp/statemanagement/searching_system/searching_provider.dart
 import 'package:provider/provider.dart';
 
 class CurrentIndexProvider with ChangeNotifier {
+  final BuildContext context = navigationKey.currentContext as BuildContext;
+
   // Change the index of the showen categories
   int currentIndex = 0;
 
   void getNewIndex({required int newIndex}) {
     currentIndex = newIndex;
+
+    context.read<SearchingProvider>().filtesearchWithFilterCategoriesItems();
 
     notifyListeners();
   }
@@ -28,7 +32,6 @@ class CurrentIndexProvider with ChangeNotifier {
 
   void selectDrinsType(int type) {
     drinkIndex = type;
-    final BuildContext context = navigationKey.currentContext as BuildContext;
 
     context.read<SearchingProvider>().filtesearchWithFilterCategoriesItems();
     notifyListeners();
