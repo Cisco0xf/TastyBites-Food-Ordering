@@ -5,7 +5,6 @@ import 'package:foodapp/statemanagement/current_index_provider.dart';
 import 'package:foodapp/common/app_dimention.dart';
 import 'package:foodapp/presentaition_layer/screens/custom_nav_bar_screens/home_screen/components/categories_items.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
-import 'package:foodapp/statemanagement/searching_system/searching_provider.dart';
 import 'package:foodapp/constants/style.dart';
 
 import 'package:provider/provider.dart';
@@ -69,8 +68,6 @@ class _CategoriesSectorWidgetState extends State<CategoriesSectorWidget> {
                   context
                       .read<CurrentIndexProvider>()
                       .getNewIndex(newIndex: index);
-
-                  
 
                   _scrollToCategory(index: index);
                 },

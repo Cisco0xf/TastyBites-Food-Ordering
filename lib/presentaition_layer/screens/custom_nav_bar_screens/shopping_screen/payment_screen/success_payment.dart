@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodapp/common/commons.dart';
+import 'package:foodapp/common/gaps.dart';
 import 'package:foodapp/constants/enums.dart';
 import 'package:foodapp/statemanagement/localization/language_of_app.dart';
 import 'package:foodapp/statemanagement/localization/localization_delegate.dart';
@@ -61,6 +62,7 @@ class _SuccessfulPaymentWidgetState extends State<SuccessfulPaymentWidget>
     return Scaffold(
       body: Column(
         children: <Widget>[
+          const Gap(hRatio: 0.06),
           Padding(
             padding: padding(8.0, from: From.horizontal),
             child: Row(
